@@ -23,4 +23,12 @@ public abstract class Tile {
         return board;
      }
      public abstract Piece getPiece() throws NoPieceOnWhiteException;
+
+    public Tile getNeighbor(Direction direction, int n) throws NoPieceOnWhiteException {
+        if (direction.equals(Direction.Left)){
+            return board.getTile(x+n,y-n);
+        }else{
+            return board.getTile(x+n,y+n);
+        }
+    }
 }

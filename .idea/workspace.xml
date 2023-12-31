@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="setting the board to a tile">
-      <change afterPath="$PROJECT_DIR$/src/main/java/NoPieceOnWhiteException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Team.java" afterDir="false" />
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="Correctly placing pieces in the board">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/PieceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/WhiteTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WhiteTile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704032698993</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Correctly placing pieces in the board">
+      <option name="closed" value="true" />
+      <created>1704041961948</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1704041961948</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -226,6 +233,7 @@
     <MESSAGE value="working exceptions" />
     <MESSAGE value="correctly creating Board" />
     <MESSAGE value="setting the board to a tile" />
-    <option name="LAST_COMMIT_MESSAGE" value="setting the board to a tile" />
+    <MESSAGE value="Correctly placing pieces in the board" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correctly placing pieces in the board" />
   </component>
 </project>

@@ -31,7 +31,11 @@ public class Board {
     public Tile getTile(int row,int col){
         return tiles[row][col];
     }
+    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+        return getTile(row,col).getPiece();
+    }
     public int getSize(){
         return size;
     }
+
 }
