@@ -9,4 +9,5 @@ public class BlackTile extends Tile {
             throw new IllegalTilePlacementException("Black tiles must be placed where (x+y)%2==0");
         }
     }
+
 }
