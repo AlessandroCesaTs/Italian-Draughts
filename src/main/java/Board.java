@@ -10,13 +10,13 @@ public class Board {
         }
     }
 
-
     private void createTile(int col, int row) throws IllegalTilePlacementException {
         if((col + row)%2==0){
             tiles[col][row]=BlackTile.createBlackTile(col, row);
         }else{
             tiles[col][row]=WhiteTile.createWhiteTile(col, row);
         }
+        tiles[col][row].setBoard(this);
     }
 
     public Tile getTile(int col,int row){

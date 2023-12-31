@@ -1,6 +1,7 @@
 public abstract class Tile {
     final int x;
     final int y;
+    private Board board;
 
 
     protected Tile(int x, int y) {
@@ -13,5 +14,9 @@ public abstract class Tile {
     }
      public int getY(){
          return y;
+     }
+
+     public void setBoard(Board boardToSet){
+        board=boardToSet;
      }
 }
