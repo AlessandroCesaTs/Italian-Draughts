@@ -12,6 +12,9 @@ public class Piece {
     public Team getTeam() {
         return team;
     }
+    public Piece getNeighbor(Direction direction, int n) throws NoPieceOnWhiteException {
+        return tile.getNeighbor(direction,n).getPiece();
+    }
 }
 
 

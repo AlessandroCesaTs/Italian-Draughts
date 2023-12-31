@@ -59,6 +59,4 @@ public class BoardTest {
             assertEquals(Team.White,board.getTile(6,col).getPiece().getTeam());
         }
     }
-
-
 }
