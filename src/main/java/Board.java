@@ -5,22 +5,31 @@ public class Board {
     public Board() throws IllegalTilePlacementException {
         for (int row=0;row<size;row++){
             for (int col=0;col<size;col++){
-                createTile(col, row);
+                createTile(row, col);
             }
         }
     }
 
-    private void createTile(int col, int row) throws IllegalTilePlacementException {
+    private void createTile(int row, int col) throws IllegalTilePlacementException {
         if((col + row)%2==0){
-            tiles[col][row]=BlackTile.createBlackTile(col, row);
+            tiles[row][col]=BlackTile.createBlackTile(row, col);
+            placePiece(row, col);
         }else{
-            tiles[col][row]=WhiteTile.createWhiteTile(col, row);
+            tiles[row][col]=WhiteTile.createWhiteTile(row, col);
         }
-        tiles[col][row].setBoard(this);
+        tiles[row][col].setBoard(this);
     }
 
-    public Tile getTile(int col,int row){
-        return tiles[col][row];
+    private void placePiece(int row, int col) {
+        if (row <3){
+            ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.Black));
+        }else if(row <8 && row >4){
+            ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.White));
+        }
+    }
+
+    public Tile getTile(int row,int col){
+        return tiles[row][col];
     }
     public int getSize(){
         return size;

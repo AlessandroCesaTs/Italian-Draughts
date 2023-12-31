@@ -1,4 +1,5 @@
 public class BlackTile extends Tile {
+    private Piece piece;
     private BlackTile(int x, int y) {
         super(x,y);
     }
@@ -10,5 +11,12 @@ public class BlackTile extends Tile {
         }
     }
 
+    public void setPiece(Piece piece){
+        this.piece=piece;
+        piece.setTile(this);
+    }
+    public Piece getPiece(){
+        return piece;
+    }
 
 }

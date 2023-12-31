@@ -19,4 +19,8 @@ public abstract class Tile {
      public void setBoard(Board boardToSet){
         board=boardToSet;
      }
+     public Board getBoard(){
+        return board;
+     }
+     public abstract Piece getPiece() throws NoPieceOnWhiteException;
 }

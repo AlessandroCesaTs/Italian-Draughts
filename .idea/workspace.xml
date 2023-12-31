@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="Added gitkeep and README">
-      <change afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Tile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/WhiteTile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TileTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="setting the board to a tile">
+      <change afterPath="$PROJECT_DIR$/src/main/java/NoPieceOnWhiteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Team.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/WhiteTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WhiteTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,24 +74,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2aGMslhKxPerrbg9Y729QTivC9P" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Italian-Draughts [test].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "start__tile",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -164,12 +167,65 @@
       <option name="project" value="LOCAL" />
       <updated>1703943711470</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="create tile classes">
+      <option name="closed" value="true" />
+      <created>1704023256537</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1704023256537</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added exceptions">
+      <option name="closed" value="true" />
+      <created>1704024514148</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704024514149</updated>
+    </task>
+    <task id="LOCAL-00006" summary="working exceptions">
+      <option name="closed" value="true" />
+      <created>1704030652595</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1704030652595</updated>
+    </task>
+    <task id="LOCAL-00007" summary="correctly creating Board">
+      <option name="closed" value="true" />
+      <created>1704032221415</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1704032221415</updated>
+    </task>
+    <task id="LOCAL-00008" summary="setting the board to a tile">
+      <option name="closed" value="true" />
+      <created>1704032648316</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1704032648317</updated>
+    </task>
+    <task id="LOCAL-00009" summary="setting the board to a tile">
+      <option name="closed" value="true" />
+      <created>1704032698993</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1704032698993</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Added gitkeep and README" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added gitkeep and README" />
+    <MESSAGE value="create tile classes" />
+    <MESSAGE value="Added exceptions" />
+    <MESSAGE value="working exceptions" />
+    <MESSAGE value="correctly creating Board" />
+    <MESSAGE value="setting the board to a tile" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting the board to a tile" />
   </component>
 </project>

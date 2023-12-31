@@ -10,4 +10,8 @@ public class WhiteTile extends Tile {
             throw new IllegalTilePlacementException("White tiles must be placed where (x+y)%2!=0");
         }
     }
+    public Piece getPiece() throws NoPieceOnWhiteException {
+        throw new NoPieceOnWhiteException();
+    }
+
 }
