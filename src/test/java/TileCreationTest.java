@@ -8,14 +8,14 @@ public class TileCreationTest {
     @Test
     void validBlackTile() throws IllegalTilePlacementException {
         Tile blackTile= BlackTile.createBlackTile(0,0);
-        assertEquals(0,blackTile.getX());
-        assertEquals(0,blackTile.getY());
+        assertEquals(0,blackTile.getRow());
+        assertEquals(0,blackTile.getCol());
     }
     @Test
     void validBlackTile2() throws IllegalTilePlacementException {
         Tile blackTile= BlackTile.createBlackTile(5,3);
-        assertEquals(5,blackTile.getX());
-        assertEquals(3,blackTile.getY());
+        assertEquals(5,blackTile.getRow());
+        assertEquals(3,blackTile.getCol());
     }
 
     @Test
@@ -30,14 +30,14 @@ public class TileCreationTest {
     @Test
     void createWhiteTile() throws IllegalTilePlacementException {
         Tile whiteTile= WhiteTile.createWhiteTile(1,0);
-        assertEquals(1,whiteTile.getX());
-        assertEquals(0,whiteTile.getY());
+        assertEquals(1,whiteTile.getRow());
+        assertEquals(0,whiteTile.getCol());
     }
     @Test
     void createWhiteTile2() throws IllegalTilePlacementException {
         Tile whiteTile= WhiteTile.createWhiteTile(7,2);
-        assertEquals(7,whiteTile.getX());
-        assertEquals(2,whiteTile.getY());
+        assertEquals(7,whiteTile.getRow());
+        assertEquals(2,whiteTile.getCol());
     }
     @Test
     void whiteTileException() {

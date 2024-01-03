@@ -1,18 +1,18 @@
 public abstract class Tile {
-    final int x;
-    final int y;
+    final int row;
+    final int col;
     private Board board;
 
-    protected Tile(int x, int y) {
-        this.x = x;
-        this.y = y;
+    protected Tile(int row, int col) {
+        this.row = row;
+        this.col = col;
     }
 
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
-     public int getY(){
-         return y;
+     public int getCol(){
+         return col;
      }
 
      public void setBoard(Board boardToSet){
@@ -23,13 +23,24 @@ public abstract class Tile {
      }
      public abstract Piece getPiece() throws NoPieceOnWhiteException;
 
+    public boolean equals(Tile tile) {
+        return tile.getRow()== row && tile.getCol()== col;
+    }
+
+     /*
     public Tile getNeighbor(Direction direction, int n) throws NoPieceOnWhiteException {
         if (direction.equals(Direction.Left)){
-            return board.getTile(x+n,y-n);
+            if( board.validCoordinates(x+n,y-n)) {
+                return board.getTile(x + n, y - n);
+            }
         }else{
-            return board.getTile(x+n,y+n);
+            if( board.validCoordinates(x+n,y-n)) {
+                return board.getTile(x + n, y + n);
+            }
         }
     }
+
+     */
 
 
 }
