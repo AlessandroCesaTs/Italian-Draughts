@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="Created method to check if coordinated are valid">
-      <change afterPath="$PROJECT_DIR$/src/main/java/NeighborPosition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" afterDir="false" />
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="computing diagonal directions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PieceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PieceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +83,7 @@
     "Gradle.TileCreationTest.blackTileException.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "movements",
+    "git-widget-placeholder": "Neighbors",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
@@ -288,7 +282,23 @@
       <option name="project" value="LOCAL" />
       <updated>1704272330175</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="computing neighbors, changed x and y to row and col">
+      <option name="closed" value="true" />
+      <created>1704279987007</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1704279987007</updated>
+    </task>
+    <task id="LOCAL-00017" summary="computing diagonal directions">
+      <option name="closed" value="true" />
+      <created>1704283298807</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1704283298807</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -304,6 +314,8 @@
     <MESSAGE value="updated gitignore" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;src/test/java/PieceTest.java" />
     <MESSAGE value="Created method to check if coordinated are valid" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created method to check if coordinated are valid" />
+    <MESSAGE value="computing neighbors, changed x and y to row and col" />
+    <MESSAGE value="computing diagonal directions" />
+    <option name="LAST_COMMIT_MESSAGE" value="computing diagonal directions" />
   </component>
 </project>

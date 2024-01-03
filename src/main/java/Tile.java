@@ -27,20 +27,30 @@ public abstract class Tile {
         return tile.getRow()== row && tile.getCol()== col;
     }
 
-     /*
-    public Tile getNeighbor(Direction direction, int n) throws NoPieceOnWhiteException {
-        if (direction.equals(Direction.Left)){
-            if( board.validCoordinates(x+n,y-n)) {
-                return board.getTile(x + n, y - n);
+    //public int getDiagonalDistance(Tile tile){}
+
+    public boolean isOnDiagonal(int rowDiff,int colDiff){
+        return Math.abs(rowDiff)==Math.abs(colDiff) && rowDiff!=0;
+    }
+    public NeighborPosition otherTileDirection(Tile tile) throws NotOnDiagonalException {
+        int rowDiff=tile.getRow()-row;
+        int colDiff=tile.getCol()-col;
+        if (this.isOnDiagonal(rowDiff,colDiff)) {
+            if (rowDiff > 0) {
+                if (colDiff > 0) {
+                    return NeighborPosition.TopRight;
+                } else {
+                    return NeighborPosition.TopLeft;
+                }
+            } else {
+                if (colDiff > 0) {
+                    return NeighborPosition.BottomRight;
+                } else {
+                    return NeighborPosition.BottomLeft;
+                }
             }
         }else{
-            if( board.validCoordinates(x+n,y-n)) {
-                return board.getTile(x + n, y + n);
-            }
+            throw new NotOnDiagonalException();
         }
     }
-
-     */
-
-
 }
