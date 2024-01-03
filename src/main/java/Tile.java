@@ -3,7 +3,6 @@ public abstract class Tile {
     final int y;
     private Board board;
 
-
     protected Tile(int x, int y) {
         this.x = x;
         this.y = y;
@@ -31,4 +30,6 @@ public abstract class Tile {
             return board.getTile(x+n,y+n);
         }
     }
+
+
 }

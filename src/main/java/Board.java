@@ -38,4 +38,8 @@ public class Board {
         return size;
     }
 
+    public boolean validCoordinates(int x,int y){
+        return x>=0 && x<size && y>=0 && y<size;
+    }
+
 }

@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BoardTest {
@@ -58,5 +57,23 @@ public class BoardTest {
         for (int col=0;col<board.getSize();col+=2){
             assertEquals(Team.White,board.getTile(6,col).getPiece().getTeam());
         }
+    }
+
+    @Test
+    void validPositionTest(){
+        for (int row=0;row<8;row++){
+            for (int col=0;col<8;col++){
+                assertTrue(board.validCoordinates(row,col));
+            }
+        }
+    }
+    @Test
+    void nonValidPositionTest(){
+        assertFalse(board.validCoordinates(-2,3));
+        assertFalse(board.validCoordinates(1,9));
+        assertFalse(board.validCoordinates(3,8));
+        assertFalse(board.validCoordinates(8,8));
+        assertFalse(board.validCoordinates(15,92));
+
     }
 }
