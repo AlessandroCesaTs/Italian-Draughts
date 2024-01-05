@@ -26,6 +26,13 @@ public class BlackTile extends Tile {
         this.piece=piece;
         piece.setTile(this);
     }
+    public void movePieceHere(Piece piece) throws AlreadyOccupiedException {
+        if (isFree()){
+            this.piece=piece;
+        }else{
+            throw new AlreadyOccupiedException();
+        }
+    }
     public Piece getPiece(){
         return piece;
     }

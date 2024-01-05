@@ -8,6 +8,10 @@ public class Piece {
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
+    public void moveToTile(BlackTile tile) throws AlreadyOccupiedException {
+        setTile(tile);
+        tile.movePieceHere(this);
+    }
     public BlackTile getTile(){
         return this.tile;
     }
@@ -16,15 +20,15 @@ public class Piece {
         return team;
     }
 
-    /*
-    public void movePiece(NeighborPosition position){
-        if (getTile().getNeighbor(position).getPiece()==null){
 
+    public void movePiece(NeighborPosition position) throws AlreadyOccupiedException {
+        BlackTile targetTile=getTile().getNeighbor(position);
+        if (targetTile.isFree()){
+            moveToTile(targetTile);
+        }else{
+            throw new AlreadyOccupiedException();
         }
     }
-
-     */
-
 }
 
 
