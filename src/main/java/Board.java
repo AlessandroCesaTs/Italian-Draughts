@@ -2,7 +2,7 @@ public class Board {
     private final int size=8;
     private final Tile[][] tiles = new Tile[size][size];
 
-    public Board() throws IllegalTilePlacementException {
+    public Board() throws IllegalTilePlacementException{
         for (int row=0;row<size;row++){
             for (int col=0;col<size;col++){
                 createTile(row, col);
@@ -32,7 +32,7 @@ public class Board {
         tiles[row][col].setBoard(this);
     }
 
-    private void placePiece(int row, int col) {
+    private void placePiece(int row, int col){
         if (row <3){
             ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.Black));
         }else if(row <8 && row >4){

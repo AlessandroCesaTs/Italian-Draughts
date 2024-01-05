@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BoardTest {
 
 
-    public BoardTest() throws IllegalTilePlacementException {
+    public BoardTest() throws IllegalTilePlacementException{
     }
     Board board=new Board();
     @Test
