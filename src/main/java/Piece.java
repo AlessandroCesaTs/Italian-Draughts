@@ -8,17 +8,21 @@ public class Piece {
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
+    public BlackTile getTile(){
+        return this.tile;
+    }
 
     public Team getTeam() {
         return team;
     }
 
-
-
     /*
-    public Piece getNeighbor(Direction direction, int n) throws NoPieceOnWhiteException {
-        return tile.getNeighbor(direction,n).getPiece();
+    public void movePiece(NeighborPosition position){
+        if (getTile().getNeighbor(position).getPiece()==null){
+
+        }
     }
+
      */
 
 }

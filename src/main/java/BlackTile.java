@@ -29,6 +29,9 @@ public class BlackTile extends Tile {
     public Piece getPiece(){
         return piece;
     }
+    public boolean isFree(){
+        return getPiece() == null;
+    }
 
     public void setNeighbors(){
         checkAndAddNeighbor(NeighborPosition.BottomLeft, row -1, col -1);

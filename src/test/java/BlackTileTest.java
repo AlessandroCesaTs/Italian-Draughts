@@ -69,8 +69,8 @@ public class BlackTileTest {
         assertEquals(NeighborPosition.TopRight,tile.otherTileDirection(topRightTile));
     }
     @Test
-    void directionException() throws Exception {
-        assertThrows(NotOnDiagonalException.class,()->{tile.otherTileDirection(otherTile);});
+    void directionException() {
+        assertThrows(NotOnDiagonalException.class,()-> tile.otherTileDirection(otherTile));
     }
 
     @Test
@@ -92,12 +92,25 @@ public class BlackTileTest {
         assertEquals(topRightTile,tile.getBlackTileInBetween(otherTile2));
     }
 
-@Test
-void tileInBetween2() throws NotOnDiagonalException, DistanceDifferentThan2Exception {
-    BlackTile firstTile=BlackTile.asBlackTile(board.getTile(4,2));
-    BlackTile secondTile=BlackTile.asBlackTile(board.getTile(6,0));
-    BlackTile inBetweenTile=BlackTile.asBlackTile(board.getTile(5,1));
-    assertEquals(inBetweenTile,firstTile.getBlackTileInBetween(secondTile));
-}
+    @Test
+    void tileInBetween2() throws NotOnDiagonalException, DistanceDifferentThan2Exception {
+        BlackTile firstTile = BlackTile.asBlackTile(board.getTile(4, 2));
+        BlackTile secondTile = BlackTile.asBlackTile(board.getTile(6, 0));
+        BlackTile inBetweenTile = BlackTile.asBlackTile(board.getTile(5, 1));
+        assertEquals(inBetweenTile, firstTile.getBlackTileInBetween(secondTile));
+    }
+
+    @Test
+    void isNotFree() {
+        assertFalse(BlackTile.asBlackTile(board.getTile(1,1)).isFree());
+        assertFalse(BlackTile.asBlackTile(board.getTile(6,4)).isFree());
+    }
+    @Test
+    void isFree(){
+        assertTrue(BlackTile.asBlackTile(board.getTile(3,1)).isFree());
+        assertTrue(BlackTile.asBlackTile(board.getTile(4,4)).isFree());
+    }
+
+
 }
 

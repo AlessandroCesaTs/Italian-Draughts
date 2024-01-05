@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="correctly computing distances">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DistanceDifferentThan2Exception.java" afterDir="false" />
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="correctly computing tile inbetween">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +100,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BlackTileTest.tileInBetween">
+  <component name="RunManager" selected="Gradle.BlackTileTest.isNotFree">
     <configuration name="BlackTileTest.equalsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -115,6 +115,30 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;BlackTileTest.equalsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="BlackTileTest.isNotFree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;BlackTileTest.isNotFree&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -173,8 +197,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BlackTileTest.tileInBetween" />
+        <item itemvalue="Gradle.BlackTileTest.isNotFree" />
         <item itemvalue="Gradle.Italian-Draughts [test]" />
+        <item itemvalue="Gradle.BlackTileTest.tileInBetween" />
         <item itemvalue="Gradle.BlackTileTest.equalsTest" />
       </list>
     </recent_temporary>
@@ -347,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704450728178</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="correctly computing tile inbetween">
+      <option name="closed" value="true" />
+      <created>1704453211885</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1704453211885</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -366,6 +399,7 @@
     <MESSAGE value="computing neighbors, changed x and y to row and col" />
     <MESSAGE value="computing diagonal directions" />
     <MESSAGE value="correctly computing distances" />
-    <option name="LAST_COMMIT_MESSAGE" value="correctly computing distances" />
+    <MESSAGE value="correctly computing tile inbetween" />
+    <option name="LAST_COMMIT_MESSAGE" value="correctly computing tile inbetween" />
   </component>
 </project>
