@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="updated gitignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="correctly computing tile inbetween">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +44,11 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="verification" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Italian-Draughts" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -75,22 +83,96 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.BlackTileTest.equalsTest.executor": "Run",
+    "Gradle.BlackTileTest.tileInBetween.executor": "Run",
+    "Gradle.Italian-Draughts [test].executor": "Run",
+    "Gradle.TileCreationTest.blackTileException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Neighbors",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.BlackTileTest.isNotFree">
+    <configuration name="BlackTileTest.equalsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;BlackTileTest.equalsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="BlackTileTest.isNotFree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;BlackTileTest.isNotFree&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="BlackTileTest.tileInBetween" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;BlackTileTest.tileInBetween&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="Italian-Draughts [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -115,7 +197,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BlackTileTest.isNotFree" />
         <item itemvalue="Gradle.Italian-Draughts [test]" />
+        <item itemvalue="Gradle.BlackTileTest.tileInBetween" />
+        <item itemvalue="Gradle.BlackTileTest.equalsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +324,63 @@
       <option name="project" value="LOCAL" />
       <updated>1704047512838</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;src/test/java/PieceTest.java">
+      <option name="closed" value="true" />
+      <created>1704047632895</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1704047632895</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Created method to check if coordinated are valid">
+      <option name="closed" value="true" />
+      <created>1704272330175</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1704272330175</updated>
+    </task>
+    <task id="LOCAL-00016" summary="computing neighbors, changed x and y to row and col">
+      <option name="closed" value="true" />
+      <created>1704279987007</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1704279987007</updated>
+    </task>
+    <task id="LOCAL-00017" summary="computing diagonal directions">
+      <option name="closed" value="true" />
+      <created>1704283298807</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1704283298807</updated>
+    </task>
+    <task id="LOCAL-00018" summary="computing diagonal directions">
+      <option name="closed" value="true" />
+      <created>1704283515067</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1704283515067</updated>
+    </task>
+    <task id="LOCAL-00019" summary="correctly computing distances">
+      <option name="closed" value="true" />
+      <created>1704450728177</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1704450728178</updated>
+    </task>
+    <task id="LOCAL-00020" summary="correctly computing tile inbetween">
+      <option name="closed" value="true" />
+      <created>1704453211885</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1704453211885</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -253,6 +394,12 @@
     <MESSAGE value="Correctly placing pieces in the board" />
     <MESSAGE value="started methods to get neighbors" />
     <MESSAGE value="updated gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated gitignore" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;src/test/java/PieceTest.java" />
+    <MESSAGE value="Created method to check if coordinated are valid" />
+    <MESSAGE value="computing neighbors, changed x and y to row and col" />
+    <MESSAGE value="computing diagonal directions" />
+    <MESSAGE value="correctly computing distances" />
+    <MESSAGE value="correctly computing tile inbetween" />
+    <option name="LAST_COMMIT_MESSAGE" value="correctly computing tile inbetween" />
   </component>
 </project>

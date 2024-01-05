@@ -8,6 +8,18 @@ public class Board {
                 createTile(row, col);
             }
         }
+        populateNeighbors();
+
+    }
+
+    private void populateNeighbors() {
+        for (int row=0;row<size;row++){
+            for (int col=0;col<size;col++){
+                if(tiles[row][col] instanceof BlackTile){
+                    ((BlackTile) tiles[row][col]).setNeighbors();
+                }
+            }
+        }
     }
 
     private void createTile(int row, int col) throws IllegalTilePlacementException {
@@ -36,6 +48,10 @@ public class Board {
     }
     public int getSize(){
         return size;
+    }
+
+    public boolean validCoordinates(int x,int y){
+        return x>=0 && x<size && y>=0 && y<size;
     }
 
 }

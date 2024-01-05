@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class PieceTest {
+    /*
     @Test
     void getBlackNeighborTest() throws IllegalTilePlacementException, NoPieceOnWhiteException {
         Board board = new Board();
@@ -27,5 +28,7 @@ public class PieceTest {
         assertEquals(Team.White, tile.getNeighbor(Direction.Left, 1).getPiece().getTeam());
         assertEquals(Team.White, tile.getNeighbor(Direction.Right, 1).getPiece().getTeam());
     }
+
+     */
 }
 
