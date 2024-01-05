@@ -73,4 +73,18 @@ public class BlackTileTest {
         assertThrows(NotOnDiagonalException.class,()->{tile.otherTileDirection(otherTile);});
     }
 
+    @Test
+    void distanceNeighbors(){
+        assertEquals(1,tile.calculateDistance(bottomLeftTile));
+        assertEquals(1,tile.calculateDistance(bottomRightTile));
+        assertEquals(1,tile.calculateDistance(topLeftTile));
+        assertEquals(1,tile.calculateDistance(topRightTile));
+    }
+
+    @Test
+    void distance2(){
+        BlackTile otherTile2=BlackTile.asBlackTile(board.getTile(4,4));
+        assertEquals(3,otherTile.calculateDistance(otherTile2));
+    }
+
 }

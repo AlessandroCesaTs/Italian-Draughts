@@ -48,14 +48,10 @@ public class BlackTile extends Tile {
     }
 
     /*
-    public Tile getNeighbor(NeighborPosition position){
-        if(position.equals(NeighborPosition.BottomLeft)){
-            return neighbors[0];
-        } else if (position.equals(NeighborPosition.BottomRight)) {
-            return neighbors[1];
-        }
-    }
-     */
+    public BlackTile getBlackTileInBetween(BlackTile otherBlackTile){
 
+    }
+
+     */
 
 }

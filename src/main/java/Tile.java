@@ -29,13 +29,13 @@ public abstract class Tile {
 
     //public int getDiagonalDistance(Tile tile){}
 
-    public boolean isOnDiagonal(int rowDiff,int colDiff){
-        return Math.abs(rowDiff)==Math.abs(colDiff) && rowDiff!=0;
+    public boolean isOnDiagonal(Tile otherTile){
+        return Math.abs(rowDiff(otherTile))==Math.abs(colDiff(otherTile)) && rowDiff(otherTile)!=0;
     }
-    public NeighborPosition otherTileDirection(Tile tile) throws NotOnDiagonalException {
-        int rowDiff=tile.getRow()-row;
-        int colDiff=tile.getCol()-col;
-        if (this.isOnDiagonal(rowDiff,colDiff)) {
+    public NeighborPosition otherTileDirection(Tile otherTile) throws NotOnDiagonalException {
+        int rowDiff=rowDiff(otherTile);
+        int colDiff=colDiff(otherTile);
+        if (this.isOnDiagonal(otherTile)) {
             if (rowDiff > 0) {
                 if (colDiff > 0) {
                     return NeighborPosition.TopRight;
@@ -53,4 +53,18 @@ public abstract class Tile {
             throw new NotOnDiagonalException();
         }
     }
+
+    public int calculateDistance(Tile otherTile){
+        int rowDiff=rowDiff(otherTile);
+        int colDiff=colDiff(otherTile);
+        return Math.max(Math.abs(rowDiff),Math.abs(colDiff));
+    }
+
+    public int rowDiff(Tile otherTile){
+        return otherTile.getRow()-row;
+    }
+    public int colDiff(Tile otherTile){
+        return otherTile.getCol()-col;
+    }
+
 }
