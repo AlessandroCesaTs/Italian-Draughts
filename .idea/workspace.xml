@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="computing diagonal directions">
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="correctly computing distances">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DistanceDifferentThan2Exception.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,23 +83,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.BlackTileTest.equalsTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Neighbors&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.BlackTileTest.equalsTest.executor": "Run",
+    "Gradle.BlackTileTest.tileInBetween.executor": "Run",
+    "Gradle.Italian-Draughts [test].executor": "Run",
+    "Gradle.TileCreationTest.blackTileException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Neighbors",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Italian-Draughts [test]">
+  <component name="RunManager" selected="Gradle.BlackTileTest.tileInBetween">
     <configuration name="BlackTileTest.equalsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -113,6 +115,30 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;BlackTileTest.equalsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="BlackTileTest.tileInBetween" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;BlackTileTest.tileInBetween&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -147,6 +173,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BlackTileTest.tileInBetween" />
         <item itemvalue="Gradle.Italian-Draughts [test]" />
         <item itemvalue="Gradle.BlackTileTest.equalsTest" />
       </list>
@@ -312,7 +339,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704283515067</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="correctly computing distances">
+      <option name="closed" value="true" />
+      <created>1704450728177</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1704450728178</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -330,6 +365,7 @@
     <MESSAGE value="Created method to check if coordinated are valid" />
     <MESSAGE value="computing neighbors, changed x and y to row and col" />
     <MESSAGE value="computing diagonal directions" />
-    <option name="LAST_COMMIT_MESSAGE" value="computing diagonal directions" />
+    <MESSAGE value="correctly computing distances" />
+    <option name="LAST_COMMIT_MESSAGE" value="correctly computing distances" />
   </component>
 </project>

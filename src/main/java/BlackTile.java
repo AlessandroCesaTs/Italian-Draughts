@@ -47,11 +47,12 @@ public class BlackTile extends Tile {
         return neighbors.get(position);
     }
 
-    /*
-    public BlackTile getBlackTileInBetween(BlackTile otherBlackTile){
-
+    public BlackTile getBlackTileInBetween(BlackTile otherTile) throws DistanceDifferentThan2Exception, NotOnDiagonalException {
+        if (calculateDistance(otherTile)!=2){
+            throw new DistanceDifferentThan2Exception();
+        }else{
+            NeighborPosition position=otherTileDirection(asBlackTile(otherTile));
+            return getNeighbor(position);
+        }
     }
-
-     */
-
 }
