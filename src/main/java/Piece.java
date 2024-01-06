@@ -29,6 +29,21 @@ public class Piece {
             throw new AlreadyOccupiedException();
         }
     }
+    public void movePieceByTwo(NeighborPosition position) throws AlreadyOccupiedException {
+        BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
+        if (targetTile.isFree()){
+            moveToTile(targetTile);
+        }else{
+            throw new AlreadyOccupiedException();
+        }
+    }
+
+    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException {
+        if (tile.getNeighbor(position).getPiece().getTeam()!=team && tile.getNeighbor(position).getNeighbor(position).isFree()){
+            movePieceByTwo(position);
+            tile.getNeighbor(position).removePiece();
+        }
+    }
 }
 
 

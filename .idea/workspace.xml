@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="correctly computing tile inbetween">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AlreadyOccupiedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/MovementTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BoardTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="removing pieces" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,6 +81,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.BlackTileTest.equalsTest.executor": "Run",
+    "Gradle.BlackTileTest.removePiece.executor": "Run",
     "Gradle.BlackTileTest.tileInBetween.executor": "Run",
     "Gradle.Italian-Draughts [test].executor": "Run",
     "Gradle.MovementTest.alreadyOccupiedTest.executor": "Run",
@@ -96,7 +89,7 @@
     "Gradle.TileCreationTest.blackTileException.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "movements",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
@@ -105,7 +98,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MovementTest.alreadyOccupiedTest">
+  <component name="RunManager" selected="Gradle.BlackTileTest.removePiece">
     <configuration name="BlackTileTest.isNotFree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -130,7 +123,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="BlackTileTest.tileInBetween" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BlackTileTest.removePiece" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,7 +136,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BlackTileTest.tileInBetween&quot;" />
+            <option value="&quot;BlackTileTest.removePiece&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -226,11 +219,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BlackTileTest.removePiece" />
         <item itemvalue="Gradle.MovementTest.alreadyOccupiedTest" />
         <item itemvalue="Gradle.MovementTest" />
         <item itemvalue="Gradle.BlackTileTest.isNotFree" />
         <item itemvalue="Gradle.Italian-Draughts [test]" />
-        <item itemvalue="Gradle.BlackTileTest.tileInBetween" />
       </list>
     </recent_temporary>
   </component>
@@ -410,7 +403,23 @@
       <option name="project" value="LOCAL" />
       <updated>1704453211885</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="removing pieces">
+      <option name="closed" value="true" />
+      <created>1704555539277</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704555539277</updated>
+    </task>
+    <task id="LOCAL-00022" summary="removing pieces">
+      <option name="closed" value="true" />
+      <created>1704555564979</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1704555564979</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -430,6 +439,7 @@
     <MESSAGE value="computing diagonal directions" />
     <MESSAGE value="correctly computing distances" />
     <MESSAGE value="correctly computing tile inbetween" />
-    <option name="LAST_COMMIT_MESSAGE" value="correctly computing tile inbetween" />
+    <MESSAGE value="removing pieces" />
+    <option name="LAST_COMMIT_MESSAGE" value="removing pieces" />
   </component>
 </project>
