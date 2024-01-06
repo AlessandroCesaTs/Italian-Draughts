@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BlackTile extends Tile {
-    private Piece piece;
+    private Piece piece=null;
     private final Map<NeighborPosition, BlackTile> neighbors = new HashMap<>();
     private BlackTile(int x, int y) {
         super(x,y);
@@ -35,6 +35,7 @@ public class BlackTile extends Tile {
     }
 
     public void removePiece(){
+        getPiece().remove();
         piece=null;
     }
     public Piece getPiece(){

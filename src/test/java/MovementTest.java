@@ -13,12 +13,14 @@ public class MovementTest {
         Piece piece=board.getPiece(2,2);
         piece.movePiece(NeighborPosition.TopRight);
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
+        assertNull(board.getPiece(2,2));
     }
     @Test
     void movementTest2() throws NoPieceOnWhiteException, AlreadyOccupiedException {
         Piece piece=board.getPiece(5,1);
         piece.movePiece(NeighborPosition.BottomLeft);
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(4,0)).getPiece());
+        assertNull(board.getPiece(5,1));
     }
 
     @Test
