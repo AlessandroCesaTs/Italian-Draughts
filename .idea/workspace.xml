@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="correctly computing tile inbetween">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AlreadyOccupiedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/MovementTest.java" afterDir="false" />
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="working movements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,26 +81,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.BlackTileTest.equalsTest.executor": "Run",
-    "Gradle.BlackTileTest.tileInBetween.executor": "Run",
-    "Gradle.Italian-Draughts [test].executor": "Run",
-    "Gradle.MovementTest.alreadyOccupiedTest.executor": "Run",
-    "Gradle.MovementTest.executor": "Run",
-    "Gradle.TileCreationTest.blackTileException.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "movements",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.BlackTileTest.equalsTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BlackTileTest.tileInBetween.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MovementTest.alreadyOccupiedTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MovementTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MovementTest.alreadyOccupiedTest">
+  <component name="RunManager" selected="Gradle.BlackTileTest.removePiece">
     <configuration name="BlackTileTest.isNotFree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -130,7 +125,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="BlackTileTest.tileInBetween" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BlackTileTest.removePiece" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,7 +138,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BlackTileTest.tileInBetween&quot;" />
+            <option value="&quot;BlackTileTest.removePiece&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -226,11 +221,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BlackTileTest.removePiece" />
         <item itemvalue="Gradle.MovementTest.alreadyOccupiedTest" />
         <item itemvalue="Gradle.MovementTest" />
         <item itemvalue="Gradle.BlackTileTest.isNotFree" />
         <item itemvalue="Gradle.Italian-Draughts [test]" />
-        <item itemvalue="Gradle.BlackTileTest.tileInBetween" />
       </list>
     </recent_temporary>
   </component>

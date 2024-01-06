@@ -33,6 +33,10 @@ public class BlackTile extends Tile {
             throw new AlreadyOccupiedException();
         }
     }
+
+    public void removePiece(){
+        piece=null;
+    }
     public Piece getPiece(){
         return piece;
     }

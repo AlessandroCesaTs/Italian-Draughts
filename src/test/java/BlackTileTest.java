@@ -111,6 +111,15 @@ public class BlackTileTest {
         assertTrue(BlackTile.asBlackTile(board.getTile(4,4)).isFree());
     }
 
+    @Test
+    void removePiece(){
+        assertNotNull(tile.getPiece());
+        assertFalse(tile.isFree());
+        tile.removePiece();
+
+        assertNull(tile.getPiece());
+        assertTrue(tile.isFree());
+    }
 
 }
 
