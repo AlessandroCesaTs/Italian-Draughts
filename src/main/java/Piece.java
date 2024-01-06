@@ -8,9 +8,10 @@ public class Piece {
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
-    public void moveToTile(BlackTile tile) throws AlreadyOccupiedException {
-        setTile(tile);
-        tile.movePieceHere(this);
+    public void moveToTile(BlackTile targetTile) throws AlreadyOccupiedException {
+        tile.removePiece();
+        setTile(targetTile);
+        targetTile.movePieceHere(this);
     }
     public BlackTile getTile(){
         return this.tile;
@@ -38,12 +39,34 @@ public class Piece {
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException {
-        if (tile.getNeighbor(position).getPiece().getTeam()!=team && tile.getNeighbor(position).getNeighbor(position).isFree()){
-            movePieceByTwo(position);
+    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException, CantEatPieceOfSameTeamException {
+        if (canEat(position)){
             tile.getNeighbor(position).removePiece();
+            movePieceByTwo(position);
         }
     }
+
+    private boolean isPositionAfterEatingFree(NeighborPosition position) {
+        return tile.getNeighbor(position).getNeighbor(position).isFree();
+    }
+
+    private boolean pieceOfOpposingTeam(NeighborPosition position) {
+        return tile.getNeighbor(position).getPiece().getTeam() != team;
+    }
+
+
+    public boolean canEat(NeighborPosition position) throws CantEatPieceOfSameTeamException, AlreadyOccupiedException {
+        if (pieceOfOpposingTeam(position)){
+            if (isPositionAfterEatingFree(position)){
+                return true;
+            }else{
+                throw new AlreadyOccupiedException("Can't eat because tile after is occupied");
+            }
+        }else {
+            throw new CantEatPieceOfSameTeamException();
+        }
+    }
+    public void remove(){
+        tile=null;
+    }
 }
-
-
