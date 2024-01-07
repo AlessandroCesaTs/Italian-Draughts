@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EatingTest {
 
     @Test
-    void whiteEatsBlackTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, CantEatPieceOfSameTeamException {
+    void whiteEatsBlackTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, CantEatPieceOfSameTeamException, SimplePieceCantGoBackException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);

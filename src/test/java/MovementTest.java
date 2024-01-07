@@ -9,14 +9,14 @@ public class MovementTest {
     public MovementTest() throws IllegalTilePlacementException{
     }
     @Test
-    void movementTest() throws NoPieceOnWhiteException, AlreadyOccupiedException {
+    void movementTest() throws NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException {
         Piece piece=board.getPiece(2,2);
         piece.movePiece(NeighborPosition.TopRight);
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
         assertNull(board.getPiece(2,2));
     }
     @Test
-    void movementTest2() throws NoPieceOnWhiteException, AlreadyOccupiedException {
+    void movementTest2() throws NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException {
         Piece piece=board.getPiece(5,1);
         piece.movePiece(NeighborPosition.BottomLeft);
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(4,0)).getPiece());

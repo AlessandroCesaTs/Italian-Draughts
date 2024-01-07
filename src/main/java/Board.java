@@ -34,9 +34,9 @@ public class Board {
 
     private void placePiece(int row, int col){
         if (row <3){
-            ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.Black));
-        }else if(row <8 && row >4){
             ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.White));
+        }else if(row <8 && row >4){
+            ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.Black));
         }
     }
 

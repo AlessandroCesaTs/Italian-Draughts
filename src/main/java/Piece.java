@@ -1,6 +1,7 @@
 public class Piece {
     final Team team;
     private BlackTile tile;
+    private boolean isKing=false;
 
     public Piece(Team team) {
         this.team = team;
@@ -12,6 +13,9 @@ public class Piece {
         tile.removePiece();
         setTile(targetTile);
         targetTile.movePieceHere(this);
+        if (promotion()) {
+            isKing = true;
+        }
     }
     public BlackTile getTile(){
         return this.tile;
@@ -21,15 +25,38 @@ public class Piece {
         return team;
     }
 
+    public boolean getIfKing(){
+        return isKing;
+    }
 
-    public void movePiece(NeighborPosition position) throws AlreadyOccupiedException {
-        BlackTile targetTile=getTile().getNeighbor(position);
-        if (targetTile.isFree()){
-            moveToTile(targetTile);
+    public void movePiece(NeighborPosition position) throws AlreadyOccupiedException, SimplePieceCantGoBackException {
+        if (isMoveValid(position)) {
+            BlackTile targetTile = getTile().getNeighbor(position);
+            if (targetTile.isFree()) {
+                moveToTile(targetTile);
+            } else {
+                throw new AlreadyOccupiedException();
+            }
         }else{
-            throw new AlreadyOccupiedException();
+            throw new SimplePieceCantGoBackException();
         }
     }
+
+    public boolean promotion(){
+        return (team==Team.White && tile.getRow()==7)||(team==Team.Black && tile.getRow()==0);
+    }
+    public boolean isMoveValid(NeighborPosition position){
+        if (isKing){
+            return true;
+        }else {
+            if (team == Team.White) {
+                return position==NeighborPosition.TopLeft || position==NeighborPosition.TopRight;
+            }else{
+                return position==NeighborPosition.BottomLeft || position==NeighborPosition.BottomRight;
+            }
+        }
+    }
+
     public void movePieceByTwo(NeighborPosition position) throws AlreadyOccupiedException {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
         if (targetTile.isFree()){
