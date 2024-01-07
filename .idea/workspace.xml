@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="simple piece can't eat king">
-      <change afterPath="$PROJECT_DIR$/src/main/java/CantEatException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/OutOfBoundsException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BlackTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BlackTile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/EatingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/EatingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/KingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/KingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BlackTileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MovementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MovementTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,55 +85,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.BlackTileTest.equalsTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.BlackTileTest.tileInBetween.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.EatingTest.cantEatSameTeamTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.EatingTest.cantEatTileAfterOccupiedTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.KingTest.cantEatKing.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.KingTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.KingTest.whiteBecomesKing.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MovementTest.alreadyOccupiedTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MovementTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dame&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.BlackTileTest.equalsTest.executor": "Run",
+    "Gradle.BlackTileTest.tileInBetween.executor": "Run",
+    "Gradle.EatingTest.cantEatSameTeamTest.executor": "Run",
+    "Gradle.EatingTest.cantEatTileAfterOccupiedTest.executor": "Run",
+    "Gradle.Italian-Draughts [test].executor": "Run",
+    "Gradle.KingTest.cantEatKing.executor": "Run",
+    "Gradle.KingTest.executor": "Run",
+    "Gradle.KingTest.whiteBecomesKing.executor": "Run",
+    "Gradle.MovementTest.alreadyOccupiedTest.executor": "Run",
+    "Gradle.MovementTest.blackOutOfBoundsTest.executor": "Run",
+    "Gradle.MovementTest.executor": "Run",
+    "Gradle.MovementTest.whiteOutOfBoundsTest.executor": "Run",
+    "Gradle.TileCreationTest.blackTileException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "out__of__bounds",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Italian-Draughts [test]">
-    <configuration name="EatingTest.cantEatSameTeamTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;EatingTest.cantEatSameTeamTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="EatingTest.cantEatTileAfterOccupiedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -179,30 +158,6 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="KingTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;KingTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="KingTest.cantEatKing" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -227,13 +182,61 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="MovementTest.blackOutOfBoundsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MovementTest.blackOutOfBoundsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="MovementTest.whiteOutOfBoundsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MovementTest.whiteOutOfBoundsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.Italian-Draughts [test]" />
+        <item itemvalue="Gradle.MovementTest.blackOutOfBoundsTest" />
+        <item itemvalue="Gradle.MovementTest.whiteOutOfBoundsTest" />
         <item itemvalue="Gradle.KingTest.cantEatKing" />
         <item itemvalue="Gradle.EatingTest.cantEatTileAfterOccupiedTest" />
-        <item itemvalue="Gradle.EatingTest.cantEatSameTeamTest" />
-        <item itemvalue="Gradle.KingTest" />
       </list>
     </recent_temporary>
   </component>
