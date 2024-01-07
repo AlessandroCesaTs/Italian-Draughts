@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="working movements">
+    <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="simple piece can't eat king">
+      <change afterPath="$PROJECT_DIR$/src/main/java/CantEatException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/EatingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/EatingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/KingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/KingTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,13 +88,18 @@
   &quot;keyToString&quot;: {
     &quot;Gradle.BlackTileTest.equalsTest.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.BlackTileTest.tileInBetween.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.EatingTest.cantEatSameTeamTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.EatingTest.cantEatTileAfterOccupiedTest.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KingTest.cantEatKing.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.KingTest.whiteBecomesKing.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.MovementTest.alreadyOccupiedTest.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.MovementTest.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dame&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
 }</component>
@@ -100,8 +108,8 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BlackTileTest.removePiece">
-    <configuration name="BlackTileTest.isNotFree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Italian-Draughts [test]">
+    <configuration name="EatingTest.cantEatSameTeamTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -114,7 +122,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BlackTileTest.isNotFree&quot;" />
+            <option value="&quot;EatingTest.cantEatSameTeamTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -125,7 +133,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="BlackTileTest.removePiece" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="EatingTest.cantEatTileAfterOccupiedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -138,7 +146,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BlackTileTest.removePiece&quot;" />
+            <option value="&quot;EatingTest.cantEatTileAfterOccupiedTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -171,7 +179,7 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="MovementTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KingTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -184,7 +192,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;MovementTest&quot;" />
+            <option value="&quot;KingTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -195,7 +203,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="MovementTest.alreadyOccupiedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KingTest.cantEatKing" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -208,7 +216,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;MovementTest.alreadyOccupiedTest&quot;" />
+            <option value="&quot;KingTest.cantEatKing&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -221,11 +229,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BlackTileTest.removePiece" />
-        <item itemvalue="Gradle.MovementTest.alreadyOccupiedTest" />
-        <item itemvalue="Gradle.MovementTest" />
-        <item itemvalue="Gradle.BlackTileTest.isNotFree" />
         <item itemvalue="Gradle.Italian-Draughts [test]" />
+        <item itemvalue="Gradle.KingTest.cantEatKing" />
+        <item itemvalue="Gradle.EatingTest.cantEatTileAfterOccupiedTest" />
+        <item itemvalue="Gradle.EatingTest.cantEatSameTeamTest" />
+        <item itemvalue="Gradle.KingTest" />
       </list>
     </recent_temporary>
   </component>
@@ -405,7 +413,23 @@
       <option name="project" value="LOCAL" />
       <updated>1704453211885</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="working king">
+      <option name="closed" value="true" />
+      <created>1704638938629</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704638938632</updated>
+    </task>
+    <task id="LOCAL-00022" summary="simple piece can't eat king">
+      <option name="closed" value="true" />
+      <created>1704640516148</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1704640516148</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -425,6 +449,8 @@
     <MESSAGE value="computing diagonal directions" />
     <MESSAGE value="correctly computing distances" />
     <MESSAGE value="correctly computing tile inbetween" />
-    <option name="LAST_COMMIT_MESSAGE" value="correctly computing tile inbetween" />
+    <MESSAGE value="working king" />
+    <MESSAGE value="simple piece can't eat king" />
+    <option name="LAST_COMMIT_MESSAGE" value="simple piece can't eat king" />
   </component>
 </project>

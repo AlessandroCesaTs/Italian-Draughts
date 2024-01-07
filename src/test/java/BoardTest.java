@@ -40,22 +40,22 @@ public class BoardTest {
     void blackPieceTest() throws NoPieceOnWhiteException {
         for (int row=0;row<4;row+=2){
             for (int col=0;col<board.getSize();col+=2){
-                assertEquals(Team.Black,board.getTile(row,col).getPiece().getTeam());
+                assertEquals(Team.White,board.getTile(row,col).getPiece().getTeam());
             }
         }
         for (int col=1;col<board.getSize();col+=2){
-            assertEquals(Team.Black,board.getTile(1,col).getPiece().getTeam());
+            assertEquals(Team.White,board.getTile(1,col).getPiece().getTeam());
         }
     }
     @Test
     void whitePieceTest() throws NoPieceOnWhiteException {
         for (int row=5;row<board.getSize();row+=2){
             for (int col=1;col<board.getSize();col+=2){
-                assertEquals(Team.White,board.getTile(row,col).getPiece().getTeam());
+                assertEquals(Team.Black,board.getTile(row,col).getPiece().getTeam());
             }
         }
         for (int col=0;col<board.getSize();col+=2){
-            assertEquals(Team.White,board.getTile(6,col).getPiece().getTeam());
+            assertEquals(Team.Black,board.getTile(6,col).getPiece().getTeam());
         }
     }
 
