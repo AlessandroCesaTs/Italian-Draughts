@@ -66,7 +66,7 @@ public class Piece {
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException, CantEatPieceOfSameTeamException {
+    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException, CantEatException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
@@ -80,17 +80,23 @@ public class Piece {
     private boolean pieceOfOpposingTeam(NeighborPosition position) {
         return tile.getNeighbor(position).getPiece().getTeam() != team;
     }
+    private boolean pieceIsKing(NeighborPosition position) {
+        return tile.getNeighbor(position).getPiece().isKing;
+    }
 
-
-    public boolean canEat(NeighborPosition position) throws CantEatPieceOfSameTeamException, AlreadyOccupiedException {
+    public boolean canEat(NeighborPosition position)throws CantEatException {
         if (pieceOfOpposingTeam(position)){
             if (isPositionAfterEatingFree(position)){
-                return true;
+                if (!pieceIsKing(position) || isKing ){
+                    return true;
+                }else{
+                    throw new CantEatException("Simple piece can't eat king");
+                }
             }else{
-                throw new AlreadyOccupiedException("Can't eat because tile after is occupied");
+                throw new CantEatException("Can't eat because tile after is occupied");
             }
         }else {
-            throw new CantEatPieceOfSameTeamException();
+            throw new CantEatException("Can't eat piece of same team");
         }
     }
     public void remove(){
