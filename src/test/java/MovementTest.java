@@ -9,14 +9,14 @@ public class MovementTest {
     public MovementTest() throws IllegalTilePlacementException{
     }
     @Test
-    void movementTest() throws NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException {
+    void movementTest() throws NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, OutOfBoundsException {
         Piece piece=board.getPiece(2,2);
         piece.movePiece(NeighborPosition.TopRight);
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
         assertNull(board.getPiece(2,2));
     }
     @Test
-    void movementTest2() throws NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException {
+    void movementTest2() throws NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, OutOfBoundsException {
         Piece piece=board.getPiece(5,1);
         piece.movePiece(NeighborPosition.BottomLeft);
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(4,0)).getPiece());
@@ -27,5 +27,15 @@ public class MovementTest {
     void alreadyOccupiedTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(7,5);
         assertThrows(AlreadyOccupiedException.class,()->piece.movePiece(NeighborPosition.BottomLeft));
+    }
+    @Test
+    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException {
+        Piece piece=board.getPiece(1,7);
+        assertThrows(OutOfBoundsException.class,()->piece.movePiece(NeighborPosition.TopRight));
+    }
+    @Test
+    void blackOutOfBoundsTest() throws NoPieceOnWhiteException {
+        Piece piece=board.getPiece(7,7);
+        assertThrows(OutOfBoundsException.class,()->piece.movePiece(NeighborPosition.BottomRight));
     }
 }

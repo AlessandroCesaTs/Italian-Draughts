@@ -29,7 +29,7 @@ public class Piece {
         return isKing;
     }
 
-    public void movePiece(NeighborPosition position) throws AlreadyOccupiedException, SimplePieceCantGoBackException {
+    public void movePiece(NeighborPosition position) throws AlreadyOccupiedException, SimplePieceCantGoBackException, OutOfBoundsException {
         if (isMoveValid(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
@@ -57,7 +57,7 @@ public class Piece {
         }
     }
 
-    public void movePieceByTwo(NeighborPosition position) throws AlreadyOccupiedException {
+    public void movePieceByTwo(NeighborPosition position) throws AlreadyOccupiedException, OutOfBoundsException {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
         if (targetTile.isFree()){
             moveToTile(targetTile);
@@ -66,25 +66,25 @@ public class Piece {
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException, CantEatException {
+    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException, CantEatException, OutOfBoundsException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
         }
     }
 
-    private boolean isPositionAfterEatingFree(NeighborPosition position) {
+    private boolean isPositionAfterEatingFree(NeighborPosition position) throws OutOfBoundsException {
         return tile.getNeighbor(position).getNeighbor(position).isFree();
     }
 
-    private boolean pieceOfOpposingTeam(NeighborPosition position) {
+    private boolean pieceOfOpposingTeam(NeighborPosition position) throws OutOfBoundsException {
         return tile.getNeighbor(position).getPiece().getTeam() != team;
     }
-    private boolean pieceIsKing(NeighborPosition position) {
+    private boolean pieceIsKing(NeighborPosition position) throws OutOfBoundsException {
         return tile.getNeighbor(position).getPiece().isKing;
     }
 
-    public boolean canEat(NeighborPosition position)throws CantEatException {
+    public boolean canEat(NeighborPosition position) throws CantEatException, OutOfBoundsException {
         if (pieceOfOpposingTeam(position)){
             if (isPositionAfterEatingFree(position)){
                 if (!pieceIsKing(position) || isKing ){

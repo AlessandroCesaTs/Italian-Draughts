@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KingTest {
 
     @Test
-    void whiteBecomesKing() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, CantEatException {
+    void whiteBecomesKing() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, CantEatException, OutOfBoundsException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece1=board.getPiece(5,5);
@@ -30,7 +30,7 @@ public class KingTest {
         assertTrue(whitePiece.getIfKing());
     }
     @Test
-    void cantEatKing() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, CantEatException {
+    void cantEatKing() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, CantEatException, OutOfBoundsException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece1=board.getPiece(5,5);

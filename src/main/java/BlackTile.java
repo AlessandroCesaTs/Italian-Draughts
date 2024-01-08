@@ -58,11 +58,15 @@ public class BlackTile extends Tile {
         }
     }
 
-    public BlackTile getNeighbor(NeighborPosition position){
-        return neighbors.get(position);
+    public BlackTile getNeighbor(NeighborPosition position) throws OutOfBoundsException {
+        if (neighbors.containsKey(position)) {
+            return neighbors.get(position);
+        }else{
+            throw new OutOfBoundsException();
+        }
     }
 
-    public BlackTile getBlackTileInBetween(BlackTile otherTile) throws DistanceDifferentThan2Exception, NotOnDiagonalException {
+    public BlackTile getBlackTileInBetween(BlackTile otherTile) throws DistanceDifferentThan2Exception, NotOnDiagonalException, OutOfBoundsException {
         if (calculateDistance(otherTile)!=2){
             throw new DistanceDifferentThan2Exception();
         }else{

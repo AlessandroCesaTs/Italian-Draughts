@@ -34,21 +34,21 @@ public class BlackTileTest {
     }
 
     @Test
-    void neighborBottomLeftTest(){
+    void neighborBottomLeftTest() throws OutOfBoundsException {
         assertTrue(tile.getNeighbor(NeighborPosition.BottomLeft).equals(bottomLeftTile));
     }
     @Test
-    void neighborBottomRightTest(){
+    void neighborBottomRightTest() throws OutOfBoundsException {
 
         assertTrue(tile.getNeighbor(NeighborPosition.BottomRight).equals(bottomRightTile));
     }
     @Test
-    void neighborTopLeftTest(){
+    void neighborTopLeftTest() throws OutOfBoundsException {
 
         assertTrue(tile.getNeighbor(NeighborPosition.TopLeft).equals(topLeftTile));
     }
     @Test
-    void neighborTopRightTest(){
+    void neighborTopRightTest() throws OutOfBoundsException {
         assertTrue(tile.getNeighbor(NeighborPosition.TopRight).equals(topRightTile));
     }
 
@@ -87,13 +87,13 @@ public class BlackTileTest {
     }
 
     @Test
-    void tileInBetween() throws NotOnDiagonalException, DistanceDifferentThan2Exception {
+    void tileInBetween() throws NotOnDiagonalException, DistanceDifferentThan2Exception, OutOfBoundsException {
         BlackTile otherTile2=BlackTile.asBlackTile(board.getTile(3,3));
         assertEquals(topRightTile,tile.getBlackTileInBetween(otherTile2));
     }
 
     @Test
-    void tileInBetween2() throws NotOnDiagonalException, DistanceDifferentThan2Exception {
+    void tileInBetween2() throws NotOnDiagonalException, DistanceDifferentThan2Exception, OutOfBoundsException {
         BlackTile firstTile = BlackTile.asBlackTile(board.getTile(4, 2));
         BlackTile secondTile = BlackTile.asBlackTile(board.getTile(6, 0));
         BlackTile inBetweenTile = BlackTile.asBlackTile(board.getTile(5, 1));
