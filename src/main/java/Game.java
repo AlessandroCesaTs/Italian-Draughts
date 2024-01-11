@@ -1,12 +1,10 @@
-import java.util.LinkedList;
-import java.util.List;
-
 public class Game {
     final Player player1;
     final Player player2;
     private Player activePlayer;
     private Player winnerPlayer;
-    Board currentGameBoard;
+    private static Board currentGameBoard;
+    private int currentRound;
 
     public Game(Player player1, Player player2) throws IllegalTeamsCompositionException, IllegalTilePlacementException {
         if (player1.team == player2.team) {
@@ -25,10 +23,17 @@ public class Game {
 
     }
 
-    public void newTurn(Piece piece, BlackTile source, BlackTile destination) {
-        Player inactivePlayer = activePlayer.equals(player1) ? player2 : player1;
+    public void play() throws NoPieceOnWhiteException {
+        while (player1.hasPieces() & player2.hasPieces()) {
+            playTurn();
+        }
+        //alla fine metodo per chiamare il vincitore
+    }
 
+    public void playTurn() {
+        //metodo per ricevere mossa del giocatore
         changeActivePlayer();
+        currentRound++;
     }
     public void changeActivePlayer() {
         if (activePlayer == player1){
@@ -37,9 +42,14 @@ public class Game {
             activePlayer = player1;
         }
     }
+    public Player getCurrentPlayer() {
+        return activePlayer;
+    }
+    public int getCurrentRound(){
+        return currentRound;
+    }
 
-
-
-
-
+    public static Board getBoard() {
+        return currentGameBoard;
+    }
 }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Board {
     private final int size=8;
     private final Tile[][] tiles = new Tile[size][size];
@@ -52,6 +54,18 @@ public class Board {
 
     public boolean validCoordinates(int x,int y){
         return x>=0 && x<size && y>=0 && y<size;
+    }
+
+    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+        List<BlackTile> fullBlackTiles = null;
+        for (int col=0; col<tiles.length; col++){
+            for (int row=0; row<tiles[0].length; row++){
+                if((col + row)%2==0 & tiles[row][col].getPiece() != null){
+                    fullBlackTiles.add((BlackTile) tiles[row][col]);
+                }
+            }
+        }
+        return fullBlackTiles;
     }
 
 }
