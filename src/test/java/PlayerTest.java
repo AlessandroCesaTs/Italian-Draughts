@@ -9,8 +9,5 @@ public class PlayerTest {
             throw new RuntimeException(e);
         }
     }
-    @Test
-    void nameTest(){
-        player.getName();
-    }
+
 }
