@@ -13,7 +13,7 @@ public class ConnectionTest {
     @Test
     void hostCreateLocalServer(){
         host = new Host();
-        assertTrue(host.getLocalServer() instanceof LocalServer);
+        assertInstanceOf(LocalServer.class, host.getLocalServer());
     }
 
 }
