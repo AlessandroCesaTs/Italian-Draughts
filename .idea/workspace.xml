@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74b384eb-85ad-448d-a466-e5d28f540f22" name="Changes" comment="working movements">
+      <change afterPath="$PROJECT_DIR$/src/main/java/multiplayer/Guest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/multiplayer/Host.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/multiplayer/LocalServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/multiplayerTest/ConnectionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Piece.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +29,7 @@
           <activation />
         </task>
         <projects_view>
+          <option name="groupModules" value="false" />
           <tree_state>
             <expand>
               <path>
@@ -34,18 +39,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Italian-Draughts" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Italian-Draughts" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Italian-Draughts" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Italian-Draughts" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -62,6 +56,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="multiplayer-1.0" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -81,27 +88,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.BlackTileTest.equalsTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.BlackTileTest.tileInBetween.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Italian-Draughts [test].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MovementTest.alreadyOccupiedTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MovementTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TileCreationTest.blackTileException.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.BlackTileTest.equalsTest.executor": "Run",
+    "Gradle.BlackTileTest.removePiece.executor": "Run",
+    "Gradle.BlackTileTest.tileInBetween.executor": "Run",
+    "Gradle.Build Italian-Draughts.executor": "Run",
+    "Gradle.ConnectionTest (1).executor": "Run",
+    "Gradle.ConnectionTest.executor": "Run",
+    "Gradle.ConnectionTest.guestAndHostConnection (1).executor": "Run",
+    "Gradle.ConnectionTest.guestAndHostConnection.executor": "Run",
+    "Gradle.ConnectionTest.hostCreateLocalServer (1).executor": "Run",
+    "Gradle.ConnectionTest.hostCreateLocalServer.executor": "Run",
+    "Gradle.Italian-Draughts [:test].executor": "Run",
+    "Gradle.Italian-Draughts [test].executor": "Run",
+    "Gradle.MovementTest.alreadyOccupiedTest.executor": "Run",
+    "Gradle.MovementTest.executor": "Run",
+    "Gradle.TileCreationTest.blackTileException.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/fedem/IdeaProjects/Italian-Draughts",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BlackTileTest.removePiece">
-    <configuration name="BlackTileTest.isNotFree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle :test" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.ConnectionTest.hostCreateLocalServer (1)">
+    <configuration name="ConnectionTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -114,7 +140,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BlackTileTest.isNotFree&quot;" />
+            <option value="&quot;multiplayerTest.ConnectionTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -125,7 +151,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="BlackTileTest.removePiece" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ConnectionTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -138,7 +164,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;BlackTileTest.removePiece&quot;" />
+            <option value="&quot;MultiplayerTest.ConnectionTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -149,29 +175,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="Italian-Draughts [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="MovementTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ConnectionTest.guestAndHostConnection (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -184,7 +188,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;MovementTest&quot;" />
+            <option value="&quot;multiplayerTest.ConnectionTest.guestAndHostConnection&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -195,7 +199,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="MovementTest.alreadyOccupiedTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ConnectionTest.guestAndHostConnection" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -208,7 +212,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;MovementTest.alreadyOccupiedTest&quot;" />
+            <option value="&quot;MultiplayerTest.ConnectionTest.guestAndHostConnection&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ConnectionTest.hostCreateLocalServer (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;multiplayerTest.ConnectionTest.hostCreateLocalServer&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -221,20 +249,13 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BlackTileTest.removePiece" />
-        <item itemvalue="Gradle.MovementTest.alreadyOccupiedTest" />
-        <item itemvalue="Gradle.MovementTest" />
-        <item itemvalue="Gradle.BlackTileTest.isNotFree" />
-        <item itemvalue="Gradle.Italian-Draughts [test]" />
+        <item itemvalue="Gradle.ConnectionTest.hostCreateLocalServer (1)" />
+        <item itemvalue="Gradle.ConnectionTest.guestAndHostConnection (1)" />
+        <item itemvalue="Gradle.ConnectionTest (1)" />
+        <item itemvalue="Gradle.ConnectionTest.guestAndHostConnection" />
+        <item itemvalue="Gradle.ConnectionTest" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-76dd8dae" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -407,6 +428,29 @@
     </task>
     <option name="localTasksCounter" value="21" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
