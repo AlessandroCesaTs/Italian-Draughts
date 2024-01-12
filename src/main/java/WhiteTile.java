@@ -1,3 +1,6 @@
+import Exceptions.IllegalTilePlacementException;
+import Exceptions.NoPieceOnWhiteException;
+
 public class WhiteTile extends Tile {
     public WhiteTile(int x, int y) {
         super(x,y);

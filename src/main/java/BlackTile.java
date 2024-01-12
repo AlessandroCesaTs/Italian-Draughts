@@ -1,3 +1,7 @@
+import Exceptions.IllegalMovementException;
+import Exceptions.IllegalTilePlacementException;
+import Exceptions.OutOfBoundsException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,11 +30,11 @@ public class BlackTile extends Tile {
         this.piece=piece;
         piece.setTile(this);
     }
-    public void movePieceHere(Piece piece) throws AlreadyOccupiedException {
+    public void movePieceHere(Piece piece) throws IllegalMovementException {
         if (isFree()){
             this.piece=piece;
         }else{
-            throw new AlreadyOccupiedException();
+            throw new IllegalMovementException("Already occupied");
         }
     }
 
@@ -66,12 +70,4 @@ public class BlackTile extends Tile {
         }
     }
 
-    public BlackTile getBlackTileInBetween(BlackTile otherTile) throws DistanceDifferentThan2Exception, NotOnDiagonalException, OutOfBoundsException {
-        if (calculateDistance(otherTile)!=2){
-            throw new DistanceDifferentThan2Exception();
-        }else{
-            NeighborPosition position=otherTileDirection(asBlackTile(otherTile));
-            return getNeighbor(position);
-        }
-    }
 }

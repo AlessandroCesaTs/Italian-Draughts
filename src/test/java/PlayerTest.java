@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import Exceptions.NoPieceOnWhiteException;
 
 public class PlayerTest {
     Player player;

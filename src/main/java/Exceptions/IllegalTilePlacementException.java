@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class IllegalTilePlacementException extends Exception {
     public IllegalTilePlacementException(){
         super("Illegal Tile placement");

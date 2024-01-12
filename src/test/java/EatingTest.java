@@ -1,3 +1,4 @@
+import Exceptions.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EatingTest {
 
     @Test
-    void whiteEatsBlackTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, CantEatException, OutOfBoundsException {
+    void whiteEatsBlackTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, CantEatException, OutOfBoundsException, IllegalMovementException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
@@ -23,7 +24,7 @@ public class EatingTest {
         assertThrows(CantEatException.class,()-> whitePiece.eatPiece(NeighborPosition.TopRight));
     }
     @Test
-    void cantEatTileAfterOccupiedTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, AlreadyOccupiedException, SimplePieceCantGoBackException, OutOfBoundsException {
+    void cantEatTileAfterOccupiedTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         whitePiece.movePiece(NeighborPosition.TopRight);

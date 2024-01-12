@@ -1,4 +1,6 @@
-import IlegalPieceMovementException.IllegalPieceMovement;
+import Exceptions.CantEatException;
+import Exceptions.IllegalMovementException;
+import Exceptions.OutOfBoundsException;
 
 public class Move {
     private final Player player;
@@ -6,7 +8,7 @@ public class Move {
     private final BlackTile destination;
     private final NeighborPosition neighborDestination;
 
-    public Move(Player player, Piece piece, BlackTile finish, NeighborPosition neighborDestination) throws IllegalPieceMovement, AlreadyOccupiedException, CantEatException, CantEatPieceOfSameTeamException, OutOfBoundsException {
+    public Move(Player player, Piece piece, BlackTile finish, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
         this.player = player;
         this.piece = piece;
         this.destination = finish;
@@ -14,9 +16,9 @@ public class Move {
         makeMove();
     }
 
-    private void makeMove() throws IllegalPieceMovement, AlreadyOccupiedException, CantEatPieceOfSameTeamException, CantEatException, OutOfBoundsException {
+    private void makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
         if (player.team != piece.team){
-            throw new IllegalPieceMovement();
+            throw new IllegalMovementException();
         }
         if (destination.isFree()){
             piece.moveToTile(destination);

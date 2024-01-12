@@ -1,3 +1,7 @@
+import Exceptions.IllegalTeamsCompositionException;
+import Exceptions.IllegalTilePlacementException;
+import Exceptions.NoPieceOnWhiteException;
+
 public class Game {
     final Player player1;
     final Player player2;
