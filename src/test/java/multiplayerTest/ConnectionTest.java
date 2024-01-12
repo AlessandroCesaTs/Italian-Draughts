@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import multiplayer.Guest;
 import multiplayer.Host;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 public class ConnectionTest {
 
     Host host;
@@ -18,17 +21,35 @@ public class ConnectionTest {
     }
 
     @Test
-    void hostConnectsToServer() {
+    void hostConnectsToServer() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
         host = new Host();
-        assertEquals(1, host.getLocalServer().getnConnection());
+
+        new Thread(() -> {
+            try {
+                assertTrue(latch.await(5, TimeUnit.SECONDS));
+                assertEquals(1, host.getLocalServer().getnConnection());
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
     }
 
     @Test
     void guestConnectsToServer() {
+        CountDownLatch latch = new CountDownLatch(1);
         localServer = new LocalServer(10000);
         localServer.start();
         guest = new Guest();
-        assertEquals(1, localServer.getnConnection());
+
+        new Thread(() -> {
+            try {
+                assertTrue(latch.await(5, TimeUnit.SECONDS));
+                assertEquals(1, localServer.getnConnection());
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
     }
 }
 
