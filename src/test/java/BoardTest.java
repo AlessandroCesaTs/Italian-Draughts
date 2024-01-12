@@ -1,4 +1,5 @@
-import org.junit.jupiter.api.Disabled;
+import Exceptions.IllegalTilePlacementException;
+import Exceptions.NoPieceOnWhiteException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BoardTest {
 
 
-    public BoardTest() throws IllegalTilePlacementException{
+    public BoardTest() throws IllegalTilePlacementException {
     }
     Board board=new Board();
     @Test

@@ -1,3 +1,6 @@
+import Exceptions.IllegalTilePlacementException;
+import Exceptions.NoPieceOnWhiteException;
+
 import java.util.List;
 
 public class Board {

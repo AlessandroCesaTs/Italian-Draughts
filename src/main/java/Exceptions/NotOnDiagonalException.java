@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class NotOnDiagonalException extends Exception{
     public NotOnDiagonalException(){
         super("Tile is not on Diagonal");

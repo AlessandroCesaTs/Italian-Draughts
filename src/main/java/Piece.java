@@ -1,3 +1,7 @@
+import Exceptions.CantEatException;
+import Exceptions.IllegalMovementException;
+import Exceptions.OutOfBoundsException;
+
 public class Piece {
     final Team team;
     private BlackTile tile;
@@ -9,7 +13,7 @@ public class Piece {
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
-    public void moveToTile(BlackTile targetTile) throws AlreadyOccupiedException {
+    public void moveToTile(BlackTile targetTile) throws IllegalMovementException {
         tile.removePiece();
         setTile(targetTile);
         targetTile.movePieceHere(this);
@@ -29,16 +33,16 @@ public class Piece {
         return isKing;
     }
 
-    public void movePiece(NeighborPosition position) throws AlreadyOccupiedException, SimplePieceCantGoBackException, OutOfBoundsException {
+    public void movePiece(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         if (isMoveValid(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
             } else {
-                throw new AlreadyOccupiedException();
+                throw new IllegalMovementException("Already occupied");
             }
         }else{
-            throw new SimplePieceCantGoBackException();
+            throw new IllegalMovementException("You can't go back");
         }
     }
 
@@ -57,16 +61,16 @@ public class Piece {
         }
     }
 
-    public void movePieceByTwo(NeighborPosition position) throws AlreadyOccupiedException, OutOfBoundsException {
+    public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
         if (targetTile.isFree()){
             moveToTile(targetTile);
         }else{
-            throw new AlreadyOccupiedException();
+            throw new IllegalMovementException("Already occupied");
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws AlreadyOccupiedException, CantEatException, OutOfBoundsException {
+    public void eatPiece(NeighborPosition position) throws CantEatException, OutOfBoundsException, IllegalMovementException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);

@@ -1,3 +1,6 @@
+import Exceptions.NoPieceOnWhiteException;
+import Exceptions.NotOnDiagonalException;
+
 public abstract class Tile {
     final int row;
     final int col;

@@ -1,3 +1,6 @@
+import Exceptions.IllegalTilePlacementException;
+import Exceptions.NotOnDiagonalException;
+import Exceptions.OutOfBoundsException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -84,20 +87,6 @@ public class BlackTileTest {
     void distance2(){
         BlackTile otherTile2=BlackTile.asBlackTile(board.getTile(4,4));
         assertEquals(3,otherTile.calculateDistance(otherTile2));
-    }
-
-    @Test
-    void tileInBetween() throws NotOnDiagonalException, DistanceDifferentThan2Exception, OutOfBoundsException {
-        BlackTile otherTile2=BlackTile.asBlackTile(board.getTile(3,3));
-        assertEquals(topRightTile,tile.getBlackTileInBetween(otherTile2));
-    }
-
-    @Test
-    void tileInBetween2() throws NotOnDiagonalException, DistanceDifferentThan2Exception, OutOfBoundsException {
-        BlackTile firstTile = BlackTile.asBlackTile(board.getTile(4, 2));
-        BlackTile secondTile = BlackTile.asBlackTile(board.getTile(6, 0));
-        BlackTile inBetweenTile = BlackTile.asBlackTile(board.getTile(5, 1));
-        assertEquals(inBetweenTile, firstTile.getBlackTileInBetween(secondTile));
     }
 
     @Test

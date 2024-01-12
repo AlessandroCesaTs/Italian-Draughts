@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class NoPieceOnWhiteException extends Exception {
     public NoPieceOnWhiteException(){
         super("No Piece on White");
