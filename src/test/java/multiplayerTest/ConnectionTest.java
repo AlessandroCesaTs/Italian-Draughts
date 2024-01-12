@@ -9,6 +9,7 @@ public class ConnectionTest {
 
     Host host;
     Guest guest;
+    LocalServer localServer;
 
     @Test
     void hostCreateLocalServer(){
@@ -16,5 +17,18 @@ public class ConnectionTest {
         assertInstanceOf(LocalServer.class, host.getLocalServer());
     }
 
+    @Test
+    void hostConnectsToServer() {
+        host = new Host();
+        assertEquals(1, host.getLocalServer().getnConnection());
+    }
+
+    @Test
+    void guestConnectsToServer() {
+        localServer = new LocalServer(10000);
+        localServer.start();
+        guest = new Guest();
+        assertEquals(1, localServer.getnConnection());
+    }
 }
 
