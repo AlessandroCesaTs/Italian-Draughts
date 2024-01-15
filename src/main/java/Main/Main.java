@@ -11,7 +11,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.black);
         frame.setLayout(new GridBagLayout());
-        frame.setMinimumSize(new Dimension(1000, 1000));
+        frame.setMinimumSize(new Dimension(500, 500));
         frame.setLocationRelativeTo(null);
 
         GraphicBoard gBoard = new GraphicBoard();
