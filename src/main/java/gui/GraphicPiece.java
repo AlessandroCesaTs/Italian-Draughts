@@ -4,7 +4,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class GraphicPiece extends JPanel {
@@ -12,14 +11,14 @@ public class GraphicPiece extends JPanel {
     public int xPos, yPos;
     public boolean isWhite;
 
-    BufferedImage red;
-    BufferedImage redKing;
+    BufferedImage black;
+    BufferedImage blackKing;
     BufferedImage white;
     BufferedImage whiteKing;
     {
         try {
-            red = ImageIO.read(ClassLoader.getSystemResourceAsStream("red.png"));
-            redKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("redKing.png"));
+            black = ImageIO.read(ClassLoader.getSystemResourceAsStream("black.png"));
+            blackKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("blackKing.png"));
             white = ImageIO.read(ClassLoader.getSystemResourceAsStream("white.png"));
             whiteKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("whiteKing.png"));
         } catch (IOException e) {
