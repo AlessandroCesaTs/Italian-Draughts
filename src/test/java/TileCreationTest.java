@@ -1,4 +1,7 @@
 import Exceptions.IllegalTilePlacementException;
+import logic.BlackTile;
+import logic.Tile;
+import logic.WhiteTile;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +24,7 @@ public class TileCreationTest {
 
     @Test
     void blackTileException()  {
-       assertThrows(IllegalTilePlacementException.class,()->BlackTile.createBlackTile(0,1));
+       assertThrows(IllegalTilePlacementException.class,()-> BlackTile.createBlackTile(0,1));
     }
     @Test
     void blackTileException2()  {
@@ -42,7 +45,7 @@ public class TileCreationTest {
     }
     @Test
     void whiteTileException() {
-        assertThrows(IllegalTilePlacementException.class,()->WhiteTile.createWhiteTile(0,0));
+        assertThrows(IllegalTilePlacementException.class,()-> WhiteTile.createWhiteTile(0,0));
     }
     @Test
     void whiteTileException2() {

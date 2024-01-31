@@ -1,3 +1,5 @@
+package logic;
+
 import Exceptions.IllegalTeamsCompositionException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;

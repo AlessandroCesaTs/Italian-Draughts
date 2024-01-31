@@ -1,3 +1,5 @@
+package logic;
+
 import Exceptions.IllegalMovementException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.OutOfBoundsException;
@@ -22,7 +24,7 @@ public class BlackTile extends Tile {
         if (tile instanceof BlackTile) {
             return (BlackTile) tile;
         } else {
-            throw new IllegalArgumentException("A white tile cannot be cast to BlackTile");
+            throw new IllegalArgumentException("A white tile cannot be cast to logic.BlackTile");
         }
     }
 

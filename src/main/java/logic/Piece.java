@@ -1,3 +1,5 @@
+package logic;
+
 import Exceptions.CantEatException;
 import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;

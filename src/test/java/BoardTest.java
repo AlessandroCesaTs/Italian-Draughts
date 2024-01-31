@@ -1,5 +1,9 @@
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
+import logic.BlackTile;
+import logic.Board;
+import logic.Team;
+import logic.WhiteTile;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

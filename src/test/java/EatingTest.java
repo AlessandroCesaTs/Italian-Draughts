@@ -1,4 +1,7 @@
 import Exceptions.*;
+import logic.Board;
+import logic.NeighborPosition;
+import logic.Piece;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

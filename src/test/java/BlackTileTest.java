@@ -1,6 +1,9 @@
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NotOnDiagonalException;
 import Exceptions.OutOfBoundsException;
+import logic.BlackTile;
+import logic.Board;
+import logic.NeighborPosition;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -85,7 +88,7 @@ public class BlackTileTest {
     }
     @Test
     void distance2(){
-        BlackTile otherTile2=BlackTile.asBlackTile(board.getTile(4,4));
+        BlackTile otherTile2= BlackTile.asBlackTile(board.getTile(4,4));
         assertEquals(3,otherTile.calculateDistance(otherTile2));
     }
 

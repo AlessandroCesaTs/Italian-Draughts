@@ -1,3 +1,5 @@
+package logic;
+
 import Exceptions.NoPieceOnWhiteException;
 import Exceptions.NotOnDiagonalException;
 
@@ -30,7 +32,7 @@ public abstract class Tile {
         return tile.getRow()== row && tile.getCol()== col;
     }
 
-    //public int getDiagonalDistance(Tile tile){}
+    //public int getDiagonalDistance(logic.Tile tile){}
 
     public boolean isOnDiagonal(Tile otherTile){
         return Math.abs(rowDiff(otherTile))==Math.abs(colDiff(otherTile)) && rowDiff(otherTile)!=0;

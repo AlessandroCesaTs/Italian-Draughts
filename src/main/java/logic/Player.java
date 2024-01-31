@@ -1,3 +1,5 @@
+package logic;
+
 import Exceptions.NoPieceOnWhiteException;
 
 import java.util.List;

@@ -2,6 +2,10 @@ import Exceptions.IllegalMovementException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 import Exceptions.OutOfBoundsException;
+import logic.BlackTile;
+import logic.Board;
+import logic.NeighborPosition;
+import logic.Piece;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +20,7 @@ public class MovementTest {
     void movementTest() throws NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException {
         Piece piece=board.getPiece(2,2);
         piece.movePiece(NeighborPosition.TopRight);
-        assertEquals(piece,BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
+        assertEquals(piece, BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
         assertNull(board.getPiece(2,2));
     }
     @Test

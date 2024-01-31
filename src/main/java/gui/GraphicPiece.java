@@ -26,10 +26,8 @@ public class GraphicPiece extends JPanel {
             throw new RuntimeException(e);
         }
     }
-
     Image sprite;
     GraphicBoard graphicBoard;
-
     public GraphicPiece(GraphicBoard graphicBoard) {
         this.graphicBoard = graphicBoard;
     }
