@@ -34,4 +34,10 @@ public class GraphicPiece extends JPanel {
     public void paint(Graphics2D g2d) {
         g2d.drawImage(sprite, xPos, yPos, null);
     }
+    public void moveTo(int x, int y) {
+        this.col = x;
+        this.row = y;
+        this.xPos = x * GraphicBoard.tileSize;
+        this.yPos = y * GraphicBoard.tileSize;
+    }
 }
