@@ -14,8 +14,8 @@ public class EatingTest {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
-        whitePiece.movePiece(NeighborPosition.TopRight);
-        blackPiece.movePiece(NeighborPosition.BottomLeft);
+        whitePiece.movePieceByOne(NeighborPosition.TopRight);
+        blackPiece.movePieceByOne(NeighborPosition.BottomLeft);
         whitePiece.eatPiece(NeighborPosition.TopRight);
         assertEquals(board.getPiece(5,5),whitePiece);
         assertNull(board.getPiece(4,4));
@@ -30,8 +30,8 @@ public class EatingTest {
     void cantEatTileAfterOccupiedTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
-        whitePiece.movePiece(NeighborPosition.TopRight);
-        whitePiece.movePiece(NeighborPosition.TopRight);
+        whitePiece.movePieceByOne(NeighborPosition.TopRight);
+        whitePiece.movePieceByOne(NeighborPosition.TopRight);
         assertThrows(CantEatException.class,()-> whitePiece.eatPiece(NeighborPosition.TopRight));
     }
 }

@@ -35,7 +35,7 @@ public class Piece {
         return isKing;
     }
 
-    public void movePiece(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void movePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         if (isMoveValid(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
@@ -105,6 +105,9 @@ public class Piece {
             throw new CantEatException("Can't eat piece of same team");
         }
     }
+
+
+
     public void remove(){
         tile=null;
     }
