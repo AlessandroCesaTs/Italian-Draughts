@@ -19,7 +19,7 @@ public class Move {
     }
 
     private void makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
-        if (player.team != piece.team){
+        if (player.getTeam() != piece.team){
             throw new IllegalMovementException();
         }
         if (destination.isFree()){
