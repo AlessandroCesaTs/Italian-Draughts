@@ -53,7 +53,7 @@ public class Player {
     }
     public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) throws IllegalMovementException, OutOfBoundsException, CantEatException {
         if (Objects.requireNonNull(typeOfMove) == TypeOfMove.Move) {
-            movingPiece.movePiece(targetPosition);
+            movingPiece.movePieceByOne(targetPosition);
         }else{
         movingPiece.eatPiece(targetPosition);
         }
