@@ -1,5 +1,6 @@
 package logic;
 
+import Exceptions.IllegalTeamsCompositionException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 
@@ -12,7 +13,10 @@ public class Game {
     private final Board board;
     private int currentRound=1;
 
-    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException {
+        if (team1.equals(team2)){
+            throw new IllegalTeamsCompositionException();
+        }
         board = new Board();
         player1 =new Player(player1Name,team1,this);
         player2 =new Player(player2Name,team2,this);

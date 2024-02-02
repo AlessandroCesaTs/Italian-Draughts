@@ -1,3 +1,4 @@
+import Exceptions.IllegalTeamsCompositionException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 import logic.Game;
@@ -13,7 +14,7 @@ public class PlayerTest {
 
     Game game=new Game("Anna","Mario", Team.White,Team.Black);
 
-    public PlayerTest() throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    public PlayerTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException {
     }
 
     Player player1=game.getActivePlayer();
@@ -41,5 +42,16 @@ public class PlayerTest {
     void playerEqualsTest2(){
         Player testPlayer=game.getInactivePlayer();
         assertTrue(player2.equals(testPlayer));
+    }
+    @Test
+    void losePiece1Test(){
+        player1.loseOnePiece();
+        assertEquals(11,player1.getNumberOfPieces());
+    }
+    @Test
+    void losePiece2Test(){
+        player2.loseOnePiece();
+        player2.loseOnePiece();
+        assertEquals(10,player2.getNumberOfPieces());
     }
 }
