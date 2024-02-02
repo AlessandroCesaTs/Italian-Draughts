@@ -10,10 +10,14 @@ public class Player {
     public final Team team;
     private List<Piece> pieces;
 
-    public Player(String name, Team team) throws NoPieceOnWhiteException {
+    public Player(String name, Team team) {
         this.name = name;
         this.team = team;
-        this.pieces = getPieces();
+        try {
+            this.pieces = getPieces();
+        } catch (NoPieceOnWhiteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getName(){

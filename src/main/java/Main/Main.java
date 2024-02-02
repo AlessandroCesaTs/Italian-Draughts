@@ -1,6 +1,10 @@
 package Main;
 
+import Exceptions.IllegalTeamsCompositionException;
+import Exceptions.IllegalTilePlacementException;
 import gui.GraphicBoard;
+import logic.Game;
+import logic.Player;
 import logic.Team;
 
 import javax.swing.*;
@@ -15,12 +19,20 @@ public class Main {
         return () -> {
             JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().setBackground(Color.black);
+            frame.getContentPane().setBackground(new Color(240, 236, 236));
             frame.setLayout(new GridBagLayout());
-            frame.setMinimumSize(new Dimension(800, 800));
+            frame.setMinimumSize(new Dimension(800, 850));
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
             GraphicBoard gBoard = new GraphicBoard();
+
+            JLabel playersLabel = new JLabel();
+            JLabel gameLabel = new JLabel();
+            Dimension labelSize = new Dimension(frame.getWidth(), 25);
+            playersLabel.setPreferredSize(labelSize);
+            gameLabel.setPreferredSize(labelSize);
+            playersLabel.setForeground(Color.BLACK);
+            gameLabel.setForeground(Color.BLACK);
 
             JButton newGameButton = new JButton("New Game");
             newGameButton.addActionListener(e -> {
@@ -61,7 +73,15 @@ public class Main {
                     Team player1Team = (Team) player1TeamField.getSelectedItem();
                     String player2Name = player2NameField.getText();
                     Team player2Team = (Team) player2TeamField.getSelectedItem();
+
+                    playersLabel.setText("Player 1: " + player1Name + " with " + "Team " + player1Team +
+                                         "; Player 2: " + player2Name + " with " + "Team " + player2Team );
+
                     gBoard.resetBoard();
+                    Player player1 = new Player(player1Name, player1Team);
+                    Player player2 = new Player(player2Name, player2Team);
+                    //Game newGame = new Game(player1, player2);
+                    gameLabel.setText("Game Started");
                 }
             });
 
@@ -81,7 +101,9 @@ public class Main {
                 if (result == JOptionPane.OK_OPTION) {
                     String player1Name = player1NameField.getText();
                     String player2Name = player2NameField.getText();
+
                     // Code for multiplayer
+                    gBoard.resetBoard();
                 }
             });
 
@@ -96,29 +118,16 @@ public class Main {
             gbc.gridwidth = GridBagConstraints.REMAINDER;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             frame.add(buttonPanel, gbc);
+            frame.add(gameLabel, gbc);
 
             gbc.fill = GridBagConstraints.BOTH;
             gbc.weightx = 1;
             gbc.weighty = 1;
             frame.add(gBoard, gbc);
+            frame.add(playersLabel, gbc);
 
             frame.pack();
             frame.setVisible(true);
         };
     }
 }
-
-
-/*
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setBackground(Color.black);
-        frame.setLayout(new GridBagLayout());
-        frame.setMinimumSize(new Dimension(500, 500));
-        frame.setLocationRelativeTo(null);
-
-        GraphicBoard gBoard = new GraphicBoard();
-        frame.add(gBoard);
-
-        frame.setVisible(true);
- */
