@@ -8,54 +8,69 @@ public class Game {
     final Player player1;
     final Player player2;
     private Player activePlayer;
+    private Player inactivePlayer;
     private Player winnerPlayer;
-    private static Board currentGameBoard;
-    private int currentRound;
+    private final Board board;
+    private int currentRound=1;
 
-    public Game(Player player1, Player player2) throws IllegalTeamsCompositionException, IllegalTilePlacementException {
-        if (player1.team == player2.team) {
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException {
+        if (team1.equals(team2)){
             throw new IllegalTeamsCompositionException();
         }
-        this.player1 = player1;
-        this.player2 = player2;
-
-        if (player1.team == Team.White){
-            this.activePlayer = player1;
-        } else {
-            this.activePlayer = player2;
-        }
-
-        this.currentGameBoard = new Board();
-
+        board = new Board();
+        player1 =new Player(player1Name,team1,this);
+        player2 =new Player(player2Name,team2,this);
+        activePlayer= player1;
+        inactivePlayer=player2;
     }
 
     public void play() throws NoPieceOnWhiteException {
         while (player1.hasPieces() & player2.hasPieces()) {
             playTurn();
         }
-        //alla fine metodo per chiamare il vincitore
+        if (player1.hasPieces()){
+            winnerPlayer=player1;
+        }else{
+            winnerPlayer=player2;
+        }
     }
 
     public void playTurn() {
-        //metodo per ricevere mossa del giocatore
+        //ricevere la mossa dall'interfaccia grafica (può essere un muovi,mangia o passa il turno)
+        /*
+        Receive typeOfMove (can be pass, move or eat)
+        if (move!=Pass){
+            Receive movingPiece and targetPosition (where to move/eat)
+            activePlayer.makeMove(typeOfMove,movingPiece,targetPosition)
+            if (move==Eat){
+            inactivePlayer.loseOnePiece();
+            }
+        }
+         */
+
         changeActivePlayer();
         currentRound++;
     }
     public void changeActivePlayer() {
         if (activePlayer == player1){
             activePlayer = player2;
+            inactivePlayer=player1;
         } else {
             activePlayer = player1;
+            inactivePlayer=player2;
         }
     }
-    public Player getCurrentPlayer() {
+    public Player getActivePlayer() {
         return activePlayer;
+    }
+    public Player getInactivePlayer() {
+        return inactivePlayer;
     }
     public int getCurrentRound(){
         return currentRound;
     }
 
-    public static Board getBoard() {
-        return currentGameBoard;
+    public Board getBoard() {
+        return board;
     }
 }

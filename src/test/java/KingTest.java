@@ -20,15 +20,15 @@ public class KingTest {
 
         assertFalse(whitePiece.getIfKing());
 
-        whitePiece.movePiece(NeighborPosition.TopRight);
-        blackPiece1.movePiece(NeighborPosition.BottomLeft);
+        whitePiece.movePieceByOne(NeighborPosition.TopRight);
+        blackPiece1.movePieceByOne(NeighborPosition.BottomLeft);
         whitePiece.eatPiece(NeighborPosition.TopRight);
-        blackPiece2.movePiece(NeighborPosition.BottomLeft);
-        blackPiece3.movePiece(NeighborPosition.BottomRight);
-        blackPiece4.movePiece(NeighborPosition.BottomLeft);
+        blackPiece2.movePieceByOne(NeighborPosition.BottomLeft);
+        blackPiece3.movePieceByOne(NeighborPosition.BottomRight);
+        blackPiece4.movePieceByOne(NeighborPosition.BottomLeft);
         whitePiece.eatPiece(NeighborPosition.TopRight);
 
-        whitePiece.movePiece(NeighborPosition.BottomLeft);
+        whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
 
         assertEquals(board.getPiece(6,6),whitePiece);
         assertTrue(whitePiece.getIfKing());
@@ -45,17 +45,17 @@ public class KingTest {
 
         assertFalse(whitePiece.getIfKing());
 
-        whitePiece.movePiece(NeighborPosition.TopRight);
-        blackPiece1.movePiece(NeighborPosition.BottomLeft);
+        whitePiece.movePieceByOne(NeighborPosition.TopRight);
+        blackPiece1.movePieceByOne(NeighborPosition.BottomLeft);
         whitePiece.eatPiece(NeighborPosition.TopRight);
-        blackPiece2.movePiece(NeighborPosition.BottomLeft);
-        blackPiece3.movePiece(NeighborPosition.BottomRight);
-        blackPiece4.movePiece(NeighborPosition.BottomLeft);
+        blackPiece2.movePieceByOne(NeighborPosition.BottomLeft);
+        blackPiece3.movePieceByOne(NeighborPosition.BottomRight);
+        blackPiece4.movePieceByOne(NeighborPosition.BottomLeft);
         whitePiece.eatPiece(NeighborPosition.TopRight);
 
-        whitePiece.movePiece(NeighborPosition.BottomLeft);
-        whitePiece.movePiece(NeighborPosition.BottomLeft);
-        blackPiece5.movePiece(NeighborPosition.BottomRight);
+        whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
+        whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
+        blackPiece5.movePieceByOne(NeighborPosition.BottomRight);
 
         assertThrows(CantEatException.class,()->blackPiece5.eatPiece(NeighborPosition.BottomRight));
     }

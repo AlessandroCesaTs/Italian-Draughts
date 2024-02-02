@@ -4,6 +4,9 @@ import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 
 import java.util.List;
+import java.util.ArrayList;
+
+
 
 public class Board {
     private final int size=8;
@@ -62,10 +65,10 @@ public class Board {
     }
 
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
-        List<BlackTile> fullBlackTiles = null;
-        for (int col=0; col<tiles.length; col++){
-            for (int row=0; row<tiles[0].length; row++){
-                if((col + row)%2==0 & tiles[row][col].getPiece() != null){
+        List<BlackTile> fullBlackTiles = new ArrayList<>();;
+        for (int col=0; col<size; col++){
+            for (int row=0; row<size; row++){
+                if((col + row)%2==0 && getPiece(row,col) != null){
                     fullBlackTiles.add((BlackTile) tiles[row][col]);
                 }
             }
