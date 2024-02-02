@@ -1,5 +1,6 @@
 package logic;
 
+import Exceptions.IllegalTeamsCompositionException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 
@@ -9,17 +10,18 @@ public class Game {
     private Player activePlayer;
     private Player inactivePlayer;
     private Player winnerPlayer;
-    private final Board currentGameBoard;
+    private final Board board;
     private int currentRound=1;
 
-    public Game(String player1Name, String player2Name) throws IllegalTilePlacementException, NoPieceOnWhiteException {
-        this.player1 =new Player(player1Name,Team.White,this);
-        this.player2 =new Player(player2Name,Team.Black,this);
-        activePlayer= this.player1;
-        inactivePlayer=this.player2;
-
-        this.currentGameBoard = new Board();
-
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException {
+        if (team1.equals(team2)){
+            throw new IllegalTeamsCompositionException();
+        }
+        board = new Board();
+        player1 =new Player(player1Name,team1,this);
+        player2 =new Player(player2Name,team2,this);
+        activePlayer= player1;
+        inactivePlayer=player2;
     }
 
     public void play() throws NoPieceOnWhiteException {
@@ -69,6 +71,6 @@ public class Game {
     }
 
     public Board getBoard() {
-        return currentGameBoard;
+        return board;
     }
 }

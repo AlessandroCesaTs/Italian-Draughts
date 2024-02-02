@@ -31,6 +31,9 @@ public class Player {
         return team;
     }
     public int getNumberOfPieces() {return numberOfPieces;}
+    public boolean equals(Player player){
+        return Objects.equals(name, player.getName());
+    }
 
     public void reloadPieces() throws NoPieceOnWhiteException {
         List<BlackTile> fullBlackTiles = Game.getBoard().getFullBlackTiles();
