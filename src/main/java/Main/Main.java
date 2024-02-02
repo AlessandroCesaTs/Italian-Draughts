@@ -78,8 +78,8 @@ public class Main {
                                          "; Player 2: " + player2Name + " with " + "Team " + player2Team );
 
                     gBoard.resetBoard();
-                    Player player1 = new Player(player1Name, player1Team);
-                    Player player2 = new Player(player2Name, player2Team);
+                    //Player player1 = new Player(player1Name, player1Team);
+                    //Player player2 = new Player(player2Name, player2Team);
                     //Game newGame = new Game(player1, player2);
                     gameLabel.setText("Game Started");
                 }
