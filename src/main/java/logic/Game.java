@@ -14,7 +14,7 @@ public class Game {
 
     public Game(String player1Name, String player2Name) throws IllegalTilePlacementException, NoPieceOnWhiteException {
         this.player1 =new Player(player1Name,Team.White,this);
-        this.player2 =new Player(player2Name,Team.White,this);
+        this.player2 =new Player(player2Name,Team.Black,this);
         activePlayer= this.player1;
         inactivePlayer=this.player2;
 
