@@ -105,7 +105,7 @@ public class Game {
             activePlayer = player1;
             inactivePlayer=player2;
         }
-        notifyObservers();
+        //notifyObservers();
     }
     public Player getActivePlayer() {
         return activePlayer;
