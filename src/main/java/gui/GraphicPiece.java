@@ -1,5 +1,7 @@
 package gui;
 
+import logic.Piece;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,6 @@ public class GraphicPiece extends JPanel {
     public int col, row;
     public int xPos, yPos;
     public boolean isWhite;
-
     BufferedImage black;
     BufferedImage blackKing;
     BufferedImage white;
@@ -40,4 +41,5 @@ public class GraphicPiece extends JPanel {
         this.xPos = x * GraphicBoard.tileSize;
         this.yPos = y * GraphicBoard.tileSize;
     }
+
 }

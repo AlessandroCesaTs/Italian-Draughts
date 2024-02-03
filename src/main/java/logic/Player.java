@@ -35,19 +35,24 @@ public class Player {
         return Objects.equals(name, player.getName());
     }
 
-    public void reloadPieces() throws NoPieceOnWhiteException {
-        List<BlackTile> fullBlackTiles = Game.getBoard().getFullBlackTiles();
+    public void reloadPieces(){
+        List<BlackTile> fullBlackTiles = null;
+        try {
+            fullBlackTiles = Game.getBoard().getFullBlackTiles();
+        } catch (NoPieceOnWhiteException e) {
+            throw new RuntimeException(e);
+        }
         pieces = fullBlackTiles.stream()
                 .map(BlackTile::getPiece)
                 .filter(piece -> piece.getTeam().equals(team))
                 .collect(Collectors.toList());
     }
-    public List<Piece> getPieces() throws NoPieceOnWhiteException {
+    public List<Piece> getPieces(){
         reloadPieces();
         return pieces;
     }
 
-    public boolean hasPieces() throws NoPieceOnWhiteException {
+    public boolean hasPieces(){
         return numberOfPieces!=0;
     }
 
@@ -60,5 +65,8 @@ public class Player {
         }else{
         movingPiece.eatPiece(targetPosition);
         }
+    }
+    public boolean isWhite(){
+        return team==Team.White;
     }
 }

@@ -18,7 +18,7 @@ public class Move {
         makeMove();
     }
 
-    private void makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
+    public void makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
         if (player.getTeam() != piece.team){
             throw new IllegalMovementException();
         }
@@ -30,7 +30,7 @@ public class Move {
         }
         //if(!piece.getIfKing() & piece.promotion()){}
     }
-
-
-
+    public Piece getPiece() {
+        return piece;
+    }
 }
