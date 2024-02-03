@@ -17,7 +17,7 @@ public class Player {
     private int numberOfPieces=12;
     private List<Piece> pieces;
 
-    public Player(String name, Team team,Game Game) throws NoPieceOnWhiteException {
+    public Player(String name, Team team,Game Game) {
         this.name = name;
         this.team = team;
         this.Game=Game;

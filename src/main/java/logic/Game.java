@@ -24,7 +24,6 @@ public class Game {
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        gBoard = new GraphicBoard(this);
         player1 =new Player(player1Name,team1,this);
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
@@ -121,11 +120,5 @@ public class Game {
     }
     public Board getBoard() {
         return board;
-    }
-    public Player getPlayer1() {
-        return player1;
-    }
-    public Player getPlayer2() {
-        return player2;
     }
 }

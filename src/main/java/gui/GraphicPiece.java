@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class GraphicPiece extends JPanel {
     public int col, row;
@@ -18,10 +19,10 @@ public class GraphicPiece extends JPanel {
     BufferedImage whiteKing;
     {
         try {
-            black = ImageIO.read(ClassLoader.getSystemResourceAsStream("black.png"));
-            blackKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("blackKing.png"));
-            white = ImageIO.read(ClassLoader.getSystemResourceAsStream("white.png"));
-            whiteKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("whiteKing.png"));
+            black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
+            blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
+            white = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("white.png")));
+            whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
