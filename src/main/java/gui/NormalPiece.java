@@ -1,10 +1,14 @@
 package gui;
 
+import logic.Piece;
+
 import java.awt.image.BufferedImage;
 
 public class NormalPiece extends GraphicPiece{
-    public NormalPiece(GraphicBoard graphicBoard, int col, int row, boolean isWhite){
+    private Piece piece;
+    public NormalPiece(GraphicBoard graphicBoard, Piece piece, int col, int row, boolean isWhite){
         super(graphicBoard);
+        this.piece = piece;
         this.row = row;
         this.col = col;
         this.xPos = col * GraphicBoard.tileSize;
@@ -16,5 +20,8 @@ public class NormalPiece extends GraphicPiece{
         } else {
             this.sprite = black.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
         }
+    }
+    public Piece getPiece(){
+        return piece;
     }
 }

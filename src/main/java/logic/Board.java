@@ -3,6 +3,7 @@ package logic;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 
+import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -76,4 +77,7 @@ public class Board {
         return fullBlackTiles;
     }
 
+    public BlackTile getTileAtPosition(Point position) {
+        return (BlackTile) tiles[position.x][position.y];
+    }
 }

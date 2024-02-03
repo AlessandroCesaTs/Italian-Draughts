@@ -105,9 +105,9 @@ public class Piece {
             throw new CantEatException("Can't eat piece of same team");
         }
     }
-
-
-
+    public boolean isWhite() {
+        return team == Team.White;
+    }
     public void remove(){
         tile=null;
     }

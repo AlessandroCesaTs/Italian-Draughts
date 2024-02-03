@@ -2,16 +2,20 @@ package Main;
 
 import Exceptions.IllegalTeamsCompositionException;
 import Exceptions.IllegalTilePlacementException;
+import Exceptions.NoPieceOnWhiteException;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.Player;
 import logic.Team;
+import observers.GameObserver;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 
-public class Main {
+public class Main implements GameObserver {
+    private static GraphicBoard gBoard;
+    private static JLabel gameLabel;
     public static void main(String[] args) {
         SwingUtilities.invokeLater(gameInitiation());
     }
@@ -24,10 +28,20 @@ public class Main {
             frame.setMinimumSize(new Dimension(800, 850));
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
-            GraphicBoard gBoard = new GraphicBoard();
+            Game placeholderGame = null;
+            try {
+                placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
+            } catch (IllegalTilePlacementException e) {
+                throw new RuntimeException(e);
+            } catch (NoPieceOnWhiteException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalTeamsCompositionException e) {
+                throw new RuntimeException(e);
+            }
+            gBoard = new GraphicBoard(placeholderGame);
 
             JLabel playersLabel = new JLabel();
-            JLabel gameLabel = new JLabel();
+            gameLabel = new JLabel();
             Dimension labelSize = new Dimension(frame.getWidth(), 25);
             playersLabel.setPreferredSize(labelSize);
             gameLabel.setPreferredSize(labelSize);
@@ -74,14 +88,24 @@ public class Main {
                     String player2Name = player2NameField.getText();
                     Team player2Team = (Team) player2TeamField.getSelectedItem();
 
-                    playersLabel.setText("Player 1: " + player1Name + " with " + "Team " + player1Team +
-                                         "; Player 2: " + player2Name + " with " + "Team " + player2Team );
+                    playersLabel.setText(player1Name + " with " + player1Team + "s" +
+                                         "; " + player2Name + " with " + player2Team + "s" );
 
-                    gBoard.resetBoard();
-                    //Player player1 = new Player(player1Name, player1Team);
-                    //Player player2 = new Player(player2Name, player2Team);
-                    //Game newGame = new Game(player1, player2);
-                    gameLabel.setText("Game Started");
+                    Game game = null;
+                    try {
+                        game = new Game(player1Name, player2Name, player1Team, player2Team);
+                        frame.remove(gBoard);
+                        gBoard = new GraphicBoard(game);
+                        game.addObserver(new Main());
+                        frame.add(gBoard);
+                    } catch (IllegalTilePlacementException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (NoPieceOnWhiteException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (IllegalTeamsCompositionException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
                 }
             });
 
@@ -123,11 +147,18 @@ public class Main {
             gbc.fill = GridBagConstraints.BOTH;
             gbc.weightx = 1;
             gbc.weighty = 1;
-            frame.add(gBoard, gbc);
             frame.add(playersLabel, gbc);
+            frame.add(gBoard, gbc);
+
 
             frame.pack();
             frame.setVisible(true);
         };
+    }
+    @Override
+    public void update(Game game) {
+        SwingUtilities.invokeLater(() -> {
+            gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
+        });
     }
 }

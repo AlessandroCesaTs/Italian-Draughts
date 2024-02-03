@@ -18,7 +18,6 @@ public class GameTest {
     Player player1=game.getActivePlayer();
     Player player2=game.getActivePlayer();
 
-
     @Test
     void changeActivePlayerTest(){
         game.changeActivePlayer();

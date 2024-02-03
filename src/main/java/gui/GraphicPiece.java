@@ -1,26 +1,28 @@
 package gui;
 
+import logic.Piece;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class GraphicPiece extends JPanel {
     public int col, row;
     public int xPos, yPos;
     public boolean isWhite;
-
     BufferedImage black;
     BufferedImage blackKing;
     BufferedImage white;
     BufferedImage whiteKing;
     {
         try {
-            black = ImageIO.read(ClassLoader.getSystemResourceAsStream("black.png"));
-            blackKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("blackKing.png"));
-            white = ImageIO.read(ClassLoader.getSystemResourceAsStream("white.png"));
-            whiteKing = ImageIO.read(ClassLoader.getSystemResourceAsStream("whiteKing.png"));
+            black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
+            blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
+            white = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("white.png")));
+            whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,4 +42,5 @@ public class GraphicPiece extends JPanel {
         this.xPos = x * GraphicBoard.tileSize;
         this.yPos = y * GraphicBoard.tileSize;
     }
+
 }
