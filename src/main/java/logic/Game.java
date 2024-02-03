@@ -29,7 +29,7 @@ public class Game {
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
         inactivePlayer=player2;
-        startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
+        //startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
     }
     public void startGame(){
        Thread gameThread = new Thread(() -> { //nuovo thread per non bloccare il programma
@@ -105,7 +105,7 @@ public class Game {
             activePlayer = player1;
             inactivePlayer=player2;
         }
-        //notifyObservers();
+        notifyObservers();
     }
     public Player getActivePlayer() {
         return activePlayer;
