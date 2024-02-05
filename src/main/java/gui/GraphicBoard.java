@@ -6,6 +6,7 @@ import Exceptions.NoPieceOnWhiteException;
 import Exceptions.OutOfBoundsException;
 import logic.*;
 import observers.GameObserver;
+import observers.MoveMadeObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,11 +27,11 @@ public class GraphicBoard extends JPanel{
     Point endTile = null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
+    private List<MoveMadeObserver> observers = new ArrayList<>();
     private boolean moveMade = false;
 
     public GraphicBoard(Game game) {
         setGame(game);
-        game.setGBoard(this);
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -60,12 +61,8 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null) {
-                    System.out.println("Dragged piece's team: " + ((NormalPiece) draggedPiece).getPiece().getTeam()); //these two print are just for testing
-                    System.out.println("Active player's team: " + game.getActivePlayer().getTeam());
-                    if (((NormalPiece) draggedPiece).getPiece().getTeam() != game.getActivePlayer().getTeam()) {
-                        draggedPiece = null;
-                    }
+                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != game.getActivePlayer().getTeam()) {
+                    draggedPiece = null;
                 }
             }
 
@@ -75,17 +72,14 @@ public class GraphicBoard extends JPanel{
                 int y = (getHeight() - e.getY()) / tileSize;
                 endTile = new Point(x, y);
 
-                GraphicPiece piece = findPieceAtTile(startTile);
+                GraphicPiece piece = draggedPiece;
                 if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == game.getActivePlayer().getTeam()) {
                     piece.moveTo(endTile.x, endTile.y);
-                    System.out.println("Move set to true");
                     setMoveMade(true);
                 }
+
                 draggedPiece = null;
-
                 repaint();
-
-                setMoveMade(false);
             }
         });
     }
@@ -159,11 +153,12 @@ public class GraphicBoard extends JPanel{
         Player player = game.getActivePlayer();
         BlackTile destination = game.getBoard().getTileAtPosition(endTile);
         NeighborPosition neighborDestination = getNeighborPosition(startTile, endTile);
+        System.out.println("piece"+piece+",player"+player+",destination"+destination+",neighborDestination"+neighborDestination);
 
         try {
-            System.out.println("Move returned"); //just for debugging
             return new Move(player, piece, destination, neighborDestination);
         } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
+            System.out.println("Illegal move: " + e.getMessage());
             return null;
         }
     }
@@ -189,10 +184,18 @@ public class GraphicBoard extends JPanel{
             return null;
         }
     }
-    public boolean hasMoveBeenMade() {
-        return moveMade;
+    public void addMoveMadeObserver(MoveMadeObserver observer) {
+        observers.add(observer);
+    }
+    public void notifyMoveMadeObservers() {
+        for (MoveMadeObserver observer : observers) {
+            observer.onMoveMade();
+        }
     }
     public void setMoveMade(boolean moveMade) {
         this.moveMade = moveMade;
+        if (moveMade) {
+            notifyMoveMadeObservers();
+        }
     }
 }
