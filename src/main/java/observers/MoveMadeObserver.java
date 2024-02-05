@@ -1,5 +1,7 @@
 package observers;
 
+import Exceptions.NotOnDiagonalException;
+
 public interface MoveMadeObserver {
-    void onMoveMade();
+    void onMoveMade() throws NotOnDiagonalException;
 }
