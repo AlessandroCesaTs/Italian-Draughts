@@ -1,11 +1,10 @@
-package Main;
+package main;
 
 import Exceptions.IllegalTeamsCompositionException;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 import gui.GraphicBoard;
 import logic.Game;
-import logic.Player;
 import logic.Team;
 import observers.GameObserver;
 
@@ -14,7 +13,7 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 
 public class Main implements GameObserver {
-    private static GraphicBoard gBoard;
+    public static GraphicBoard gBoard;
     private static JLabel gameLabel;
     public static void main(String[] args) {
         SwingUtilities.invokeLater(gameInitiation());

@@ -30,6 +30,7 @@ public class GraphicBoard extends JPanel{
 
     public GraphicBoard(Game game) {
         setGame(game);
+        game.setGBoard(this);
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -60,7 +61,7 @@ public class GraphicBoard extends JPanel{
                 draggedPiece = findPieceAtTile(startTile);
 
                 if (draggedPiece != null) {
-                    System.out.println("Dragged piece's team: " + ((NormalPiece) draggedPiece).getPiece().getTeam());
+                    System.out.println("Dragged piece's team: " + ((NormalPiece) draggedPiece).getPiece().getTeam()); //these two print are just for testing
                     System.out.println("Active player's team: " + game.getActivePlayer().getTeam());
                     if (((NormalPiece) draggedPiece).getPiece().getTeam() != game.getActivePlayer().getTeam()) {
                         draggedPiece = null;
@@ -77,6 +78,7 @@ public class GraphicBoard extends JPanel{
                 GraphicPiece piece = findPieceAtTile(startTile);
                 if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == game.getActivePlayer().getTeam()) {
                     piece.moveTo(endTile.x, endTile.y);
+                    System.out.println("Move set to true");
                     setMoveMade(true);
                 }
                 draggedPiece = null;
@@ -159,6 +161,7 @@ public class GraphicBoard extends JPanel{
         NeighborPosition neighborDestination = getNeighborPosition(startTile, endTile);
 
         try {
+            System.out.println("Move returned"); //just for debugging
             return new Move(player, piece, destination, neighborDestination);
         } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
             return null;
