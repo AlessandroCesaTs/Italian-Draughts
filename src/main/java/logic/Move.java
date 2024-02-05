@@ -19,6 +19,7 @@ public class Move {
     }
 
     public void makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
+        /*
         if (player.getTeam() != piece.team){
             throw new IllegalMovementException();
         }
@@ -29,6 +30,21 @@ public class Move {
             piece.eatPiece(neighborDestination);
         }
         //if(!piece.getIfKing() & piece.promotion()){}
+         */
+        if (player.getTeam() != piece.team){
+            throw new IllegalMovementException();
+        }else {
+            try {
+                piece.eatPiece(neighborDestination);
+            } catch (CantEatException | IllegalMovementException | OutOfBoundsException e) {
+                System.out.println("Illegal move: " + e.getMessage());
+                try {
+                    piece.movePieceByOne(neighborDestination);
+                } catch (IllegalMovementException | OutOfBoundsException e2) {
+                    System.out.println("Illegal move: " + e2.getMessage());
+                }
+            }
+        }
     }
     public Piece getPiece() {
         return piece;

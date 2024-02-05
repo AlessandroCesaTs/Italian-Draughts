@@ -85,13 +85,17 @@ public class Piece {
 
     private boolean pieceOfOpposingTeam(NeighborPosition position) throws OutOfBoundsException {
         if (tile.getNeighbor(position).isFree()){
-            return false;
+            return true;
         }else {
             return tile.getNeighbor(position).getPiece().getTeam() != team;
         }
     }
     private boolean pieceIsKing(NeighborPosition position) throws OutOfBoundsException {
-        return tile.getNeighbor(position).getPiece().isKing;
+        if (tile.getNeighbor(position).isFree()){
+            return false;
+        }else {
+            return tile.getNeighbor(position).getPiece().isKing;
+        }
     }
 
     public boolean canEat(NeighborPosition position) throws CantEatException, OutOfBoundsException {
