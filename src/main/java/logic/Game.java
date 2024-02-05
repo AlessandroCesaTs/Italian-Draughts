@@ -2,10 +2,10 @@ package logic;
 
 import Exceptions.*;
 import gui.GraphicBoard;
+import main.Main;
 import observers.GameObserver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Game {
@@ -28,10 +28,17 @@ public class Game {
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
         inactivePlayer=player2;
-        //startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
+        startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
     }
     public void startGame(){
        Thread gameThread = new Thread(() -> { //nuovo thread per non bloccare il programma
+           while (gBoard == null){ //aspetta che la gBoard sia stata inizializzata in GraphicBoard
+                try {
+                     Thread.sleep(100);
+                } catch (InterruptedException e) {
+                     Thread.currentThread().interrupt();
+                }
+           }
            while (!isGameOver()){
                waitForMove();
            }
@@ -104,7 +111,10 @@ public class Game {
             activePlayer = player1;
             inactivePlayer=player2;
         }
-        //notifyObservers();
+        notifyObservers();
+    }
+    public void setGBoard(GraphicBoard graphicBoard) {
+        this.gBoard = Main.gBoard;
     }
     public Player getActivePlayer() {
         return activePlayer;
