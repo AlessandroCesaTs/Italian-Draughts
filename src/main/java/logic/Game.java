@@ -4,11 +4,12 @@ import Exceptions.*;
 import gui.GraphicBoard;
 import main.Main;
 import observers.GameObserver;
+import observers.MoveMadeObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game implements MoveMadeObserver {
     final Player player1;
     final Player player2;
     private Player activePlayer;
@@ -28,8 +29,9 @@ public class Game {
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
         inactivePlayer=player2;
-        startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
+        //startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
     }
+    /*
     public void startGame(){
        Thread gameThread = new Thread(() -> { //nuovo thread per non bloccare il programma
            while (gBoard == null){ //aspetta che la gBoard sia stata inizializzata in GraphicBoard
@@ -45,25 +47,47 @@ public class Game {
        });
        gameThread.start();
     }
-    public void waitForMove(){
-        while (!gBoard.hasMoveBeenMade()){
-            try {
-                Thread.sleep(100); //questo serve per non far andare il while in loop troppo velocemente
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
+
+     */
+    @Override
+    public void onMoveMade() {
         Move lastMove = gBoard.getMoveFromGUI();
+        System.out.println("Is lastMove null?   "+(lastMove==null));
         if (lastMove!=null){
             try {
                 lastMove.makeMove();
             } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
                 e.printStackTrace();
             }
+            gBoard.setMoveMade(false);
             currentRound++;
             changeActivePlayer();
         }
     }
+    /*
+    public void waitForMove(){
+        while (!gBoard.hasMoveBeenMade()){
+            try {
+                Thread.sleep(200); //questo serve per non far andare il while in loop troppo velocemente
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        Move lastMove = gBoard.getMoveFromGUI();
+        System.out.println("Is lastMove null? "+(lastMove==null));
+        if (lastMove!=null){
+            try {
+                lastMove.makeMove();
+            } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
+                e.printStackTrace();
+            }
+            gBoard.setMoveMade(false);
+            currentRound++;
+            changeActivePlayer();
+        }
+    }
+
+     */
     public boolean isGameOver(){
         //Ho tolto l'exception NoPieceOnWhiteException dal metodo hasPieces perchè penso venga gestito dal game over
         //così evitiamo di mettere troppi try catch
@@ -113,8 +137,9 @@ public class Game {
         }
         notifyObservers();
     }
-    public void setGBoard(GraphicBoard graphicBoard) {
-        this.gBoard = Main.gBoard;
+    public void setGBoard(GraphicBoard gBoard) {
+        this.gBoard = gBoard;
+        gBoard.addMoveMadeObserver(this);
     }
     public Player getActivePlayer() {
         return activePlayer;

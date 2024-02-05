@@ -38,6 +38,7 @@ public class Main implements GameObserver {
                 throw new RuntimeException(e);
             }
             gBoard = new GraphicBoard(placeholderGame);
+            placeholderGame.setGBoard(gBoard);
 
             JLabel playersLabel = new JLabel();
             gameLabel = new JLabel();
@@ -95,6 +96,7 @@ public class Main implements GameObserver {
                         game = new Game(player1Name, player2Name, player1Team, player2Team);
                         frame.remove(gBoard);
                         gBoard = new GraphicBoard(game);
+                        game.setGBoard(gBoard);
                         game.addObserver(new Main());
                         frame.add(gBoard);
                     } catch (IllegalTilePlacementException ex) {
