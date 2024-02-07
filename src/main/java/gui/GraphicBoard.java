@@ -92,9 +92,26 @@ public class GraphicBoard extends JPanel{
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
     }
-    public void moveCurrentPiece() {
+    public void moveCurrentPieceByOne() {
         currentPiece.moveTo(currentTile.x, currentTile.y);
         repaint();
+    }
+    public void moveCurrentPieceByTwo() {
+        currentPiece.moveTo(currentTile.x, currentTile.y);
+        repaint();
+    }
+    public void removePiece(GraphicPiece piece) {
+        pieceList.remove(piece);
+        repaint();
+    }
+    public GraphicPiece getGraphicPiece (Piece piece) {
+        GraphicPiece graphicPiece = null;
+        for (GraphicPiece g : pieceList) {
+            if (((NormalPiece) g).getPiece() == piece) {
+                graphicPiece = g;
+            }
+        }
+        return graphicPiece;
     }
     public void setGame(Game game) {
         this.game = game;
