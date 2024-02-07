@@ -10,14 +10,14 @@ import static main.Main.gBoard;
 public class Move {
     private final Player player;
     private final Piece piece;
-    private final BlackTile destination;
+    private final BlackTile startingTile;
     private final NeighborPosition neighborDestination;
     private boolean isMoveValid;
 
-    public Move(Player player, Piece piece, BlackTile destination, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
+    public Move(Player player, Piece piece, BlackTile startingTile, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
         this.player = player;
         this.piece = piece;
-        this.destination = destination;
+        this.startingTile = startingTile;
         this.neighborDestination = neighborDestination;
         isMoveValid=makeMove();
     }
@@ -51,15 +51,24 @@ public class Move {
         }
          */
         if (player.getTeam() == piece.team){
+            boolean result;
             if (piece.canEat(neighborDestination)){
-                Piece eatenPiece = destination.getNeighbor(neighborDestination).getPiece();
-                GraphicPiece eatenGraphicPiece = gBoard.getGraphicPiece(eatenPiece);
-                gBoard.removePiece(eatenGraphicPiece);
-                gBoard.moveCurrentPieceByTwo();
-                return piece.eatPiece(neighborDestination);
+                result = piece.eatPiece(neighborDestination);
+                if (result) {
+                    System.out.println("Eating");
+                    Piece eatenPiece = startingTile.getNeighbor(neighborDestination).getPiece();
+                    GraphicPiece eatenGraphicPiece = gBoard.getGraphicPiece(eatenPiece);
+                    gBoard.removePiece(eatenGraphicPiece);
+                    gBoard.moveCurrentPieceByTwo();
+                }
+                return result;
             }else{
-                gBoard.moveCurrentPieceByOne();
-                return piece.movePieceByOne(neighborDestination);
+                result = piece.movePieceByOne(neighborDestination);
+                if (result) {
+                    System.out.println("Moving");
+                    gBoard.moveCurrentPieceByOne();
+                }
+                return result;
             }
         }
         return false;

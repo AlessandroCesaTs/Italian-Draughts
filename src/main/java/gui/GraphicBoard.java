@@ -31,6 +31,7 @@ public class GraphicBoard extends JPanel{
 
     public GraphicBoard(Game game) {
         setGame(game);
+        //debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -184,10 +185,10 @@ public class GraphicBoard extends JPanel{
 
         Piece piece = ((NormalPiece) draggedPiece).getPiece();
         Player player = game.getActivePlayer();
-        BlackTile destination = game.getBoard().getTileAtPosition(endTile);
+        BlackTile startingTile = game.getBoard().getTileAtPosition(startTile);
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
 
-         Move move=new Move(player, piece, destination, neighborDestination);
+         Move move=new Move(player, piece, startingTile, neighborDestination);
          if (move.getIfMoveIsValid()){
              System.out.println("Start: " + startTile);
              System.out.println("Destination: " + endTile);
@@ -262,5 +263,13 @@ public class GraphicBoard extends JPanel{
             notifyMoveMadeObservers();
         }
         this.moveMade = false;
+    }
+    public void debugPieces() {
+        for (GraphicPiece graphicPiece : pieceList) {
+            Piece logicPiece = ((NormalPiece) graphicPiece).getPiece();
+            Point position = graphicPiece.getPosition();
+            System.out.println("GraphicPiece at " + position);
+            System.out.println("Corresponding logic Piece at " + logicPiece.getTile().getCol() + ", " + logicPiece.getTile().getRow());
+        }
     }
 }

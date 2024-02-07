@@ -52,7 +52,6 @@ public class Game implements MoveMadeObserver {
      */
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
-        System.out.println("onMoveMade");
         Move lastMove = gBoard.getMoveFromGUI();
         if (lastMove!=null){
             try {
@@ -61,7 +60,6 @@ public class Game implements MoveMadeObserver {
                 e.printStackTrace();
                 return;
             }
-            //gBoard.setMoveMade(false);
             currentRound++;
             System.out.println("changed active player");
             changeActivePlayer();
