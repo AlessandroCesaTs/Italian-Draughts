@@ -21,17 +21,23 @@ public class EatingTest {
         assertNull(board.getPiece(4,4));
     }
     @Test
-    void cantEatSameTeamTest() throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    void cantEatSameTeamTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(1,1);
-        assertThrows(CantEatException.class,()-> whitePiece.eatPiece(NeighborPosition.TopRight));
+        Piece whitePiece2=board.getPiece(2,2);
+        whitePiece.eatPiece(NeighborPosition.TopRight);
+        assertEquals(board.getPiece(1,1),whitePiece);
+        assertEquals(board.getPiece(2,2),whitePiece2);
     }
     @Test
-    void cantEatTileAfterOccupiedTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException {
+    void cantEatTileAfterOccupiedTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException, CantEatException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
+        Piece blackPiece=board.getPiece(5,5);
         whitePiece.movePieceByOne(NeighborPosition.TopRight);
         whitePiece.movePieceByOne(NeighborPosition.TopRight);
-        assertThrows(CantEatException.class,()-> whitePiece.eatPiece(NeighborPosition.TopRight));
+        whitePiece.eatPiece(NeighborPosition.TopRight);
+        assertEquals(board.getPiece(4,4),whitePiece);
+        assertEquals(board.getPiece(5,5),blackPiece);
     }
 }

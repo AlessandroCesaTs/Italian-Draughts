@@ -32,9 +32,10 @@ public class MovementTest {
     }
 
     @Test
-    void alreadyOccupiedTest() throws NoPieceOnWhiteException {
+    void alreadyOccupiedTest() throws NoPieceOnWhiteException, IllegalMovementException, OutOfBoundsException {
         Piece piece=board.getPiece(7,5);
-        assertThrows(IllegalMovementException.class,()->piece.movePieceByOne(NeighborPosition.BottomLeft));
+        piece.movePieceByOne(NeighborPosition.BottomLeft);
+        assertEquals(piece,BlackTile.asBlackTile(board.getTile(7,5)).getPiece());
     }
     @Test
     void whiteOutOfBoundsTest() throws NoPieceOnWhiteException {

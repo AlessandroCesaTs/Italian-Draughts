@@ -40,11 +40,7 @@ public class Piece {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
-            } else {
-                throw new IllegalMovementException("Already occupied");
             }
-        }else{
-            throw new IllegalMovementException("You can't go back");
         }
     }
 
@@ -65,10 +61,10 @@ public class Piece {
 
     public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
-        if (targetTile.isFree()){
-            moveToTile(targetTile);
-        }else{
-            throw new IllegalMovementException("Already occupied");
+        if (isMoveValid(position)) {
+            if (targetTile.isFree()) {
+                moveToTile(targetTile);
+            }
         }
     }
 
@@ -98,20 +94,8 @@ public class Piece {
         }
     }
 
-    public boolean canEat(NeighborPosition position) throws CantEatException, OutOfBoundsException {
-        if (pieceOfOpposingTeam(position)){
-            if (isPositionAfterEatingFree(position)){
-                if (!pieceIsKing(position) || isKing ){
-                    return true;
-                }else{
-                    throw new CantEatException("Simple piece can't eat king");
-                }
-            }else{
-                throw new CantEatException("Can't eat because tile after is occupied");
-            }
-        }else {
-            throw new CantEatException("Can't eat piece of same team");
-        }
+    public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
+        return pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing);
     }
     public boolean isWhite() {
         return team == Team.White;
