@@ -9,16 +9,17 @@ public class Move {
     private final Piece piece;
     private final BlackTile destination;
     private final NeighborPosition neighborDestination;
+    private boolean isMoveValid;
 
     public Move(Player player, Piece piece, BlackTile finish, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
         this.player = player;
         this.piece = piece;
         this.destination = finish;
         this.neighborDestination = neighborDestination;
-        makeMove();
+        isMoveValid=makeMove();
     }
 
-    public void makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
+    public boolean makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
         /*
         if (player.getTeam() != piece.team){
             throw new IllegalMovementException();
@@ -30,7 +31,7 @@ public class Move {
             piece.eatPiece(neighborDestination);
         }
         //if(!piece.getIfKing() & piece.promotion()){}
-         */
+
         if (player.getTeam() != piece.team){
             throw new IllegalMovementException();
         }else {
@@ -45,8 +46,20 @@ public class Move {
                 }
             }
         }
+         */
+        if (player.getTeam() == piece.team){
+            if (piece.canEat(neighborDestination)){
+                return piece.eatPiece(neighborDestination);
+            }else{
+                return piece.movePieceByOne(neighborDestination);
+            }
+        }
+        return false;
     }
     public Piece getPiece() {
         return piece;
+    }
+    public boolean getIfMoveIsValid(){
+        return isMoveValid;
     }
 }

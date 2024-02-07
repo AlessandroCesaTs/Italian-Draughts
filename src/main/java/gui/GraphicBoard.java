@@ -74,7 +74,7 @@ public class GraphicBoard extends JPanel{
                     piece.moveTo(endTile.x, endTile.y);
                     try {
                         setMoveMade(true);
-                    } catch (NotOnDiagonalException ex) {
+                    } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
@@ -145,8 +145,11 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI() throws NotOnDiagonalException {
+    public Move getMoveFromGUI() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         if (startTile == null || endTile == null || draggedPiece == null) {
+            return null;
+        }
+        if(endTile.x>cols-1 || endTile.y>rows-1){
             return null;
         }
 
@@ -156,12 +159,13 @@ public class GraphicBoard extends JPanel{
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
         System.out.println("piece"+piece+",player"+player+",destination"+destination+",neighborDestination"+neighborDestination);
 
-        try {
-            return new Move(player, piece, destination, neighborDestination);
-        } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
-            System.out.println("Illegal move: " + e.getMessage());
-            return null;
-        }
+         Move move=new Move(player, piece, destination, neighborDestination);
+         if (move.getIfMoveIsValid()){
+             return move;
+         }else{
+             return null;
+         }
+
     }
     public GraphicPiece findPieceAtTile(Point tile) {
         return pieceList.stream()
@@ -218,12 +222,12 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers() throws NotOnDiagonalException {
+    public void notifyMoveMadeObservers() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException {
+    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         this.moveMade = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();

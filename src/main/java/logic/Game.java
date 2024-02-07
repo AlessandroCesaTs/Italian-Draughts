@@ -50,7 +50,7 @@ public class Game implements MoveMadeObserver {
 
      */
     @Override
-    public void onMoveMade() throws NotOnDiagonalException {
+    public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         Move lastMove = gBoard.getMoveFromGUI();
         System.out.println("Is lastMove null?   "+(lastMove==null));
         if (lastMove!=null){
