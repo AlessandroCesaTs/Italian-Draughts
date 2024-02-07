@@ -30,6 +30,7 @@ public class Game implements MoveMadeObserver {
         activePlayer= player1;
         inactivePlayer=player2;
         //startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
+        //rimane da aggiungere caso game over
     }
     /*
     public void startGame(){
@@ -51,16 +52,19 @@ public class Game implements MoveMadeObserver {
      */
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+        System.out.println("onMoveMade");
         Move lastMove = gBoard.getMoveFromGUI();
-        System.out.println("Is lastMove null?   "+(lastMove==null));
         if (lastMove!=null){
             try {
                 lastMove.makeMove();
             } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
                 e.printStackTrace();
+                return;
             }
-            gBoard.setMoveMade(false);
+            //gBoard.setMoveMade(false);
+            gBoard.moveCurrentPiece();
             currentRound++;
+            System.out.println("changed active player");
             changeActivePlayer();
         }
     }

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -26,6 +27,7 @@ public class GraphicBoard extends JPanel{
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private List<MoveMadeObserver> observers = new ArrayList<>();
     private boolean moveMade = false;
+    private GraphicPiece currentPiece;
 
     public GraphicBoard(Game game) {
         setGame(game);
@@ -71,18 +73,28 @@ public class GraphicBoard extends JPanel{
 
                 GraphicPiece piece = draggedPiece;
                 if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == game.getActivePlayer().getTeam()) {
-                    piece.moveTo(endTile.x, endTile.y);
+                    setCurrentPiece(piece);
+                    setCurrentTile(endTile);
                     try {
                         setMoveMade(true);
                     } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
-                        throw new RuntimeException(ex);
+                        ex.printStackTrace();
+                        return;
                     }
                 }
-
                 draggedPiece = null;
-                repaint();
             }
         });
+    }
+    private void setCurrentPiece(GraphicPiece currentPiece) {
+        this.currentPiece = currentPiece;
+    }
+    private void setCurrentTile(Point currentTile) {
+        this.currentTile = currentTile;
+    }
+    public void moveCurrentPiece() {
+        currentPiece.moveTo(currentTile.x, currentTile.y);
+        repaint();
     }
     public void setGame(Game game) {
         this.game = game;
@@ -157,10 +169,11 @@ public class GraphicBoard extends JPanel{
         Player player = game.getActivePlayer();
         BlackTile destination = game.getBoard().getTileAtPosition(endTile);
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
-        System.out.println("piece"+piece+",player"+player+",destination"+destination+",neighborDestination"+neighborDestination);
 
          Move move=new Move(player, piece, destination, neighborDestination);
          if (move.getIfMoveIsValid()){
+             System.out.println("Start: " + startTile);
+             System.out.println("Destination: " + endTile);
              return move;
          }else{
              return null;
@@ -173,12 +186,11 @@ public class GraphicBoard extends JPanel{
                 .findFirst()
                 .orElse(null);
     }
-
     public int rowDiff(Point endTile){
         return endTile.y-startTile.y;
     }
     public int colDiff(Point endTile){
-        return endTile.y-startTile.y;
+        return endTile.x-startTile.x;
     }
     public boolean isOnDiagonal(Point endTile){
         return Math.abs(rowDiff(endTile))==Math.abs(colDiff(endTile)) && rowDiff(endTile)!=0;
@@ -232,5 +244,6 @@ public class GraphicBoard extends JPanel{
         if (moveMade) {
             notifyMoveMadeObservers();
         }
+        this.moveMade = false;
     }
 }

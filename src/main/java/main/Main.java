@@ -151,7 +151,6 @@ public class Main implements GameObserver {
             frame.add(playersLabel, gbc);
             frame.add(gBoard, gbc);
 
-
             frame.pack();
             frame.setVisible(true);
         };

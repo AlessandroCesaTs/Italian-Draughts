@@ -42,5 +42,8 @@ public class GraphicPiece extends JPanel {
         this.xPos = x * GraphicBoard.tileSize;
         this.yPos = y * GraphicBoard.tileSize;
     }
+    public Point getPosition() {
+        return new Point(col, row);
+    }
 
 }
