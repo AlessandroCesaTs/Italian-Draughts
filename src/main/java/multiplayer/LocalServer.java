@@ -22,6 +22,10 @@ public class LocalServer extends Thread{
             while (true) {
                 Socket socket = serverSocket.accept();
                 nConnection++;
+                if(nConnection == 1)
+                    System.out.println("Player 1 connected");
+                if(nConnection == 2)
+                    System.out.println("Player 2 connected");
             }
         } catch (Exception e) {
             System.out.println(String.format("Generic error occurred. Error message: \"%s\"", e.getMessage()));

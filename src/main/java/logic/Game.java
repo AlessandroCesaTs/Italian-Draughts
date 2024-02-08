@@ -25,7 +25,6 @@ public class Game implements MoveMadeObserver {
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        gBoard=new GraphicBoard(this);
         player1 =new Player(player1Name,team1,this);
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
@@ -111,6 +110,9 @@ public class Game implements MoveMadeObserver {
             }else {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
                 gBoard.movePiece(movingPiece,targetPosition);
+            }
+            if (movingPiece.promotion()){ //per promozione gui
+                gBoard.getGraphicPiece(movingPiece).promote();
             }
             currentRound++;
             System.out.println("changed active player");
