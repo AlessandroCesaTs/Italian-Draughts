@@ -14,7 +14,7 @@ public class Game implements MoveMadeObserver {
     final Player player2;
     private Player activePlayer;
     private Player inactivePlayer;
-    private Player winnerPlayer;
+    private Player winnerPlayer=null;
     private final Board board;
     private GraphicBoard gBoard;
     private int currentRound=1;
@@ -55,6 +55,9 @@ public class Game implements MoveMadeObserver {
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         System.out.println("onMoveMade");
         playTurn();
+        if(winnerPlayer!=null){
+            System.out.println("Winner player is" + winnerPlayer);
+        }
     }
     /*
     public void waitForMove(){
@@ -90,11 +93,7 @@ public class Game implements MoveMadeObserver {
         while (player1.hasPieces() & player2.hasPieces()) {
             playTurn();
         }
-        if (player1.hasPieces()){
-            winnerPlayer=player1;
-        }else{
-            winnerPlayer=player2;
-        }
+
     }
 
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
@@ -116,8 +115,16 @@ public class Game implements MoveMadeObserver {
             currentRound++;
             System.out.println("changed active player");
             changeActivePlayer();
+            if (!player1.hasPieces()){
+                winnerPlayer=player2;
+            }else if (!player2.hasPieces()){
+                winnerPlayer=player1;
+            }
         }
-        gBoard.debugPieces();
+        System.out.println(player1.getNumberOfPieces());
+        System.out.println(player2.getNumberOfPieces());
+        //gBoard.debugPieces();
+
     }
 
     public void addObserver(GameObserver observer){
