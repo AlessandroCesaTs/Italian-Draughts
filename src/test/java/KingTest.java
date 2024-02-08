@@ -1,4 +1,5 @@
 import Exceptions.*;
+import logic.BlackTile;
 import logic.Board;
 import logic.NeighborPosition;
 import logic.Piece;
@@ -57,6 +58,8 @@ public class KingTest {
         whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
         blackPiece5.movePieceByOne(NeighborPosition.BottomRight);
 
-        assertThrows(CantEatException.class,()->blackPiece5.eatPiece(NeighborPosition.BottomRight));
+        blackPiece5.eatPiece(NeighborPosition.BottomRight);
+        assertEquals(whitePiece, BlackTile.asBlackTile(board.getTile(5,5)).getPiece());
+        assertEquals(blackPiece5, BlackTile.asBlackTile(board.getTile(6,6)).getPiece());
     }
 }

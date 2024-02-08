@@ -1,5 +1,6 @@
 package gui;
 
+import logic.NeighborPosition;
 import logic.Piece;
 
 import javax.imageio.ImageIO;
@@ -20,9 +21,9 @@ public class GraphicPiece extends JPanel {
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
-            blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
+            //blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
             white = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("white.png")));
-            whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
+            //whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -41,6 +42,27 @@ public class GraphicPiece extends JPanel {
         this.row = y;
         this.xPos = x * GraphicBoard.tileSize;
         this.yPos = y * GraphicBoard.tileSize;
+    }
+    public void moveTo(NeighborPosition destination) {
+        if (destination.equals(NeighborPosition.TopRight)){
+            col=col+1;
+            row=row+1;
+        } else if(destination.equals(NeighborPosition.TopLeft)){
+            col=col-1;
+            row=row+1;
+        }
+        else if(destination.equals(NeighborPosition.BottomRight)){
+            col=col+1;
+            row=row-1;
+        }else{
+            col=col-1;
+            row=row-1;
+        }
+        xPos = col * GraphicBoard.tileSize;
+        yPos = row * GraphicBoard.tileSize;
+    }
+    public Point getPosition() {
+        return new Point(col, row);
     }
 
 }

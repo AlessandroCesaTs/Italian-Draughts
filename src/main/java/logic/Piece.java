@@ -4,10 +4,13 @@ import Exceptions.CantEatException;
 import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
 
+import java.awt.*;
+
 public class Piece {
     final Team team;
     private BlackTile tile;
     private boolean isKing=false;
+    private Point newCoordinates = new Point();
 
     public Piece(Team team) {
         this.team = team;
@@ -40,11 +43,21 @@ public class Piece {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
-            } else {
-                throw new IllegalMovementException("Already occupied");
+                setNewCoordinates(targetTile.getCol(), targetTile.getRow());
+            }
+        }
+    }
+
+    public boolean canMovePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+        if (isMoveValid(position)) {
+            BlackTile targetTile = getTile().getNeighbor(position);
+            if (targetTile.isFree()) {
+                return true;
+            }else{
+                return false;
             }
         }else{
-            throw new IllegalMovementException("You can't go back");
+            return false;
         }
     }
 
@@ -65,14 +78,15 @@ public class Piece {
 
     public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
-        if (targetTile.isFree()){
-            moveToTile(targetTile);
-        }else{
-            throw new IllegalMovementException("Already occupied");
+        if (isMoveValid(position)) {
+            if (targetTile.isFree()) {
+                moveToTile(targetTile);
+                setNewCoordinates(targetTile.getCol(), targetTile.getRow());
+            }
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws CantEatException, OutOfBoundsException, IllegalMovementException {
+    public void eatPiece(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
@@ -85,34 +99,34 @@ public class Piece {
 
     private boolean pieceOfOpposingTeam(NeighborPosition position) throws OutOfBoundsException {
         if (tile.getNeighbor(position).isFree()){
-            return false;
+            return true;
         }else {
             return tile.getNeighbor(position).getPiece().getTeam() != team;
         }
     }
     private boolean pieceIsKing(NeighborPosition position) throws OutOfBoundsException {
-        return tile.getNeighbor(position).getPiece().isKing;
+        if (tile.getNeighbor(position).isFree()){
+            return false;
+        }else {
+            return tile.getNeighbor(position).getPiece().isKing;
+        }
     }
 
-    public boolean canEat(NeighborPosition position) throws CantEatException, OutOfBoundsException {
-        if (pieceOfOpposingTeam(position)){
-            if (isPositionAfterEatingFree(position)){
-                if (!pieceIsKing(position) || isKing ){
-                    return true;
-                }else{
-                    throw new CantEatException("Simple piece can't eat king");
-                }
-            }else{
-                throw new CantEatException("Can't eat because tile after is occupied");
-            }
-        }else {
-            throw new CantEatException("Can't eat piece of same team");
-        }
+    public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
+        return  !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing);
     }
     public boolean isWhite() {
         return team == Team.White;
     }
     public void remove(){
         tile=null;
+    }
+    private void setNewCoordinates(int x, int y){
+        newCoordinates.x=x;
+        newCoordinates.y=y;
+    }
+
+    public Point getNewCoordinates() {
+        return newCoordinates;
     }
 }
