@@ -19,7 +19,7 @@ import static main.Main.gBoard;
 
 public class GraphicBoard extends JPanel{
     private Game game;
-    public static int tileSize = 100;
+    public static int tileSize = 75;
     int cols = 8;
     int rows = 8;
     Point currentTile = null;

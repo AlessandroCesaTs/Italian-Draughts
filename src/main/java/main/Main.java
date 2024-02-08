@@ -22,8 +22,8 @@ public class Main implements GameObserver {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.getContentPane().setBackground(new Color(240, 236, 236));
             frame.setLayout(new GridBagLayout());
-            frame.setMinimumSize(new Dimension(800, 850));
-            frame.setResizable(true);
+            frame.setMinimumSize(new Dimension(600, 650));
+            frame.setResizable(false);
             frame.setLocationRelativeTo(null);
             Game placeholderGame = null;
             try {
