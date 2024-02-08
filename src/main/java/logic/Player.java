@@ -66,6 +66,19 @@ public class Player {
         movingPiece.eatPiece(targetPosition);
         }
     }
+
+    public boolean shouldEat() throws OutOfBoundsException {
+        for (Piece piece:pieces){
+            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
+            {
+                if (piece.canEat(destination)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean isWhite(){
         return team==Team.White;
     }

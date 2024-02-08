@@ -70,6 +70,7 @@ public class Game implements MoveMadeObserver {
 
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         //ricevere la mossa dall'interfaccia grafica (può essere un muovi,mangia o passa il turno)
+        System.out.println(activePlayer.shouldEat());
         Move move= gBoard.getMoveFromGUI();
         TypeOfMove typeOfMove=move.getTypeOfMove();
         System.out.println(typeOfMove);
@@ -103,6 +104,7 @@ public class Game implements MoveMadeObserver {
         //gBoard.debugPieces();
 
     }
+
 
     public void addObserver(GameObserver observer){
         observers.add(observer);

@@ -56,6 +56,8 @@ public class Move {
         }
         return TypeOfMove.NoMove;
     }
+
+
     public Piece getPiece() {
         return piece;
     }
