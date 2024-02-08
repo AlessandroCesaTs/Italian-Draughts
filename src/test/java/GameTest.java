@@ -1,6 +1,4 @@
-import Exceptions.IllegalTeamsCompositionException;
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import Exceptions.*;
 import logic.Game;
 import logic.Player;
 import logic.Team;
@@ -13,7 +11,7 @@ public class GameTest {
 
     Game game=new Game("Anna","Mario", Team.White,Team.Black);
 
-    public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException {
+    public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
     }
     Player player1=game.getActivePlayer();
     Player player2=game.getActivePlayer();

@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import static main.Main.gBoard;
+
 public class GraphicBoard extends JPanel{
     private Game game;
     public static int tileSize = 100;
@@ -23,6 +25,7 @@ public class GraphicBoard extends JPanel{
     Point currentTile = null;
     Point startTile = null;
     Point endTile = null;
+    NeighborPosition movingDirection=null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private List<MoveMadeObserver> observers = new ArrayList<>();
@@ -31,6 +34,7 @@ public class GraphicBoard extends JPanel{
 
     public GraphicBoard(Game game) {
         setGame(game);
+        debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -46,8 +50,8 @@ public class GraphicBoard extends JPanel{
                     int x = e.getX() / tileSize;
                     int y = (getHeight() - e.getY()) / tileSize;
                     if ((x + y) % 2 == 0) {
-                        draggedPiece.moveTo(x, y);
-                        repaint();
+                        //draggedPiece.moveTo(x, y);
+                        //repaint();
                     }
                 }
             }
@@ -66,10 +70,15 @@ public class GraphicBoard extends JPanel{
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(MouseEvent e)  {
                 int x = e.getX() / tileSize;
                 int y = (getHeight() - e.getY()) / tileSize;
                 endTile = new Point(x, y);
+                try {
+                    movingDirection=getNeighborPosition(endTile);
+                } catch (NotOnDiagonalException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 GraphicPiece piece = draggedPiece;
                 if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == game.getActivePlayer().getTeam()) {
@@ -100,8 +109,16 @@ public class GraphicBoard extends JPanel{
         currentPiece.moveTo(currentTile.x, currentTile.y);
         repaint();
     }
+    public void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
+        piece.moveTo(destination);
+        repaint();
+    }
+
+
     public void removePiece(GraphicPiece piece) {
+        System.out.println("Before removing: " + pieceList); // Print contents before removing
         pieceList.remove(piece);
+        System.out.println("After removing: " + pieceList); // Print contents after removing
         repaint();
     }
     public GraphicPiece getGraphicPiece (Piece piece) {
@@ -184,19 +201,26 @@ public class GraphicBoard extends JPanel{
 
         Piece piece = ((NormalPiece) draggedPiece).getPiece();
         Player player = game.getActivePlayer();
-        BlackTile destination = game.getBoard().getTileAtPosition(endTile);
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
 
-         Move move=new Move(player, piece, destination, neighborDestination);
-         if (move.getIfMoveIsValid()){
-             System.out.println("Start: " + startTile);
-             System.out.println("Destination: " + endTile);
-             return move;
-         }else{
-             return null;
-         }
+        return new Move(player, piece, neighborDestination);
 
     }
+
+    public void eatPiece(Piece eatingPiece,NeighborPosition destination) throws OutOfBoundsException {
+        System.out.println("Eating");
+        GraphicPiece eatingGraphicPiece= gBoard.getGraphicPiece(eatingPiece);
+        GraphicPiece targetGraphicPiece= gBoard.getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
+        gBoard.removePiece(targetGraphicPiece);
+        gBoard.movePieceTo(eatingGraphicPiece,destination);
+        gBoard.movePieceTo(eatingGraphicPiece,destination);
+    }
+    public void movePiece(Piece movingPiece,NeighborPosition destination) throws OutOfBoundsException {
+        System.out.println("Moving");
+        GraphicPiece movingGraphicPiece= gBoard.getGraphicPiece(movingPiece);
+        gBoard.movePieceTo(movingGraphicPiece,destination);
+    }
+
     public GraphicPiece findPieceAtTile(Point tile) {
         return pieceList.stream()
                 .filter(p -> p.col == tile.x && p.row == tile.y)
@@ -262,5 +286,13 @@ public class GraphicBoard extends JPanel{
             notifyMoveMadeObservers();
         }
         this.moveMade = false;
+    }
+    public void debugPieces(){
+        for (GraphicPiece graphicPiece:pieceList){
+            Piece logicPiece=((NormalPiece) graphicPiece).getPiece();
+            Point position = graphicPiece.getPosition();
+            System.out.println("Graphic Piece at "+position);
+            System.out.println("Corresponding logic Piece at "+logicPiece.getTile().getCol()+ " , "+logicPiece.getTile().getRow());
+        }
     }
 }

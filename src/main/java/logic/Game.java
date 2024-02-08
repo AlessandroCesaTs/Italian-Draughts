@@ -20,11 +20,12 @@ public class Game implements MoveMadeObserver {
     private int currentRound=1;
     private List<GameObserver> observers = new ArrayList<>();
 
-    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException {
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
+        gBoard=new GraphicBoard(this);
         player1 =new Player(player1Name,team1,this);
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
@@ -53,19 +54,7 @@ public class Game implements MoveMadeObserver {
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         System.out.println("onMoveMade");
-        Move lastMove = gBoard.getMoveFromGUI();
-        if (lastMove!=null){
-            try {
-                lastMove.makeMove();
-            } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
-                e.printStackTrace();
-                return;
-            }
-            //gBoard.setMoveMade(false);
-            currentRound++;
-            System.out.println("changed active player");
-            changeActivePlayer();
-        }
+        playTurn();
     }
     /*
     public void waitForMove(){
@@ -96,8 +85,8 @@ public class Game implements MoveMadeObserver {
         //così evitiamo di mettere troppi try catch
         return !player1.hasPieces() | !player2.hasPieces();
     }
-    /*
-    public void play() throws NoPieceOnWhiteException {
+
+    public void play() throws NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         while (player1.hasPieces() & player2.hasPieces()) {
             playTurn();
         }
@@ -108,20 +97,29 @@ public class Game implements MoveMadeObserver {
         }
     }
 
-    public void playTurn() {
+    public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         //ricevere la mossa dall'interfaccia grafica (può essere un muovi,mangia o passa il turno)
-        Receive typeOfMove (can be pass, move or eat)
-        if (move!=Pass){
-            Receive movingPiece and targetPosition (where to move/eat)
-            activePlayer.makeMove(typeOfMove,movingPiece,targetPosition)
-            if (move==Eat){
-            inactivePlayer.loseOnePiece();
+        Move move= gBoard.getMoveFromGUI();
+        TypeOfMove typeOfMove=move.getTypeOfMove();
+        System.out.println(typeOfMove);
+        if (move.getTypeOfMove()!=TypeOfMove.NoMove){
+            Piece movingPiece=move.getPiece();
+            NeighborPosition targetPosition=move.getDestination();
+            if (move.getTypeOfMove().equals(TypeOfMove.Eat)){
+                gBoard.eatPiece(movingPiece,targetPosition);
+                activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
+                inactivePlayer.loseOnePiece();
+            }else {
+                activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
+                gBoard.movePiece(movingPiece,targetPosition);
             }
+            currentRound++;
+            System.out.println("changed active player");
+            changeActivePlayer();
         }
-        changeActivePlayer();
-        currentRound++;
+        gBoard.debugPieces();
     }
-    */
+
     public void addObserver(GameObserver observer){
         observers.add(observer);
     }

@@ -1,8 +1,6 @@
 package main;
 
-import Exceptions.IllegalTeamsCompositionException;
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import Exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.Team;
@@ -35,6 +33,14 @@ public class Main implements GameObserver {
             } catch (NoPieceOnWhiteException e) {
                 throw new RuntimeException(e);
             } catch (IllegalTeamsCompositionException e) {
+                throw new RuntimeException(e);
+            } catch (CantEatException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalMovementException e) {
+                throw new RuntimeException(e);
+            } catch (OutOfBoundsException e) {
+                throw new RuntimeException(e);
+            } catch (NotOnDiagonalException e) {
                 throw new RuntimeException(e);
             }
             gBoard = new GraphicBoard(placeholderGame);
@@ -104,6 +110,14 @@ public class Main implements GameObserver {
                     } catch (NoPieceOnWhiteException ex) {
                         throw new RuntimeException(ex);
                     } catch (IllegalTeamsCompositionException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (CantEatException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (IllegalMovementException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (OutOfBoundsException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (NotOnDiagonalException ex) {
                         throw new RuntimeException(ex);
                     }
                     gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());

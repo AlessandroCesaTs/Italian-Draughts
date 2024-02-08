@@ -38,16 +38,27 @@ public class Piece {
         return isKing;
     }
 
-    public boolean movePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void movePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         if (isMoveValid(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
                 setNewCoordinates(targetTile.getCol(), targetTile.getRow());
-                return true;
             }
         }
-        return false;
+    }
+
+    public boolean canMovePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+        if (isMoveValid(position)) {
+            BlackTile targetTile = getTile().getNeighbor(position);
+            if (targetTile.isFree()) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
     public boolean promotion(){
@@ -75,13 +86,11 @@ public class Piece {
         }
     }
 
-    public boolean eatPiece(NeighborPosition position) throws CantEatException, OutOfBoundsException, IllegalMovementException {
+    public void eatPiece(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
-            return true;
         }
-        return false;
     }
 
     private boolean isPositionAfterEatingFree(NeighborPosition position) throws OutOfBoundsException {

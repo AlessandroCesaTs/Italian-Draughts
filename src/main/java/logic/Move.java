@@ -3,26 +3,21 @@ package logic;
 import Exceptions.CantEatException;
 import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
-import gui.GraphicPiece;
-
-import static main.Main.gBoard;
 
 public class Move {
     private final Player player;
     private final Piece piece;
-    private final BlackTile destination;
     private final NeighborPosition neighborDestination;
-    private boolean isMoveValid;
+    private TypeOfMove typeOfMove;
 
-    public Move(Player player, Piece piece, BlackTile destination, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
+    public Move(Player player, Piece piece, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
         this.player = player;
         this.piece = piece;
-        this.destination = destination;
         this.neighborDestination = neighborDestination;
-        isMoveValid=makeMove();
+        typeOfMove=computeTypeOfMove();
     }
 
-    public boolean makeMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
+    public TypeOfMove computeTypeOfMove() throws IllegalMovementException, CantEatException, OutOfBoundsException{
         /*
         if (player.getTeam() != piece.team){
             throw new IllegalMovementException();
@@ -52,22 +47,21 @@ public class Move {
          */
         if (player.getTeam() == piece.team){
             if (piece.canEat(neighborDestination)){
-                Piece eatenPiece = destination.getNeighbor(neighborDestination).getPiece();
-                GraphicPiece eatenGraphicPiece = gBoard.getGraphicPiece(eatenPiece);
-                gBoard.removePiece(eatenGraphicPiece);
-                gBoard.moveCurrentPieceByTwo();
-                return piece.eatPiece(neighborDestination);
-            }else{
-                gBoard.moveCurrentPieceByOne();
-                return piece.movePieceByOne(neighborDestination);
+
+                return TypeOfMove.Eat;
+            }else if (piece.canMovePieceByOne(neighborDestination)) {
+
+                return TypeOfMove.Move;
             }
         }
-        return false;
+        return TypeOfMove.NoMove;
     }
     public Piece getPiece() {
         return piece;
     }
-    public boolean getIfMoveIsValid(){
-        return isMoveValid;
+    public Player getPlayer(){return player;}
+    public NeighborPosition getDestination(){return neighborDestination;}
+    public TypeOfMove getTypeOfMove(){
+        return typeOfMove;
     }
 }

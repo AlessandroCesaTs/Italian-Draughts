@@ -1,4 +1,4 @@
 package logic;
 
-public enum TypeOfMove {Move,Eat,Pass
+public enum TypeOfMove {Move,Eat,Pass,NoMove
 }
