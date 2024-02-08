@@ -1,7 +1,6 @@
 package gui;
 
 import logic.NeighborPosition;
-import logic.Piece;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
