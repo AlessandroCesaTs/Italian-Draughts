@@ -23,7 +23,7 @@ public class Main implements GameObserver {
             frame.getContentPane().setBackground(new Color(240, 236, 236));
             frame.setLayout(new GridBagLayout());
             frame.setMinimumSize(new Dimension(800, 850));
-            frame.setResizable(false);
+            frame.setResizable(true);
             frame.setLocationRelativeTo(null);
             Game placeholderGame = null;
             try {

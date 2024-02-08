@@ -25,11 +25,11 @@ public class Game implements MoveMadeObserver {
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        gBoard=new GraphicBoard(this);
         player1 =new Player(player1Name,team1,this);
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
         inactivePlayer=player2;
+        //gBoard=new GraphicBoard(this);
         //startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
         //rimane da aggiungere caso game over
     }
