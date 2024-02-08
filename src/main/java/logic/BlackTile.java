@@ -64,12 +64,8 @@ public class BlackTile extends Tile {
         }
     }
 
-    public BlackTile getNeighbor(NeighborPosition position) throws OutOfBoundsException {
-        if (neighbors.containsKey(position)) {
-            return neighbors.get(position);
-        }else{
-            throw new OutOfBoundsException();
-        }
+    public BlackTile getNeighbor(NeighborPosition position) {
+        return neighbors.getOrDefault(position, null);
     }
 
 }

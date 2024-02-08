@@ -39,7 +39,7 @@ public class Piece {
     }
 
     public void movePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
-        if (isMoveValid(position)) {
+        if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
@@ -49,7 +49,7 @@ public class Piece {
     }
 
     public boolean canMovePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
-        if (isMoveValid(position)) {
+        if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 return true;
@@ -74,6 +74,9 @@ public class Piece {
                 return position==NeighborPosition.BottomLeft || position==NeighborPosition.BottomRight;
             }
         }
+    }
+    public boolean isMoveOutOfBounds(NeighborPosition position) {
+        return getTile().getNeighbor(position) == null;
     }
 
     public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {

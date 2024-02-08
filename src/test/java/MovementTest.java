@@ -38,13 +38,15 @@ public class MovementTest {
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(7,5)).getPiece());
     }
     @Test
-    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException {
+    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException, IllegalMovementException, OutOfBoundsException {
         Piece piece=board.getPiece(1,7);
-        assertThrows(OutOfBoundsException.class,()->piece.movePieceByOne(NeighborPosition.TopRight));
+        piece.movePieceByOne(NeighborPosition.TopRight);
+        assertEquals(piece,BlackTile.asBlackTile(board.getTile(1,7)).getPiece());
     }
     @Test
-    void blackOutOfBoundsTest() throws NoPieceOnWhiteException {
+    void blackOutOfBoundsTest() throws NoPieceOnWhiteException, IllegalMovementException, OutOfBoundsException {
         Piece piece=board.getPiece(7,7);
-        assertThrows(OutOfBoundsException.class,()->piece.movePieceByOne(NeighborPosition.BottomRight));
+        piece.movePieceByOne(NeighborPosition.BottomRight);
+        assertEquals(piece,BlackTile.asBlackTile(board.getTile(7,7)).getPiece());
     }
 }
