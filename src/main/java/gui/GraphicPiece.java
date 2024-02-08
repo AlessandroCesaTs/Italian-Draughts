@@ -1,7 +1,6 @@
 package gui;
 
 import logic.NeighborPosition;
-import logic.Piece;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,9 +20,9 @@ public class GraphicPiece extends JPanel {
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
-            blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
+            //blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
             white = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("white.png")));
-            whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
+            //whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
