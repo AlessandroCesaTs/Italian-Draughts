@@ -112,6 +112,9 @@ public class Game implements MoveMadeObserver {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
                 gBoard.movePiece(movingPiece,targetPosition);
             }
+            if (movingPiece.promotion()){ //per promozione gui
+                gBoard.getGraphicPiece(movingPiece).promote();
+            }
             currentRound++;
             System.out.println("changed active player");
             changeActivePlayer();

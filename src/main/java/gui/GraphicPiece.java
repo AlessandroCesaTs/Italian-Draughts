@@ -20,9 +20,9 @@ public class GraphicPiece extends JPanel {
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
-            //blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
+            blackKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("blackKing.png")));
             white = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("white.png")));
-            //whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
+            whiteKing = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("whiteKing.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -32,7 +32,6 @@ public class GraphicPiece extends JPanel {
     public GraphicPiece(GraphicBoard graphicBoard) {
         this.graphicBoard = graphicBoard;
     }
-
     public void paint(Graphics2D g2d) {
         g2d.drawImage(sprite, xPos, yPos, null);
     }
@@ -59,6 +58,13 @@ public class GraphicPiece extends JPanel {
         }
         xPos = col * GraphicBoard.tileSize;
         yPos = row * GraphicBoard.tileSize;
+    }
+    public void promote(){
+        if (isWhite) {
+            sprite = whiteKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+        } else {
+            sprite = blackKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+        }
     }
     public Point getPosition() {
         return new Point(col, row);
