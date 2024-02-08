@@ -116,9 +116,7 @@ public class GraphicBoard extends JPanel{
 
 
     public void removePiece(GraphicPiece piece) {
-        System.out.println("Before removing: " + pieceList); // Print contents before removing
         pieceList.remove(piece);
-        System.out.println("After removing: " + pieceList); // Print contents after removing
         repaint();
     }
     public GraphicPiece getGraphicPiece (Piece piece) {
