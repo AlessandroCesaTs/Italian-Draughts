@@ -172,7 +172,12 @@ public class Main implements GameObserver {
     @Override
     public void update(Game game) {
         SwingUtilities.invokeLater(() -> {
-            gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
+            if (!game.isGameOver()) {
+                gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
+            }else{
+                String winnerName=game.getWinnerPlayer().getName();
+                gameLabel.setText("Player "+winnerName+" has won, press New Game for playing again");
+            }
         });
     }
 }

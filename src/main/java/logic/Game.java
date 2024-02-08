@@ -15,6 +15,7 @@ public class Game implements MoveMadeObserver {
     private Player activePlayer;
     private Player inactivePlayer;
     private Player winnerPlayer=null;
+    private boolean gameOver=false;
     private final Board board;
     private GraphicBoard gBoard;
     private int currentRound=1;
@@ -59,35 +60,6 @@ public class Game implements MoveMadeObserver {
             System.out.println("Winner player is" + winnerPlayer);
         }
     }
-    /*
-    public void waitForMove(){
-        while (!gBoard.hasMoveBeenMade()){
-            try {
-                Thread.sleep(200); //questo serve per non far andare il while in loop troppo velocemente
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        Move lastMove = gBoard.getMoveFromGUI();
-        System.out.println("Is lastMove null? "+(lastMove==null));
-        if (lastMove!=null){
-            try {
-                lastMove.makeMove();
-            } catch (IllegalMovementException | CantEatException | OutOfBoundsException e) {
-                e.printStackTrace();
-            }
-            gBoard.setMoveMade(false);
-            currentRound++;
-            changeActivePlayer();
-        }
-    }
-
-     */
-    public boolean isGameOver(){
-        //Ho tolto l'exception NoPieceOnWhiteException dal metodo hasPieces perchè penso venga gestito dal game over
-        //così evitiamo di mettere troppi try catch
-        return !player1.hasPieces() | !player2.hasPieces();
-    }
 
     public void play() throws NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         while (player1.hasPieces() & player2.hasPieces()) {
@@ -120,8 +92,10 @@ public class Game implements MoveMadeObserver {
             changeActivePlayer();
             if (!player1.hasPieces()){
                 winnerPlayer=player2;
+                gameOver=true;
             }else if (!player2.hasPieces()){
                 winnerPlayer=player1;
+                gameOver=true;
             }
         }
         System.out.println(player1.getNumberOfPieces());
@@ -167,4 +141,8 @@ public class Game implements MoveMadeObserver {
     public Board getBoard() {
         return board;
     }
+    public Player getWinnerPlayer() {
+        return winnerPlayer;
+    }
+    public boolean isGameOver(){return gameOver; }
 }
