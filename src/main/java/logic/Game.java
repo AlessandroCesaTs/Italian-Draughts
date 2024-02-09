@@ -91,7 +91,6 @@ public class Game implements MoveMadeObserver {
             currentRound++;
             System.out.println("changed active player");
             changeActivePlayer();
-            System.out.println(activePlayer.shouldEat());
             if (!player1.hasPieces()){
                 winnerPlayer=player2;
                 gameOver=true;
