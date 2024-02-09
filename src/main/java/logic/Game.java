@@ -81,7 +81,6 @@ public class Game implements MoveMadeObserver {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
 
                 inactivePlayer.loseOnePiece(eatenPiece);
-                inactivePlayer.loseOnePiece(eatenPiece);
                 checkPromotion(movingPiece);
                 consecutiveEatings++;
                 if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
