@@ -99,9 +99,6 @@ public class Game implements MoveMadeObserver {
                 gameOver=true;
             }
         }
-        System.out.println(player1.getNumberOfPieces());
-        System.out.println(player2.getNumberOfPieces());
-        //gBoard.debugPieces();
 
     }
 

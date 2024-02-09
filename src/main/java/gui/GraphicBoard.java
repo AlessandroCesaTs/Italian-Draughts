@@ -34,7 +34,7 @@ public class GraphicBoard extends JPanel{
 
     public GraphicBoard(Game game) {
         setGame(game);
-        debugPieces();
+        //debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
