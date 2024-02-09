@@ -77,8 +77,11 @@ public class Game implements MoveMadeObserver {
             NeighborPosition targetPosition=move.getDestination();
             if (move.getTypeOfMove().equals(TypeOfMove.Eat)){
                 gBoard.eatPiece(movingPiece,targetPosition);
+                Piece eatenPiece=movingPiece.getTile().getNeighbor(targetPosition).getPiece();
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
-                inactivePlayer.loseOnePiece();
+
+                inactivePlayer.loseOnePiece(eatenPiece);
+                inactivePlayer.loseOnePiece(eatenPiece);
                 checkPromotion(movingPiece);
                 consecutiveEatings++;
                 if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
@@ -99,6 +102,8 @@ public class Game implements MoveMadeObserver {
                 gameOver=true;
             }
         }
+
+
         //System.out.println(player1.getNumberOfPieces());
         //System.out.println(player2.getNumberOfPieces());
         //gBoard.debugPieces();

@@ -28,5 +28,4 @@ public class GameTest {
     void illegalTeamCompositionTest(){
         assertThrows(IllegalTeamsCompositionException.class,()->new Game("Anna","Mario",Team.White,Team.White));
     }
-
 }

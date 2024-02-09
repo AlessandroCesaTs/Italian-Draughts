@@ -44,8 +44,9 @@ public class Move {
                 }
             }
         }
-         */
+
         if (player.getTeam() == piece.team){
+
             if (piece.canEat(neighborDestination)){
 
                 return TypeOfMove.Eat;
@@ -55,7 +56,23 @@ public class Move {
             }
         }
         return TypeOfMove.NoMove;
+
+         */
+
+        if (player.getTeam() == piece.team){
+            if (player.shouldEat()){
+                if (piece.canEat(neighborDestination)){
+                    return TypeOfMove.Eat;
+                }
+            }else if (piece.canMovePieceByOne(neighborDestination)){
+                return TypeOfMove.Move;
+            }
+        }
+        return TypeOfMove.NoMove;
+
     }
+
+
     public Piece getPiece() {
         return piece;
     }
