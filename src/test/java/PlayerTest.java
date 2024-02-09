@@ -1,5 +1,6 @@
 import Exceptions.*;
 import logic.Game;
+import logic.Piece;
 import logic.Player;
 import logic.Team;
 import org.junit.jupiter.api.Test;
@@ -42,14 +43,17 @@ public class PlayerTest {
         assertTrue(player2.equals(testPlayer));
     }
     @Test
-    void losePiece1Test(){
-        player1.loseOnePiece();
+    void losePiece1Test() throws NoPieceOnWhiteException {
+        Piece pieceToLose=game.getBoard().getPiece(0,0);
+        player1.loseOnePiece(pieceToLose);
         assertEquals(11,player1.getNumberOfPieces());
     }
     @Test
-    void losePiece2Test(){
-        player2.loseOnePiece();
-        player2.loseOnePiece();
+    void losePiece2Test() throws NoPieceOnWhiteException {
+        Piece pieceToLose1=game.getBoard().getPiece(5,1);
+        Piece pieceToLose2=game.getBoard().getPiece(5,3);
+        player2.loseOnePiece(pieceToLose1);
+        player2.loseOnePiece(pieceToLose2);
         assertEquals(10,player2.getNumberOfPieces());
     }
 }

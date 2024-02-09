@@ -56,7 +56,8 @@ public class Player {
         return numberOfPieces!=0;
     }
 
-    public void loseOnePiece(){
+    public void loseOnePiece(Piece piece){
+        pieces.remove(piece);
         numberOfPieces--;
     }
     public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) throws IllegalMovementException, OutOfBoundsException, CantEatException {

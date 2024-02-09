@@ -70,7 +70,6 @@ public class Game implements MoveMadeObserver {
 
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         //ricevere la mossa dall'interfaccia grafica (può essere un muovi,mangia o passa il turno)
-        System.out.println(activePlayer.shouldEat());
         Move move= gBoard.getMoveFromGUI();
         TypeOfMove typeOfMove=move.getTypeOfMove();
         System.out.println(typeOfMove);
@@ -79,8 +78,9 @@ public class Game implements MoveMadeObserver {
             NeighborPosition targetPosition=move.getDestination();
             if (move.getTypeOfMove().equals(TypeOfMove.Eat)){
                 gBoard.eatPiece(movingPiece,targetPosition);
+                Piece eatenPiece=movingPiece.getTile().getNeighbor(targetPosition).getPiece();
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
-                inactivePlayer.loseOnePiece();
+                inactivePlayer.loseOnePiece(eatenPiece);
             }else {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
                 gBoard.movePiece(movingPiece,targetPosition);
@@ -91,6 +91,7 @@ public class Game implements MoveMadeObserver {
             currentRound++;
             System.out.println("changed active player");
             changeActivePlayer();
+            System.out.println(activePlayer.shouldEat());
             if (!player1.hasPieces()){
                 winnerPlayer=player2;
                 gameOver=true;

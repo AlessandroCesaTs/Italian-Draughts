@@ -80,7 +80,11 @@ public class Piece {
     }
 
     public boolean isMoveAfterOutOfBounds(NeighborPosition position){
-        return tile.getNeighbor(position).getNeighbor(position)==null;
+        if (isMoveOutOfBounds(position)){
+            return true;
+        }else {
+            return tile.getNeighbor(position).getNeighbor(position) == null;
+        }
     }
 
     public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
@@ -120,7 +124,7 @@ public class Piece {
     }
 
     public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
-        return  !isMoveOutOfBounds(position) & !isMoveAfterOutOfBounds(position) & !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing);
+        return  !isMoveOutOfBounds(position) && !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing);
     }
     public boolean isWhite() {
         return team == Team.White;
