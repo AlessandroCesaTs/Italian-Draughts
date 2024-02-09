@@ -5,6 +5,7 @@ import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
 
 import java.awt.*;
+import java.util.List;
 
 public class Piece {
     final Team team;
@@ -125,6 +126,23 @@ public class Piece {
 
     public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
         return  !isMoveOutOfBounds(position) && !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing) && (isMoveValid(position));
+    }
+
+    public boolean canEatAnotherPiece() {
+
+        List<NeighborPosition> neighborPositions = NeighborPosition.getNeighborPosition();
+
+        for (NeighborPosition position : neighborPositions) {
+            try {
+                if(canEat(position)){
+                    System.out.println(position);
+                    return true;
+                }
+            } catch (OutOfBoundsException e) {
+                return false;
+            }
+        }
+        return false;
     }
     public boolean isWhite() {
         return team == Team.White;

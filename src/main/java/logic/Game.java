@@ -2,7 +2,6 @@ package logic;
 
 import Exceptions.*;
 import gui.GraphicBoard;
-import main.Main;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
 
@@ -20,6 +19,7 @@ public class Game implements MoveMadeObserver {
     private GraphicBoard gBoard;
     private int currentRound=1;
     private List<GameObserver> observers = new ArrayList<>();
+    private int consecutiveEatings;
 
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
@@ -54,7 +54,6 @@ public class Game implements MoveMadeObserver {
      */
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
-        System.out.println("onMoveMade");
         playTurn();
         if(winnerPlayer!=null){
             System.out.println("Winner player is" + winnerPlayer);
@@ -72,7 +71,7 @@ public class Game implements MoveMadeObserver {
         //ricevere la mossa dall'interfaccia grafica (può essere un muovi,mangia o passa il turno)
         Move move= gBoard.getMoveFromGUI();
         TypeOfMove typeOfMove=move.getTypeOfMove();
-        System.out.println(typeOfMove);
+        //System.out.println(typeOfMove);
         if (move.getTypeOfMove()!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();
             NeighborPosition targetPosition=move.getDestination();
@@ -80,16 +79,20 @@ public class Game implements MoveMadeObserver {
                 gBoard.eatPiece(movingPiece,targetPosition);
                 Piece eatenPiece=movingPiece.getTile().getNeighbor(targetPosition).getPiece();
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
+
                 inactivePlayer.loseOnePiece(eatenPiece);
+                inactivePlayer.loseOnePiece(eatenPiece);
+                checkPromotion(movingPiece);
+                consecutiveEatings++;
+                if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
+                    return; // se può mangiare ancora e non ha mangiato più di 3 pezzi esce dal metodo senza cambiare giocatore
+                }
             }else {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
                 gBoard.movePiece(movingPiece,targetPosition);
-            }
-            if (movingPiece.promotion()){ //per promozione gui
-                gBoard.getGraphicPiece(movingPiece).promote();
+                checkPromotion(movingPiece);
             }
             currentRound++;
-            System.out.println("changed active player");
             changeActivePlayer();
             if (!player1.hasPieces()){
                 winnerPlayer=player2;
@@ -100,9 +103,25 @@ public class Game implements MoveMadeObserver {
             }
         }
 
+
+        //System.out.println(player1.getNumberOfPieces());
+        //System.out.println(player2.getNumberOfPieces());
+        //gBoard.debugPieces();
+
     }
-
-
+    private boolean checkMultipleEating(Piece movingPiece) throws OutOfBoundsException {
+        if(movingPiece.canEatAnotherPiece()) {
+            return true;
+        } else {
+            consecutiveEatings =0;
+            return false;
+        }
+    }
+    private void checkPromotion(Piece movingPiece){
+        if (movingPiece.promotion()){
+            gBoard.getGraphicPiece(movingPiece).promote();
+        }
+    }
     public void addObserver(GameObserver observer){
         observers.add(observer);
     }

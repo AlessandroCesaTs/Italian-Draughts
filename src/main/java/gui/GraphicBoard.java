@@ -206,7 +206,6 @@ public class GraphicBoard extends JPanel{
     }
 
     public void eatPiece(Piece eatingPiece,NeighborPosition destination) throws OutOfBoundsException {
-        System.out.println("Eating");
         GraphicPiece eatingGraphicPiece= gBoard.getGraphicPiece(eatingPiece);
         GraphicPiece targetGraphicPiece= gBoard.getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
         gBoard.removePiece(targetGraphicPiece);
@@ -214,7 +213,6 @@ public class GraphicBoard extends JPanel{
         gBoard.movePieceTo(eatingGraphicPiece,destination);
     }
     public void movePiece(Piece movingPiece,NeighborPosition destination) throws OutOfBoundsException {
-        System.out.println("Moving");
         GraphicPiece movingGraphicPiece= gBoard.getGraphicPiece(movingPiece);
         gBoard.movePieceTo(movingGraphicPiece,destination);
     }
