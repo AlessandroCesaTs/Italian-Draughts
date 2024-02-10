@@ -32,8 +32,6 @@ public abstract class Tile {
         return tile.getRow()== row && tile.getCol()== col;
     }
 
-    //public int getDiagonalDistance(logic.Tile tile){}
-
     public boolean isOnDiagonal(Tile otherTile){
         return Math.abs(rowDiff(otherTile))==Math.abs(colDiff(otherTile)) && rowDiff(otherTile)!=0;
     }
