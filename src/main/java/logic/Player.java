@@ -79,6 +79,19 @@ public class Player {
         }
         return false;
     }
+    public boolean canMove() throws OutOfBoundsException, IllegalMovementException {
+        for (Piece piece:pieces){
+            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
+            {
+                if (piece.canEat(destination) || piece.canMovePieceByOne(destination)){
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
 
     public boolean isWhite(){
         return team==Team.White;

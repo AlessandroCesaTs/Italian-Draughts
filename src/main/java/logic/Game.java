@@ -91,15 +91,9 @@ public class Game implements MoveMadeObserver {
                 gBoard.movePiece(movingPiece,targetPosition);
                 checkPromotion(movingPiece);
             }
+            checkGameOver();
             currentRound++;
             changeActivePlayer();
-            if (!player1.hasPieces()){
-                winnerPlayer=player2;
-                gameOver=true;
-            }else if (!player2.hasPieces()){
-                winnerPlayer=player1;
-                gameOver=true;
-            }
         }
 
 
@@ -108,6 +102,14 @@ public class Game implements MoveMadeObserver {
         //gBoard.debugPieces();
 
     }
+
+    private void checkGameOver() throws IllegalMovementException, OutOfBoundsException {
+        if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
+            winnerPlayer=activePlayer;
+            gameOver=true;
+        }
+    }
+
     private boolean checkMultipleEating(Piece movingPiece) throws OutOfBoundsException {
         if(movingPiece.canEatAnotherPiece()) {
             return true;
