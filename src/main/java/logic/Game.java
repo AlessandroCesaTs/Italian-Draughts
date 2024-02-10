@@ -18,6 +18,7 @@ public class Game implements MoveMadeObserver {
     private final Board board;
     private GraphicBoard gBoard;
     private int currentRound=1;
+    private int roundsWithoutEating=0;
     private List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
 
@@ -82,6 +83,7 @@ public class Game implements MoveMadeObserver {
 
                 inactivePlayer.loseOnePiece(eatenPiece);
                 checkPromotion(movingPiece);
+                roundsWithoutEating=0;
                 consecutiveEatings++;
                 if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
                     return; // se può mangiare ancora e non ha mangiato più di 3 pezzi esce dal metodo senza cambiare giocatore
@@ -90,6 +92,7 @@ public class Game implements MoveMadeObserver {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
                 gBoard.movePiece(movingPiece,targetPosition);
                 checkPromotion(movingPiece);
+                roundsWithoutEating++;
             }
             checkGameOver();
             currentRound++;
@@ -106,6 +109,8 @@ public class Game implements MoveMadeObserver {
     private void checkGameOver() throws IllegalMovementException, OutOfBoundsException {
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
+            gameOver=true;
+        }else if(roundsWithoutEating==40){
             gameOver=true;
         }
     }
@@ -164,4 +169,8 @@ public class Game implements MoveMadeObserver {
         return winnerPlayer;
     }
     public boolean isGameOver(){return gameOver; }
+
+    public int getRoundWithoutEating() {
+        return roundsWithoutEating;
+    }
 }
