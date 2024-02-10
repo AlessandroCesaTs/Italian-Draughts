@@ -173,10 +173,14 @@ public class Main implements GameObserver {
     public void update(Game game) {
         SwingUtilities.invokeLater(() -> {
             if (!game.isGameOver()) {
-                gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
+                gameLabel.setText("Turn " + game.getCurrentRound() + ", Rounds without eating: "+game.getRoundWithoutEating()+", Active player: " + game.getActivePlayer().getName());
             }else{
-                String winnerName=game.getWinnerPlayer().getName();
-                gameLabel.setText("Player "+winnerName+" has won, press New Game for playing again");
+                if (game.getWinnerPlayer()!=null) {
+                    String winnerName = game.getWinnerPlayer().getName();
+                    gameLabel.setText("Player " + winnerName + " has won, press New Game for playing again");
+                }else{
+                    gameLabel.setText("the game is tied, press New Game for playing again");
+                }
             }
         });
     }
