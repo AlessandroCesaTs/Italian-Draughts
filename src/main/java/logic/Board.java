@@ -41,30 +41,12 @@ public class Board {
         tiles[row][col].setBoard(this);
     }
 
-    private static boolean isPositionForBlackTile(int row, int col) {
-        return (col + row) % 2 == 0;
-    }
-
     private void placePiece(int row, int col){
         if (row <3){
             ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.White));
         }else if(row <8 && row >4){
             ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.Black));
         }
-    }
-
-    public Tile getTile(int row,int col){
-        return tiles[row][col];
-    }
-    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
-        return getTile(row,col).getPiece();
-    }
-    public int getSize(){
-        return size;
-    }
-
-    public boolean validCoordinates(int x,int y){
-        return x>=0 && x<size && y>=0 && y<size;
     }
 
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
@@ -78,5 +60,26 @@ public class Board {
         }
         return fullBlackTiles;
     }
+
+    private static boolean isPositionForBlackTile(int row, int col) {
+        return (col + row) % 2 == 0;
+    }
+
+    public boolean validCoordinates(int x,int y){
+        return x>=0 && x<size && y>=0 && y<size;
+    }
+
+    public Tile getTile(int row,int col){
+        return tiles[row][col];
+    }
+    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+        return getTile(row,col).getPiece();
+    }
+    public int getSize(){
+        return size;
+    }
+
+
+
 
 }
