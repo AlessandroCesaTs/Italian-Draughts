@@ -22,10 +22,10 @@ public class Board {
     }
 
     private void populateNeighbors() {
-        for (int row=0;row<size;row++){
-            for (int col=0;col<size;col++){
-                if(tiles[row][col] instanceof BlackTile){
-                    ((BlackTile) tiles[row][col]).setNeighbors();
+        for (Tile[] tileRow: tiles){
+            for (Tile tile:tileRow){
+                if(tile instanceof BlackTile){
+                    ((BlackTile) tile).setNeighbors();
                 }
             }
         }
