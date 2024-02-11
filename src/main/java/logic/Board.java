@@ -69,10 +69,10 @@ public class Board {
 
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
         List<BlackTile> fullBlackTiles = new ArrayList<>();
-        for (int col=0; col<size; col++){
-            for (int row=0; row<size; row++){
-                if(isPositionForBlackTile(row, col) && getPiece(row,col) != null){
-                    fullBlackTiles.add((BlackTile) tiles[row][col]);
+        for (Tile[] tileRow:tiles){
+            for (Tile tile:tileRow){
+                if(tile instanceof BlackTile && tile.getPiece()!=null){
+                    fullBlackTiles.add((BlackTile) tile);
                 }
             }
         }
