@@ -3,7 +3,6 @@ package logic;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 
-import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -69,7 +68,7 @@ public class Board {
     }
 
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
-        List<BlackTile> fullBlackTiles = new ArrayList<>();;
+        List<BlackTile> fullBlackTiles = new ArrayList<>();
         for (int col=0; col<size; col++){
             for (int row=0; row<size; row++){
                 if(isPositionForBlackTile(row, col) && getPiece(row,col) != null){
@@ -80,7 +79,4 @@ public class Board {
         return fullBlackTiles;
     }
 
-    public BlackTile getTileAtPosition(Point position) {
-        return (BlackTile) tiles[position.x][position.y];
-    }
 }
