@@ -20,7 +20,6 @@ public class Board {
             }
         }
         populateNeighbors();
-
     }
 
     private void populateNeighbors() {
@@ -34,13 +33,17 @@ public class Board {
     }
 
     private void createTile(int row, int col) throws IllegalTilePlacementException {
-        if((col + row)%2==0){
+        if(isPositionForBlackTile(row, col)){
             tiles[row][col]=BlackTile.createBlackTile(row, col);
             placePiece(row, col);
         }else{
             tiles[row][col]=WhiteTile.createWhiteTile(row, col);
         }
         tiles[row][col].setBoard(this);
+    }
+
+    private static boolean isPositionForBlackTile(int row, int col) {
+        return (col + row) % 2 == 0;
     }
 
     private void placePiece(int row, int col){
@@ -69,7 +72,7 @@ public class Board {
         List<BlackTile> fullBlackTiles = new ArrayList<>();;
         for (int col=0; col<size; col++){
             for (int row=0; row<size; row++){
-                if((col + row)%2==0 && getPiece(row,col) != null){
+                if(isPositionForBlackTile(row, col) && getPiece(row,col) != null){
                     fullBlackTiles.add((BlackTile) tiles[row][col]);
                 }
             }
