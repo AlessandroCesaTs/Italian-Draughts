@@ -28,11 +28,9 @@ public class Move {
         return TypeOfMove.NoMove;
     }
 
-
     public Piece getPiece() {
         return piece;
     }
-
     public NeighborPosition getDestination(){return neighborDestination;}
     public TypeOfMove getTypeOfMove(){
         return typeOfMove;

@@ -19,7 +19,7 @@ public class Game implements MoveMadeObserver {
     private GraphicBoard gBoard;
     private int currentRound=1;
     private int roundsWithoutEating=0;
-    private List<GameObserver> observers = new ArrayList<>();
+    private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
 
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
@@ -31,41 +31,13 @@ public class Game implements MoveMadeObserver {
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
         inactivePlayer=player2;
-        //gBoard=new GraphicBoard(this);
-        //startGame(); //sostituirei con play() il metodo startGame() che fa quello che vedi sotto
-        //rimane da aggiungere caso game over
     }
-    /*
-    public void startGame(){
-       Thread gameThread = new Thread(() -> { //nuovo thread per non bloccare il programma
-           while (gBoard == null){ //aspetta che la gBoard sia stata inizializzata in GraphicBoard
-                try {
-                     Thread.sleep(100);
-                } catch (InterruptedException e) {
-                     Thread.currentThread().interrupt();
-                }
-           }
-           while (!isGameOver()){
-               waitForMove();
-           }
-       });
-       gameThread.start();
-    }
-
-     */
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         playTurn();
         if(winnerPlayer!=null){
             System.out.println("Winner player is" + winnerPlayer);
         }
-    }
-
-    public void play() throws NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
-        while (player1.hasPieces() & player2.hasPieces()) {
-            playTurn();
-        }
-
     }
 
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
@@ -84,7 +56,7 @@ public class Game implements MoveMadeObserver {
                 roundsWithoutEating=0;
                 consecutiveEatings++;
                 if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
-                    return; // se può mangiare ancora e non ha mangiato più di 3 pezzi esce dal metodo senza cambiare giocatore
+                    return;
                 }
             }else {
                 activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
@@ -97,14 +69,9 @@ public class Game implements MoveMadeObserver {
             changeActivePlayer();
         }
 
-
-        //System.out.println(player1.getNumberOfPieces());
-        //System.out.println(player2.getNumberOfPieces());
-        //gBoard.debugPieces();
-
     }
 
-    private void checkGameOver() throws IllegalMovementException, OutOfBoundsException {
+    private void checkGameOver() throws  OutOfBoundsException {
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
@@ -113,7 +80,7 @@ public class Game implements MoveMadeObserver {
         }
     }
 
-    private boolean checkMultipleEating(Piece movingPiece) throws OutOfBoundsException {
+    private boolean checkMultipleEating(Piece movingPiece) {
         if(movingPiece.canEatAnotherPiece()) {
             return true;
         } else {
@@ -157,9 +124,7 @@ public class Game implements MoveMadeObserver {
     public int getCurrentRound(){
         return currentRound;
     }
-    public GraphicBoard getGBoard() {
-        return gBoard;
-    }
+
     public Board getBoard() {
         return board;
     }
