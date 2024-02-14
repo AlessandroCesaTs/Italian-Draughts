@@ -43,32 +43,39 @@ public class Game implements MoveMadeObserver {
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         Move move= gBoard.getMoveFromGUI();
         TypeOfMove typeOfMove=move.getTypeOfMove();
-        if (move.getTypeOfMove()!=TypeOfMove.NoMove){
+        if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();
             NeighborPosition targetPosition=move.getDestination();
-            if (move.getTypeOfMove().equals(TypeOfMove.Eat)){
-                gBoard.eatPiece(movingPiece,targetPosition);
-                Piece eatenPiece=movingPiece.getTile().getNeighbor(targetPosition).getPiece();
-                activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
-
-                inactivePlayer.loseOnePiece(eatenPiece);
-                checkPromotion(movingPiece);
-                roundsWithoutEating=0;
-                consecutiveEatings++;
+            if (typeOfMove.equals(TypeOfMove.Eat)){
+                eat(movingPiece, targetPosition);
                 if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
                     return;
                 }
             }else {
-                activePlayer.makeMove(typeOfMove,movingPiece,targetPosition);
-                gBoard.movePiece(movingPiece,targetPosition);
-                checkPromotion(movingPiece);
-                roundsWithoutEating++;
+                Move(movingPiece, targetPosition);
             }
             checkGameOver();
             currentRound++;
             changeActivePlayer();
         }
+    }
 
+    private void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+        activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
+        gBoard.movePiece(movingPiece, targetPosition);
+        checkPromotion(movingPiece);
+        roundsWithoutEating++;
+    }
+
+    private void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+        gBoard.eatPiece(movingPiece, targetPosition);
+        Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
+        activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);
+
+        inactivePlayer.loseOnePiece(eatenPiece);
+        checkPromotion(movingPiece);
+        roundsWithoutEating=0;
+        consecutiveEatings++;
     }
 
     private void checkGameOver() throws  OutOfBoundsException {
