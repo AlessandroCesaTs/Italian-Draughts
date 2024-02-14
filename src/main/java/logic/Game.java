@@ -52,8 +52,10 @@ public class Game implements MoveMadeObserver {
                 Move(movingPiece, targetPosition);
             }
             checkGameOver();
-            currentRound++;
-            changeActivePlayer();
+            if (!gameOver) {
+                currentRound++;
+                changeActivePlayer();
+            }
         }
     }
 
