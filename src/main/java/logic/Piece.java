@@ -16,7 +16,7 @@ public class Piece {
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
-    public void moveToTile(BlackTile targetTile) throws IllegalMovementException {
+    public void moveToTile(BlackTile targetTile) {
         tile.removePiece();
         setTile(targetTile);
         targetTile.movePieceHere(this);
@@ -36,7 +36,7 @@ public class Piece {
         return isKing;
     }
 
-    public void movePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void movePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
@@ -45,7 +45,7 @@ public class Piece {
         }
     }
 
-    public boolean canMovePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public boolean canMovePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
