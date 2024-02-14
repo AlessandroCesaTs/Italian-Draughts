@@ -51,11 +51,15 @@ public class Game implements MoveMadeObserver {
             }else {
                 Move(movingPiece, targetPosition);
             }
-            checkGameOver();
-            if (!gameOver) {
-                currentRound++;
-                changeActivePlayer();
-            }
+            moveToOtherTurn();
+        }
+    }
+
+    private void moveToOtherTurn() throws OutOfBoundsException {
+        checkGameOver();
+        if (!gameOver) {
+            currentRound++;
+            changeActivePlayer();
         }
     }
 
