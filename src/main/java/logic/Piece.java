@@ -113,7 +113,7 @@ public class Piece {
         return !neighboringPieceIsKing(position) || isKing;
     }
 
-    public boolean isPositionGoodForEating(NeighborPosition position){
+    private boolean isPositionGoodForEating(NeighborPosition position){
         return  !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && isPositionAfterEatingFree(position);
     }
 
