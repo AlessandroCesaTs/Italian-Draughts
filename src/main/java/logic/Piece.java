@@ -1,6 +1,5 @@
 package logic;
 
-import Exceptions.CantEatException;
 import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
 
@@ -23,7 +22,7 @@ public class Piece {
         tile.removePiece();
         setTile(targetTile);
         targetTile.movePieceHere(this);
-        if (promotion()) {
+        if (pieceHasToBePromoted()) {
             isKing = true;
         }
     }
@@ -62,7 +61,7 @@ public class Piece {
         }
     }
 
-    public boolean promotion(){
+    public boolean pieceHasToBePromoted(){
         return (team==Team.White && tile.getRow()==7)||(team==Team.Black && tile.getRow()==0);
     }
     public boolean isMoveValid(NeighborPosition position){

@@ -124,7 +124,7 @@ public class Game implements MoveMadeObserver {
         }
     }
     private void checkPromotion(Piece movingPiece){
-        if (movingPiece.promotion()){
+        if (movingPiece.pieceHasToBePromoted()){
             gBoard.getGraphicPiece(movingPiece).promote();
         }
     }
