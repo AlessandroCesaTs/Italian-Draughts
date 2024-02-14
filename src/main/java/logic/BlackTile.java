@@ -1,8 +1,6 @@
 package logic;
 
-import Exceptions.IllegalMovementException;
 import Exceptions.IllegalTilePlacementException;
-import Exceptions.OutOfBoundsException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,14 +8,14 @@ import java.util.Map;
 public class BlackTile extends Tile {
     private Piece piece=null;
     private final Map<NeighborPosition, BlackTile> neighbors = new HashMap<>();
-    private BlackTile(int x, int y) {
-        super(x,y);
+    private BlackTile(int row, int col) {
+        super(row,col);
     }
-    public static BlackTile createBlackTile(int x,int y) throws IllegalTilePlacementException {
-        if((x+y)%2==0){
-            return new BlackTile(x,y);
+    public static BlackTile createBlackTile(int row,int col) throws IllegalTilePlacementException {
+        if((row+col)%2==0){
+            return new BlackTile(row,col);
         }else{
-            throw new IllegalTilePlacementException("Black tiles must be placed where (x+y)%2==0");
+            throw new IllegalTilePlacementException("Black tiles must be placed where (row+col)%2==0");
         }
     }
     public static BlackTile asBlackTile(Tile tile) {
@@ -32,11 +30,9 @@ public class BlackTile extends Tile {
         this.piece=piece;
         piece.setTile(this);
     }
-    public void movePieceHere(Piece piece) throws IllegalMovementException {
+    public void movePieceHere(Piece piece) {
         if (isFree()){
             this.piece=piece;
-        }else{
-            throw new IllegalMovementException("Already occupied");
         }
     }
 

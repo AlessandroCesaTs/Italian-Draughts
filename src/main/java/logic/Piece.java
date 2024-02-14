@@ -1,68 +1,50 @@
 package logic;
 
-import Exceptions.CantEatException;
-import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
 
-import java.awt.*;
 import java.util.List;
 
 public class Piece {
     final Team team;
     private BlackTile tile;
     private boolean isKing=false;
-    private Point newCoordinates = new Point();
 
     public Piece(Team team) {
         this.team = team;
     }
+
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
-    public void moveToTile(BlackTile targetTile) throws IllegalMovementException {
+
+    public void moveToTile(BlackTile targetTile) {
         tile.removePiece();
         setTile(targetTile);
         targetTile.movePieceHere(this);
-        if (promotion()) {
+        if (pieceHasToBePromoted()) {
             isKing = true;
         }
     }
-    public BlackTile getTile(){
-        return this.tile;
-    }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public boolean getIfKing(){
-        return isKing;
-    }
-
-    public void movePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void movePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
-                setNewCoordinates(targetTile.getCol(), targetTile.getRow());
             }
         }
     }
 
-    public boolean canMovePieceByOne(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public boolean canMovePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
-            if (targetTile.isFree()) {
-                return true;
-            }else{
-                return false;
-            }
+            return targetTile.isFree();
         }else{
             return false;
         }
     }
 
-    public boolean promotion(){
+    public boolean pieceHasToBePromoted(){
         return (team==Team.White && tile.getRow()==7)||(team==Team.Black && tile.getRow()==0);
     }
     public boolean isMoveValid(NeighborPosition position){
@@ -88,35 +70,34 @@ public class Piece {
         }
     }
 
-    public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void movePieceByTwo(NeighborPosition position) {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
         if (isMoveValid(position)) {
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
-                setNewCoordinates(targetTile.getCol(), targetTile.getRow());
             }
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void eatPiece(NeighborPosition position) throws OutOfBoundsException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
         }
     }
 
-    private boolean isPositionAfterEatingFree(NeighborPosition position) throws OutOfBoundsException {
+    private boolean isPositionAfterEatingFree(NeighborPosition position){
         return tile.getNeighbor(position).getNeighbor(position).isFree();
     }
 
-    private boolean pieceOfOpposingTeam(NeighborPosition position) throws OutOfBoundsException {
+    private boolean pieceOfOpposingTeam(NeighborPosition position) {
         if (tile.getNeighbor(position).isFree()){
             return true;
         }else {
             return tile.getNeighbor(position).getPiece().getTeam() != team;
         }
     }
-    private boolean pieceIsKing(NeighborPosition position) throws OutOfBoundsException {
+    private boolean neighboringPieceIsKing(NeighborPosition position)  {
         if (tile.getNeighbor(position).isFree()){
             return false;
         }else {
@@ -125,7 +106,15 @@ public class Piece {
     }
 
     public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
-        return  !isMoveOutOfBounds(position) && !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing) && (isMoveValid(position));
+        return  isMoveValid(position) && isPositionGoodForEating(position) && pieceOfOpposingTeam(position) && canOtherPieceBeEaten(position);
+    }
+
+    private boolean canOtherPieceBeEaten(NeighborPosition position) {
+        return !neighboringPieceIsKing(position) || isKing;
+    }
+
+    private boolean isPositionGoodForEating(NeighborPosition position){
+        return  !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && isPositionAfterEatingFree(position);
     }
 
     public boolean canEatAnotherPiece() {
@@ -144,18 +133,24 @@ public class Piece {
         }
         return false;
     }
+
+    public BlackTile getTile(){
+        return this.tile;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public boolean getIfKing(){
+        return isKing;
+    }
+
     public boolean isWhite() {
         return team == Team.White;
     }
     public void remove(){
         tile=null;
     }
-    private void setNewCoordinates(int x, int y){
-        newCoordinates.x=x;
-        newCoordinates.y=y;
-    }
 
-    public Point getNewCoordinates() {
-        return newCoordinates;
-    }
 }

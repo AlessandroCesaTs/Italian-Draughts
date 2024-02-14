@@ -3,7 +3,6 @@ package logic;
 import Exceptions.IllegalTilePlacementException;
 import Exceptions.NoPieceOnWhiteException;
 
-import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,22 +18,21 @@ public class Board {
                 createTile(row, col);
             }
         }
-        populateNeighbors();
-
+        setNeighborsForEachTile();
     }
 
-    private void populateNeighbors() {
-        for (int row=0;row<size;row++){
-            for (int col=0;col<size;col++){
-                if(tiles[row][col] instanceof BlackTile){
-                    ((BlackTile) tiles[row][col]).setNeighbors();
+    private void setNeighborsForEachTile() {
+        for (Tile[] tileRow: tiles){
+            for (Tile tile:tileRow){
+                if(tile instanceof BlackTile){
+                    ((BlackTile) tile).setNeighbors();
                 }
             }
         }
     }
 
     private void createTile(int row, int col) throws IllegalTilePlacementException {
-        if((col + row)%2==0){
+        if(isPositionForBlackTile(row, col)){
             tiles[row][col]=BlackTile.createBlackTile(row, col);
             placePiece(row, col);
         }else{
@@ -51,6 +49,26 @@ public class Board {
         }
     }
 
+    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+        List<BlackTile> fullBlackTiles = new ArrayList<>();
+        for (Tile[] tileRow:tiles){
+            for (Tile tile:tileRow){
+                if(tile instanceof BlackTile && tile.getPiece()!=null){
+                    fullBlackTiles.add((BlackTile) tile);
+                }
+            }
+        }
+        return fullBlackTiles;
+    }
+
+    private static boolean isPositionForBlackTile(int row, int col) {
+        return (col + row) % 2 == 0;
+    }
+
+    public boolean validCoordinates(int x,int y){
+        return x>=0 && x<size && y>=0 && y<size;
+    }
+
     public Tile getTile(int row,int col){
         return tiles[row][col];
     }
@@ -61,23 +79,7 @@ public class Board {
         return size;
     }
 
-    public boolean validCoordinates(int x,int y){
-        return x>=0 && x<size && y>=0 && y<size;
-    }
 
-    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
-        List<BlackTile> fullBlackTiles = new ArrayList<>();;
-        for (int col=0; col<size; col++){
-            for (int row=0; row<size; row++){
-                if((col + row)%2==0 && getPiece(row,col) != null){
-                    fullBlackTiles.add((BlackTile) tiles[row][col]);
-                }
-            }
-        }
-        return fullBlackTiles;
-    }
 
-    public BlackTile getTileAtPosition(Point position) {
-        return (BlackTile) tiles[position.x][position.y];
-    }
+
 }

@@ -1,7 +1,5 @@
 package logic;
 
-import Exceptions.CantEatException;
-import Exceptions.IllegalMovementException;
 import Exceptions.NoPieceOnWhiteException;
 import Exceptions.OutOfBoundsException;
 
@@ -36,7 +34,7 @@ public class Player {
     }
 
     public void reloadPieces(){
-        List<BlackTile> fullBlackTiles = null;
+        List<BlackTile> fullBlackTiles;
         try {
             fullBlackTiles = Game.getBoard().getFullBlackTiles();
         } catch (NoPieceOnWhiteException e) {
@@ -60,7 +58,7 @@ public class Player {
         pieces.remove(piece);
         numberOfPieces--;
     }
-    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) throws IllegalMovementException, OutOfBoundsException, CantEatException {
+    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) throws OutOfBoundsException{
         if (Objects.requireNonNull(typeOfMove) == TypeOfMove.Move) {
             movingPiece.movePieceByOne(targetPosition);
         }else{
@@ -79,7 +77,7 @@ public class Player {
         }
         return false;
     }
-    public boolean canMove() throws OutOfBoundsException, IllegalMovementException {
+    public boolean canMove() throws OutOfBoundsException {
         for (Piece piece:pieces){
             for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
             {
@@ -91,8 +89,6 @@ public class Player {
         }
         return false;
     }
-
-
     public boolean isWhite(){
         return team==Team.White;
     }
