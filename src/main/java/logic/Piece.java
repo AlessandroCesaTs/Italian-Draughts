@@ -106,7 +106,15 @@ public class Piece {
     }
 
     public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
-        return  !isMoveOutOfBounds(position) && !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!neighboringPieceIsKing(position) || isKing) && (isMoveValid(position));
+        return  isMoveValid(position) && isPositionGoodForEating(position) && pieceOfOpposingTeam(position) && canOtherPieceBeEaten(position);
+    }
+
+    private boolean canOtherPieceBeEaten(NeighborPosition position) {
+        return !neighboringPieceIsKing(position) || isKing;
+    }
+
+    public boolean isPositionGoodForEating(NeighborPosition position){
+        return  !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && isPositionAfterEatingFree(position);
     }
 
     public boolean canEatAnotherPiece() {
