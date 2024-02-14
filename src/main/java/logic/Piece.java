@@ -97,7 +97,7 @@ public class Piece {
             return tile.getNeighbor(position).getPiece().getTeam() != team;
         }
     }
-    private boolean pieceIsKing(NeighborPosition position)  {
+    private boolean neighboringPieceIsKing(NeighborPosition position)  {
         if (tile.getNeighbor(position).isFree()){
             return false;
         }else {
@@ -106,7 +106,7 @@ public class Piece {
     }
 
     public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
-        return  !isMoveOutOfBounds(position) && !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!pieceIsKing(position) || isKing) && (isMoveValid(position));
+        return  !isMoveOutOfBounds(position) && !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && pieceOfOpposingTeam(position) && isPositionAfterEatingFree(position) && (!neighboringPieceIsKing(position) || isKing) && (isMoveValid(position));
     }
 
     public boolean canEatAnotherPiece() {
