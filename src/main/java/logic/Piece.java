@@ -3,14 +3,12 @@ package logic;
 import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
 
-import java.awt.*;
 import java.util.List;
 
 public class Piece {
     final Team team;
     private BlackTile tile;
     private boolean isKing=false;
-    private Point newCoordinates = new Point();
 
     public Piece(Team team) {
         this.team = team;
@@ -43,7 +41,6 @@ public class Piece {
             BlackTile targetTile = getTile().getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
-                setNewCoordinates(targetTile.getCol(), targetTile.getRow());
             }
         }
     }
@@ -92,7 +89,6 @@ public class Piece {
         if (isMoveValid(position)) {
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
-                setNewCoordinates(targetTile.getCol(), targetTile.getRow());
             }
         }
     }
@@ -149,12 +145,5 @@ public class Piece {
     public void remove(){
         tile=null;
     }
-    private void setNewCoordinates(int x, int y){
-        newCoordinates.x=x;
-        newCoordinates.y=y;
-    }
 
-    public Point getNewCoordinates() {
-        return newCoordinates;
-    }
 }
