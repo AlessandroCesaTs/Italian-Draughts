@@ -1,6 +1,5 @@
 package logic;
 
-import Exceptions.IllegalMovementException;
 import Exceptions.OutOfBoundsException;
 
 import java.util.List;
@@ -80,7 +79,7 @@ public class Piece {
         }
     }
 
-    public void movePieceByTwo(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void movePieceByTwo(NeighborPosition position) {
         BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
         if (isMoveValid(position)) {
             if (targetTile.isFree()) {
@@ -89,25 +88,25 @@ public class Piece {
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws OutOfBoundsException, IllegalMovementException {
+    public void eatPiece(NeighborPosition position) throws OutOfBoundsException {
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
         }
     }
 
-    private boolean isPositionAfterEatingFree(NeighborPosition position) throws OutOfBoundsException {
+    private boolean isPositionAfterEatingFree(NeighborPosition position){
         return tile.getNeighbor(position).getNeighbor(position).isFree();
     }
 
-    private boolean pieceOfOpposingTeam(NeighborPosition position) throws OutOfBoundsException {
+    private boolean pieceOfOpposingTeam(NeighborPosition position) {
         if (tile.getNeighbor(position).isFree()){
             return true;
         }else {
             return tile.getNeighbor(position).getPiece().getTeam() != team;
         }
     }
-    private boolean pieceIsKing(NeighborPosition position) throws OutOfBoundsException {
+    private boolean pieceIsKing(NeighborPosition position)  {
         if (tile.getNeighbor(position).isFree()){
             return false;
         }else {
