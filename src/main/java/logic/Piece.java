@@ -48,11 +48,7 @@ public class Piece {
     public boolean canMovePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
             BlackTile targetTile = getTile().getNeighbor(position);
-            if (targetTile.isFree()) {
-                return true;
-            }else{
-                return false;
-            }
+            return targetTile.isFree();
         }else{
             return false;
         }
