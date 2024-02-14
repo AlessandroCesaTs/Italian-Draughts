@@ -1,8 +1,6 @@
 package logic;
 
-import Exceptions.IllegalMovementException;
 import Exceptions.IllegalTilePlacementException;
-import Exceptions.OutOfBoundsException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,11 +30,9 @@ public class BlackTile extends Tile {
         this.piece=piece;
         piece.setTile(this);
     }
-    public void movePieceHere(Piece piece) throws IllegalMovementException {
+    public void movePieceHere(Piece piece) {
         if (isFree()){
             this.piece=piece;
-        }else{
-            throw new IllegalMovementException("Already occupied");
         }
     }
 
