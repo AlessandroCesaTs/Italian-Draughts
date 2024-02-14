@@ -35,9 +35,6 @@ public class Game implements MoveMadeObserver {
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         playTurn();
-        if(winnerPlayer!=null){
-            System.out.println("Winner player is" + winnerPlayer);
-        }
     }
 
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
@@ -82,6 +79,7 @@ public class Game implements MoveMadeObserver {
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
+            System.out.println("Winner player is" + winnerPlayer);
         }else if(roundsWithoutEating==40){
             gameOver=true;
         }
