@@ -18,10 +18,10 @@ public class Board {
                 createTile(row, col);
             }
         }
-        populateNeighbors();
+        setNeighborsForEachTile();
     }
 
-    private void populateNeighbors() {
+    private void setNeighborsForEachTile() {
         for (Tile[] tileRow: tiles){
             for (Tile tile:tileRow){
                 if(tile instanceof BlackTile){
