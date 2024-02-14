@@ -51,13 +51,7 @@ public class Game implements MoveMadeObserver {
             }else {
                 Move(movingPiece, targetPosition);
             }
-            moveToOtherTurn();
-        }
-    }
-
-    private void moveToOtherTurn() throws OutOfBoundsException {
-        checkGameOver();
-        if (!gameOver) {
+            checkGameOver();
             currentRound++;
             changeActivePlayer();
         }
@@ -85,7 +79,6 @@ public class Game implements MoveMadeObserver {
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
-            System.out.println("Winner player is" + winnerPlayer);
         }else if(roundsWithoutEating==40){
             gameOver=true;
         }
