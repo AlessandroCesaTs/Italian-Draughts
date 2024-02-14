@@ -12,9 +12,11 @@ public class Piece {
     public Piece(Team team) {
         this.team = team;
     }
+
     public void setTile(BlackTile tile){
         this.tile=tile;
     }
+
     public void moveToTile(BlackTile targetTile) {
         tile.removePiece();
         setTile(targetTile);
@@ -22,17 +24,6 @@ public class Piece {
         if (pieceHasToBePromoted()) {
             isKing = true;
         }
-    }
-    public BlackTile getTile(){
-        return this.tile;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public boolean getIfKing(){
-        return isKing;
     }
 
     public void movePieceByOne(NeighborPosition position) {
@@ -134,6 +125,19 @@ public class Piece {
         }
         return false;
     }
+
+    public BlackTile getTile(){
+        return this.tile;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public boolean getIfKing(){
+        return isKing;
+    }
+
     public boolean isWhite() {
         return team == Team.White;
     }
