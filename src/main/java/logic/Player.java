@@ -89,8 +89,6 @@ public class Player {
         }
         return false;
     }
-
-
     public boolean isWhite(){
         return team==Team.White;
     }

@@ -8,7 +8,7 @@ public class Move {
     private final Player player;
     private final Piece piece;
     private final NeighborPosition neighborDestination;
-    private TypeOfMove typeOfMove;
+    private final TypeOfMove typeOfMove;
 
     public Move(Player player, Piece piece, NeighborPosition neighborDestination) throws IllegalMovementException, CantEatException, OutOfBoundsException {
         this.player = player;
