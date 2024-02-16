@@ -4,6 +4,9 @@ import Exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.Team;
+import multiplayer.Guest;
+import multiplayer.Host;
+import multiplayer.Role;
 import observers.GameObserver;
 
 import javax.swing.*;
@@ -126,23 +129,35 @@ public class Main implements GameObserver {
 
             JButton multiplayerButton = new JButton("Multiplayer");
             multiplayerButton.addActionListener(e -> {
-                JTextField player1NameField = new JTextField();
-                JTextField player2NameField = new JTextField();
+                JComboBox<Role> playerRoleField = new JComboBox<>(Role.values());
+                JTextField hostIPField = new JTextField();
+
+                playerRoleField.setSelectedItem(Role.Host);
 
                 JPanel panel = new JPanel(new GridLayout(0, 1));
-                panel.add(new JLabel("Enter Player 1 Name:"));
-                panel.add(player1NameField);
-                panel.add(new JLabel("Enter Player 2 Name:"));
-                panel.add(player2NameField);
+                panel.add(new JLabel("Enter Player Role:"));
+                panel.add(playerRoleField);
+                panel.add(new JLabel("Enter Host IP:"));
+                panel.add(hostIPField);
 
                 int result = JOptionPane.showConfirmDialog(frame, panel, "Start New Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
                 if (result == JOptionPane.OK_OPTION) {
-                    String player1Name = player1NameField.getText();
-                    String player2Name = player2NameField.getText();
+                    switch ((Role) playerRoleField.getSelectedItem()){
+
+                        case Host -> {
+                            Host host = new Host();
+                        }
+
+                        case Guest -> {
+                            Guest guest = new Guest(hostIPField.getText());
+                        }
+
+                    }
 
                     // Code for multiplayer
                     gBoard.resetBoard();
+
                 }
             });
 
