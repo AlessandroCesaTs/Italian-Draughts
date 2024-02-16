@@ -290,5 +290,37 @@ public class GraphicBoard extends JPanel{
             System.out.println("Graphic Piece at "+position);
             System.out.println("Corresponding logic Piece at "+logicPiece.getTile().getCol()+ " , "+logicPiece.getTile().getRow());
         }
+
+    }
+
+    public Point getStartTile() {
+        return startTile;
+    }
+
+    public void setStartTile(Point startTile) {
+        this.startTile = startTile;
+        draggedPiece = findPieceAtTile(startTile);
+    }
+
+    public Point getEndTile() {
+        return endTile;
+    }
+
+    public void setEndTile(Point endTile) {
+        this.endTile = endTile;
+        try {
+            movingDirection = getNeighborPosition(endTile);
+        } catch (NotOnDiagonalException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        try {
+            setMoveMade(true);
+        } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
+            ex.printStackTrace();
+            return;
+        }
+
+        draggedPiece = null;
     }
 }

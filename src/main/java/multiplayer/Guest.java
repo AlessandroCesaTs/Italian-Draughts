@@ -26,7 +26,7 @@ public class Guest {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             String moveProtocol = String.format("1;%d;%d;%d;%d;%d", startTitle.getX(), startTitle.getY(),
                                                 endTitle.getX(), endTitle.getY(), messageType);
-            bw.write(moveProtocol);
+            bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
