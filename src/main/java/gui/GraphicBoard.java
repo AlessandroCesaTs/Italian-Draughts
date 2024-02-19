@@ -16,17 +16,16 @@ import static main.Main.gBoard;
 
 public class GraphicBoard extends JPanel{
     private GameInterface gameInterface;
-    public static int tileSize = 75;
-    int cols = 8;
-    int rows = 8;
+    final public static int tileSize = 75;
+    final int cols = 8;
+    final int rows = 8;
     Point currentTile = null;
     Point startTile = null;
     Point endTile = null;
     NeighborPosition movingDirection=null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
-    private List<MoveMadeObserver> observers = new ArrayList<>();
-    private boolean moveMade = false;
+    private final List<MoveMadeObserver> observers = new ArrayList<>();
     private GraphicPiece currentPiece;
 
     public GraphicBoard(GameInterface gameInterface) {
@@ -40,17 +39,6 @@ public class GraphicBoard extends JPanel{
                 int y = e.getY() / tileSize;
                 currentTile = new Point(x, y);
                 repaint();
-            }
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                if (draggedPiece != null) {
-                    int x = e.getX() / tileSize;
-                    int y = (getHeight() - e.getY()) / tileSize;
-                    if ((x + y) % 2 == 0) {
-                        //draggedPiece.moveTo(x, y);
-                        //repaint();
-                    }
-                }
             }
         });
         this.addMouseListener(new MouseAdapter() {
@@ -98,14 +86,7 @@ public class GraphicBoard extends JPanel{
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
     }
-    public void moveCurrentPieceByOne() {
-        currentPiece.moveTo(currentTile.x, currentTile.y);
-        repaint();
-    }
-    public void moveCurrentPieceByTwo() {
-        currentPiece.moveTo(currentTile.x, currentTile.y);
-        repaint();
-    }
+
     public void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
         piece.moveTo(destination);
         repaint();
@@ -186,7 +167,7 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public Move getMoveFromGUI() throws NotOnDiagonalException, OutOfBoundsException {
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
         }
@@ -202,14 +183,14 @@ public class GraphicBoard extends JPanel{
 
     }
 
-    public void eatPiece(Piece eatingPiece,NeighborPosition destination) throws OutOfBoundsException {
+    public void eatPiece(Piece eatingPiece,NeighborPosition destination) {
         GraphicPiece eatingGraphicPiece= gBoard.getGraphicPiece(eatingPiece);
         GraphicPiece targetGraphicPiece= gBoard.getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
         gBoard.removePiece(targetGraphicPiece);
         gBoard.movePieceTo(eatingGraphicPiece,destination);
         gBoard.movePieceTo(eatingGraphicPiece,destination);
     }
-    public void movePiece(Piece movingPiece,NeighborPosition destination) throws OutOfBoundsException {
+    public void movePiece(Piece movingPiece,NeighborPosition destination){
         GraphicPiece movingGraphicPiece= gBoard.getGraphicPiece(movingPiece);
         gBoard.movePieceTo(movingGraphicPiece,destination);
     }
@@ -252,19 +233,6 @@ public class GraphicBoard extends JPanel{
         }
     }
 
-        /*
-        if (dx == 1 && dy == 1) {
-            return NeighborPosition.BottomRight;
-        } else if (dx == -1 && dy == 1) {
-            return NeighborPosition.BottomLeft;
-        } else if (dx == 1 && dy == -1) {
-            return NeighborPosition.TopRight;
-        } else if (dx == -1 && dy == -1) {
-            return NeighborPosition.TopLeft;
-        } else {
-            return null;
-        }
-         */
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
@@ -274,11 +242,11 @@ public class GraphicBoard extends JPanel{
         }
     }
     public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
-        this.moveMade = moveMade;
+        boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();
         }
-        this.moveMade = false;
+        moveMade1 = false;
     }
     public void debugPieces(){
         for (GraphicPiece graphicPiece:pieceList){

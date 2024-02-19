@@ -1,11 +1,6 @@
 package logic;
 
 import Exceptions.*;
-import gui.GraphicBoard;
-import observers.GameObserver;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MockGame implements GameInterface{
 
@@ -18,10 +13,9 @@ public class MockGame implements GameInterface{
     private final Board board;
     private int currentRound=1;
     private int roundsWithoutEating=0;
-    private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
 
-    public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }

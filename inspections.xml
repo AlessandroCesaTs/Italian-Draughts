@@ -1,0 +1,57 @@
+<component name="InspectionProjectProfileManager">
+<profile version="1.0">
+<option name="myName" value="Project Default"/>
+<inspection_tool class="BooleanParameter" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="BreakStatement" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="BreakStatementWithLabel" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="ChainedMethodCall" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_ignoreFieldInitializations" value="true"/>
+<option name="m_ignoreThisSuperCalls" value="true"/>
+</inspection_tool>
+<inspection_tool class="ClassComplexity" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_limit" value="80"/>
+</inspection_tool>
+<inspection_tool class="ClassCoupling" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_includeJavaClasses" value="false"/>
+<option name="m_includeLibraryClasses" value="false"/>
+<option name="m_limit" value="15"/>
+</inspection_tool>
+<inspection_tool class="ContinueStatement" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="ContinueStatementWithLabel" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="CyclomaticComplexity" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_limit" value="10"/>
+</inspection_tool>
+<inspection_tool class="FeatureEnvy" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="ignoreTestCases" value="false"/>
+</inspection_tool>
+<inspection_tool class="FieldCount" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_countConstantFields" value="false"/>
+<option name="m_considerStaticFinalFieldsConstant" value="false"/>
+<option name="myCountEnumConstants" value="false"/>
+<option name="m_limit" value="10"/>
+</inspection_tool>
+<inspection_tool class="InstanceofChain" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="ignoreInstanceofOnLibraryClasses" value="false"/>
+</inspection_tool>
+<inspection_tool class="MagicNumber" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="MethodCount" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_limit" value="20"/>
+<option name="ignoreGettersAndSetters" value="false"/>
+<option name="ignoreOverridingMethods" value="false"/>
+</inspection_tool>
+<inspection_tool class="MethodWithMultipleLoops" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="NestedConditionalExpression" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="NestingDepth" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_limit" value="5"/>
+</inspection_tool>
+<inspection_tool class="NonCommentSourceStatements" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_limit" value="30"/>
+</inspection_tool>
+<inspection_tool class="OverlyComplexBooleanExpression" enabled="true" level="WARNING" enabled_by_default="true">
+<option name="m_limit" value="3"/>
+<option name="m_ignorePureConjunctionsDisjunctions" value="true"/>
+</inspection_tool>
+<inspection_tool class="ParametersPerConstructor" enabled="true" level="WARNING" enabled_by_default="true"/>
+<inspection_tool class="Singleton" enabled="true" level="WARNING" enabled_by_default="true"/>
+</profile>
+</component>

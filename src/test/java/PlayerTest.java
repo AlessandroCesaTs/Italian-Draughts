@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+@SuppressWarnings("MagicNumber")
 public class PlayerTest {
 
     GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
