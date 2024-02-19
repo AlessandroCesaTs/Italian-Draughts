@@ -14,7 +14,7 @@ public class GameTest {
     public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
     }
     @Test
-    void changeActivePlayerTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
+    void changeActivePlayerTest() throws NoPieceOnWhiteException, OutOfBoundsException {
         Piece piece=board.getPiece(2,2);
         game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
         assertEquals(player2,game.getActivePlayer());
@@ -28,53 +28,53 @@ public class GameTest {
 
 
     @Test
-    void moveOnePieceTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
+    void moveOnePieceTest() throws NoPieceOnWhiteException, OutOfBoundsException {
         Piece piece=board.getPiece(2,2);
         Move move=new Move(player1,piece,NeighborPosition.TopRight);
         game.playTurn(move);
-        assertEquals(piece, BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
+        assertEquals(piece, board.getPiece(3,3));
         assertNull(board.getPiece(2,2));
         assertEquals(game.getRoundWithoutEating(),1);
     }
 
     @Test
-    void CantMoveOtherPlayersPiece() throws NoPieceOnWhiteException, OutOfBoundsException, NotOnDiagonalException {
+    void CantMoveOtherPlayersPiece() throws NoPieceOnWhiteException, OutOfBoundsException {
         Piece piece=board.getPiece(5,1);
         game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
-        assertEquals(piece, BlackTile.asBlackTile(board.getTile(5,1)).getPiece());
+        assertEquals(piece, board.getPiece(5,1));
         assertNull(board.getPiece(4,0));
     }
 
     @Test
-    void moveTwoPiecesTest() throws NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    void moveTwoPiecesTest() throws NoPieceOnWhiteException, OutOfBoundsException {
         Piece piece1=board.getPiece(2,2);
         game.playTurn(new Move(player1,piece1,NeighborPosition.TopRight));
 
         Piece piece2=board.getPiece(5,1);
         game.playTurn(new Move(player2,piece2,NeighborPosition.BottomLeft));
 
-        assertEquals(piece1, BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
+        assertEquals(piece1, board.getPiece(3,3));
         assertNull(board.getPiece(2,2));
-        assertEquals(piece2,BlackTile.asBlackTile(board.getTile(4,0)).getPiece());
+        assertEquals(piece2,board.getPiece(4,0));
         assertNull(board.getPiece(5,1));
         assertEquals(game.getRoundWithoutEating(),2);
     }
 
     @Test
-    void illegalMoveTest() throws NoPieceOnWhiteException, IllegalMovementException, OutOfBoundsException, CantEatException, NotOnDiagonalException {
+    void illegalMoveTest() throws NoPieceOnWhiteException, OutOfBoundsException{
         Piece piece=board.getPiece(7,5);
         game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
-        assertEquals(piece,BlackTile.asBlackTile(board.getTile(7,5)).getPiece());
+        assertEquals(piece,board.getPiece(7,5));
     }
     @Test
-    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
+    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException, OutOfBoundsException{
         Piece piece=board.getPiece(1,7);
         game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
-        assertEquals(piece,BlackTile.asBlackTile(board.getTile(1,7)).getPiece());
+        assertEquals(piece,board.getPiece(1,7));
     }
 
     @Test
-    void whiteEatsBlackTest() throws NoPieceOnWhiteException, CantEatException, OutOfBoundsException, IllegalMovementException, NotOnDiagonalException {
+    void whiteEatsBlackTest() throws NoPieceOnWhiteException, OutOfBoundsException {
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
 
@@ -127,13 +127,6 @@ public class GameTest {
         assertEquals(board.getPiece(4,6),blackPiece);
         assertEquals(board.getPiece(2,2),whitePiece2);
         assertEquals(game.getActivePlayer(),player1);
-
     }
-
-
-
-
-
-
 
 }
