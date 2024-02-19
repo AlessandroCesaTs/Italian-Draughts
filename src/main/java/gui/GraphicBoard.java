@@ -40,17 +40,6 @@ public class GraphicBoard extends JPanel{
                 currentTile = new Point(x, y);
                 repaint();
             }
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                if (draggedPiece != null) {
-                    int x = e.getX() / tileSize;
-                    int y = (getHeight() - e.getY()) / tileSize;
-                    if ((x + y) % 2 == 0) {
-                        //draggedPiece.moveTo(x, y);
-                        //repaint();
-                    }
-                }
-            }
         });
         this.addMouseListener(new MouseAdapter() {
             @Override
