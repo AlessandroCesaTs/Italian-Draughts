@@ -89,17 +89,18 @@ public class GameTest {
     }
 
     @Test
-    void cantEatSameTeamTest() throws NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    void cantEatSameTeamTest() throws NoPieceOnWhiteException, OutOfBoundsException {
         Piece whitePiece=board.getPiece(1,1);
         Piece whitePiece2=board.getPiece(2,2);
         game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
 
         assertEquals(board.getPiece(1,1),whitePiece);
         assertEquals(board.getPiece(2,2),whitePiece2);
+        assertEquals(game.getActivePlayer(),player1);
     }
 
     @Test
-    void cantEatTileAfterOccupiedTest() throws NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException, CantEatException, NotOnDiagonalException {
+    void cantEatTileAfterOccupiedTest() throws NoPieceOnWhiteException, OutOfBoundsException{
         Piece whitePiece=board.getPiece(2,6);
         Piece blackPiece=board.getPiece(5,7);
 
@@ -109,6 +110,7 @@ public class GameTest {
 
         assertEquals(board.getPiece(3,7),whitePiece);
         assertEquals(board.getPiece(4,6),blackPiece);
+        assertEquals(game.getActivePlayer(),player1);
     }
 
     @Test
