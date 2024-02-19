@@ -13,10 +13,10 @@ public class GraphicPiece extends JPanel {
     public int col, row;
     public int xPos, yPos;
     public boolean isWhite;
-    BufferedImage black;
-    BufferedImage blackKing;
-    BufferedImage white;
-    BufferedImage whiteKing;
+    final BufferedImage black;
+    final BufferedImage blackKing;
+    final BufferedImage white;
+    final BufferedImage whiteKing;
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
