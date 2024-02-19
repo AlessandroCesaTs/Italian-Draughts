@@ -83,6 +83,19 @@ public class GameTest {
         assertEquals(board.getPiece(2,2),whitePiece2);
     }
 
+    @Test
+    void cantEatTileAfterOccupiedTest() throws NoPieceOnWhiteException, OutOfBoundsException, IllegalMovementException, CantEatException, NotOnDiagonalException {
+        Piece whitePiece=board.getPiece(2,6);
+        Piece blackPiece=board.getPiece(5,7);
+
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
+        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopLeft));
+
+        assertEquals(board.getPiece(3,7),whitePiece);
+        assertEquals(board.getPiece(4,6),blackPiece);
+    }
+
 
 
 
