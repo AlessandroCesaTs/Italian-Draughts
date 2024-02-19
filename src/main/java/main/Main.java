@@ -26,9 +26,9 @@ public class Main implements GameObserver {
             frame.setMinimumSize(new Dimension(600, 650));
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
-            GameInterface placeholderGameInterface = null;
+            Game placeholderGame = null;
             try {
-                placeholderGameInterface = new Game("Player1", "Player2", Team.White, Team.Black);
+                placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
             } catch (IllegalTilePlacementException e) {
                 throw new RuntimeException(e);
             } catch (NoPieceOnWhiteException e) {
@@ -44,8 +44,8 @@ public class Main implements GameObserver {
             } catch (NotOnDiagonalException e) {
                 throw new RuntimeException(e);
             }
-            gBoard = new GraphicBoard(placeholderGameInterface);
-            placeholderGameInterface.setGBoard(gBoard);
+            gBoard = new GraphicBoard(placeholderGame);
+            placeholderGame.setGBoard(gBoard);
 
             JLabel playersLabel = new JLabel();
             gameLabel = new JLabel();

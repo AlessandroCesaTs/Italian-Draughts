@@ -7,7 +7,8 @@ import Exceptions.OutOfBoundsException;
 import gui.GraphicBoard;
 
 public interface GameInterface {
-    void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException;
+
+    void playTurn(Move move) throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException;
 
     void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
 
@@ -17,13 +18,7 @@ public interface GameInterface {
 
     boolean checkMultipleEating(Piece movingPiece);
 
-    void checkPromotion(Piece movingPiece);
-
-    void notifyObservers();
-
     void changeActivePlayer();
-
-    void setGBoard(GraphicBoard gBoard);
 
     Player getActivePlayer();
 
