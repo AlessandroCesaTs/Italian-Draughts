@@ -48,10 +48,18 @@ public class GameTest {
     }
 
     @Test
-    void illegalMove() throws NoPieceOnWhiteException, IllegalMovementException, OutOfBoundsException, CantEatException, NotOnDiagonalException {
+    void illegalMoveTest() throws NoPieceOnWhiteException, IllegalMovementException, OutOfBoundsException, CantEatException, NotOnDiagonalException {
         Piece piece=board.getPiece(7,5);
         game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(7,5)).getPiece());
     }
+    @Test
+    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
+        Piece piece=board.getPiece(1,7);
+        game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
+        assertEquals(piece,BlackTile.asBlackTile(board.getTile(1,7)).getPiece());
+    }
+
+
 
 }
