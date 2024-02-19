@@ -14,10 +14,11 @@ public class GameTest {
     public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
     }
     @Test
-    void changeActivePlayerTest(){
-        game.changeActivePlayer();
-        assertEquals("Mario",player2.getName());
-        assertEquals("Anna",player1.getName());
+    void changeActivePlayerTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
+        Piece piece=board.getPiece(2,2);
+        game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
+        assertEquals(player2,game.getActivePlayer());
+        assertEquals(player1,game.getInactivePlayer());
     }
     @Test
     void illegalTeamCompositionTest(){
@@ -96,6 +97,8 @@ public class GameTest {
         assertEquals(board.getPiece(3,7),whitePiece);
         assertEquals(board.getPiece(4,6),blackPiece);
     }
+
+
 
 
 
