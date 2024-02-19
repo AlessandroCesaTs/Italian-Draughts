@@ -33,7 +33,7 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void playTurn(Move move) throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public void playTurn(Move move) throws OutOfBoundsException{
         TypeOfMove typeOfMove=move.getTypeOfMove();
         if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();

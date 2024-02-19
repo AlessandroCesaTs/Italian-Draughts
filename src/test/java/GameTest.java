@@ -25,6 +25,8 @@ public class GameTest {
         assertThrows(IllegalTeamsCompositionException.class,()->new Game("Anna","Mario",Team.White,Team.White));
     }
 
+
+
     @Test
     void moveOnePieceTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
         Piece piece=board.getPiece(2,2);
@@ -32,6 +34,14 @@ public class GameTest {
         game.playTurn(move);
         assertEquals(piece, BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
         assertNull(board.getPiece(2,2));
+    }
+
+    @Test
+    void CantMoveOtherPlayersPiece() throws NoPieceOnWhiteException, OutOfBoundsException, NotOnDiagonalException {
+        Piece piece=board.getPiece(5,1);
+        game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
+        assertEquals(piece, BlackTile.asBlackTile(board.getTile(5,1)).getPiece());
+        assertNull(board.getPiece(4,0));
     }
 
     @Test
