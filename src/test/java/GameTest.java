@@ -34,6 +34,7 @@ public class GameTest {
         game.playTurn(move);
         assertEquals(piece, BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
         assertNull(board.getPiece(2,2));
+        assertEquals(game.getRoundWithoutEating(),1);
     }
 
     @Test
@@ -56,6 +57,7 @@ public class GameTest {
         assertNull(board.getPiece(2,2));
         assertEquals(piece2,BlackTile.asBlackTile(board.getTile(4,0)).getPiece());
         assertNull(board.getPiece(5,1));
+        assertEquals(game.getRoundWithoutEating(),2);
     }
 
     @Test
@@ -83,6 +85,7 @@ public class GameTest {
         assertEquals(board.getPiece(5,5),whitePiece);
         assertNull(board.getPiece(4,4));
         assertEquals(player2.getNumberOfPieces(),11);
+        assertEquals(game.getRoundWithoutEating(),0);
     }
 
     @Test
