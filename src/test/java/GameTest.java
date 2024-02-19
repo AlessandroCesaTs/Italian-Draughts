@@ -1,8 +1,5 @@
 import Exceptions.*;
-import logic.Game;
-import logic.GameInterface;
-import logic.Player;
-import logic.Team;
+import logic.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,18 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GameTest {
 
-    GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
+    MockGame game =new MockGame("Anna","Mario", Team.White,Team.Black);
 
     public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
     }
-    Player player1= gameInterface.getActivePlayer();
-    Player player2= gameInterface.getActivePlayer();
+    Player player1= game.getActivePlayer();
+    Player player2= game.getActivePlayer();
 
     @Test
     void changeActivePlayerTest(){
-        gameInterface.changeActivePlayer();
-        Player active= gameInterface.getActivePlayer();
-        Player inactive= gameInterface.getInactivePlayer();
+        game.changeActivePlayer();
+        Player active= game.getActivePlayer();
+        Player inactive= game.getInactivePlayer();
         assertEquals("Mario",active.getName());
         assertEquals("Anna",inactive.getName());
     }
