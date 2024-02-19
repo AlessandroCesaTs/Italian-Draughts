@@ -1,7 +1,7 @@
 package observers;
 
-import logic.Game;
+import logic.GameInterface;
 
 public interface GameObserver {
-    void update(Game game);
+    void update(GameInterface gameInterface);
 }

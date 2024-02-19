@@ -3,6 +3,7 @@ package main;
 import Exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
+import logic.GameInterface;
 import logic.Team;
 import observers.GameObserver;
 
@@ -25,9 +26,9 @@ public class Main implements GameObserver {
             frame.setMinimumSize(new Dimension(600, 650));
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
-            Game placeholderGame = null;
+            GameInterface placeholderGameInterface = null;
             try {
-                placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
+                placeholderGameInterface = new Game("Player1", "Player2", Team.White, Team.Black);
             } catch (IllegalTilePlacementException e) {
                 throw new RuntimeException(e);
             } catch (NoPieceOnWhiteException e) {
@@ -43,8 +44,8 @@ public class Main implements GameObserver {
             } catch (NotOnDiagonalException e) {
                 throw new RuntimeException(e);
             }
-            gBoard = new GraphicBoard(placeholderGame);
-            placeholderGame.setGBoard(gBoard);
+            gBoard = new GraphicBoard(placeholderGameInterface);
+            placeholderGameInterface.setGBoard(gBoard);
 
             JLabel playersLabel = new JLabel();
             gameLabel = new JLabel();
@@ -170,13 +171,13 @@ public class Main implements GameObserver {
         };
     }
     @Override
-    public void update(Game game) {
+    public void update(GameInterface gameInterface) {
         SwingUtilities.invokeLater(() -> {
-            if (!game.isGameOver()) {
-                gameLabel.setText("Turn " + game.getCurrentRound() + ", Rounds without eating: "+game.getRoundWithoutEating()+", Active player: " + game.getActivePlayer().getName());
+            if (!gameInterface.isGameOver()) {
+                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
             }else{
-                if (game.getWinnerPlayer()!=null) {
-                    String winnerName = game.getWinnerPlayer().getName();
+                if (gameInterface.getWinnerPlayer()!=null) {
+                    String winnerName = gameInterface.getWinnerPlayer().getName();
                     gameLabel.setText("Player " + winnerName + " has won, press New Game for playing again");
                 }else{
                     gameLabel.setText("the game is tied, press New Game for playing again");
