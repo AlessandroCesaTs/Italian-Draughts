@@ -2,7 +2,6 @@ package gui;
 
 import Exceptions.*;
 import logic.*;
-import observers.GameObserver;
 import observers.MoveMadeObserver;
 
 import javax.swing.*;
@@ -10,15 +9,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import static main.Main.gBoard;
 
 public class GraphicBoard extends JPanel{
-    private Game game;
+    private GameInterface gameInterface;
     public static int tileSize = 75;
     int cols = 8;
     int rows = 8;
@@ -32,8 +29,8 @@ public class GraphicBoard extends JPanel{
     private boolean moveMade = false;
     private GraphicPiece currentPiece;
 
-    public GraphicBoard(Game game) {
-        setGame(game);
+    public GraphicBoard(GameInterface gameInterface) {
+        setGame(gameInterface);
         //debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
@@ -64,7 +61,7 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != game.getActivePlayer().getTeam()) {
+                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam()) {
                     draggedPiece = null;
                 }
             }
@@ -81,7 +78,7 @@ public class GraphicBoard extends JPanel{
                 }
 
                 GraphicPiece piece = draggedPiece;
-                if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == game.getActivePlayer().getTeam()) {
+                if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == gameInterface.getActivePlayer().getTeam()) {
                     setCurrentPiece(piece);
                     setCurrentTile(endTile);
                     try {
@@ -128,8 +125,8 @@ public class GraphicBoard extends JPanel{
         }
         return graphicPiece;
     }
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGame(GameInterface gameInterface) {
+        this.gameInterface = gameInterface;
         resetBoard();
     }
     public void resetBoard() {
@@ -144,7 +141,7 @@ public class GraphicBoard extends JPanel{
                 if ((r+c) % 2 == 0){
                     Piece piece = null;
                     try {
-                        piece = game.getBoard().getPiece(r, c);
+                        piece = gameInterface.getBoard().getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -155,7 +152,7 @@ public class GraphicBoard extends JPanel{
                 if ((r+c) % 2 == 0){
                     Piece piece = null;
                     try {
-                        piece = game.getBoard().getPiece(r, c);
+                        piece = gameInterface.getBoard().getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -198,7 +195,7 @@ public class GraphicBoard extends JPanel{
         }
 
         Piece piece = ((NormalPiece) draggedPiece).getPiece();
-        Player player = game.getActivePlayer();
+        Player player = gameInterface.getActivePlayer();
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
 
         return new Move(player, piece, neighborDestination);

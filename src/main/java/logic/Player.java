@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 public class Player {
     private final String name;
     private final Team team;
-    public final Game Game;
+    public final GameInterface GameInterface;
 
     private int numberOfPieces=12;
     private List<Piece> pieces;
 
-    public Player(String name, Team team,Game Game) {
+    public Player(String name, Team team, GameInterface GameInterface) {
         this.name = name;
         this.team = team;
-        this.Game=Game;
+        this.GameInterface = GameInterface;
         this.pieces = getPieces();
     }
 
@@ -36,7 +36,7 @@ public class Player {
     public void reloadPieces(){
         List<BlackTile> fullBlackTiles;
         try {
-            fullBlackTiles = Game.getBoard().getFullBlackTiles();
+            fullBlackTiles = GameInterface.getBoard().getFullBlackTiles();
         } catch (NoPieceOnWhiteException e) {
             throw new RuntimeException(e);
         }

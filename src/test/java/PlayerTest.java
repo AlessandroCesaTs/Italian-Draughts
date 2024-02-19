@@ -1,8 +1,5 @@
 import Exceptions.*;
-import logic.Game;
-import logic.Piece;
-import logic.Player;
-import logic.Team;
+import logic.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerTest {
 
-    Game game=new Game("Anna","Mario", Team.White,Team.Black);
+    GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
 
     public PlayerTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
     }
 
-    Player player1=game.getActivePlayer();
-    Player player2=game.getInactivePlayer();
+    Player player1= gameInterface.getActivePlayer();
+    Player player2= gameInterface.getInactivePlayer();
 
     @Test
     void player1Test(){
@@ -34,24 +31,24 @@ public class PlayerTest {
 
     @Test
     void playerEqualsTest1(){
-        Player testPlayer=game.getActivePlayer();
+        Player testPlayer= gameInterface.getActivePlayer();
         assertTrue(player1.equals(testPlayer));
     }
     @Test
     void playerEqualsTest2(){
-        Player testPlayer=game.getInactivePlayer();
+        Player testPlayer= gameInterface.getInactivePlayer();
         assertTrue(player2.equals(testPlayer));
     }
     @Test
     void losePiece1Test() throws NoPieceOnWhiteException {
-        Piece pieceToLose=game.getBoard().getPiece(0,0);
+        Piece pieceToLose= gameInterface.getBoard().getPiece(0,0);
         player1.loseOnePiece(pieceToLose);
         assertEquals(11,player1.getNumberOfPieces());
     }
     @Test
     void losePiece2Test() throws NoPieceOnWhiteException {
-        Piece pieceToLose1=game.getBoard().getPiece(5,1);
-        Piece pieceToLose2=game.getBoard().getPiece(5,3);
+        Piece pieceToLose1= gameInterface.getBoard().getPiece(5,1);
+        Piece pieceToLose2= gameInterface.getBoard().getPiece(5,3);
         player2.loseOnePiece(pieceToLose1);
         player2.loseOnePiece(pieceToLose2);
         assertEquals(10,player2.getNumberOfPieces());
