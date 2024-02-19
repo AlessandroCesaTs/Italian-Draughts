@@ -2,8 +2,7 @@ import Exceptions.*;
 import logic.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
@@ -11,9 +10,6 @@ public class GameTest {
 
     public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
     }
-    Player player1= game.getActivePlayer();
-    Player player2= game.getActivePlayer();
-
     @Test
     void changeActivePlayerTest(){
         game.changeActivePlayer();
@@ -26,4 +22,16 @@ public class GameTest {
     void illegalTeamCompositionTest(){
         assertThrows(IllegalTeamsCompositionException.class,()->new Game("Anna","Mario",Team.White,Team.White));
     }
+
+    @Test
+    void moveOnePieceTest() throws NoPieceOnWhiteException, OutOfBoundsException, CantEatException, IllegalMovementException, NotOnDiagonalException {
+        Player player=game.getActivePlayer();
+        Board board=game.getBoard();
+        Piece piece=board.getPiece(2,2);
+        Move move=new Move(player,piece,NeighborPosition.TopRight);
+        game.playTurn(move);
+        assertEquals(piece, BlackTile.asBlackTile(board.getTile(3,3)).getPiece());
+        assertNull(board.getPiece(2,2));
+    }
+
 }
