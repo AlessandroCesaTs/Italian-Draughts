@@ -71,6 +71,7 @@ public class GameTest {
 
         assertEquals(board.getPiece(5,5),whitePiece);
         assertNull(board.getPiece(4,4));
+        assertEquals(player2.getNumberOfPieces(),11);
     }
 
     @Test
