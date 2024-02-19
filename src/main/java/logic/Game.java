@@ -22,7 +22,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
 
-    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }
@@ -39,7 +39,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void playTurn(Move move) throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public void playTurn(Move move) throws OutOfBoundsException {
         TypeOfMove typeOfMove=move.getTypeOfMove();
         if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();

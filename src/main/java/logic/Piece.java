@@ -105,7 +105,7 @@ public class Piece {
         }
     }
 
-    public boolean canEat(NeighborPosition position) throws OutOfBoundsException {
+    public boolean canEat(NeighborPosition position) {
         return  isMoveValid(position) && isPositionGoodForEating(position) && pieceOfOpposingTeam(position) && canOtherPieceBeEaten(position);
     }
 
@@ -122,13 +122,9 @@ public class Piece {
         List<NeighborPosition> neighborPositions = NeighborPosition.getNeighborPosition();
 
         for (NeighborPosition position : neighborPositions) {
-            try {
-                if(canEat(position)){
-                    System.out.println(position);
-                    return true;
-                }
-            } catch (OutOfBoundsException e) {
-                return false;
+            if(canEat(position)){
+                System.out.println(position);
+                return true;
             }
         }
         return false;

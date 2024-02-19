@@ -174,7 +174,7 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public Move getMoveFromGUI() throws NotOnDiagonalException, OutOfBoundsException {
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
         }
@@ -190,14 +190,14 @@ public class GraphicBoard extends JPanel{
 
     }
 
-    public void eatPiece(Piece eatingPiece,NeighborPosition destination) throws OutOfBoundsException {
+    public void eatPiece(Piece eatingPiece,NeighborPosition destination) {
         GraphicPiece eatingGraphicPiece= gBoard.getGraphicPiece(eatingPiece);
         GraphicPiece targetGraphicPiece= gBoard.getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
         gBoard.removePiece(targetGraphicPiece);
         gBoard.movePieceTo(eatingGraphicPiece,destination);
         gBoard.movePieceTo(eatingGraphicPiece,destination);
     }
-    public void movePiece(Piece movingPiece,NeighborPosition destination) throws OutOfBoundsException {
+    public void movePiece(Piece movingPiece,NeighborPosition destination){
         GraphicPiece movingGraphicPiece= gBoard.getGraphicPiece(movingPiece);
         gBoard.movePieceTo(movingGraphicPiece,destination);
     }

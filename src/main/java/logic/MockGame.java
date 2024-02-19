@@ -21,7 +21,7 @@ public class MockGame implements GameInterface{
     private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
 
-    public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }

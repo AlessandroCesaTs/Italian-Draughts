@@ -8,7 +8,7 @@ import gui.GraphicBoard;
 
 public interface GameInterface {
 
-    void playTurn(Move move) throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException;
+    void playTurn(Move move) throws OutOfBoundsException;
 
     void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
 
