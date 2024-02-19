@@ -60,6 +60,20 @@ public class GameTest {
         assertEquals(piece,BlackTile.asBlackTile(board.getTile(1,7)).getPiece());
     }
 
+    @Test
+    void whiteEatsBlackTest() throws NoPieceOnWhiteException, CantEatException, OutOfBoundsException, IllegalMovementException, NotOnDiagonalException {
+        Piece whitePiece=board.getPiece(2,2);
+        Piece blackPiece=board.getPiece(5,5);
+
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
+        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
+
+        assertEquals(board.getPiece(5,5),whitePiece);
+        assertNull(board.getPiece(4,4));
+    }
+
+
 
 
 }
