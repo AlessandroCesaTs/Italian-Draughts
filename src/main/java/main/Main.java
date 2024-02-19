@@ -143,20 +143,38 @@ public class Main implements GameObserver {
                 int result = JOptionPane.showConfirmDialog(frame, panel, "Start New Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
                 if (result == JOptionPane.OK_OPTION) {
-                    switch ((Role) playerRoleField.getSelectedItem()){
 
-                        case Host -> {
-                            Host host = new Host();
+                    Game game = null;
+
+                    try{
+
+                        switch ((Role) playerRoleField.getSelectedItem()) {
+
+                            case Host -> {
+                                game = new Game("Host", Team.White, new Host());
+                                frame.remove(gBoard);
+                                gBoard = new GraphicBoard(game);
+                                game.setGBoard(gBoard);
+                                game.addObserver(new Main());
+                                frame.add(gBoard);
+                            }
+
+                            case Guest -> {
+                                game = new Game("Host", Team.White, new Guest(hostIPField.getText()));
+                                frame.remove(gBoard);
+                                gBoard = new GraphicBoard(game);
+                                game.setGBoard(gBoard);
+                                game.addObserver(new Main());
+                                frame.add(gBoard);
+                            }
+
+                            default -> throw new Exception("Something has gone wrong!");
+
                         }
 
-                        case Guest -> {
-                            Guest guest = new Guest(hostIPField.getText());
-                        }
-
+                    } catch (Exception exception){
+                        throw new RuntimeException(exception);
                     }
-
-                    // Code for multiplayer
-                    gBoard.resetBoard();
 
                 }
             });

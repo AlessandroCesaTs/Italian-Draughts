@@ -2,9 +2,11 @@ package logic;
 
 import Exceptions.*;
 import gui.GraphicBoard;
+import multiplayer.MultiplayerActions;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class Game implements MoveMadeObserver {
     private int roundsWithoutEating=0;
     private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
+    private final MultiplayerActions multiRole;
 
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
@@ -31,7 +34,31 @@ public class Game implements MoveMadeObserver {
         player2 =new Player(player2Name,team2,this);
         activePlayer= player1;
         inactivePlayer=player2;
+        multiRole = null;
     }
+
+    public Game(String playerName, Team team, MultiplayerActions multiRole) throws Exception {
+        switch (playerName){
+            case "Host" -> {
+                board = new Board();
+                player1 = new Player(playerName, team, this);
+                player2 = null;
+                activePlayer = player1;
+                inactivePlayer = player2;
+                this.multiRole = multiRole;
+            }
+            case "Guest" -> {
+                board = new Board();
+                player2 = new Player(playerName, team, this);
+                player1 = null;
+                activePlayer = player1;
+                inactivePlayer = player2;
+                this.multiRole = multiRole;
+            }
+            default -> throw new Exception("Something has gone wrong!");
+        }
+    }
+
     @Override
     public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
         playTurn();
@@ -114,6 +141,19 @@ public class Game implements MoveMadeObserver {
             inactivePlayer=player2;
         }
         notifyObservers();
+        if(activePlayer == null) {
+            setAdversaryMove();
+        }
+    }
+
+    private void setAdversaryMove () {
+        Point[] advMove = multiRole.receiveMove();
+        gBoard.setStartTile(advMove[0]);
+        gBoard.setEndTile(advMove[1]);
+        if (advMove[2].getX() == 1)
+            setAdversaryMove();
+        else
+            changeActivePlayer();
     }
     public void setGBoard(GraphicBoard gBoard) {
         this.gBoard = gBoard;

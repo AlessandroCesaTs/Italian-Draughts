@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Guest {
+public class Guest implements MultiplayerActions {
     private final int port = 10000;
     private final String host;
     private final Socket socket;
@@ -21,6 +21,7 @@ public class Guest {
         }
     }
 
+    @Override
     public void sendMove(Point startTitle, Point endTitle, int messageType) {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -33,6 +34,7 @@ public class Guest {
         }
     }
 
+    @Override
     public Point[] receiveMove() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));

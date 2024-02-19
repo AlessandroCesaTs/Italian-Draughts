@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Host {
+public class Host implements MultiplayerActions {
 
     private final int port = 10000;
     private final String host = "127.0.0.1";
@@ -26,6 +26,7 @@ public class Host {
         }
     }
 
+    @Override
     public void sendMove(Point startTitle, Point endTitle, int messageType) {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -38,6 +39,7 @@ public class Host {
         }
     }
 
+    @Override
     public Point[] receiveMove() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -49,7 +51,8 @@ public class Host {
                         throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
                     Point oppStartTitle = new Point(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
                     Point oppEndTitle = new Point(Integer.parseInt(command[3]), Integer.parseInt(command[4]));
-                    return new Point[]{oppStartTitle, oppEndTitle};
+                    Point oppTurnNotify =  new Point(Integer.parseInt(command[5]), 0);
+                    return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
                 case 1:
                     return null; //aggiungere fine partita
                 default:
