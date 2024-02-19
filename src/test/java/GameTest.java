@@ -73,6 +73,17 @@ public class GameTest {
         assertNull(board.getPiece(4,4));
     }
 
+    @Test
+    void cantEatSameTeamTest() throws NoPieceOnWhiteException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+        Piece whitePiece=board.getPiece(1,1);
+        Piece whitePiece2=board.getPiece(2,2);
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
+
+        assertEquals(board.getPiece(1,1),whitePiece);
+        assertEquals(board.getPiece(2,2),whitePiece2);
+    }
+
+
 
 
 
