@@ -111,6 +111,23 @@ public class GameTest {
         assertEquals(board.getPiece(4,6),blackPiece);
     }
 
+    @Test
+    void youHaveToEatTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+        Piece whitePiece1=board.getPiece(2,4);
+        Piece whitePiece2=board.getPiece(2,2);
+        Piece blackPiece=board.getPiece(5,7);
+
+        game.playTurn(new Move(player1,whitePiece1,NeighborPosition.TopRight));
+        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player1,whitePiece2,NeighborPosition.TopRight));
+
+        assertEquals(board.getPiece(3,5),whitePiece1);
+        assertEquals(board.getPiece(4,6),blackPiece);
+        assertEquals(board.getPiece(2,2),whitePiece2);
+        assertEquals(game.getActivePlayer(),player1);
+
+    }
+
 
 
 
