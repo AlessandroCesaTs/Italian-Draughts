@@ -129,4 +129,31 @@ public class GameTest {
         assertEquals(game.getActivePlayer(),player1);
     }
 
+    @Test
+    void doubleEatTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+        Piece whitePiece1=board.getPiece(2,4);
+        Piece blackPiece1=board.getPiece(5,1);
+        Piece whitePiece2=board.getPiece(2,6);
+        Piece blackPiece2=board.getPiece(6,0);
+        Piece whitePiece3=board.getPiece(1,5);
+        Piece whitePiece4=board.getPiece(2,0);
+
+
+        game.playTurn(new Move(player1,whitePiece1,NeighborPosition.TopRight));
+        game.playTurn(new Move(player2,blackPiece1,NeighborPosition.BottomRight));
+        game.playTurn(new Move(player1,whitePiece2,NeighborPosition.TopRight));
+        game.playTurn(new Move(player2,blackPiece2,NeighborPosition.BottomRight));
+        game.playTurn(new Move(player1,whitePiece3,NeighborPosition.TopRight));
+        game.playTurn(new Move(player2,blackPiece1,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player1,whitePiece4,NeighborPosition.TopRight));
+
+        assertEquals(game.getActivePlayer(),player1);
+
+        game.playTurn(new Move(player1,whitePiece4,NeighborPosition.TopLeft));
+
+        assertEquals(whitePiece4,board.getPiece(6,0));
+        assertNull(board.getPiece(5,1));
+        assertNull(board.getPiece(3,1));
+        assertEquals(player2.getNumberOfPieces(),10);
+    }
 }
