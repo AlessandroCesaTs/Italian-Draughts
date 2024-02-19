@@ -27,11 +27,11 @@ public class Host implements MultiplayerActions {
     }
 
     @Override
-    public void sendMove(Point startTitle, Point endTitle, int messageType) {
+    public void sendMove(Point startTitle, Point endTitle, int typeOfMove) {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             String moveProtocol = String.format("0;%d;%d;%d;%d;%d", startTitle.getX(), startTitle.getY(),
-                                                endTitle.getX(), endTitle.getY(),messageType);
+                                                endTitle.getX(), endTitle.getY(),typeOfMove);
             bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
         } catch (IOException e) {

@@ -54,6 +54,7 @@ public class Game implements MoveMadeObserver {
                 activePlayer = player1;
                 inactivePlayer = player2;
                 this.multiRole = multiRole;
+                setAdversaryMove();
             }
             default -> throw new Exception("Something has gone wrong!");
         }
@@ -73,11 +74,15 @@ public class Game implements MoveMadeObserver {
             if (typeOfMove.equals(TypeOfMove.Eat)){
                 eat(movingPiece, targetPosition);
                 if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
+                    if(multiRole != null && activePlayer != null)
+                        multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
                     return;
                 }
             }else {
                 Move(movingPiece, targetPosition);
             }
+            if(multiRole != null && activePlayer != null)
+                multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
             checkGameOver();
             currentRound++;
             changeActivePlayer();

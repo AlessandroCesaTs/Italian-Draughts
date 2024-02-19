@@ -22,11 +22,11 @@ public class Guest implements MultiplayerActions {
     }
 
     @Override
-    public void sendMove(Point startTitle, Point endTitle, int messageType) {
+    public void sendMove(Point startTitle, Point endTitle, int typeOfMove) {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             String moveProtocol = String.format("1;%d;%d;%d;%d;%d", startTitle.getX(), startTitle.getY(),
-                                                endTitle.getX(), endTitle.getY(), messageType);
+                                                endTitle.getX(), endTitle.getY(), typeOfMove);
             bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
         } catch (IOException e) {
@@ -46,7 +46,8 @@ public class Guest implements MultiplayerActions {
                         throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
                     Point oppStartTitle = new Point(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
                     Point oppEndTitle = new Point(Integer.parseInt(command[3]), Integer.parseInt(command[4]));
-                    return new Point[]{oppStartTitle, oppEndTitle};
+                    Point oppTurnNotify =  new Point(Integer.parseInt(command[5]), 0);
+                    return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
                 case 1:
                     return null; //aggiungere fine partita
                 default:
