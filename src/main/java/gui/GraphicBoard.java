@@ -86,14 +86,7 @@ public class GraphicBoard extends JPanel{
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
     }
-    public void moveCurrentPieceByOne() {
-        currentPiece.moveTo(currentTile.x, currentTile.y);
-        repaint();
-    }
-    public void moveCurrentPieceByTwo() {
-        currentPiece.moveTo(currentTile.x, currentTile.y);
-        repaint();
-    }
+
     public void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
         piece.moveTo(destination);
         repaint();
@@ -240,19 +233,6 @@ public class GraphicBoard extends JPanel{
         }
     }
 
-        /*
-        if (dx == 1 && dy == 1) {
-            return NeighborPosition.BottomRight;
-        } else if (dx == -1 && dy == 1) {
-            return NeighborPosition.BottomLeft;
-        } else if (dx == 1 && dy == -1) {
-            return NeighborPosition.TopRight;
-        } else if (dx == -1 && dy == -1) {
-            return NeighborPosition.TopLeft;
-        } else {
-            return null;
-        }
-         */
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }

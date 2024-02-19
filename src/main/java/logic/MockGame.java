@@ -1,11 +1,6 @@
 package logic;
 
 import Exceptions.*;
-import gui.GraphicBoard;
-import observers.GameObserver;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MockGame implements GameInterface{
 
@@ -18,7 +13,6 @@ public class MockGame implements GameInterface{
     private final Board board;
     private int currentRound=1;
     private int roundsWithoutEating=0;
-    private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
 
     public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {

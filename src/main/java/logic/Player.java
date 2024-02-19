@@ -77,7 +77,7 @@ public class Player {
         }
         return false;
     }
-    public boolean canMove() throws OutOfBoundsException {
+    public boolean canMove() {
         for (Piece piece:pieces){
             for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
             {
@@ -88,8 +88,5 @@ public class Player {
 
         }
         return false;
-    }
-    public boolean isWhite(){
-        return team==Team.White;
     }
 }

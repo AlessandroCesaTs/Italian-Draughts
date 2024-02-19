@@ -1,10 +1,6 @@
 package logic;
 
-import Exceptions.CantEatException;
-import Exceptions.IllegalMovementException;
-import Exceptions.NotOnDiagonalException;
 import Exceptions.OutOfBoundsException;
-import gui.GraphicBoard;
 
 public interface GameInterface {
 
