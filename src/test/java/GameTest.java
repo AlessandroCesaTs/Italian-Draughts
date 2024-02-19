@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("MagicNumber")
 public class GameTest {
 
     MockGame game =new MockGame("Anna","Mario", Team.White,Team.Black);

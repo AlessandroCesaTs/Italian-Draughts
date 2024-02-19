@@ -25,8 +25,7 @@ public class GraphicBoard extends JPanel{
     NeighborPosition movingDirection=null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
-    private List<MoveMadeObserver> observers = new ArrayList<>();
-    private boolean moveMade = false;
+    private final List<MoveMadeObserver> observers = new ArrayList<>();
     private GraphicPiece currentPiece;
 
     public GraphicBoard(GameInterface gameInterface) {
@@ -274,11 +273,11 @@ public class GraphicBoard extends JPanel{
         }
     }
     public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
-        this.moveMade = moveMade;
+        boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();
         }
-        this.moveMade = false;
+        moveMade1 = false;
     }
     public void debugPieces(){
         for (GraphicPiece graphicPiece:pieceList){

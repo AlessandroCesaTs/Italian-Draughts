@@ -72,6 +72,7 @@ public class BoardTest {
             }
         }
     }
+    @SuppressWarnings("MagicNumber")
     @Test
     void nonValidPositionTest(){
         assertFalse(board.validCoordinates(-2,3));
