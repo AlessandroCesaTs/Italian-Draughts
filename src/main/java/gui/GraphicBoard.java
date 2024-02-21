@@ -66,7 +66,6 @@ public class GraphicBoard extends JPanel{
 
                 GraphicPiece piece = draggedPiece;
                 if (piece != null && ((NormalPiece) piece).getTeam() == gameInterface.getActiveTeam()) {
-                    setCurrentPiece(piece);
                     setCurrentTile(endTile);
                     try {
                         setMoveMade(true);
@@ -79,8 +78,7 @@ public class GraphicBoard extends JPanel{
             }
         });
     }
-    private void setCurrentPiece(GraphicPiece currentPiece) {
-    }
+
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
     }
