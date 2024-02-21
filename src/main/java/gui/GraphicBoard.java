@@ -26,7 +26,6 @@ public class GraphicBoard extends JPanel{
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private final List<MoveMadeObserver> observers = new ArrayList<>();
-    private GraphicPiece currentPiece;
 
     public GraphicBoard(GameInterface gameInterface) {
         setGame(gameInterface);
@@ -81,7 +80,6 @@ public class GraphicBoard extends JPanel{
         });
     }
     private void setCurrentPiece(GraphicPiece currentPiece) {
-        this.currentPiece = currentPiece;
     }
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
