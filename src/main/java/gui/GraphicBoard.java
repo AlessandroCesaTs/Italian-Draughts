@@ -69,7 +69,7 @@ public class GraphicBoard extends JPanel{
                     setCurrentTile(endTile);
                     try {
                         setMoveMade(true);
-                    } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
+                    } catch (NotOnDiagonalException | IllegalMovementException | OutOfBoundsException ex) {
                         ex.printStackTrace();
                         return;
                     }
@@ -232,12 +232,12 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void notifyMoveMadeObservers() throws NotOnDiagonalException, OutOfBoundsException {
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, IllegalMovementException, OutOfBoundsException {
         boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();

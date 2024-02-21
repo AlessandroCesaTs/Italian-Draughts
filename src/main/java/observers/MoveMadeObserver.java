@@ -1,7 +1,5 @@
 package observers;
 
-import Exceptions.CantEatException;
-import Exceptions.IllegalMovementException;
 import Exceptions.NotOnDiagonalException;
 import Exceptions.OutOfBoundsException;
 
