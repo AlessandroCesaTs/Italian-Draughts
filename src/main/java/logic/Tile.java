@@ -1,7 +1,7 @@
 package logic;
 
-import Exceptions.NoPieceOnWhiteException;
-import Exceptions.NotOnDiagonalException;
+import exceptions.NoPieceOnWhiteException;
+import exceptions.NotOnDiagonalException;
 
 public abstract class Tile {
     final int row;

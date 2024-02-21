@@ -1,4 +1,4 @@
-import Exceptions.*;
+import exceptions.*;
 import logic.*;
 import org.junit.jupiter.api.Test;
 

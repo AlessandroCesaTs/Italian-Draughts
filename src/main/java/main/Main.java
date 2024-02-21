@@ -1,6 +1,6 @@
 package main;
 
-import Exceptions.*;
+import exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.GameInterface;

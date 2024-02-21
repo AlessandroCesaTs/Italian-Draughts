@@ -1,7 +1,7 @@
 package logic;
 
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NoPieceOnWhiteException;
 
 import java.util.List;
 import java.util.ArrayList;

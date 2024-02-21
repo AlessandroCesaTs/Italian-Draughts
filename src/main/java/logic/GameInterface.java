@@ -1,6 +1,6 @@
 package logic;
 
-import Exceptions.NoPieceOnWhiteException;
+import exceptions.NoPieceOnWhiteException;
 
 import java.util.List;
 

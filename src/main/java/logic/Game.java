@@ -1,6 +1,6 @@
 package logic;
 
-import Exceptions.*;
+import exceptions.*;
 import gui.GraphicBoard;
 import observers.GameObserver;
 import observers.MoveMadeObserver;

@@ -1,7 +1,7 @@
 package logic;
 
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NoPieceOnWhiteException;
 
 public class WhiteTile extends Tile {
     public WhiteTile(int row, int col) {

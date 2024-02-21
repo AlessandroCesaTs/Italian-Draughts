@@ -1,4 +1,4 @@
-import Exceptions.*;
+import exceptions.*;
 import logic.Board;
 import logic.NeighborPosition;
 import logic.Piece;

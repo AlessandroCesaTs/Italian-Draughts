@@ -1,5 +1,5 @@
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NoPieceOnWhiteException;
 import logic.BlackTile;
 import logic.Board;
 import logic.Team;

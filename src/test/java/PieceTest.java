@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class PieceTest {
 
     @Test
-    void getBlackNeighborTest() throws Exceptions.IllegalTilePlacementException {
+    void getBlackNeighborTest() throws exceptions.IllegalTilePlacementException {
         Board board = new Board();
         Tile tile = board.getTile(0, 2);
         assertEquals(Team.White, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopLeft).getPiece().getTeam());
@@ -15,7 +15,7 @@ public class PieceTest {
     }
 
     @Test
-    void getNullNeighborTest() throws Exceptions.IllegalTilePlacementException {
+    void getNullNeighborTest() throws exceptions.IllegalTilePlacementException {
         Board board = new Board();
         Tile tile = board.getTile(2, 2);
         assertNull(BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopLeft).getPiece());
@@ -23,7 +23,7 @@ public class PieceTest {
     }
 
     @Test
-    void getWhiteNeighborTest() throws Exceptions.IllegalTilePlacementException{
+    void getWhiteNeighborTest() throws exceptions.IllegalTilePlacementException{
         Board board = new Board();
         Tile tile = board.getTile(5, 3);
         assertEquals(Team.Black, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopLeft).getPiece().getTeam());

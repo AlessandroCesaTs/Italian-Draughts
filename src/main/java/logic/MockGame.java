@@ -1,6 +1,6 @@
 package logic;
 
-import Exceptions.*;
+import exceptions.*;
 
 import java.util.List;
 

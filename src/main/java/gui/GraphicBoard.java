@@ -1,6 +1,6 @@
 package gui;
 
-import Exceptions.*;
+import exceptions.*;
 import logic.*;
 import observers.MoveMadeObserver;
 
