@@ -115,7 +115,7 @@ public class GraphicBoard extends JPanel{
         for (int c=0; c < cols; c++) {
             for (int r = 0; r <= 2; r++) {
                 if ((r+c) % 2 == 0){
-                    Piece piece = null;
+                    Piece piece;
                     try {
                         piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
@@ -126,7 +126,7 @@ public class GraphicBoard extends JPanel{
             }
             for (int r = 5; r < rows; r++) {
                 if ((r+c) % 2 == 0){
-                    Piece piece = null;
+                    Piece piece;
                     try {
                         piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
