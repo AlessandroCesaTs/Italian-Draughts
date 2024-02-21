@@ -140,9 +140,6 @@ public class Piece {
         return isKing;
     }
 
-    public boolean isWhite() {
-        return team == Team.White;
-    }
     public void remove(){
         tile=null;
     }
