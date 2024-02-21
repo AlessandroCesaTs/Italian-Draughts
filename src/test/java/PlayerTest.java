@@ -11,7 +11,7 @@ public class PlayerTest {
 
     GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
 
-    public PlayerTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public PlayerTest() throws IllegalTilePlacementException, IllegalTeamsCompositionException {
     }
 
     Player player1= gameInterface.getActivePlayer();

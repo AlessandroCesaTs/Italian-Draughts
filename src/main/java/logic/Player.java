@@ -66,7 +66,7 @@ public class Player {
         }
     }
 
-    public boolean shouldEat() throws OutOfBoundsException {
+    public boolean shouldEat(){
         for (Piece piece:pieces){
             for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
             {

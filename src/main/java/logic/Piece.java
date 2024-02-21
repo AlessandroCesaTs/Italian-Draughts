@@ -79,7 +79,7 @@ public class Piece {
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws OutOfBoundsException {
+    public void eatPiece(NeighborPosition position){
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);

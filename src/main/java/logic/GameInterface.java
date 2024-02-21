@@ -13,7 +13,7 @@ public interface GameInterface {
 
     void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
 
-    void checkGameOver() throws OutOfBoundsException;
+    void checkGameOver();
 
     boolean checkMultipleEating(Piece movingPiece);
 

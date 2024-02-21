@@ -33,7 +33,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         inactivePlayer=player2;
     }
     @Override
-    public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void onMoveMade() throws NotOnDiagonalException, OutOfBoundsException {
         Move move= gBoard.getMoveFromGUI();
         playTurn(move);
     }
@@ -79,7 +79,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void checkGameOver() throws  OutOfBoundsException {
+    public void checkGameOver(){
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;

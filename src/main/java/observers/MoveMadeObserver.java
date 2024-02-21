@@ -6,5 +6,5 @@ import Exceptions.NotOnDiagonalException;
 import Exceptions.OutOfBoundsException;
 
 public interface MoveMadeObserver {
-    void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException;
+    void onMoveMade() throws NotOnDiagonalException,OutOfBoundsException;
 }

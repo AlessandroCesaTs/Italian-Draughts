@@ -67,7 +67,7 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void checkGameOver() throws OutOfBoundsException {
+    public void checkGameOver(){
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
