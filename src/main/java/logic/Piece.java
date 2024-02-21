@@ -1,7 +1,5 @@
 package logic;
 
-import Exceptions.OutOfBoundsException;
-
 import java.util.List;
 
 public class Piece {
@@ -79,7 +77,7 @@ public class Piece {
         }
     }
 
-    public void eatPiece(NeighborPosition position) throws OutOfBoundsException {
+    public void eatPiece(NeighborPosition position){
         if (canEat(position)){
             tile.getNeighbor(position).removePiece();
             movePieceByTwo(position);
@@ -142,9 +140,6 @@ public class Piece {
         return isKing;
     }
 
-    public boolean isWhite() {
-        return team == Team.White;
-    }
     public void remove(){
         tile=null;
     }

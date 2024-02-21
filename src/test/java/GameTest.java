@@ -1,4 +1,4 @@
-import Exceptions.*;
+import exceptions.*;
 import logic.*;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +12,10 @@ public class GameTest {
     Player player1=game.getActivePlayer();
     Player player2=game.getInactivePlayer();
 
-    public GameTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public GameTest() throws IllegalTilePlacementException,IllegalTeamsCompositionException{
     }
     @Test
-    void changeActivePlayerTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void changeActivePlayerTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(2,2);
         game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
         assertEquals(player2,game.getActivePlayer());
@@ -29,17 +29,17 @@ public class GameTest {
 
 
     @Test
-    void moveOnePieceTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void moveOnePieceTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(2,2);
         Move move=new Move(player1,piece,NeighborPosition.TopRight);
         game.playTurn(move);
         assertEquals(piece, board.getPiece(3,3));
         assertNull(board.getPiece(2,2));
-        assertEquals(game.getRoundWithoutEating(),1);
+        assertEquals(game.getRoundsWithoutEating(),1);
     }
 
     @Test
-    void CantMoveOtherPlayersPiece() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void CantMoveOtherPlayersPiece() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(5,1);
         game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
         assertEquals(piece, board.getPiece(5,1));
@@ -47,7 +47,7 @@ public class GameTest {
     }
 
     @Test
-    void moveTwoPiecesTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void moveTwoPiecesTest() throws NoPieceOnWhiteException {
         Piece piece1=board.getPiece(2,2);
         game.playTurn(new Move(player1,piece1,NeighborPosition.TopRight));
 
@@ -58,24 +58,24 @@ public class GameTest {
         assertNull(board.getPiece(2,2));
         assertEquals(piece2,board.getPiece(4,0));
         assertNull(board.getPiece(5,1));
-        assertEquals(game.getRoundWithoutEating(),2);
+        assertEquals(game.getRoundsWithoutEating(),2);
     }
 
     @Test
-    void illegalMoveTest() throws NoPieceOnWhiteException, OutOfBoundsException{
+    void illegalMoveTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(7,5);
         game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
         assertEquals(piece,board.getPiece(7,5));
     }
     @Test
-    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException, OutOfBoundsException{
+    void whiteOutOfBoundsTest() throws NoPieceOnWhiteException{
         Piece piece=board.getPiece(1,7);
         game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
         assertEquals(piece,board.getPiece(1,7));
     }
 
     @Test
-    void whiteEatsBlackTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void whiteEatsBlackTest() throws NoPieceOnWhiteException{
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
 
@@ -86,11 +86,11 @@ public class GameTest {
         assertEquals(board.getPiece(5,5),whitePiece);
         assertNull(board.getPiece(4,4));
         assertEquals(player2.getNumberOfPieces(),11);
-        assertEquals(game.getRoundWithoutEating(),0);
+        assertEquals(game.getRoundsWithoutEating(),0);
     }
 
     @Test
-    void cantEatSameTeamTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void cantEatSameTeamTest() throws NoPieceOnWhiteException{
         Piece whitePiece=board.getPiece(1,1);
         Piece whitePiece2=board.getPiece(2,2);
         game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
@@ -101,7 +101,7 @@ public class GameTest {
     }
 
     @Test
-    void cantEatTileAfterOccupiedTest() throws NoPieceOnWhiteException, OutOfBoundsException{
+    void cantEatTileAfterOccupiedTest() throws NoPieceOnWhiteException{
         Piece whitePiece=board.getPiece(2,6);
         Piece blackPiece=board.getPiece(5,7);
 
@@ -115,7 +115,7 @@ public class GameTest {
     }
 
     @Test
-    void youHaveToEatTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void youHaveToEatTest() throws NoPieceOnWhiteException{
         Piece whitePiece1=board.getPiece(2,4);
         Piece whitePiece2=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,7);
@@ -131,7 +131,7 @@ public class GameTest {
     }
 
     @Test
-    void doubleEatTest() throws NoPieceOnWhiteException, OutOfBoundsException {
+    void doubleEatTest() throws NoPieceOnWhiteException {
         Piece whitePiece1=board.getPiece(2,4);
         Piece blackPiece1=board.getPiece(5,1);
         Piece whitePiece2=board.getPiece(2,6);

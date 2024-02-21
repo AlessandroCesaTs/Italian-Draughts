@@ -1,6 +1,6 @@
 package gui;
 
-import Exceptions.*;
+import exceptions.*;
 import logic.*;
 import observers.MoveMadeObserver;
 
@@ -22,11 +22,9 @@ public class GraphicBoard extends JPanel{
     Point currentTile = null;
     Point startTile = null;
     Point endTile = null;
-    NeighborPosition movingDirection=null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private final List<MoveMadeObserver> observers = new ArrayList<>();
-    private GraphicPiece currentPiece;
 
     public GraphicBoard(GameInterface gameInterface) {
         setGame(gameInterface);
@@ -49,7 +47,7 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam()) {
+                if (draggedPiece != null && ((NormalPiece) draggedPiece).getTeam() != gameInterface.getActiveTeam()) {
                     draggedPiece = null;
                 }
             }
@@ -60,18 +58,17 @@ public class GraphicBoard extends JPanel{
                 int y = (getHeight() - e.getY()) / tileSize;
                 endTile = new Point(x, y);
                 try {
-                    movingDirection=getNeighborPosition(endTile);
+                    getNeighborPosition(endTile);
                 } catch (NotOnDiagonalException ex) {
                     throw new RuntimeException(ex);
                 }
 
                 GraphicPiece piece = draggedPiece;
-                if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == gameInterface.getActivePlayer().getTeam()) {
-                    setCurrentPiece(piece);
+                if (piece != null && ((NormalPiece) piece).getTeam() == gameInterface.getActiveTeam()) {
                     setCurrentTile(endTile);
                     try {
                         setMoveMade(true);
-                    } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
+                    } catch (NotOnDiagonalException ex) {
                         ex.printStackTrace();
                         return;
                     }
@@ -80,9 +77,7 @@ public class GraphicBoard extends JPanel{
             }
         });
     }
-    private void setCurrentPiece(GraphicPiece currentPiece) {
-        this.currentPiece = currentPiece;
-    }
+
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
     }
@@ -120,9 +115,9 @@ public class GraphicBoard extends JPanel{
         for (int c=0; c < cols; c++) {
             for (int r = 0; r <= 2; r++) {
                 if ((r+c) % 2 == 0){
-                    Piece piece = null;
+                    Piece piece;
                     try {
-                        piece = gameInterface.getBoard().getPiece(r, c);
+                        piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -131,9 +126,9 @@ public class GraphicBoard extends JPanel{
             }
             for (int r = 5; r < rows; r++) {
                 if ((r+c) % 2 == 0){
-                    Piece piece = null;
+                    Piece piece;
                     try {
-                        piece = gameInterface.getBoard().getPiece(r, c);
+                        piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -167,7 +162,7 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI() throws NotOnDiagonalException, OutOfBoundsException {
+    public Move getMoveFromGUI() throws NotOnDiagonalException{
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
         }
@@ -236,12 +231,12 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void notifyMoveMadeObservers() throws NotOnDiagonalException{
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException{
         boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();

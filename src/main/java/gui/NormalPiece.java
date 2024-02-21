@@ -1,6 +1,7 @@
 package gui;
 
 import logic.Piece;
+import logic.Team;
 
 import java.awt.image.BufferedImage;
 
@@ -24,4 +25,6 @@ public class NormalPiece extends GraphicPiece{
     public Piece getPiece(){
         return piece;
     }
+
+    public Team getTeam(){return getPiece().getTeam();}
 }

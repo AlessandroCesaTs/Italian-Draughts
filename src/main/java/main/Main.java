@@ -1,6 +1,6 @@
 package main;
 
-import Exceptions.*;
+import exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.GameInterface;
@@ -26,7 +26,7 @@ public class Main implements GameObserver {
             frame.setMinimumSize(new Dimension(600, 650));
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
-            Game placeholderGame = null;
+            Game placeholderGame;
             try {
                 placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
             } catch (IllegalTilePlacementException | IllegalTeamsCompositionException e) {
@@ -86,7 +86,7 @@ public class Main implements GameObserver {
                     playersLabel.setText(player1Name + " with " + player1Team + "s" +
                                          "; " + player2Name + " with " + player2Team + "s" );
 
-                    Game game = null;
+                    Game game;
                     try {
                         game = new Game(player1Name, player2Name, player1Team, player2Team);
                         frame.remove(gBoard);
@@ -151,7 +151,7 @@ public class Main implements GameObserver {
     public void update(GameInterface gameInterface) {
         SwingUtilities.invokeLater(() -> {
             if (!gameInterface.isGameOver()) {
-                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
+                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundsWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
             }else{
                 if (gameInterface.getWinnerPlayer()!=null) {
                     String winnerName = gameInterface.getWinnerPlayer().getName();

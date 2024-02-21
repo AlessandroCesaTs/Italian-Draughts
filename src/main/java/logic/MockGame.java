@@ -1,6 +1,8 @@
 package logic;
 
-import Exceptions.*;
+import exceptions.*;
+
+import java.util.List;
 
 public class MockGame implements GameInterface{
 
@@ -27,7 +29,7 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void playTurn(Move move) throws OutOfBoundsException{
+    public void playTurn(Move move){
         TypeOfMove typeOfMove=move.getTypeOfMove();
         if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();
@@ -47,14 +49,14 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void Move(Piece movingPiece, NeighborPosition targetPosition) {
         activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
         roundsWithoutEating++;
 
     }
 
     @Override
-    public void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void eat(Piece movingPiece, NeighborPosition targetPosition){
         Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
         activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);
 
@@ -65,7 +67,7 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void checkGameOver() throws OutOfBoundsException {
+    public void checkGameOver(){
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
@@ -127,7 +129,20 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public int getRoundWithoutEating() {
+    public int getRoundsWithoutEating() {
         return roundsWithoutEating;
+    }
+
+    @Override
+    public Team getActiveTeam(){
+        return activePlayer.getTeam();
+    }
+    @Override
+    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+        return getBoard().getPiece(row,col);
+    }
+    @Override
+    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+        return getBoard().getFullBlackTiles();
     }
 }

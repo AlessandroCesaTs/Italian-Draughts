@@ -1,4 +1,4 @@
-import Exceptions.*;
+import exceptions.*;
 import logic.*;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ public class PlayerTest {
 
     GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
 
-    public PlayerTest() throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public PlayerTest() throws IllegalTilePlacementException, IllegalTeamsCompositionException {
     }
 
     Player player1= gameInterface.getActivePlayer();
@@ -42,14 +42,14 @@ public class PlayerTest {
     }
     @Test
     void losePiece1Test() throws NoPieceOnWhiteException {
-        Piece pieceToLose= gameInterface.getBoard().getPiece(0,0);
+        Piece pieceToLose= gameInterface.getPiece(0,0);
         player1.loseOnePiece(pieceToLose);
         assertEquals(11,player1.getNumberOfPieces());
     }
     @Test
     void losePiece2Test() throws NoPieceOnWhiteException {
-        Piece pieceToLose1= gameInterface.getBoard().getPiece(5,1);
-        Piece pieceToLose2= gameInterface.getBoard().getPiece(5,3);
+        Piece pieceToLose1= gameInterface.getPiece(5,1);
+        Piece pieceToLose2= gameInterface.getPiece(5,3);
         player2.loseOnePiece(pieceToLose1);
         player2.loseOnePiece(pieceToLose2);
         assertEquals(10,player2.getNumberOfPieces());

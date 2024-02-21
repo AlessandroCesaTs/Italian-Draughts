@@ -1,6 +1,6 @@
 package logic;
 
-import Exceptions.*;
+import exceptions.*;
 import gui.GraphicBoard;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
@@ -33,13 +33,13 @@ public class Game implements MoveMadeObserver, GameInterface {
         inactivePlayer=player2;
     }
     @Override
-    public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void onMoveMade() throws NotOnDiagonalException{
         Move move= gBoard.getMoveFromGUI();
         playTurn(move);
     }
 
     @Override
-    public void playTurn(Move move) throws OutOfBoundsException {
+    public void playTurn(Move move){
         TypeOfMove typeOfMove=move.getTypeOfMove();
         if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();
@@ -59,7 +59,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void Move(Piece movingPiece, NeighborPosition targetPosition){
         activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
         gBoard.movePiece(movingPiece, targetPosition);
         checkPromotion(movingPiece);
@@ -67,7 +67,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void eat(Piece movingPiece, NeighborPosition targetPosition) {
         gBoard.eatPiece(movingPiece, targetPosition);
         Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
         activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);
@@ -79,7 +79,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void checkGameOver() throws  OutOfBoundsException {
+    public void checkGameOver(){
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
@@ -102,6 +102,8 @@ public class Game implements MoveMadeObserver, GameInterface {
             gBoard.getGraphicPiece(movingPiece).promote();
         }
     }
+
+
     public void addObserver(GameObserver observer){
         observers.add(observer);
     }
@@ -150,7 +152,22 @@ public class Game implements MoveMadeObserver, GameInterface {
     public boolean isGameOver(){return gameOver; }
 
     @Override
-    public int getRoundWithoutEating() {
+    public int getRoundsWithoutEating() {
         return roundsWithoutEating;
+    }
+
+    @Override
+    public Team getActiveTeam(){
+        return activePlayer.getTeam();
+    }
+
+    @Override
+    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+        return getBoard().getPiece(row,col);
+    }
+
+    @Override
+    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+        return getBoard().getFullBlackTiles();
     }
 }

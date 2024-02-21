@@ -1,7 +1,7 @@
 package logic;
 
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NoPieceOnWhiteException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -74,6 +74,10 @@ public class Board {
     }
     public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
         return getTile(row,col).getPiece();
+    }
+
+    public Team getTeam(int row, int col) throws NoPieceOnWhiteException {
+        return getPiece(row,col).getTeam();
     }
     public int getSize(){
         return size;

@@ -1,10 +1,7 @@
 package observers;
 
-import Exceptions.CantEatException;
-import Exceptions.IllegalMovementException;
-import Exceptions.NotOnDiagonalException;
-import Exceptions.OutOfBoundsException;
+import exceptions.NotOnDiagonalException;
 
 public interface MoveMadeObserver {
-    void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException;
+    void onMoveMade() throws NotOnDiagonalException;
 }

@@ -1,16 +1,18 @@
 package logic;
 
-import Exceptions.OutOfBoundsException;
+import exceptions.NoPieceOnWhiteException;
+
+import java.util.List;
 
 public interface GameInterface {
 
-    void playTurn(Move move) throws OutOfBoundsException;
+    void playTurn(Move move);
 
-    void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
+    void Move(Piece movingPiece, NeighborPosition targetPosition);
 
-    void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
+    void eat(Piece movingPiece, NeighborPosition targetPosition) ;
 
-    void checkGameOver() throws OutOfBoundsException;
+    void checkGameOver();
 
     boolean checkMultipleEating(Piece movingPiece);
 
@@ -28,5 +30,12 @@ public interface GameInterface {
 
     boolean isGameOver();
 
-    int getRoundWithoutEating();
+    int getRoundsWithoutEating();
+
+    Team getActiveTeam();
+
+    Piece getPiece(int row,int col) throws NoPieceOnWhiteException;
+
+    List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException;
+
 }

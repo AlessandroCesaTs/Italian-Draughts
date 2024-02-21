@@ -1,6 +1,5 @@
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NotOnDiagonalException;
-import Exceptions.OutOfBoundsException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NotOnDiagonalException;
 import logic.BlackTile;
 import logic.Board;
 import logic.NeighborPosition;

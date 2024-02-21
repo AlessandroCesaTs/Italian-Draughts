@@ -1,4 +1,4 @@
-import Exceptions.IllegalTilePlacementException;
+import exceptions.IllegalTilePlacementException;
 import logic.BlackTile;
 import logic.Tile;
 import logic.WhiteTile;
