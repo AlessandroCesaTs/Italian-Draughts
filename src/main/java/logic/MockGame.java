@@ -29,7 +29,7 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void playTurn(Move move) throws OutOfBoundsException{
+    public void playTurn(Move move){
         TypeOfMove typeOfMove=move.getTypeOfMove();
         if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();
@@ -49,14 +49,14 @@ public class MockGame implements GameInterface{
     }
 
     @Override
-    public void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void Move(Piece movingPiece, NeighborPosition targetPosition) {
         activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
         roundsWithoutEating++;
 
     }
 
     @Override
-    public void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void eat(Piece movingPiece, NeighborPosition targetPosition){
         Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
         activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);
 

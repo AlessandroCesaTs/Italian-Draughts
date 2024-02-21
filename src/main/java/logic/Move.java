@@ -1,21 +1,19 @@
 package logic;
 
-import Exceptions.OutOfBoundsException;
-
 public class Move {
     private final Player player;
     private final Piece piece;
     private final NeighborPosition neighborDestination;
     private final TypeOfMove typeOfMove;
 
-    public Move(Player player, Piece piece, NeighborPosition neighborDestination) throws OutOfBoundsException {
+    public Move(Player player, Piece piece, NeighborPosition neighborDestination){
         this.player = player;
         this.piece = piece;
         this.neighborDestination = neighborDestination;
         typeOfMove=computeTypeOfMove();
     }
 
-    public TypeOfMove computeTypeOfMove() throws OutOfBoundsException{
+    public TypeOfMove computeTypeOfMove(){
         if (player.getTeam() == piece.team){
             if (player.shouldEat()){
                 if (piece.canEat(neighborDestination)){

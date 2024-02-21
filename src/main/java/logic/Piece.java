@@ -1,7 +1,5 @@
 package logic;
 
-import Exceptions.OutOfBoundsException;
-
 import java.util.List;
 
 public class Piece {

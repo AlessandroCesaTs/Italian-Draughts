@@ -1,17 +1,16 @@
 package logic;
 
 import Exceptions.NoPieceOnWhiteException;
-import Exceptions.OutOfBoundsException;
 
 import java.util.List;
 
 public interface GameInterface {
 
-    void playTurn(Move move) throws OutOfBoundsException;
+    void playTurn(Move move);
 
-    void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
+    void Move(Piece movingPiece, NeighborPosition targetPosition);
 
-    void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException;
+    void eat(Piece movingPiece, NeighborPosition targetPosition) ;
 
     void checkGameOver();
 

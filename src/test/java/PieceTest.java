@@ -1,4 +1,3 @@
-import Exceptions.OutOfBoundsException;
 import logic.*;
 import org.junit.jupiter.api.Test;
 

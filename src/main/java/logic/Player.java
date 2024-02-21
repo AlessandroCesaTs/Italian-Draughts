@@ -1,7 +1,6 @@
 package logic;
 
 import Exceptions.NoPieceOnWhiteException;
-import Exceptions.OutOfBoundsException;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,7 +57,7 @@ public class Player {
         pieces.remove(piece);
         numberOfPieces--;
     }
-    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) throws OutOfBoundsException{
+    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) {
         if (Objects.requireNonNull(typeOfMove) == TypeOfMove.Move) {
             movingPiece.movePieceByOne(targetPosition);
         }else{

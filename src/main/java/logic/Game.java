@@ -33,13 +33,13 @@ public class Game implements MoveMadeObserver, GameInterface {
         inactivePlayer=player2;
     }
     @Override
-    public void onMoveMade() throws NotOnDiagonalException, OutOfBoundsException {
+    public void onMoveMade() throws NotOnDiagonalException{
         Move move= gBoard.getMoveFromGUI();
         playTurn(move);
     }
 
     @Override
-    public void playTurn(Move move) throws OutOfBoundsException {
+    public void playTurn(Move move){
         TypeOfMove typeOfMove=move.getTypeOfMove();
         if (typeOfMove!=TypeOfMove.NoMove){
             Piece movingPiece=move.getPiece();
@@ -59,7 +59,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void Move(Piece movingPiece, NeighborPosition targetPosition){
         activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
         gBoard.movePiece(movingPiece, targetPosition);
         checkPromotion(movingPiece);
@@ -67,7 +67,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    public void eat(Piece movingPiece, NeighborPosition targetPosition) {
         gBoard.eatPiece(movingPiece, targetPosition);
         Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
         activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);

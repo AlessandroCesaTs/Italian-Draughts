@@ -69,7 +69,7 @@ public class GraphicBoard extends JPanel{
                     setCurrentTile(endTile);
                     try {
                         setMoveMade(true);
-                    } catch (NotOnDiagonalException | OutOfBoundsException ex) {
+                    } catch (NotOnDiagonalException ex) {
                         ex.printStackTrace();
                         return;
                     }
@@ -163,7 +163,7 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI() throws NotOnDiagonalException, OutOfBoundsException {
+    public Move getMoveFromGUI() throws NotOnDiagonalException{
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
         }
@@ -232,12 +232,12 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers() throws NotOnDiagonalException, OutOfBoundsException {
+    public void notifyMoveMadeObservers() throws NotOnDiagonalException{
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, OutOfBoundsException {
+    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException{
         boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();
