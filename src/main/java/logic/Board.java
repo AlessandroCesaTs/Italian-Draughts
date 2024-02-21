@@ -75,6 +75,10 @@ public class Board {
     public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
         return getTile(row,col).getPiece();
     }
+
+    public Team getTeam(int row, int col) throws NoPieceOnWhiteException {
+        return getPiece(row,col).getTeam();
+    }
     public int getSize(){
         return size;
     }

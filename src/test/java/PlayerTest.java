@@ -42,14 +42,14 @@ public class PlayerTest {
     }
     @Test
     void losePiece1Test() throws NoPieceOnWhiteException {
-        Piece pieceToLose= gameInterface.getBoard().getPiece(0,0);
+        Piece pieceToLose= gameInterface.getPiece(0,0);
         player1.loseOnePiece(pieceToLose);
         assertEquals(11,player1.getNumberOfPieces());
     }
     @Test
     void losePiece2Test() throws NoPieceOnWhiteException {
-        Piece pieceToLose1= gameInterface.getBoard().getPiece(5,1);
-        Piece pieceToLose2= gameInterface.getBoard().getPiece(5,3);
+        Piece pieceToLose1= gameInterface.getPiece(5,1);
+        Piece pieceToLose2= gameInterface.getPiece(5,3);
         player2.loseOnePiece(pieceToLose1);
         player2.loseOnePiece(pieceToLose2);
         assertEquals(10,player2.getNumberOfPieces());

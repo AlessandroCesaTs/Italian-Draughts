@@ -1,6 +1,9 @@
 package logic;
 
+import Exceptions.NoPieceOnWhiteException;
 import Exceptions.OutOfBoundsException;
+
+import java.util.List;
 
 public interface GameInterface {
 
@@ -28,5 +31,12 @@ public interface GameInterface {
 
     boolean isGameOver();
 
-    int getRoundWithoutEating();
+    int getRoundsWithoutEating();
+
+    Team getActiveTeam();
+
+    Piece getPiece(int row,int col) throws NoPieceOnWhiteException;
+
+    List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException;
+
 }

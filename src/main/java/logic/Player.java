@@ -36,7 +36,7 @@ public class Player {
     public void reloadPieces(){
         List<BlackTile> fullBlackTiles;
         try {
-            fullBlackTiles = GameInterface.getBoard().getFullBlackTiles();
+            fullBlackTiles = GameInterface.getFullBlackTiles();
         } catch (NoPieceOnWhiteException e) {
             throw new RuntimeException(e);
         }

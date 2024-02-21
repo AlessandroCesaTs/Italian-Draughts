@@ -48,7 +48,7 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam()) {
+                if (draggedPiece != null && ((NormalPiece) draggedPiece).getTeam() != gameInterface.getActiveTeam()) {
                     draggedPiece = null;
                 }
             }
@@ -65,7 +65,7 @@ public class GraphicBoard extends JPanel{
                 }
 
                 GraphicPiece piece = draggedPiece;
-                if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == gameInterface.getActivePlayer().getTeam()) {
+                if (piece != null && ((NormalPiece) piece).getTeam() == gameInterface.getActiveTeam()) {
                     setCurrentPiece(piece);
                     setCurrentTile(endTile);
                     try {
@@ -120,7 +120,7 @@ public class GraphicBoard extends JPanel{
                 if ((r+c) % 2 == 0){
                     Piece piece = null;
                     try {
-                        piece = gameInterface.getBoard().getPiece(r, c);
+                        piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -131,7 +131,7 @@ public class GraphicBoard extends JPanel{
                 if ((r+c) % 2 == 0){
                     Piece piece = null;
                     try {
-                        piece = gameInterface.getBoard().getPiece(r, c);
+                        piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }

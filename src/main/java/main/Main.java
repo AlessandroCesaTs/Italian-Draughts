@@ -151,7 +151,7 @@ public class Main implements GameObserver {
     public void update(GameInterface gameInterface) {
         SwingUtilities.invokeLater(() -> {
             if (!gameInterface.isGameOver()) {
-                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
+                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundsWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
             }else{
                 if (gameInterface.getWinnerPlayer()!=null) {
                     String winnerName = gameInterface.getWinnerPlayer().getName();

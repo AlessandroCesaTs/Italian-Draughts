@@ -102,6 +102,8 @@ public class Game implements MoveMadeObserver, GameInterface {
             gBoard.getGraphicPiece(movingPiece).promote();
         }
     }
+
+
     public void addObserver(GameObserver observer){
         observers.add(observer);
     }
@@ -150,7 +152,22 @@ public class Game implements MoveMadeObserver, GameInterface {
     public boolean isGameOver(){return gameOver; }
 
     @Override
-    public int getRoundWithoutEating() {
+    public int getRoundsWithoutEating() {
         return roundsWithoutEating;
+    }
+
+    @Override
+    public Team getActiveTeam(){
+        return activePlayer.getTeam();
+    }
+
+    @Override
+    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+        return getBoard().getPiece(row,col);
+    }
+
+    @Override
+    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+        return getBoard().getFullBlackTiles();
     }
 }
