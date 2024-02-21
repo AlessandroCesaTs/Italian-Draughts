@@ -22,7 +22,6 @@ public class GraphicBoard extends JPanel{
     Point currentTile = null;
     Point startTile = null;
     Point endTile = null;
-    NeighborPosition movingDirection=null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private final List<MoveMadeObserver> observers = new ArrayList<>();
@@ -59,7 +58,7 @@ public class GraphicBoard extends JPanel{
                 int y = (getHeight() - e.getY()) / tileSize;
                 endTile = new Point(x, y);
                 try {
-                    movingDirection=getNeighborPosition(endTile);
+                    getNeighborPosition(endTile);
                 } catch (NotOnDiagonalException ex) {
                     throw new RuntimeException(ex);
                 }
