@@ -11,6 +11,9 @@ public class Host implements MultiplayerActions {
     private final String host = "127.0.0.1";
     private final Socket socket;
     private final LocalServer localServer;
+    private Point[] receivedMove;
+    private final MoveListener ml;
+    private int newMove;
 
 
 
@@ -24,43 +27,36 @@ public class Host implements MultiplayerActions {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        ml = new MoveListener(socket, this);
+        ml.start();
     }
 
     @Override
     public void sendMove(Point startTitle, Point endTitle, int typeOfMove) {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            String moveProtocol = String.format("0;%d;%d;%d;%d;%d", startTitle.getX(), startTitle.getY(),
-                                                endTitle.getX(), endTitle.getY(),typeOfMove);
+            String moveProtocol = String.format("0;%d;%d;%d;%d;%d", (int) startTitle.getX(), (int) startTitle.getY(),
+                                (int) endTitle.getX(), (int) endTitle.getY(),typeOfMove);
             bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
+            System.out.println("Mossa mandata Host");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public Point[] receiveMove() {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String line = br.readLine();
-            String[] command = line.split(";");
-            switch (Integer.parseInt(command[0])){
-                case 0:
-                    if (command.length != 6)
-                        throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
-                    Point oppStartTitle = new Point(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
-                    Point oppEndTitle = new Point(Integer.parseInt(command[3]), Integer.parseInt(command[4]));
-                    Point oppTurnNotify =  new Point(Integer.parseInt(command[5]), 0);
-                    return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
-                case 1:
-                    return null; //aggiungere fine partita
-                default:
-                    throw new RuntimeException("Something has gone wrong!");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public Point[] getReceivedMove() {
+        if (newMove == 1) {
+            newMove = 0;
+            return receivedMove;
+        } else {
+            return null;
         }
+    }
+
+    public void setReceivedMove(Point[] receivedMove, int newMove) {
+        this.newMove = newMove;
+        this.receivedMove = receivedMove;
     }
 
     public LocalServer getLocalServer() {

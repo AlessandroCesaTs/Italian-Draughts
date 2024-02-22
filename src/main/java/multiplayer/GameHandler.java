@@ -15,6 +15,8 @@ public class GameHandler implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println("Esisto");
+
             BufferedReader brWhite = new BufferedReader(new InputStreamReader(sockets[0].getInputStream()));
             BufferedWriter bwWhite = new BufferedWriter(new OutputStreamWriter(sockets[0].getOutputStream()));
             BufferedReader brBlack = new BufferedReader(new InputStreamReader(sockets[1].getInputStream()));
@@ -24,6 +26,7 @@ public class GameHandler implements Runnable {
 
                 if (turnListener == 0) {
                     turnSender(brWhite, bwBlack);
+                    System.out.println("Mossa mandata gh");
                 } else {
                     turnSender(brBlack, bwWhite);
                 }
@@ -40,13 +43,20 @@ public class GameHandler implements Runnable {
 
             String line = br.readLine();
             String[] command = line.split(";");
+            System.out.println("Mossa letta fgh");
 
-            if (command.length == 6)
-                turnListener = Integer.parseInt(command[5]);
+            if (command.length == 6){
+                if (Integer.parseInt(command[5]) == 0)
+                    switch (turnListener){
+                        case 0 -> turnListener = 1;
+                        case 1 -> turnListener = 0;
+                    }
+                System.out.println(turnListener);
+            }
 
             bw.write(line);
             bw.flush();
-
+            System.out.println("Mossa mandata fgh");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

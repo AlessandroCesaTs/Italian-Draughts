@@ -160,7 +160,7 @@ public class Main implements GameObserver {
                             }
 
                             case Guest -> {
-                                game = new Game("Host", Team.White, new Guest(hostIPField.getText()));
+                                game = new Game("Guest", Team.Black, new Guest(hostIPField.getText()));
                                 frame.remove(gBoard);
                                 gBoard = new GraphicBoard(game);
                                 game.setGBoard(gBoard);
@@ -175,6 +175,8 @@ public class Main implements GameObserver {
                     } catch (Exception exception){
                         throw new RuntimeException(exception);
                     }
+
+                    gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
 
                 }
             });

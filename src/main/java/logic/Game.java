@@ -42,7 +42,7 @@ public class Game implements MoveMadeObserver {
             case "Host" -> {
                 board = new Board();
                 player1 = new Player(playerName, team, this);
-                player2 = null;
+                player2 = new Player("Guest", Team.Null, this);
                 activePlayer = player1;
                 inactivePlayer = player2;
                 this.multiRole = multiRole;
@@ -50,11 +50,11 @@ public class Game implements MoveMadeObserver {
             case "Guest" -> {
                 board = new Board();
                 player2 = new Player(playerName, team, this);
-                player1 = null;
+                player1 = new Player("Host", Team.Null, this);
                 activePlayer = player1;
                 inactivePlayer = player2;
                 this.multiRole = multiRole;
-                setAdversaryMove();
+
             }
             default -> throw new Exception("Something has gone wrong!");
         }
@@ -81,7 +81,7 @@ public class Game implements MoveMadeObserver {
             }else {
                 Move(movingPiece, targetPosition);
             }
-            if(multiRole != null && activePlayer != null)
+            if(multiRole != null && activePlayer.getTeam() != Team.Null)
                 multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
             checkGameOver();
             currentRound++;
@@ -108,7 +108,7 @@ public class Game implements MoveMadeObserver {
     }
 
     private void checkGameOver() throws  OutOfBoundsException {
-        if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
+        if ((!inactivePlayer.hasPieces() || !inactivePlayer.canMove()) && multiRole == null){
             winnerPlayer=activePlayer;
             gameOver=true;
         }else if(roundsWithoutEating==40){
@@ -140,19 +140,22 @@ public class Game implements MoveMadeObserver {
     public void changeActivePlayer() {
         if (activePlayer == player1){
             activePlayer = player2;
-            inactivePlayer=player1;
+            inactivePlayer = player1;
         } else {
             activePlayer = player1;
-            inactivePlayer=player2;
+            inactivePlayer = player2;
         }
         notifyObservers();
-        if(activePlayer == null) {
+        if(activePlayer.getTeam() == Team.Null) {
             setAdversaryMove();
         }
     }
 
-    private void setAdversaryMove () {
-        Point[] advMove = multiRole.receiveMove();
+    public void setAdversaryMove () {
+        Point[] advMove;
+        do {
+            advMove = multiRole.getReceivedMove();
+        }while (advMove == null);
         gBoard.setStartTile(advMove[0]);
         gBoard.setEndTile(advMove[1]);
         if (advMove[2].getX() == 1)
@@ -185,4 +188,6 @@ public class Game implements MoveMadeObserver {
     public int getRoundWithoutEating() {
         return roundsWithoutEating;
     }
+
+
 }
