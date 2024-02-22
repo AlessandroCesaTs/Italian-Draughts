@@ -1,35 +1,30 @@
 package multiplayer;
 
+import logic.Game;
+
 import java.awt.*;
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-public class Host implements MultiplayerActions {
+
+public class Host implements MultiplayerActions,Runnable {
 
     private final int port = 10000;
     private final String host = "127.0.0.1";
-    private final Socket socket;
+    private Socket socket;
     private final LocalServer localServer;
-    private Point[] receivedMove;
-    private final MoveListener ml;
-    private int newMove;
+    private BufferedReader br;
+    private BufferedWriter bw;
+    private boolean running = false;
+    private final Game game;
 
 
 
-    public Host() {
+    public Host(Game game) {
+        this.game = game;
         localServer = new LocalServer(port);
-        try {
-            localServer.start();
-            socket = new Socket(host, port);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        localServer.start();
         }
-        ml = new MoveListener(socket, this);
-        ml.start();
-    }
 
     @Override
     public void sendMove(Point startTitle, Point endTitle, int typeOfMove) {
@@ -45,18 +40,77 @@ public class Host implements MultiplayerActions {
         }
     }
 
-    public Point[] getReceivedMove() {
-        if (newMove == 1) {
-            newMove = 0;
-            return receivedMove;
-        } else {
-            return null;
+
+    private Point[] receiveMove() {
+        try {
+            System.out.println("Sto ascoltando");
+            String line = br.readLine();
+            System.out.println("Mossa ricevuta host");
+            String[] command = line.split(";");
+            switch (Integer.parseInt(command[0])){
+                case 0:
+                    if (command.length != 6)
+                        throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
+                    Point oppStartTitle = new Point(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
+                    Point oppEndTitle = new Point(Integer.parseInt(command[3]), Integer.parseInt(command[4]));
+                    Point oppTurnNotify =  new Point(Integer.parseInt(command[5]), 0);
+                    System.out.println("la mossa è" + line);
+                    return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
+                case 1:
+                    return null; //aggiungere fine partita
+                default:
+                    throw new RuntimeException("Something has gone wrong!");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void setReceivedMove(Point[] receivedMove, int newMove) {
-        this.newMove = newMove;
-        this.receivedMove = receivedMove;
+    @Override
+    public void connect(){
+        try {
+            socket = new Socket(host, port);
+            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            new Thread(this).start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void close(){
+        try {
+            running = false;
+            br.close();
+            bw.close();
+            socket.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            running = true;
+
+            while (running){
+                setAdversaryMove(receiveMove());
+            }
+
+            close();
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setAdversaryMove (Point[] advMove) {
+        game.getGBoard().setStartTile(advMove[0]);
+        game.getGBoard().setEndTile(advMove[1]);
+        if (advMove[2].getX() == 1)
+            setAdversaryMove(receiveMove());
+        else
+            game.changeActivePlayer();
     }
 
     public LocalServer getLocalServer() {

@@ -19,14 +19,14 @@ public class ConnectionTest {
 
     @Test
     void hostCreateLocalServer() {
-        host = new Host();
+        host = new Host(null);
         assertInstanceOf(LocalServer.class, host.getLocalServer());
     }
 
     @Test
     void hostConnectsToServer() {
         CountDownLatch latch = new CountDownLatch(1);
-        host = new Host();
+        host = new Host(null);
 
         new Thread(() -> {
             try {
@@ -43,7 +43,7 @@ public class ConnectionTest {
         CountDownLatch latch = new CountDownLatch(1);
         localServer = new LocalServer(10000);
         localServer.start();
-        guest = new Guest("127.0.0.1");
+        guest = new Guest("127.0.0.1", null);
 
         new Thread(() -> {
             try {

@@ -151,7 +151,7 @@ public class Main implements GameObserver {
                         switch ((Role) playerRoleField.getSelectedItem()) {
 
                             case Host -> {
-                                game = new Game("Host", Team.White, new Host());
+                                game = new Game("Host", Team.White, hostIPField.getText());
                                 frame.remove(gBoard);
                                 gBoard = new GraphicBoard(game);
                                 game.setGBoard(gBoard);
@@ -160,7 +160,7 @@ public class Main implements GameObserver {
                             }
 
                             case Guest -> {
-                                game = new Game("Guest", Team.Black, new Guest(hostIPField.getText()));
+                                game = new Game("Guest", Team.Black, hostIPField.getText());
                                 frame.remove(gBoard);
                                 gBoard = new GraphicBoard(game);
                                 game.setGBoard(gBoard);

@@ -2,6 +2,8 @@ package logic;
 
 import Exceptions.*;
 import gui.GraphicBoard;
+import multiplayer.Guest;
+import multiplayer.Host;
 import multiplayer.MultiplayerActions;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
@@ -37,7 +39,7 @@ public class Game implements MoveMadeObserver {
         multiRole = null;
     }
 
-    public Game(String playerName, Team team, MultiplayerActions multiRole) throws Exception {
+    public Game(String playerName, Team team, String hostIPField) throws Exception {
         switch (playerName){
             case "Host" -> {
                 board = new Board();
@@ -45,7 +47,8 @@ public class Game implements MoveMadeObserver {
                 player2 = new Player("Guest", Team.Null, this);
                 activePlayer = player1;
                 inactivePlayer = player2;
-                this.multiRole = multiRole;
+                multiRole = new Host(this);
+                multiRole.connect();
             }
             case "Guest" -> {
                 board = new Board();
@@ -53,8 +56,8 @@ public class Game implements MoveMadeObserver {
                 player1 = new Player("Host", Team.Null, this);
                 activePlayer = player1;
                 inactivePlayer = player2;
-                this.multiRole = multiRole;
-
+                multiRole = new Guest(hostIPField,this);
+                multiRole.connect();
             }
             default -> throw new Exception("Something has gone wrong!");
         }
@@ -146,23 +149,8 @@ public class Game implements MoveMadeObserver {
             inactivePlayer = player2;
         }
         notifyObservers();
-        if(activePlayer.getTeam() == Team.Null) {
-            setAdversaryMove();
-        }
     }
 
-    public void setAdversaryMove () {
-        Point[] advMove;
-        do {
-            advMove = multiRole.getReceivedMove();
-        }while (advMove == null);
-        gBoard.setStartTile(advMove[0]);
-        gBoard.setEndTile(advMove[1]);
-        if (advMove[2].getX() == 1)
-            setAdversaryMove();
-        else
-            changeActivePlayer();
-    }
     public void setGBoard(GraphicBoard gBoard) {
         this.gBoard = gBoard;
         gBoard.addMoveMadeObserver(this);
@@ -189,5 +177,7 @@ public class Game implements MoveMadeObserver {
         return roundsWithoutEating;
     }
 
-
+    public GraphicBoard getGBoard() {
+        return gBoard;
+    }
 }
