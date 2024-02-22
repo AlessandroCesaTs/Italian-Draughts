@@ -313,6 +313,9 @@ public class GraphicBoard extends JPanel{
         } catch (NotOnDiagonalException ex) {
             throw new RuntimeException(ex);
         }
+        setCurrentTile(endTile);
+        System.out.println(getEndTile());
+        System.out.println(getStartTile());
 
         try {
             setMoveMade(true);

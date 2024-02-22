@@ -4,8 +4,6 @@ import Exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.Team;
-import multiplayer.Guest;
-import multiplayer.Host;
 import multiplayer.Role;
 import observers.GameObserver;
 

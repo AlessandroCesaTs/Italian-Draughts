@@ -14,6 +14,8 @@ public class Guest implements MultiplayerActions,Runnable {
     private BufferedWriter bw;
     private boolean running = false;
     private final Game game;
+    private final String name = "Guest";
+    private boolean canMove;
 
     public Guest(String host,Game game) {
         this.host = host;
@@ -96,11 +98,25 @@ public class Guest implements MultiplayerActions,Runnable {
     }
 
     private void setAdversaryMove (Point[] advMove) {
+        setCanMove(true);
         game.getGBoard().setStartTile(advMove[0]);
         game.getGBoard().setEndTile(advMove[1]);
         if (advMove[2].getX() == 1)
             setAdversaryMove(receiveMove());
-        else
-            game.changeActivePlayer();
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    @Override
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
     }
 }

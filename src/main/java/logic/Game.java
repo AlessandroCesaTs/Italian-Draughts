@@ -27,6 +27,7 @@ public class Game implements MoveMadeObserver {
     private int consecutiveEatings;
     private final MultiplayerActions multiRole;
 
+
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
@@ -37,6 +38,7 @@ public class Game implements MoveMadeObserver {
         activePlayer= player1;
         inactivePlayer=player2;
         multiRole = null;
+
     }
 
     public Game(String playerName, Team team, String hostIPField) throws Exception {
@@ -44,20 +46,22 @@ public class Game implements MoveMadeObserver {
             case "Host" -> {
                 board = new Board();
                 player1 = new Player(playerName, team, this);
-                player2 = new Player("Guest", Team.Null, this);
+                player2 = new Player("Guest", Team.Black, this);
                 activePlayer = player1;
                 inactivePlayer = player2;
                 multiRole = new Host(this);
                 multiRole.connect();
+                multiRole.setCanMove(true);
             }
             case "Guest" -> {
                 board = new Board();
                 player2 = new Player(playerName, team, this);
-                player1 = new Player("Host", Team.Null, this);
+                player1 = new Player("Host", Team.White, this);
                 activePlayer = player1;
                 inactivePlayer = player2;
                 multiRole = new Guest(hostIPField,this);
                 multiRole.connect();
+                multiRole.setCanMove(false);
             }
             default -> throw new Exception("Something has gone wrong!");
         }
@@ -71,24 +75,28 @@ public class Game implements MoveMadeObserver {
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
         Move move= gBoard.getMoveFromGUI();
         TypeOfMove typeOfMove=move.getTypeOfMove();
-        if (typeOfMove!=TypeOfMove.NoMove){
-            Piece movingPiece=move.getPiece();
-            NeighborPosition targetPosition=move.getDestination();
-            if (typeOfMove.equals(TypeOfMove.Eat)){
-                eat(movingPiece, targetPosition);
-                if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
-                    if(multiRole != null && activePlayer != null)
-                        multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
-                    return;
+        if(multiRole == null || multiRole.isCanMove()){
+            if (typeOfMove != TypeOfMove.NoMove) {
+                Piece movingPiece = move.getPiece();
+                NeighborPosition targetPosition = move.getDestination();
+                if (typeOfMove.equals(TypeOfMove.Eat)) {
+                    eat(movingPiece, targetPosition);
+                    if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
+                        if (multiRole != null && activePlayer.getName() != multiRole.getName())
+                            multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
+                        return;
+                    }
+                } else {
+                    Move(movingPiece, targetPosition);
                 }
-            }else {
-                Move(movingPiece, targetPosition);
+                if (multiRole != null && activePlayer.getName() != multiRole.getName()){
+                    multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
+                    multiRole.setCanMove(false);
+                }
+                checkGameOver();
+                currentRound++;
+                changeActivePlayer();
             }
-            if(multiRole != null && activePlayer.getTeam() != Team.Null)
-                multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
-            checkGameOver();
-            currentRound++;
-            changeActivePlayer();
         }
     }
 

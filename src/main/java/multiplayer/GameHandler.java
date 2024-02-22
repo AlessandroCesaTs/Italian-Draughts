@@ -40,7 +40,6 @@ public class GameHandler implements Runnable {
 
     private void turnSender(BufferedReader br, BufferedWriter bw) {
         try {
-
             String line = br.readLine();
             String[] command = line.split(";");
             System.out.println("Mossa letta fgh");
@@ -54,7 +53,7 @@ public class GameHandler implements Runnable {
                 System.out.println(turnListener);
             }
 
-            bw.write(line);
+            bw.write(line + System.lineSeparator());
             bw.flush();
             System.out.println("Mossa mandata fgh");
         } catch (IOException e) {

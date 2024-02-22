@@ -17,6 +17,8 @@ public class Host implements MultiplayerActions,Runnable {
     private BufferedWriter bw;
     private boolean running = false;
     private final Game game;
+    private final String name = "Host";
+    private boolean canMove;
 
 
 
@@ -54,7 +56,7 @@ public class Host implements MultiplayerActions,Runnable {
                     Point oppStartTitle = new Point(Integer.parseInt(command[1]), Integer.parseInt(command[2]));
                     Point oppEndTitle = new Point(Integer.parseInt(command[3]), Integer.parseInt(command[4]));
                     Point oppTurnNotify =  new Point(Integer.parseInt(command[5]), 0);
-                    System.out.println("la mossa è" + line);
+                    System.out.println("la mossa è " + line);
                     return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
                 case 1:
                     return null; //aggiungere fine partita
@@ -105,16 +107,29 @@ public class Host implements MultiplayerActions,Runnable {
     }
 
     private void setAdversaryMove (Point[] advMove) {
+        setCanMove(true);
         game.getGBoard().setStartTile(advMove[0]);
         game.getGBoard().setEndTile(advMove[1]);
         if (advMove[2].getX() == 1)
             setAdversaryMove(receiveMove());
-        else
-            game.changeActivePlayer();
     }
 
     public LocalServer getLocalServer() {
         return localServer;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    @Override
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
 }
