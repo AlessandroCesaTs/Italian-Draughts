@@ -107,7 +107,6 @@ public class Host implements MultiplayerActions,Runnable {
     }
 
     private void setAdversaryMove (Point[] advMove) {
-        setCanMove(true);
         game.getGBoard().setStartTile(advMove[0]);
         game.getGBoard().setEndTile(advMove[1]);
         if (advMove[2].getX() == 1)
@@ -123,13 +122,4 @@ public class Host implements MultiplayerActions,Runnable {
         return name;
     }
 
-    @Override
-    public boolean isCanMove() {
-        return canMove;
-    }
-
-    @Override
-    public void setCanMove(boolean canMove) {
-        this.canMove = canMove;
-    }
 }

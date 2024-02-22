@@ -7,8 +7,6 @@ import multiplayer.Host;
 import multiplayer.MultiplayerActions;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +24,7 @@ public class Game implements MoveMadeObserver {
     private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
     private final MultiplayerActions multiRole;
+    private final String multiplayerName;
 
 
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
@@ -38,7 +37,7 @@ public class Game implements MoveMadeObserver {
         activePlayer= player1;
         inactivePlayer=player2;
         multiRole = null;
-
+        multiplayerName = null;
     }
 
     public Game(String playerName, Team team, String hostIPField) throws Exception {
@@ -51,7 +50,7 @@ public class Game implements MoveMadeObserver {
                 inactivePlayer = player2;
                 multiRole = new Host(this);
                 multiRole.connect();
-                multiRole.setCanMove(true);
+                multiplayerName = playerName;
             }
             case "Guest" -> {
                 board = new Board();
@@ -61,7 +60,7 @@ public class Game implements MoveMadeObserver {
                 inactivePlayer = player2;
                 multiRole = new Guest(hostIPField,this);
                 multiRole.connect();
-                multiRole.setCanMove(false);
+                multiplayerName = playerName;
             }
             default -> throw new Exception("Something has gone wrong!");
         }
@@ -73,30 +72,27 @@ public class Game implements MoveMadeObserver {
     }
 
     public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
-        Move move= gBoard.getMoveFromGUI();
-        TypeOfMove typeOfMove=move.getTypeOfMove();
-        if(multiRole == null || multiRole.isCanMove()){
-            if (typeOfMove != TypeOfMove.NoMove) {
-                Piece movingPiece = move.getPiece();
-                NeighborPosition targetPosition = move.getDestination();
-                if (typeOfMove.equals(TypeOfMove.Eat)) {
-                    eat(movingPiece, targetPosition);
-                    if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
-                        if (multiRole != null && activePlayer.getName() != multiRole.getName())
-                            multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
-                        return;
-                    }
-                } else {
-                    Move(movingPiece, targetPosition);
+        Move move = gBoard.getMoveFromGUI();
+        TypeOfMove typeOfMove = move.getTypeOfMove();
+        if (typeOfMove != TypeOfMove.NoMove) {
+            Piece movingPiece = move.getPiece();
+            NeighborPosition targetPosition = move.getDestination();
+            if (typeOfMove.equals(TypeOfMove.Eat)) {
+                eat(movingPiece, targetPosition);
+                if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
+                    if (multiRole != null && activePlayer.getName().equals(multiRole.getName()))
+                        multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
+                    return;
                 }
-                if (multiRole != null && activePlayer.getName() != multiRole.getName()){
-                    multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
-                    multiRole.setCanMove(false);
-                }
-                checkGameOver();
-                currentRound++;
-                changeActivePlayer();
+            } else {
+                Move(movingPiece, targetPosition);
             }
+            if (multiRole != null && activePlayer.getName().equals(multiRole.getName())) {
+                multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
+            }
+            checkGameOver();
+            currentRound++;
+            changeActivePlayer();
         }
     }
 
@@ -187,5 +183,9 @@ public class Game implements MoveMadeObserver {
 
     public GraphicBoard getGBoard() {
         return gBoard;
+    }
+
+    public String getMultiplayerName() {
+        return multiplayerName;
     }
 }

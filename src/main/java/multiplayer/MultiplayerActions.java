@@ -8,6 +8,4 @@ public interface MultiplayerActions {
 
     void connect();
     String getName();
-    void setCanMove(boolean canMove);
-    boolean isCanMove();
 }
