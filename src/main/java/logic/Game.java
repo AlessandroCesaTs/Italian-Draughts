@@ -5,6 +5,7 @@ import gui.GraphicBoard;
 import multiplayer.Guest;
 import multiplayer.Host;
 import multiplayer.MultiplayerActions;
+import multiplayer.Role;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ public class Game implements MoveMadeObserver {
     private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
     private final MultiplayerActions multiRole;
-    private final String multiplayerName;
 
 
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
@@ -32,35 +32,32 @@ public class Game implements MoveMadeObserver {
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        player1 =new Player(player1Name,team1,this);
-        player2 =new Player(player2Name,team2,this);
+        player1 =new Player(player1Name,team1,this, Role.Null);
+        player2 =new Player(player2Name,team2,this,Role.Null);
         activePlayer= player1;
         inactivePlayer=player2;
         multiRole = null;
-        multiplayerName = null;
     }
 
     public Game(String playerName, Team team, String hostIPField) throws Exception {
         switch (playerName){
             case "Host" -> {
                 board = new Board();
-                player1 = new Player(playerName, team, this);
-                player2 = new Player("Guest", Team.Black, this);
+                player1 = new Player(playerName, team, this, Role.Host);
+                player2 = new Player("Guest", Team.Black, this, Role.Guest);
                 activePlayer = player1;
                 inactivePlayer = player2;
                 multiRole = new Host(this);
                 multiRole.connect();
-                multiplayerName = playerName;
             }
             case "Guest" -> {
                 board = new Board();
-                player2 = new Player(playerName, team, this);
-                player1 = new Player("Host", Team.White, this);
-                activePlayer = player1;
-                inactivePlayer = player2;
+                player1 = new Player(playerName, team, this, Role.Guest);
+                player2 = new Player("Host", Team.White, this, Role.Host);
+                activePlayer = player2;
+                inactivePlayer = player1;
                 multiRole = new Guest(hostIPField,this);
                 multiRole.connect();
-                multiplayerName = playerName;
             }
             default -> throw new Exception("Something has gone wrong!");
         }
@@ -80,14 +77,14 @@ public class Game implements MoveMadeObserver {
             if (typeOfMove.equals(TypeOfMove.Eat)) {
                 eat(movingPiece, targetPosition);
                 if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
-                    if (multiRole != null && activePlayer.getName().equals(multiRole.getName()))
+                    if (multiRole != null && activePlayer.getRole() == player1.getRole())
                         multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
                     return;
                 }
             } else {
                 Move(movingPiece, targetPosition);
             }
-            if (multiRole != null && activePlayer.getName().equals(multiRole.getName())) {
+            if (multiRole != null && activePlayer.getRole() == player1.getRole()) {
                 multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
             }
             checkGameOver();
@@ -185,7 +182,8 @@ public class Game implements MoveMadeObserver {
         return gBoard;
     }
 
-    public String getMultiplayerName() {
-        return multiplayerName;
+    public Player getPlayer1() {
+        return player1;
     }
+
 }

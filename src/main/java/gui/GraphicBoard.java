@@ -65,7 +65,7 @@ public class GraphicBoard extends JPanel{
                 draggedPiece = findPieceAtTile(startTile);
 
                 if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != game.getActivePlayer().getTeam()
-                    && !game.getActivePlayer().getName().equals(game.getMultiplayerName())) {
+                    || game.getPlayer1().getRole() != game.getActivePlayer().getRole()) {
                     draggedPiece = null;
                 }
             }

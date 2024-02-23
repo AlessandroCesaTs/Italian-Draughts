@@ -2,6 +2,7 @@ package logic;
 
 import Exceptions.NoPieceOnWhiteException;
 import Exceptions.OutOfBoundsException;
+import multiplayer.Role;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,14 +12,15 @@ public class Player {
     private final String name;
     private final Team team;
     public final Game Game;
-
+    private final Role role;
     private int numberOfPieces=12;
     private List<Piece> pieces;
 
-    public Player(String name, Team team,Game Game) {
+    public Player(String name, Team team, Game Game, Role role) {
         this.name = name;
         this.team = team;
         this.Game=Game;
+        this.role = role;
         this.pieces = getPieces();
     }
 
@@ -91,5 +93,9 @@ public class Player {
     }
     public boolean isWhite(){
         return team==Team.White;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }
