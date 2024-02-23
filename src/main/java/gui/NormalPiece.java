@@ -1,11 +1,12 @@
 package gui;
 
 import logic.Piece;
+import logic.Team;
 
 import java.awt.image.BufferedImage;
 
 public class NormalPiece extends GraphicPiece{
-    private Piece piece;
+    private final Piece piece;
     public NormalPiece(GraphicBoard graphicBoard, Piece piece, int col, int row, boolean isWhite){
         super(graphicBoard);
         this.piece = piece;
@@ -24,4 +25,6 @@ public class NormalPiece extends GraphicPiece{
     public Piece getPiece(){
         return piece;
     }
+
+    public Team getTeam(){return getPiece().getTeam();}
 }

@@ -13,10 +13,10 @@ public class GraphicPiece extends JPanel {
     public int col, row;
     public int xPos, yPos;
     public boolean isWhite;
-    BufferedImage black;
-    BufferedImage blackKing;
-    BufferedImage white;
-    BufferedImage whiteKing;
+    final BufferedImage black;
+    final BufferedImage blackKing;
+    final BufferedImage white;
+    final BufferedImage whiteKing;
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
@@ -35,12 +35,7 @@ public class GraphicPiece extends JPanel {
     public void paint(Graphics2D g2d) {
         g2d.drawImage(sprite, xPos, yPos, null);
     }
-    public void moveTo(int x, int y) {
-        this.col = x;
-        this.row = y;
-        this.xPos = x * GraphicBoard.tileSize;
-        this.yPos = y * GraphicBoard.tileSize;
-    }
+
     public void moveTo(NeighborPosition destination) {
         if (destination.equals(NeighborPosition.TopRight)){
             col=col+1;

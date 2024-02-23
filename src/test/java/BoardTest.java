@@ -1,5 +1,5 @@
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NoPieceOnWhiteException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NoPieceOnWhiteException;
 import logic.BlackTile;
 import logic.Board;
 import logic.Team;
@@ -45,22 +45,22 @@ public class BoardTest {
     void blackPieceTest() throws NoPieceOnWhiteException {
         for (int row=0;row<4;row+=2){
             for (int col=0;col<board.getSize();col+=2){
-                assertEquals(Team.White,board.getTile(row,col).getPiece().getTeam());
+                assertEquals(Team.White,board.getTeam(row,col));
             }
         }
         for (int col=1;col<board.getSize();col+=2){
-            assertEquals(Team.White,board.getTile(1,col).getPiece().getTeam());
+            assertEquals(Team.White,board.getTeam(1,col));
         }
     }
     @Test
     void whitePieceTest() throws NoPieceOnWhiteException {
         for (int row=5;row<board.getSize();row+=2){
             for (int col=1;col<board.getSize();col+=2){
-                assertEquals(Team.Black,board.getTile(row,col).getPiece().getTeam());
+                assertEquals(Team.Black,board.getTeam(row,col));
             }
         }
         for (int col=0;col<board.getSize();col+=2){
-            assertEquals(Team.Black,board.getTile(6,col).getPiece().getTeam());
+            assertEquals(Team.Black,board.getTeam(6,col));
         }
     }
 
@@ -72,6 +72,7 @@ public class BoardTest {
             }
         }
     }
+    @SuppressWarnings("MagicNumber")
     @Test
     void nonValidPositionTest(){
         assertFalse(board.validCoordinates(-2,3));

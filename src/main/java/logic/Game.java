@@ -1,6 +1,6 @@
 package logic;
 
-import Exceptions.*;
+import exceptions.*;
 import gui.GraphicBoard;
 import multiplayer.Guest;
 import multiplayer.Host;
@@ -11,7 +11,7 @@ import observers.MoveMadeObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements MoveMadeObserver {
+public class Game implements MoveMadeObserver, GameInterface {
     final Player player1;
     final Player player2;
     private Player activePlayer;
@@ -27,7 +27,7 @@ public class Game implements MoveMadeObserver {
     private final MultiplayerActions multiRole;
 
 
-    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, NoPieceOnWhiteException, IllegalTeamsCompositionException, CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }
@@ -64,17 +64,18 @@ public class Game implements MoveMadeObserver {
     }
 
     @Override
-    public void onMoveMade() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
-        playTurn();
+    public void onMoveMade() throws NotOnDiagonalException{
+        Move move= gBoard.getMoveFromGUI();
+        playTurn(move);
     }
 
-    public void playTurn() throws CantEatException, IllegalMovementException, OutOfBoundsException, NotOnDiagonalException {
-        Move move = gBoard.getMoveFromGUI();
-        TypeOfMove typeOfMove = move.getTypeOfMove();
-        if (typeOfMove != TypeOfMove.NoMove) {
-            Piece movingPiece = move.getPiece();
-            NeighborPosition targetPosition = move.getDestination();
-            if (typeOfMove.equals(TypeOfMove.Eat)) {
+    @Override
+    public void playTurn(Move move){
+        TypeOfMove typeOfMove=move.getTypeOfMove();
+        if (typeOfMove!=TypeOfMove.NoMove){
+            Piece movingPiece=move.getPiece();
+            NeighborPosition targetPosition=move.getDestination();
+            if (typeOfMove.equals(TypeOfMove.Eat)){
                 eat(movingPiece, targetPosition);
                 if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
                     if (multiRole != null && activePlayer.getRole() == player1.getRole())
@@ -93,14 +94,16 @@ public class Game implements MoveMadeObserver {
         }
     }
 
-    private void Move(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    @Override
+    public void Move(Piece movingPiece, NeighborPosition targetPosition){
         activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
         gBoard.movePiece(movingPiece, targetPosition);
         checkPromotion(movingPiece);
         roundsWithoutEating++;
     }
 
-    private void eat(Piece movingPiece, NeighborPosition targetPosition) throws OutOfBoundsException {
+    @Override
+    public void eat(Piece movingPiece, NeighborPosition targetPosition) {
         gBoard.eatPiece(movingPiece, targetPosition);
         Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
         activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);
@@ -111,8 +114,10 @@ public class Game implements MoveMadeObserver {
         consecutiveEatings++;
     }
 
-    private void checkGameOver() throws  OutOfBoundsException {
-        if ((!inactivePlayer.hasPieces() || !inactivePlayer.canMove()) && multiRole == null){
+
+    @Override
+    public void checkGameOver(){
+        if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
         }else if(roundsWithoutEating==40){
@@ -120,7 +125,8 @@ public class Game implements MoveMadeObserver {
         }
     }
 
-    private boolean checkMultipleEating(Piece movingPiece) {
+    @Override
+    public boolean checkMultipleEating(Piece movingPiece) {
         if(movingPiece.canEatAnotherPiece()) {
             return true;
         } else {
@@ -128,19 +134,22 @@ public class Game implements MoveMadeObserver {
             return false;
         }
     }
-    private void checkPromotion(Piece movingPiece){
+    public void checkPromotion(Piece movingPiece){
         if (movingPiece.pieceHasToBePromoted()){
             gBoard.getGraphicPiece(movingPiece).promote();
         }
     }
+
+
     public void addObserver(GameObserver observer){
         observers.add(observer);
     }
-    private void notifyObservers(){
+    public void notifyObservers(){
         for (GameObserver observer:observers){
             observer.update(this);
         }
     }
+    @Override
     public void changeActivePlayer() {
         if (activePlayer == player1){
             activePlayer = player2;
@@ -156,25 +165,32 @@ public class Game implements MoveMadeObserver {
         this.gBoard = gBoard;
         gBoard.addMoveMadeObserver(this);
     }
+    @Override
     public Player getActivePlayer() {
         return activePlayer;
     }
+    @Override
     public Player getInactivePlayer() {
         return inactivePlayer;
     }
+    @Override
     public int getCurrentRound(){
         return currentRound;
     }
 
+    @Override
     public Board getBoard() {
         return board;
     }
+    @Override
     public Player getWinnerPlayer() {
         return winnerPlayer;
     }
+    @Override
     public boolean isGameOver(){return gameOver; }
 
-    public int getRoundWithoutEating() {
+    @Override
+    public int getRoundsWithoutEating() {
         return roundsWithoutEating;
     }
 
@@ -186,4 +202,18 @@ public class Game implements MoveMadeObserver {
         return player1;
     }
 
+    @Override
+    public Team getActiveTeam(){
+        return activePlayer.getTeam();
+    }
+
+    @Override
+    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+        return getBoard().getPiece(row,col);
+    }
+
+    @Override
+    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+        return getBoard().getFullBlackTiles();
+    }
 }

@@ -1,8 +1,9 @@
 package main;
 
-import Exceptions.*;
+import exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
+import logic.GameInterface;
 import logic.Team;
 import multiplayer.Role;
 import observers.GameObserver;
@@ -26,22 +27,10 @@ public class Main implements GameObserver {
             frame.setMinimumSize(new Dimension(600, 650));
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
-            Game placeholderGame = null;
+            Game placeholderGame;
             try {
                 placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
-            } catch (IllegalTilePlacementException e) {
-                throw new RuntimeException(e);
-            } catch (NoPieceOnWhiteException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalTeamsCompositionException e) {
-                throw new RuntimeException(e);
-            } catch (CantEatException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalMovementException e) {
-                throw new RuntimeException(e);
-            } catch (OutOfBoundsException e) {
-                throw new RuntimeException(e);
-            } catch (NotOnDiagonalException e) {
+            } catch (IllegalTilePlacementException | IllegalTeamsCompositionException e) {
                 throw new RuntimeException(e);
             }
             gBoard = new GraphicBoard(placeholderGame);
@@ -98,7 +87,7 @@ public class Main implements GameObserver {
                     playersLabel.setText(player1Name + " with " + player1Team + "s" +
                                          "; " + player2Name + " with " + player2Team + "s" );
 
-                    Game game = null;
+                    Game game;
                     try {
                         game = new Game(player1Name, player2Name, player1Team, player2Team);
                         frame.remove(gBoard);
@@ -106,19 +95,8 @@ public class Main implements GameObserver {
                         game.setGBoard(gBoard);
                         game.addObserver(new Main());
                         frame.add(gBoard);
-                    } catch (IllegalTilePlacementException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (NoPieceOnWhiteException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (IllegalTeamsCompositionException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (CantEatException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (IllegalMovementException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (OutOfBoundsException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (NotOnDiagonalException ex) {
+                    } catch (IllegalTilePlacementException |
+                             IllegalTeamsCompositionException ex) {
                         throw new RuntimeException(ex);
                     }
                     gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
@@ -203,13 +181,13 @@ public class Main implements GameObserver {
         };
     }
     @Override
-    public void update(Game game) {
+    public void update(GameInterface gameInterface) {
         SwingUtilities.invokeLater(() -> {
-            if (!game.isGameOver()) {
-                gameLabel.setText("Turn " + game.getCurrentRound() + ", Rounds without eating: "+game.getRoundWithoutEating()+", Active player: " + game.getActivePlayer().getName());
+            if (!gameInterface.isGameOver()) {
+                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundsWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
             }else{
-                if (game.getWinnerPlayer()!=null) {
-                    String winnerName = game.getWinnerPlayer().getName();
+                if (gameInterface.getWinnerPlayer()!=null) {
+                    String winnerName = gameInterface.getWinnerPlayer().getName();
                     gameLabel.setText("Player " + winnerName + " has won, press New Game for playing again");
                 }else{
                     gameLabel.setText("the game is tied, press New Game for playing again");

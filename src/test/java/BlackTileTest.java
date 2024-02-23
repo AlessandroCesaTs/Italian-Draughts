@@ -1,6 +1,5 @@
-import Exceptions.IllegalTilePlacementException;
-import Exceptions.NotOnDiagonalException;
-import Exceptions.OutOfBoundsException;
+import exceptions.IllegalTilePlacementException;
+import exceptions.NotOnDiagonalException;
 import logic.BlackTile;
 import logic.Board;
 import logic.NeighborPosition;
@@ -40,21 +39,21 @@ public class BlackTileTest {
     }
 
     @Test
-    void neighborBottomLeftTest() throws OutOfBoundsException {
+    void neighborBottomLeftTest(){
         assertTrue(tile.getNeighbor(NeighborPosition.BottomLeft).equals(bottomLeftTile));
     }
     @Test
-    void neighborBottomRightTest() throws OutOfBoundsException {
+    void neighborBottomRightTest(){
 
         assertTrue(tile.getNeighbor(NeighborPosition.BottomRight).equals(bottomRightTile));
     }
     @Test
-    void neighborTopLeftTest() throws OutOfBoundsException {
+    void neighborTopLeftTest(){
 
         assertTrue(tile.getNeighbor(NeighborPosition.TopLeft).equals(topLeftTile));
     }
     @Test
-    void neighborTopRightTest() throws OutOfBoundsException {
+    void neighborTopRightTest(){
         assertTrue(tile.getNeighbor(NeighborPosition.TopRight).equals(topRightTile));
     }
 

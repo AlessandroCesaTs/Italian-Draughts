@@ -1,8 +1,7 @@
 package gui;
 
-import Exceptions.*;
+import exceptions.*;
 import logic.*;
-import observers.GameObserver;
 import observers.MoveMadeObserver;
 
 import javax.swing.*;
@@ -10,30 +9,25 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import static main.Main.gBoard;
 
 public class GraphicBoard extends JPanel{
-    private Game game;
-    public static int tileSize = 75;
-    int cols = 8;
-    int rows = 8;
+    private GameInterface gameInterface;
+    final public static int tileSize = 75;
+    final int cols = 8;
+    final int rows = 8;
     Point currentTile = null;
     Point startTile = null;
     Point endTile = null;
-    NeighborPosition movingDirection=null;
     GraphicPiece draggedPiece = null;
     ArrayList<GraphicPiece> pieceList = new ArrayList<>();
-    private List<MoveMadeObserver> observers = new ArrayList<>();
-    private boolean moveMade = false;
-    private GraphicPiece currentPiece;
+    private final List<MoveMadeObserver> observers = new ArrayList<>();
 
-    public GraphicBoard(Game game) {
-        setGame(game);
+    public GraphicBoard(GameInterface gameInterface) {
+        setGame(gameInterface);
         //debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
@@ -44,17 +38,6 @@ public class GraphicBoard extends JPanel{
                 currentTile = new Point(x, y);
                 repaint();
             }
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                if (draggedPiece != null) {
-                    int x = e.getX() / tileSize;
-                    int y = (getHeight() - e.getY()) / tileSize;
-                    if ((x + y) % 2 == 0) {
-                        //draggedPiece.moveTo(x, y);
-                        //repaint();
-                    }
-                }
-            }
         });
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -64,8 +47,9 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != game.getActivePlayer().getTeam()
-                    || game.getPlayer1().getRole() != game.getActivePlayer().getRole()) {
+                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam()
+                    || gameInterface.getPlayer1().getRole() != gameInterface.getActivePlayer().getRole()) {
+
                     draggedPiece = null;
                 }
             }
@@ -76,18 +60,17 @@ public class GraphicBoard extends JPanel{
                 int y = (getHeight() - e.getY()) / tileSize;
                 endTile = new Point(x, y);
                 try {
-                    movingDirection=getNeighborPosition(endTile);
+                    getNeighborPosition(endTile);
                 } catch (NotOnDiagonalException ex) {
                     throw new RuntimeException(ex);
                 }
 
                 GraphicPiece piece = draggedPiece;
-                if (piece != null && ((NormalPiece) piece).getPiece().getTeam() == game.getActivePlayer().getTeam()) {
-                    setCurrentPiece(piece);
+                if (piece != null && ((NormalPiece) piece).getTeam() == gameInterface.getActiveTeam()) {
                     setCurrentTile(endTile);
                     try {
                         setMoveMade(true);
-                    } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
+                    } catch (NotOnDiagonalException ex) {
                         ex.printStackTrace();
                         return;
                     }
@@ -96,20 +79,11 @@ public class GraphicBoard extends JPanel{
             }
         });
     }
-    private void setCurrentPiece(GraphicPiece currentPiece) {
-        this.currentPiece = currentPiece;
-    }
+
     private void setCurrentTile(Point currentTile) {
         this.currentTile = currentTile;
     }
-    public void moveCurrentPieceByOne() {
-        currentPiece.moveTo(currentTile.x, currentTile.y);
-        repaint();
-    }
-    public void moveCurrentPieceByTwo() {
-        currentPiece.moveTo(currentTile.x, currentTile.y);
-        repaint();
-    }
+
     public void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
         piece.moveTo(destination);
         repaint();
@@ -129,8 +103,8 @@ public class GraphicBoard extends JPanel{
         }
         return graphicPiece;
     }
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGame(GameInterface gameInterface) {
+        this.gameInterface = gameInterface;
         resetBoard();
     }
     public void resetBoard() {
@@ -143,9 +117,9 @@ public class GraphicBoard extends JPanel{
         for (int c=0; c < cols; c++) {
             for (int r = 0; r <= 2; r++) {
                 if ((r+c) % 2 == 0){
-                    Piece piece = null;
+                    Piece piece;
                     try {
-                        piece = game.getBoard().getPiece(r, c);
+                        piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -154,9 +128,9 @@ public class GraphicBoard extends JPanel{
             }
             for (int r = 5; r < rows; r++) {
                 if ((r+c) % 2 == 0){
-                    Piece piece = null;
+                    Piece piece;
                     try {
-                        piece = game.getBoard().getPiece(r, c);
+                        piece = gameInterface.getPiece(r, c);
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
@@ -190,7 +164,7 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public Move getMoveFromGUI() throws NotOnDiagonalException{
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
         }
@@ -199,21 +173,21 @@ public class GraphicBoard extends JPanel{
         }
 
         Piece piece = ((NormalPiece) draggedPiece).getPiece();
-        Player player = game.getActivePlayer();
+        Player player = gameInterface.getActivePlayer();
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
 
         return new Move(player, piece, neighborDestination);
 
     }
 
-    public void eatPiece(Piece eatingPiece,NeighborPosition destination) throws OutOfBoundsException {
+    public void eatPiece(Piece eatingPiece,NeighborPosition destination) {
         GraphicPiece eatingGraphicPiece= gBoard.getGraphicPiece(eatingPiece);
         GraphicPiece targetGraphicPiece= gBoard.getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
         gBoard.removePiece(targetGraphicPiece);
         gBoard.movePieceTo(eatingGraphicPiece,destination);
         gBoard.movePieceTo(eatingGraphicPiece,destination);
     }
-    public void movePiece(Piece movingPiece,NeighborPosition destination) throws OutOfBoundsException {
+    public void movePiece(Piece movingPiece,NeighborPosition destination){
         GraphicPiece movingGraphicPiece= gBoard.getGraphicPiece(movingPiece);
         gBoard.movePieceTo(movingGraphicPiece,destination);
     }
@@ -256,33 +230,20 @@ public class GraphicBoard extends JPanel{
         }
     }
 
-        /*
-        if (dx == 1 && dy == 1) {
-            return NeighborPosition.BottomRight;
-        } else if (dx == -1 && dy == 1) {
-            return NeighborPosition.BottomLeft;
-        } else if (dx == 1 && dy == -1) {
-            return NeighborPosition.TopRight;
-        } else if (dx == -1 && dy == -1) {
-            return NeighborPosition.TopLeft;
-        } else {
-            return null;
-        }
-         */
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers() throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
+    public void notifyMoveMadeObservers() throws NotOnDiagonalException{
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException, CantEatException, IllegalMovementException, OutOfBoundsException {
-        this.moveMade = moveMade;
+    public void setMoveMade(boolean moveMade) throws NotOnDiagonalException{
+        boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();
         }
-        this.moveMade = false;
+        moveMade1 = false;
     }
     public void debugPieces(){
         for (GraphicPiece graphicPiece:pieceList){

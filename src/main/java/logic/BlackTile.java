@@ -1,6 +1,6 @@
 package logic;
 
-import Exceptions.IllegalTilePlacementException;
+import exceptions.IllegalTilePlacementException;
 
 import java.util.HashMap;
 import java.util.Map;

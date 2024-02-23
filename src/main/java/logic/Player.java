@@ -1,9 +1,8 @@
 package logic;
 
-import Exceptions.NoPieceOnWhiteException;
-import Exceptions.OutOfBoundsException;
-import multiplayer.Role;
 
+import multiplayer.Role;
+import exceptions.NoPieceOnWhiteException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,7 +10,7 @@ import java.util.stream.Collectors;
 public class Player {
     private final String name;
     private final Team team;
-    public final Game Game;
+    public final GameInterface GameInterface;
     private final Role role;
     private int numberOfPieces=12;
     private List<Piece> pieces;
@@ -19,7 +18,7 @@ public class Player {
     public Player(String name, Team team, Game Game, Role role) {
         this.name = name;
         this.team = team;
-        this.Game=Game;
+        this.GameInterface = GameInterface;
         this.role = role;
         this.pieces = getPieces();
     }
@@ -38,7 +37,7 @@ public class Player {
     public void reloadPieces(){
         List<BlackTile> fullBlackTiles;
         try {
-            fullBlackTiles = Game.getBoard().getFullBlackTiles();
+            fullBlackTiles = GameInterface.getFullBlackTiles();
         } catch (NoPieceOnWhiteException e) {
             throw new RuntimeException(e);
         }
@@ -60,7 +59,7 @@ public class Player {
         pieces.remove(piece);
         numberOfPieces--;
     }
-    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) throws OutOfBoundsException{
+    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) {
         if (Objects.requireNonNull(typeOfMove) == TypeOfMove.Move) {
             movingPiece.movePieceByOne(targetPosition);
         }else{
@@ -68,7 +67,7 @@ public class Player {
         }
     }
 
-    public boolean shouldEat() throws OutOfBoundsException {
+    public boolean shouldEat(){
         for (Piece piece:pieces){
             for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
             {
@@ -79,7 +78,7 @@ public class Player {
         }
         return false;
     }
-    public boolean canMove() throws OutOfBoundsException {
+    public boolean canMove() {
         for (Piece piece:pieces){
             for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
             {
@@ -90,9 +89,6 @@ public class Player {
 
         }
         return false;
-    }
-    public boolean isWhite(){
-        return team==Team.White;
     }
 
     public Role getRole() {
