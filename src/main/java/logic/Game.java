@@ -64,7 +64,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public void onMoveMade() throws NotOnDiagonalException{
+    public void onMoveMade(){
         Move move= gBoard.getMoveFromGUI();
         playTurn(move);
     }
