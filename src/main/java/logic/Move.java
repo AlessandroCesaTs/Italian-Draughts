@@ -14,7 +14,7 @@ public class Move {
     }
 
     public TypeOfMove computeTypeOfMove(){
-        if (player.getTeam() == piece.team){
+        if (player.getTeam() == piece.team && neighborDestination!=null){
             if (player.shouldEat()){
                 if (piece.canEat(neighborDestination)){
                     return TypeOfMove.Eat;

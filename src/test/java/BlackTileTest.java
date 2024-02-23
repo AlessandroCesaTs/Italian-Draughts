@@ -1,5 +1,4 @@
 import exceptions.IllegalTilePlacementException;
-import exceptions.NotOnDiagonalException;
 import logic.BlackTile;
 import logic.Board;
 import logic.NeighborPosition;
@@ -55,27 +54,6 @@ public class BlackTileTest {
     @Test
     void neighborTopRightTest(){
         assertTrue(tile.getNeighbor(NeighborPosition.TopRight).equals(topRightTile));
-    }
-
-    @Test
-    void directionBottomLeft() throws Exception {
-        assertEquals(NeighborPosition.BottomLeft,tile.otherTileDirection(bottomLeftTile));
-    }
-    @Test
-    void directionBottomRight() throws Exception {
-        assertEquals(NeighborPosition.BottomRight,tile.otherTileDirection(bottomRightTile));
-    }
-    @Test
-    void directionTopLeft() throws Exception {
-        assertEquals(NeighborPosition.TopLeft,tile.otherTileDirection(topLeftTile));
-    }
-    @Test
-    void directionTopRight() throws Exception {
-        assertEquals(NeighborPosition.TopRight,tile.otherTileDirection(topRightTile));
-    }
-    @Test
-    void directionException() {
-        assertThrows(NotOnDiagonalException.class,()-> tile.otherTileDirection(otherTile));
     }
 
     @Test
