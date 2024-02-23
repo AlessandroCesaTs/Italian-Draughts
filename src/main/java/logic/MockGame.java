@@ -1,6 +1,8 @@
 package logic;
 
 import exceptions.*;
+import gui.GraphicBoard;
+import multiplayer.Role;
 
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class MockGame implements GameInterface{
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        player1 =new Player(player1Name,team1,this);
-        player2 =new Player(player2Name,team2,this);
+        player1 =new Player(player1Name,team1,this, Role.Null);
+        player2 =new Player(player2Name,team2,this,Role.Null);
         activePlayer= player1;
         inactivePlayer=player2;
     }
@@ -145,4 +147,9 @@ public class MockGame implements GameInterface{
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
         return getBoard().getFullBlackTiles();
     }
+    @Override
+    public Player getPlayer1() {
+        return player1;
+    }
+
 }

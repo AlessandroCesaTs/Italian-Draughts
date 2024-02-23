@@ -271,7 +271,7 @@ public class GraphicBoard extends JPanel{
     public void setEndTile(Point endTile) {
         this.endTile = endTile;
         try {
-            movingDirection = getNeighborPosition(endTile);
+             getNeighborPosition(endTile);
         } catch (NotOnDiagonalException ex) {
             throw new RuntimeException(ex);
         }
@@ -281,7 +281,7 @@ public class GraphicBoard extends JPanel{
 
         try {
             setMoveMade(true);
-        } catch (NotOnDiagonalException | CantEatException | IllegalMovementException | OutOfBoundsException ex) {
+        } catch (NotOnDiagonalException ex) {
             ex.printStackTrace();
             return;
         }

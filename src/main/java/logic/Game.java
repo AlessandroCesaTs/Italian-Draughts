@@ -198,6 +198,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         return gBoard;
     }
 
+    @Override
     public Player getPlayer1() {
         return player1;
     }
