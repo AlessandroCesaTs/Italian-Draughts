@@ -2,9 +2,12 @@ package logic;
 
 import exceptions.*;
 import gui.GraphicBoard;
+import multiplayer.Guest;
+import multiplayer.Host;
+import multiplayer.MultiplayerActions;
+import multiplayer.Role;
 import observers.GameObserver;
 import observers.MoveMadeObserver;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +24,45 @@ public class Game implements MoveMadeObserver, GameInterface {
     private int roundsWithoutEating=0;
     private final List<GameObserver> observers = new ArrayList<>();
     private int consecutiveEatings;
+    private final MultiplayerActions multiRole;
+
 
     public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        player1 =new Player(player1Name,team1,this);
-        player2 =new Player(player2Name,team2,this);
+        player1 =new Player(player1Name,team1,this, Role.Null);
+        player2 =new Player(player2Name,team2,this,Role.Null);
         activePlayer= player1;
         inactivePlayer=player2;
+        multiRole = null;
     }
+
+    public Game(String playerName, Team team, String hostIPField) throws Exception {
+        switch (playerName){
+            case "Host" -> {
+                board = new Board();
+                player1 = new Player(playerName, team, this, Role.Host);
+                player2 = new Player("Guest", Team.Black, this, Role.Guest);
+                activePlayer = player1;
+                inactivePlayer = player2;
+                multiRole = new Host(this);
+                multiRole.connect();
+            }
+            case "Guest" -> {
+                board = new Board();
+                player1 = new Player(playerName, team, this, Role.Guest);
+                player2 = new Player("Host", Team.White, this, Role.Host);
+                activePlayer = player2;
+                inactivePlayer = player1;
+                multiRole = new Guest(hostIPField,this);
+                multiRole.connect();
+            }
+            default -> throw new Exception("Something has gone wrong!");
+        }
+    }
+
     @Override
     public void onMoveMade() throws NotOnDiagonalException{
         Move move= gBoard.getMoveFromGUI();
@@ -46,11 +77,16 @@ public class Game implements MoveMadeObserver, GameInterface {
             NeighborPosition targetPosition=move.getDestination();
             if (typeOfMove.equals(TypeOfMove.Eat)){
                 eat(movingPiece, targetPosition);
-                if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
+                if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
+                    if (multiRole != null && activePlayer.getRole() == player1.getRole())
+                        multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
                     return;
                 }
-            }else {
+            } else {
                 Move(movingPiece, targetPosition);
+            }
+            if (multiRole != null && activePlayer.getRole() == player1.getRole()) {
+                multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
             }
             checkGameOver();
             currentRound++;
@@ -77,6 +113,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         roundsWithoutEating=0;
         consecutiveEatings++;
     }
+
 
     @Override
     public void checkGameOver(){
@@ -116,13 +153,14 @@ public class Game implements MoveMadeObserver, GameInterface {
     public void changeActivePlayer() {
         if (activePlayer == player1){
             activePlayer = player2;
-            inactivePlayer=player1;
+            inactivePlayer = player1;
         } else {
             activePlayer = player1;
-            inactivePlayer=player2;
+            inactivePlayer = player2;
         }
         notifyObservers();
     }
+
     public void setGBoard(GraphicBoard gBoard) {
         this.gBoard = gBoard;
         gBoard.addMoveMadeObserver(this);
@@ -154,6 +192,15 @@ public class Game implements MoveMadeObserver, GameInterface {
     @Override
     public int getRoundsWithoutEating() {
         return roundsWithoutEating;
+    }
+
+    public GraphicBoard getGBoard() {
+        return gBoard;
+    }
+
+    @Override
+    public Player getPlayer1() {
+        return player1;
     }
 
     @Override

@@ -47,7 +47,9 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null && ((NormalPiece) draggedPiece).getTeam() != gameInterface.getActiveTeam()) {
+                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam()
+                    || gameInterface.getPlayer1().getRole() != gameInterface.getActivePlayer().getRole()) {
+
                     draggedPiece = null;
                 }
             }
@@ -250,5 +252,40 @@ public class GraphicBoard extends JPanel{
             System.out.println("Graphic Piece at "+position);
             System.out.println("Corresponding logic Piece at "+logicPiece.getTile().getCol()+ " , "+logicPiece.getTile().getRow());
         }
+
+    }
+
+    public Point getStartTile() {
+        return startTile;
+    }
+
+    public void setStartTile(Point startTile) {
+        this.startTile = startTile;
+        draggedPiece = findPieceAtTile(startTile);
+    }
+
+    public Point getEndTile() {
+        return endTile;
+    }
+
+    public void setEndTile(Point endTile) {
+        this.endTile = endTile;
+        try {
+             getNeighborPosition(endTile);
+        } catch (NotOnDiagonalException ex) {
+            throw new RuntimeException(ex);
+        }
+        setCurrentTile(endTile);
+        System.out.println(getEndTile());
+        System.out.println(getStartTile());
+
+        try {
+            setMoveMade(true);
+        } catch (NotOnDiagonalException ex) {
+            ex.printStackTrace();
+            return;
+        }
+
+        draggedPiece = null;
     }
 }

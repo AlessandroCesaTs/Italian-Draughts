@@ -1,6 +1,7 @@
 package logic;
 
 import exceptions.NoPieceOnWhiteException;
+import gui.GraphicBoard;
 
 import java.util.List;
 
@@ -37,5 +38,7 @@ public interface GameInterface {
     Piece getPiece(int row,int col) throws NoPieceOnWhiteException;
 
     List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException;
+
+    Player getPlayer1();
 
 }

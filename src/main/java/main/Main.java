@@ -5,6 +5,7 @@ import gui.GraphicBoard;
 import logic.Game;
 import logic.GameInterface;
 import logic.Team;
+import multiplayer.Role;
 import observers.GameObserver;
 
 import javax.swing.*;
@@ -104,23 +105,55 @@ public class Main implements GameObserver {
 
             JButton multiplayerButton = new JButton("Multiplayer");
             multiplayerButton.addActionListener(e -> {
-                JTextField player1NameField = new JTextField();
-                JTextField player2NameField = new JTextField();
+                JComboBox<Role> playerRoleField = new JComboBox<>(Role.values());
+                JTextField hostIPField = new JTextField();
+
+                playerRoleField.setSelectedItem(Role.Host);
 
                 JPanel panel = new JPanel(new GridLayout(0, 1));
-                panel.add(new JLabel("Enter Player 1 Name:"));
-                panel.add(player1NameField);
-                panel.add(new JLabel("Enter Player 2 Name:"));
-                panel.add(player2NameField);
+                panel.add(new JLabel("Enter Player Role:"));
+                panel.add(playerRoleField);
+                panel.add(new JLabel("Enter Host IP:"));
+                panel.add(hostIPField);
 
                 int result = JOptionPane.showConfirmDialog(frame, panel, "Start New Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
                 if (result == JOptionPane.OK_OPTION) {
-                    String player1Name = player1NameField.getText();
-                    String player2Name = player2NameField.getText();
 
-                    // Code for multiplayer
-                    gBoard.resetBoard();
+                    Game game = null;
+
+                    try{
+
+                        switch ((Role) playerRoleField.getSelectedItem()) {
+
+                            case Host -> {
+                                game = new Game("Host", Team.White, hostIPField.getText());
+                                frame.remove(gBoard);
+                                gBoard = new GraphicBoard(game);
+                                game.setGBoard(gBoard);
+                                game.addObserver(new Main());
+                                frame.add(gBoard);
+                            }
+
+                            case Guest -> {
+                                game = new Game("Guest", Team.Black, hostIPField.getText());
+                                frame.remove(gBoard);
+                                gBoard = new GraphicBoard(game);
+                                game.setGBoard(gBoard);
+                                game.addObserver(new Main());
+                                frame.add(gBoard);
+                            }
+
+                            default -> throw new Exception("Something has gone wrong!");
+
+                        }
+
+                    } catch (Exception exception){
+                        throw new RuntimeException(exception);
+                    }
+
+                    gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
+
                 }
             });
 

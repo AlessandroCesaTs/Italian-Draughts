@@ -1,7 +1,8 @@
 package logic;
 
-import exceptions.NoPieceOnWhiteException;
 
+import multiplayer.Role;
+import exceptions.NoPieceOnWhiteException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,15 +10,16 @@ import java.util.stream.Collectors;
 public class Player {
     private final String name;
     private final Team team;
-    public final GameInterface GameInterface;
-
+    public final GameInterface gameInterface;
+    private final Role role;
     private int numberOfPieces=12;
     private List<Piece> pieces;
 
-    public Player(String name, Team team, GameInterface GameInterface) {
+    public Player(String name, Team team, GameInterface gameInterface, Role role) {
         this.name = name;
         this.team = team;
-        this.GameInterface = GameInterface;
+        this.gameInterface = gameInterface;
+        this.role = role;
         this.pieces = getPieces();
     }
 
@@ -35,7 +37,7 @@ public class Player {
     public void reloadPieces(){
         List<BlackTile> fullBlackTiles;
         try {
-            fullBlackTiles = GameInterface.getFullBlackTiles();
+            fullBlackTiles = gameInterface.getFullBlackTiles();
         } catch (NoPieceOnWhiteException e) {
             throw new RuntimeException(e);
         }
@@ -87,5 +89,9 @@ public class Player {
 
         }
         return false;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }
