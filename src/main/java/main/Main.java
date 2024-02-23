@@ -153,6 +153,7 @@ public class Main implements GameObserver {
                     }
 
                     gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
+                    playersLabel.setText("Host with Withes and Guest with Blacks");
 
                 }
             });
