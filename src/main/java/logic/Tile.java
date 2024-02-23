@@ -1,7 +1,6 @@
 package logic;
 
 import exceptions.NoPieceOnWhiteException;
-import exceptions.NotOnDiagonalException;
 
 public abstract class Tile {
     final int row;
@@ -30,31 +29,6 @@ public abstract class Tile {
 
     public boolean equals(Tile tile) {
         return tile.getRow()== row && tile.getCol()== col;
-    }
-
-    public boolean isOnDiagonal(Tile otherTile){
-        return Math.abs(rowDiff(otherTile))==Math.abs(colDiff(otherTile)) && rowDiff(otherTile)!=0;
-    }
-    public NeighborPosition otherTileDirection(Tile otherTile) throws NotOnDiagonalException {
-        int rowDiff=rowDiff(otherTile);
-        int colDiff=colDiff(otherTile);
-        if (this.isOnDiagonal(otherTile)) {
-            if (rowDiff > 0) {
-                if (colDiff > 0) {
-                    return NeighborPosition.TopRight;
-                } else {
-                    return NeighborPosition.TopLeft;
-                }
-            } else {
-                if (colDiff > 0) {
-                    return NeighborPosition.BottomRight;
-                } else {
-                    return NeighborPosition.BottomLeft;
-                }
-            }
-        }else{
-            throw new NotOnDiagonalException();
-        }
     }
 
     public int calculateDistance(Tile otherTile){
