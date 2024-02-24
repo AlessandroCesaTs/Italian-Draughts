@@ -9,7 +9,8 @@ public class LocalServer extends Thread {
 
     private final int port;
     private int nConnections;
-    private Socket[] sockets;
+    private final Socket[] sockets;
+    private boolean running;
 
     public LocalServer(int port) {
         this.port = port;
@@ -22,7 +23,9 @@ public class LocalServer extends Thread {
         try (ServerSocket serverSocket = new ServerSocket(port);
              ExecutorService executorService = Executors.newFixedThreadPool(2)
         ) {
-            while (true) {
+            running = true;
+
+            while (running) {
                 sockets[nConnections] = serverSocket.accept();
                 nConnections++;
                 if (nConnections == 2) {
@@ -37,5 +40,9 @@ public class LocalServer extends Thread {
 
     public int getnConnections() {
         return nConnections;
+    }
+
+    public void close() {
+        running = false;
     }
 }
