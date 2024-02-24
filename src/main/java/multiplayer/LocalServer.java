@@ -9,7 +9,7 @@ public class LocalServer extends Thread {
 
     private final int port;
     private int nConnections;
-    private Socket[] sockets;
+    private final Socket[] sockets;
 
     public LocalServer(int port) {
         this.port = port;
