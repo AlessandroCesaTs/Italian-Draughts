@@ -11,3 +11,4 @@ In order to run the software and start playing, it is necessary to open the proj
 If both players want to play on the same computer, they just need to click on `New Game`, insert their names, select the team (Black or White, of course the 2 players can't select the same team) and the game will start.
 
 ## Playing on two computers
+To run multiplayer mode is necessary to connect two device togher through hotspot. The device who run the hotspot have to run the game as Host, the other one have to run the game as Guest and both have insert the IP of the Host's hotspot. At this point you have to wait that the game plot the write which indicate whose is the turn, after that you are ready to play.
