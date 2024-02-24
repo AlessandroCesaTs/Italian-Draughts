@@ -58,6 +58,7 @@ public class Guest implements MultiplayerActions,Runnable {
         }
     }
 
+    @Override
     public void close(){
         try {
             running = false;

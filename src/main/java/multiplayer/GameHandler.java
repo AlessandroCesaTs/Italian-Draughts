@@ -6,10 +6,12 @@ import java.net.Socket;
 public class GameHandler implements Runnable {
     private final Socket[] sockets;
     private int turnListener;
+    private boolean running;
 
     public GameHandler(Socket[] sockets) {
         this.sockets = sockets;
         turnListener = 0;
+        running = true;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class GameHandler implements Runnable {
             BufferedReader brBlack = new BufferedReader(new InputStreamReader(sockets[1].getInputStream()));
             BufferedWriter bwBlack = new BufferedWriter(new OutputStreamWriter(sockets[1].getOutputStream()));
 
-            while (true) {
+            while (running) {
 
                 if (turnListener == 0) {
                     turnSender(brWhite, bwBlack);
@@ -56,4 +58,5 @@ public class GameHandler implements Runnable {
             throw new RuntimeException(e);
         }
     }
+
 }

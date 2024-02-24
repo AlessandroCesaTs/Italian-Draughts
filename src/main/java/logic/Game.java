@@ -120,8 +120,14 @@ public class Game implements MoveMadeObserver, GameInterface {
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             winnerPlayer=activePlayer;
             gameOver=true;
+            if (multiRole != null){
+                multiRole.close();
+            }
         }else if(roundsWithoutEating==40){
             gameOver=true;
+            if (multiRole != null){
+                multiRole.close();
+            }
         }
     }
 

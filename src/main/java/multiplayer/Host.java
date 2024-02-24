@@ -62,12 +62,14 @@ public class Host implements MultiplayerActions,Runnable {
         }
     }
 
+    @Override
     public void close(){
         try {
             running = false;
             br.close();
             bw.close();
             socket.close();
+            localServer.close();
         } catch (IOException e){
             throw new RuntimeException(e);
         }
