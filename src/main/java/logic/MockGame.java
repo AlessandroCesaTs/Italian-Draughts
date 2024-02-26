@@ -38,10 +38,10 @@ public class MockGame implements GameInterface{
             NeighborPosition targetPosition=move.getDestination();
             if (typeOfMove.equals(TypeOfMove.Eat)){
                 eat(movingPiece, targetPosition);
-                if(checkMultipleEating(movingPiece) && consecutiveEatings <=3) {
+                if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
                     return;
                 }
-            }else {
+            } else {
                 Move(movingPiece, targetPosition);
             }
             checkGameOver();
@@ -54,7 +54,6 @@ public class MockGame implements GameInterface{
     public void Move(Piece movingPiece, NeighborPosition targetPosition) {
         activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
         roundsWithoutEating++;
-
     }
 
     @Override
