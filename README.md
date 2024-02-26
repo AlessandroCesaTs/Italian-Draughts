@@ -7,6 +7,10 @@ The game can be played either on a single computer, or with the two players play
 ## How to run the software
 In order to run the software and start playing, it is necessary to open the project's folder in a terminal and run the command `./gradlew run`
 
+### Requirements
+
+It is necessary to have the Java Development Kit 21 and Gradle 8.5
+
 ## Playing on one computer
 If both players want to play on the same computer, they just need to click on `New Game`, insert their names, select the team (Black or White, of course the 2 players can't select the same team) and the game will start.
 
