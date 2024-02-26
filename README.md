@@ -5,7 +5,7 @@ This repository contains the Java implementation of the classic Italian Draughts
 The game can be played either on a single computer, or with the two players playing against each other each one on his computer.
 
 ## How to run the software
-In order to run the software and start playing, it is necessary to open the project's folder in a terminal and run the command `./gradlew run`
+In order to run the software and start playing, it is necessary to clone this repository in order to download the whole software, and then open the project's folder in a terminal and run the command `./gradlew run`
 
 ### Requirements
 
