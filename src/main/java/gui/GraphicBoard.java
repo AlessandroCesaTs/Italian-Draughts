@@ -23,7 +23,7 @@ public class GraphicBoard extends JPanel{
     Point startTile = null;
     Point endTile = null;
     GraphicPiece draggedPiece = null;
-    ArrayList<GraphicPiece> pieceList = new ArrayList<>();
+    final ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private final List<MoveMadeObserver> observers = new ArrayList<>();
 
     public GraphicBoard(GameInterface gameInterface) {

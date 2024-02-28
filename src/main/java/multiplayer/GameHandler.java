@@ -6,7 +6,7 @@ import java.net.Socket;
 public class GameHandler implements Runnable {
     private final Socket[] sockets;
     private int turnListener;
-    private boolean running;
+    private final boolean running;
 
     public GameHandler(Socket[] sockets) {
         this.sockets = sockets;

@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SuppressWarnings("MagicNumber")
 public class PlayerTest {
 
-    GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
+    final GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
 
     public PlayerTest() throws IllegalTilePlacementException, IllegalTeamsCompositionException {
     }
 
-    Player player1= gameInterface.getActivePlayer();
-    Player player2= gameInterface.getInactivePlayer();
+    final Player player1= gameInterface.getActivePlayer();
+    final Player player2= gameInterface.getInactivePlayer();
 
     @Test
     void player1Test(){

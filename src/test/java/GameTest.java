@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SuppressWarnings("MagicNumber")
 public class GameTest {
 
-    MockGame game =new MockGame("Anna","Mario", Team.White,Team.Black);
-    Board board=game.getBoard();
-    Player player1=game.getActivePlayer();
-    Player player2=game.getInactivePlayer();
+    final MockGame game =new MockGame("Anna","Mario", Team.White,Team.Black);
+    final Board board=game.getBoard();
+    final Player player1=game.getActivePlayer();
+    final Player player2=game.getInactivePlayer();
 
     public GameTest() throws IllegalTilePlacementException,IllegalTeamsCompositionException{
     }

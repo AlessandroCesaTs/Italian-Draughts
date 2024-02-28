@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MovementTest {
-    Board board=new Board();
+    final Board board=new Board();
 
     public MovementTest() throws IllegalTilePlacementException {
     }
