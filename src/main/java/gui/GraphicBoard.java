@@ -238,11 +238,9 @@ public class GraphicBoard extends JPanel{
         }
     }
     public void setMoveMade(boolean moveMade){
-        boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();
         }
-        moveMade1 = false;
     }
     public void debugPieces(){
         for (GraphicPiece graphicPiece:pieceList){
