@@ -20,13 +20,7 @@ public class Main implements GameObserver {
     }
     public static Runnable gameInitiation() {
         return () -> {
-            JFrame frame = new JFrame();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().setBackground(new Color(240, 236, 236));
-            frame.setLayout(new GridBagLayout());
-            frame.setMinimumSize(new Dimension(600, 650));
-            frame.setResizable(false);
-            frame.setLocationRelativeTo(null);
+            JFrame frame = getjFrame();
             Game placeholderGame;
             try {
                 placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
@@ -181,6 +175,18 @@ public class Main implements GameObserver {
             frame.setVisible(true);
         };
     }
+
+    private static JFrame getjFrame() {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(new Color(240, 236, 236));
+        frame.setLayout(new GridBagLayout());
+        frame.setMinimumSize(new Dimension(600, 650));
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        return frame;
+    }
+
     @Override
     public void update(GameInterface gameInterface) {
         SwingUtilities.invokeLater(() -> {
