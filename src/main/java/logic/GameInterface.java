@@ -1,7 +1,6 @@
 package logic;
 
 import exceptions.NoPieceOnWhiteException;
-import gui.GraphicBoard;
 
 import java.util.List;
 
