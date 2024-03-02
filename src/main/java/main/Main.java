@@ -30,13 +30,7 @@ public class Main implements GameObserver {
             gBoard = new GraphicBoard(placeholderGame);
             placeholderGame.setGBoard(gBoard);
 
-            JLabel playersLabel = new JLabel();
-            gameLabel = new JLabel();
-            Dimension labelSize = new Dimension(frame.getWidth(), 25);
-            playersLabel.setPreferredSize(labelSize);
-            gameLabel.setPreferredSize(labelSize);
-            playersLabel.setForeground(Color.BLACK);
-            gameLabel.setForeground(Color.BLACK);
+            JLabel playersLabel = getPlayersLabel(frame);
 
             JButton newGameButton = new JButton("New Game");
             newGameButton.addActionListener(e -> {
@@ -174,6 +168,17 @@ public class Main implements GameObserver {
             frame.pack();
             frame.setVisible(true);
         };
+    }
+
+    private static JLabel getPlayersLabel(JFrame frame) {
+        JLabel playersLabel = new JLabel();
+        gameLabel = new JLabel();
+        Dimension labelSize = new Dimension(frame.getWidth(), 25);
+        playersLabel.setPreferredSize(labelSize);
+        gameLabel.setPreferredSize(labelSize);
+        playersLabel.setForeground(Color.BLACK);
+        gameLabel.setForeground(Color.BLACK);
+        return playersLabel;
     }
 
     private static JFrame getjFrame() {
