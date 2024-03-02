@@ -78,7 +78,7 @@ public class Main implements GameObserver {
 
             if (result == JOptionPane.OK_OPTION) {
 
-                Game game = null;
+                Game game;
 
                 try{
 
