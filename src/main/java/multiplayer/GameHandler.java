@@ -49,7 +49,6 @@ public class GameHandler implements Runnable {
                         case 0 -> turnListener = 1;
                         case 1 -> turnListener = 0;
                     }
-                System.out.println(turnListener);
             }
 
             bw.write(line + System.lineSeparator());

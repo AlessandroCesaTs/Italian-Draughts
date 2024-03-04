@@ -95,7 +95,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     private void sendMove(int messageType) {
         if (multiRole != null && activePlayer.getRole() == player1.getRole()){
             Point startTile=gBoard.getStartTile();
-            Point endTile=gBoard.getStartTile();
+            Point endTile=gBoard.getEndTile();
             multiRole.sendMove(startTile, endTile, messageType);}
     }
 
@@ -126,7 +126,7 @@ public class Game implements MoveMadeObserver, GameInterface {
             winnerPlayer=activePlayer;
             gameOver=true;
             if (multiRole != null){
-                multiRole.close();
+
             }
         }else if(roundsWithoutEating==40){
             gameOver=true;

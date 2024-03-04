@@ -269,8 +269,6 @@ public class GraphicBoard extends JPanel{
         this.endTile = endTile;
         getNeighborPosition(endTile);
         setCurrentTile(endTile);
-        System.out.println(getEndTile());
-        System.out.println(getStartTile());
 
         setMoveMade(true);
 
