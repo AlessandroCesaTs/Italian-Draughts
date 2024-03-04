@@ -14,7 +14,7 @@ public class BoardTest {
 
     public BoardTest() throws IllegalTilePlacementException {
     }
-    Board board=new Board();
+    final Board board=new Board();
     @Test
     void boardBlackTileTest(){
         for (int row=0;row<board.getSize();row+=2){

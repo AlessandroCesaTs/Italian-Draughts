@@ -1,7 +1,6 @@
 package logic;
 
 import exceptions.*;
-import gui.GraphicBoard;
 import multiplayer.Role;
 
 import java.util.List;

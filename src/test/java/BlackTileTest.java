@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BlackTileTest {
-    Board board=new Board();
-    BlackTile tile=BlackTile.asBlackTile(board.getTile(1,1));
-    BlackTile bottomLeftTile=BlackTile.asBlackTile(board.getTile(0,0));
-    BlackTile bottomRightTile=BlackTile.asBlackTile(board.getTile(0,2));
-    BlackTile topLeftTile=BlackTile.asBlackTile(board.getTile(2,0));
-    BlackTile topRightTile=BlackTile.asBlackTile(board.getTile(2,2));
-    BlackTile otherTile=BlackTile.asBlackTile(board.getTile(1,3));
+    final Board board=new Board();
+    final BlackTile tile=BlackTile.asBlackTile(board.getTile(1,1));
+    final BlackTile bottomLeftTile=BlackTile.asBlackTile(board.getTile(0,0));
+    final BlackTile bottomRightTile=BlackTile.asBlackTile(board.getTile(0,2));
+    final BlackTile topLeftTile=BlackTile.asBlackTile(board.getTile(2,0));
+    final BlackTile topRightTile=BlackTile.asBlackTile(board.getTile(2,2));
+    final BlackTile otherTile=BlackTile.asBlackTile(board.getTile(1,3));
 
     public BlackTileTest() throws IllegalTilePlacementException {
     }

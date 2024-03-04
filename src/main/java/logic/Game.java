@@ -10,6 +10,7 @@ import observers.GameObserver;
 import observers.MoveMadeObserver;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.*;
 
 public class Game implements MoveMadeObserver, GameInterface {
     final Player player1;
@@ -78,20 +79,24 @@ public class Game implements MoveMadeObserver, GameInterface {
             if (typeOfMove.equals(TypeOfMove.Eat)){
                 eat(movingPiece, targetPosition);
                 if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
-                    if (multiRole != null && activePlayer.getRole() == player1.getRole())
-                        multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 1);
+                    sendMove(1);
                     return;
                 }
             } else {
                 Move(movingPiece, targetPosition);
             }
-            if (multiRole != null && activePlayer.getRole() == player1.getRole()) {
-                multiRole.sendMove(gBoard.getStartTile(), gBoard.getEndTile(), 0);
-            }
+            sendMove(0);
             checkGameOver();
             currentRound++;
             changeActivePlayer();
         }
+    }
+
+    private void sendMove(int messageType) {
+        if (multiRole != null && activePlayer.getRole() == player1.getRole()){
+            Point startTile=gBoard.getStartTile();
+            Point endTile=gBoard.getEndTile();
+            multiRole.sendMove(startTile, endTile, messageType);}
     }
 
     @Override
@@ -121,7 +126,7 @@ public class Game implements MoveMadeObserver, GameInterface {
             winnerPlayer=activePlayer;
             gameOver=true;
             if (multiRole != null){
-                multiRole.close();
+
             }
         }else if(roundsWithoutEating==40){
             gameOver=true;

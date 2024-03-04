@@ -23,7 +23,7 @@ public class GraphicBoard extends JPanel{
     Point startTile = null;
     Point endTile = null;
     GraphicPiece draggedPiece = null;
-    ArrayList<GraphicPiece> pieceList = new ArrayList<>();
+    final ArrayList<GraphicPiece> pieceList = new ArrayList<>();
     private final List<MoveMadeObserver> observers = new ArrayList<>();
 
     public GraphicBoard(GameInterface gameInterface) {
@@ -47,9 +47,7 @@ public class GraphicBoard extends JPanel{
                 startTile = new Point(x, y);
                 draggedPiece = findPieceAtTile(startTile);
 
-                if (draggedPiece != null && ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam()
-                    || gameInterface.getPlayer1().getRole() != gameInterface.getActivePlayer().getRole()) {
-
+                if (draggedPiece != null && draggedPieceIsNotOfActivePlayer() || moveComesFromOtherPlayer()) {
                     draggedPiece = null;
                 }
             }
@@ -71,6 +69,14 @@ public class GraphicBoard extends JPanel{
                 draggedPiece = null;
             }
         });
+    }
+
+    private boolean moveComesFromOtherPlayer() {
+        return gameInterface.getPlayer1().getRole() != gameInterface.getActivePlayer().getRole();
+    }
+
+    private boolean draggedPieceIsNotOfActivePlayer() {
+        return ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam();
     }
 
     private void setCurrentTile(Point currentTile) {
@@ -232,11 +238,9 @@ public class GraphicBoard extends JPanel{
         }
     }
     public void setMoveMade(boolean moveMade){
-        boolean moveMade1 = moveMade;
         if (moveMade) {
             notifyMoveMadeObservers();
         }
-        moveMade1 = false;
     }
     public void debugPieces(){
         for (GraphicPiece graphicPiece:pieceList){
@@ -265,8 +269,6 @@ public class GraphicBoard extends JPanel{
         this.endTile = endTile;
         getNeighborPosition(endTile);
         setCurrentTile(endTile);
-        System.out.println(getEndTile());
-        System.out.println(getStartTile());
 
         setMoveMade(true);
 
