@@ -4,6 +4,7 @@ import exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.GameInterface;
+import logic.Player;
 import logic.Team;
 import multiplayer.Role;
 import observers.GameObserver;
@@ -208,8 +209,9 @@ public class Main implements GameObserver {
             if (!gameInterface.isGameOver()) {
                 gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundsWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
             }else{
-                if (gameInterface.getWinnerPlayer()!=null) {
-                    String winnerName = gameInterface.getWinnerPlayer().getName();
+                Player winner=gameInterface.getInactivePlayer();
+                if (winner!=null) {
+                    String winnerName = winner.getName();
                     gameLabel.setText("Player " + winnerName + " has won, press New Game for playing again");
                 }else{
                     gameLabel.setText("the game is tied, press New Game for playing again");
