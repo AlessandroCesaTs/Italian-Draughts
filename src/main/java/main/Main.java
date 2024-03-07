@@ -6,6 +6,7 @@ import logic.Game;
 import logic.GameInterface;
 import logic.Player;
 import logic.Team;
+import multiplayer.MultiplayerActions;
 import multiplayer.Role;
 import observers.GameObserver;
 
@@ -210,9 +211,11 @@ public class Main implements GameObserver {
                 gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundsWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
             }else{
                 Player winner=gameInterface.getInactivePlayer();
+                MultiplayerActions multiRole = gameInterface.getMultiRole();
                 if (winner!=null) {
                     String winnerName = winner.getName();
                     gameLabel.setText("Player " + winnerName + " has won, press New Game for playing again");
+                    multiRole.close();
                 }else{
                     gameLabel.setText("the game is tied, press New Game for playing again");
                 }

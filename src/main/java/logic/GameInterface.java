@@ -1,6 +1,7 @@
 package logic;
 
 import exceptions.NoPieceOnWhiteException;
+import multiplayer.MultiplayerActions;
 
 import java.util.List;
 
@@ -37,5 +38,7 @@ public interface GameInterface {
     List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException;
 
     Player getPlayer1();
+
+    MultiplayerActions getMultiRole();
 
 }

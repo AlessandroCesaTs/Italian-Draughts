@@ -23,7 +23,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     private int currentRound=1;
     private int roundsWithoutEating=0;
     private final List<GameObserver> observers = new ArrayList<>();
-    private int consecutiveEatings;
+    private int consecutiveEating;
     private final MultiplayerActions multiRole;
 
 
@@ -77,7 +77,7 @@ public class Game implements MoveMadeObserver, GameInterface {
             NeighborPosition targetPosition=move.getDestination();
             if (typeOfMove.equals(TypeOfMove.Eat)){
                 eat(movingPiece, targetPosition);
-                if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
+                if (checkMultipleEating(movingPiece) && consecutiveEating <= 3) {
                     sendMove(1);
                     return;
                 }
@@ -115,7 +115,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         inactivePlayer.loseOnePiece(eatenPiece);
         checkPromotion(movingPiece);
         roundsWithoutEating=0;
-        consecutiveEatings++;
+        consecutiveEating++;
     }
 
 
@@ -133,7 +133,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         if(movingPiece.canEatAnotherPiece()) {
             return true;
         } else {
-            consecutiveEatings =0;
+            consecutiveEating =0;
             return false;
         }
     }
@@ -216,5 +216,10 @@ public class Game implements MoveMadeObserver, GameInterface {
     @Override
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
         return getBoard().getFullBlackTiles();
+    }
+
+    @Override
+    public MultiplayerActions getMultiRole() {
+        return multiRole;
     }
 }
