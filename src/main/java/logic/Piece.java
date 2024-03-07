@@ -68,7 +68,7 @@ public class Piece {
         }
     }
 
-    public void movePieceByTwo(NeighborPosition position) {
+    private void movePieceByTwo(NeighborPosition position) {
         BlackTile targetTile=getNeighbor(position).getNeighbor(position);
         if (isMoveValid(position)) {
             if (targetTile.isFree()) {
