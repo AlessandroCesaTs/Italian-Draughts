@@ -132,11 +132,11 @@ public class MockGame implements GameInterface{
     }
     @Override
     public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
-        return getBoard().getPiece(row,col);
+        return board.getPiece(row,col);
     }
     @Override
     public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
-        return getBoard().getFullBlackTiles();
+        return board.getFullBlackTiles();
     }
     @Override
     public Player getPlayer1() {
