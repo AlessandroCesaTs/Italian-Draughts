@@ -231,7 +231,7 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers(){
+    private void notifyMoveMadeObservers(){
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
