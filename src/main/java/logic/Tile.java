@@ -12,7 +12,7 @@ public abstract class Tile {
         this.col = col;
     }
 
-    public int getRow(){
+     public int getRow(){
         return row;
     }
      public int getCol(){
@@ -27,21 +27,8 @@ public abstract class Tile {
      }
      public abstract Piece getPiece() throws NoPieceOnWhiteException;
 
-    public boolean equals(Tile tile) {
+     public boolean equals(Tile tile) {
         return tile.getRow()== row && tile.getCol()== col;
-    }
-
-    public int calculateDistance(Tile otherTile){
-        int rowDiff=rowDiff(otherTile);
-        int colDiff=colDiff(otherTile);
-        return Math.max(Math.abs(rowDiff),Math.abs(colDiff));
-    }
-
-    public int rowDiff(Tile otherTile){
-        return otherTile.getRow()-row;
-    }
-    public int colDiff(Tile otherTile){
-        return otherTile.getCol()-col;
     }
 
 }

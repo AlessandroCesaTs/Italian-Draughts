@@ -57,19 +57,6 @@ public class BlackTileTest {
     }
 
     @Test
-    void distanceNeighbors(){
-        assertEquals(1,tile.calculateDistance(bottomLeftTile));
-        assertEquals(1,tile.calculateDistance(bottomRightTile));
-        assertEquals(1,tile.calculateDistance(topLeftTile));
-        assertEquals(1,tile.calculateDistance(topRightTile));
-    }
-    @Test
-    void distance2(){
-        BlackTile otherTile2= BlackTile.asBlackTile(board.getTile(4,4));
-        assertEquals(3,otherTile.calculateDistance(otherTile2));
-    }
-
-    @Test
     void isNotFree() {
         assertFalse(BlackTile.asBlackTile(board.getTile(1,1)).isFree());
         assertFalse(BlackTile.asBlackTile(board.getTile(6,4)).isFree());
