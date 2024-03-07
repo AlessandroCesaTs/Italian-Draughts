@@ -89,14 +89,14 @@ public class Piece {
     }
 
     private boolean pieceOfOpposingTeam(NeighborPosition position) {
-        if (getNeighbor(position).isFree()){
+        if (isNeighborFree(position)){
             return true;
         }else {
             return getNeighborPiece(position).getTeam() != team;
         }
     }
     private boolean neighboringPieceIsKing(NeighborPosition position)  {
-        if (getNeighbor(position).isFree()){
+        if (isNeighborFree(position)){
             return false;
         }else {
             return getNeighborPiece(position).isKing;
@@ -112,7 +112,7 @@ public class Piece {
     }
 
     private boolean isPositionGoodForEating(NeighborPosition position){
-        return  !isMoveAfterOutOfBounds(position) && !getNeighbor(position).isFree() && isPositionAfterEatingFree(position);
+        return  !isMoveAfterOutOfBounds(position) && !isNeighborFree(position) && isPositionAfterEatingFree(position);
     }
 
     public boolean canEatAnotherPiece() {
@@ -149,6 +149,9 @@ public class Piece {
     }
     private Piece getNeighborPiece(NeighborPosition position){
         return getNeighbor(position).getPiece();
+    }
+    private boolean isNeighborFree(NeighborPosition position){
+        return getNeighbor(position).isFree();
     }
 
 }
