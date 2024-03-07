@@ -202,7 +202,7 @@ public class GraphicBoard extends JPanel{
     private int colDiff(Point endTile){
         return endTile.x-startTile.x;
     }
-    public boolean isOnDiagonal(Point endTile){
+    private boolean isOnDiagonal(Point endTile){
         return Math.abs(rowDiff(endTile))==Math.abs(colDiff(endTile)) && rowDiff(endTile)!=0;
     }
     public NeighborPosition getNeighborPosition(Point endTile){
