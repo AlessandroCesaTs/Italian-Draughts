@@ -92,14 +92,14 @@ public class Piece {
         if (getNeighbor(position).isFree()){
             return true;
         }else {
-            return getNeighbor(position).getPiece().getTeam() != team;
+            return getNeighborPiece(position).getTeam() != team;
         }
     }
     private boolean neighboringPieceIsKing(NeighborPosition position)  {
         if (getNeighbor(position).isFree()){
             return false;
         }else {
-            return getNeighbor(position).getPiece().isKing;
+            return getNeighborPiece(position).isKing;
         }
     }
 
@@ -146,6 +146,9 @@ public class Piece {
 
     private BlackTile getNeighbor(NeighborPosition position){
         return tile.getNeighbor(position);
+    }
+    private Piece getNeighborPiece(NeighborPosition position){
+        return getNeighbor(position).getPiece();
     }
 
 }
