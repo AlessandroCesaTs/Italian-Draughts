@@ -101,7 +101,7 @@ public class GraphicBoard extends JPanel{
         }
         return graphicPiece;
     }
-    public void setGame(GameInterface gameInterface) {
+    private void setGame(GameInterface gameInterface) {
         this.gameInterface = gameInterface;
         resetBoard();
     }
