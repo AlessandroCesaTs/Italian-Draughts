@@ -45,7 +45,7 @@ public class Piece {
     public boolean pieceHasToBePromoted(){
         return (team==Team.White && tile.getRow()==7)||(team==Team.Black && tile.getRow()==0);
     }
-    public boolean isMoveValid(NeighborPosition position){
+    private boolean isMoveValid(NeighborPosition position){
         if (isKing){
             return true;
         }else {
