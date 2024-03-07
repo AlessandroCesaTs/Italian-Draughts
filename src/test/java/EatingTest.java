@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EatingTest {
 
     @Test
-    void whiteEatsBlackTest() throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    void whiteEatsBlackTest() throws  NoPieceOnWhiteException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
@@ -21,7 +21,7 @@ public class EatingTest {
         assertNull(board.getPiece(4,4));
     }
     @Test
-    void cantEatSameTeamTest() throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    void cantEatSameTeamTest() throws NoPieceOnWhiteException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(1,1);
         Piece whitePiece2=board.getPiece(2,2);
@@ -30,7 +30,7 @@ public class EatingTest {
         assertEquals(board.getPiece(2,2),whitePiece2);
     }
     @Test
-    void cantEatTileAfterOccupiedTest() throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    void cantEatTileAfterOccupiedTest() throws  NoPieceOnWhiteException {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);

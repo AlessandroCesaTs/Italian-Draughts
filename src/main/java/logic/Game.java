@@ -27,7 +27,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     private final MultiplayerActions multiRole;
 
 
-    public Game(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
+    public Game(String player1Name, String player2Name,Team team1,Team team2) throws  IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }

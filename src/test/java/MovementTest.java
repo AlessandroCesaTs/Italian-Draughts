@@ -1,4 +1,3 @@
-import exceptions.IllegalTilePlacementException;
 import exceptions.NoPieceOnWhiteException;
 import logic.BlackTile;
 import logic.Board;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MovementTest {
     final Board board=new Board();
 
-    public MovementTest() throws IllegalTilePlacementException {
+    public MovementTest() {
     }
     @Test
     void movementTest() throws NoPieceOnWhiteException {

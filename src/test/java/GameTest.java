@@ -12,7 +12,7 @@ public class GameTest {
     final Player player1=game.getActivePlayer();
     final Player player2=game.getInactivePlayer();
 
-    public GameTest() throws IllegalTilePlacementException,IllegalTeamsCompositionException{
+    public GameTest() throws IllegalTeamsCompositionException{
     }
     @Test
     void changeActivePlayerTest() throws NoPieceOnWhiteException {

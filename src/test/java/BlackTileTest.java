@@ -1,4 +1,3 @@
-import exceptions.IllegalTilePlacementException;
 import logic.BlackTile;
 import logic.Board;
 import logic.NeighborPosition;
@@ -16,11 +15,11 @@ public class BlackTileTest {
     final BlackTile topRightTile=BlackTile.asBlackTile(board.getTile(2,2));
     final BlackTile otherTile=BlackTile.asBlackTile(board.getTile(1,3));
 
-    public BlackTileTest() throws IllegalTilePlacementException {
+    public BlackTileTest() {
     }
 
     @Test
-    void equalsTest() throws IllegalTilePlacementException {
+    void equalsTest() {
         BlackTile tile2=BlackTile.createBlackTile(1,1);
         assertTrue(tile.equals(tile2));
         assertTrue(tile2.equals(tile));
@@ -28,7 +27,7 @@ public class BlackTileTest {
     }
 
     @Test
-    void equalsTest2() throws IllegalTilePlacementException {
+    void equalsTest2() {
         BlackTile tile1=BlackTile.createBlackTile(2,2);
         BlackTile tile2=BlackTile.createBlackTile(2,2);
         BlackTile tile3=BlackTile.createBlackTile(5,3);

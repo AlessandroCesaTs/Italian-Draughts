@@ -25,7 +25,7 @@ public class Main implements GameObserver {
             Game placeholderGame;
             try {
                 placeholderGame = new Game("Player1", "Player2", Team.WHITE, Team.BLACK);
-            } catch (IllegalTilePlacementException | IllegalTeamsCompositionException e) {
+            } catch ( IllegalTeamsCompositionException e) {
                 throw new RuntimeException(e);
             }
             gBoard = new GraphicBoard(placeholderGame);
@@ -171,8 +171,7 @@ public class Main implements GameObserver {
                     game.setGBoard(gBoard);
                     game.addObserver(new Main());
                     frame.add(gBoard);
-                } catch (IllegalTilePlacementException |
-                         IllegalTeamsCompositionException ex) {
+                } catch (IllegalTeamsCompositionException ex) {
                     throw new RuntimeException(ex);
                 }
                 gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());

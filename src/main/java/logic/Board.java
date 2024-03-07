@@ -1,6 +1,5 @@
 package logic;
 
-import exceptions.IllegalTilePlacementException;
 import exceptions.NoPieceOnWhiteException;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public class Board {
     private final int size=8;
     private final Tile[][] tiles = new Tile[size][size];
 
-    public Board() throws IllegalTilePlacementException{
+    public Board(){
         for (int row=0;row<size;row++){
             for (int col=0;col<size;col++){
                 createTile(row, col);
@@ -31,7 +30,7 @@ public class Board {
         }
     }
 
-    private void createTile(int row, int col) throws IllegalTilePlacementException {
+    private void createTile(int row, int col){
         if(isPositionForBlackTile(row, col)){
             tiles[row][col]=BlackTile.createBlackTile(row, col);
             placePiece(row, col);

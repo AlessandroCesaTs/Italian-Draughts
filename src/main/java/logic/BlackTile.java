@@ -1,7 +1,5 @@
 package logic;
 
-import exceptions.IllegalTilePlacementException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,12 +9,8 @@ public class BlackTile extends Tile {
     private BlackTile(int row, int col) {
         super(row,col);
     }
-    public static BlackTile createBlackTile(int row,int col) throws IllegalTilePlacementException {
-        if((row+col)%2==0){
-            return new BlackTile(row,col);
-        }else{
-            throw new IllegalTilePlacementException("Black tiles must be placed where (row+col)%2==0");
-        }
+    public static BlackTile createBlackTile(int row,int col) {
+        return new BlackTile(row,col);
     }
     public static BlackTile asBlackTile(Tile tile) {
         if (tile instanceof BlackTile) {
