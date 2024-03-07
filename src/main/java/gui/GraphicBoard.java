@@ -28,7 +28,6 @@ public class GraphicBoard extends JPanel{
 
     public GraphicBoard(GameInterface gameInterface) {
         setGame(gameInterface);
-        //debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -241,15 +240,6 @@ public class GraphicBoard extends JPanel{
         if (moveMade) {
             notifyMoveMadeObservers();
         }
-    }
-    public void debugPieces(){
-        for (GraphicPiece graphicPiece:pieceList){
-            Piece logicPiece=((NormalPiece) graphicPiece).getPiece();
-            Point position = graphicPiece.getPosition();
-            System.out.println("Graphic Piece at "+position);
-            System.out.println("Corresponding logic Piece at "+logicPiece.getTile().getCol()+ " , "+logicPiece.getTile().getRow());
-        }
-
     }
 
     public Point getStartTile() {
