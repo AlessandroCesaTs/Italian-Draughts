@@ -39,21 +39,21 @@ public class BlackTileTest {
 
     @Test
     void neighborBottomLeftTest(){
-        assertTrue(tile.getNeighbor(NeighborPosition.BottomLeft).equals(bottomLeftTile));
+        assertTrue(tile.getNeighbor(NeighborPosition.BOTTOM_LEFT).equals(bottomLeftTile));
     }
     @Test
     void neighborBottomRightTest(){
 
-        assertTrue(tile.getNeighbor(NeighborPosition.BottomRight).equals(bottomRightTile));
+        assertTrue(tile.getNeighbor(NeighborPosition.BOTTOM_RIGHT).equals(bottomRightTile));
     }
     @Test
     void neighborTopLeftTest(){
 
-        assertTrue(tile.getNeighbor(NeighborPosition.TopLeft).equals(topLeftTile));
+        assertTrue(tile.getNeighbor(NeighborPosition.TOP_LEFT).equals(topLeftTile));
     }
     @Test
     void neighborTopRightTest(){
-        assertTrue(tile.getNeighbor(NeighborPosition.TopRight).equals(topRightTile));
+        assertTrue(tile.getNeighbor(NeighborPosition.TOP_RIGHT).equals(topRightTile));
     }
 
     @Test

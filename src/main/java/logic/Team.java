@@ -1,4 +1,4 @@
 package logic;
 
-public enum Team {White, Black}
+public enum Team {WHITE, BLACK}
 

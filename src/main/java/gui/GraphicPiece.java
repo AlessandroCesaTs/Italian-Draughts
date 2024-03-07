@@ -1,6 +1,8 @@
 package gui;
 
 import logic.NeighborPosition;
+import logic.Piece;
+import logic.Team;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,10 +15,12 @@ public class GraphicPiece extends JPanel {
     public int col, row;
     public int xPos, yPos;
     public boolean isWhite;
+    private final Piece piece;
     final BufferedImage black;
     final BufferedImage blackKing;
     final BufferedImage white;
     final BufferedImage whiteKing;
+    private Image sprite;
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
@@ -27,24 +31,33 @@ public class GraphicPiece extends JPanel {
             throw new RuntimeException(e);
         }
     }
-    Image sprite;
-    GraphicBoard graphicBoard;
-    public GraphicPiece(GraphicBoard graphicBoard) {
-        this.graphicBoard = graphicBoard;
+    public GraphicPiece(Piece piece, int col, int row, boolean isWhite){
+        this.piece = piece;
+        this.row = row;
+        this.col = col;
+        this.xPos = col * GraphicBoard.tileSize;
+        this.yPos = row * GraphicBoard.tileSize;
+        this.isWhite = isWhite;
+
+        if(isWhite){
+            this.sprite = white.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+        } else {
+            this.sprite = black.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+        }
     }
     public void paint(Graphics2D g2d) {
         g2d.drawImage(sprite, xPos, yPos, null);
     }
 
     public void moveTo(NeighborPosition destination) {
-        if (destination.equals(NeighborPosition.TopRight)){
+        if (destination.equals(NeighborPosition.TOP_RIGHT)){
             col=col+1;
             row=row+1;
-        } else if(destination.equals(NeighborPosition.TopLeft)){
+        } else if(destination.equals(NeighborPosition.TOP_LEFT)){
             col=col-1;
             row=row+1;
         }
-        else if(destination.equals(NeighborPosition.BottomRight)){
+        else if(destination.equals(NeighborPosition.BOTTOM_RIGHT)){
             col=col+1;
             row=row-1;
         }else{
@@ -61,8 +74,9 @@ public class GraphicPiece extends JPanel {
             sprite = blackKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
         }
     }
-    public Point getPosition() {
-        return new Point(col, row);
+    public Piece getPiece(){
+        return piece;
     }
+    public Team getTeam(){return getPiece().getTeam();}
 
 }

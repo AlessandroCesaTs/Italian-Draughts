@@ -43,16 +43,16 @@ public class Piece {
     }
 
     public boolean pieceHasToBePromoted(){
-        return (team==Team.White && tile.getRow()==7)||(team==Team.Black && tile.getRow()==0);
+        return (team==Team.WHITE && tile.getRow()==7)||(team==Team.BLACK && tile.getRow()==0);
     }
     private boolean isMoveValid(NeighborPosition position){
         if (isKing){
             return true;
         }else {
-            if (team == Team.White) {
-                return position==NeighborPosition.TopLeft || position==NeighborPosition.TopRight;
+            if (team == Team.WHITE) {
+                return position==NeighborPosition.TOP_LEFT || position==NeighborPosition.TOP_RIGHT;
             }else{
-                return position==NeighborPosition.BottomLeft || position==NeighborPosition.BottomRight;
+                return position==NeighborPosition.BOTTOM_LEFT || position==NeighborPosition.BOTTOM_RIGHT;
             }
         }
     }

@@ -56,7 +56,7 @@ public class Player {
         numberOfPieces--;
     }
     public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) {
-        if (Objects.requireNonNull(typeOfMove) == TypeOfMove.Move) {
+        if (Objects.requireNonNull(typeOfMove) == TypeOfMove.MOVE) {
             movingPiece.movePieceByOne(targetPosition);
         }else{
         movingPiece.eatPiece(targetPosition);
@@ -65,7 +65,7 @@ public class Player {
 
     public boolean shouldEat(){
         for (Piece piece:pieces){
-            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
+            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TOP_LEFT, NeighborPosition.TOP_RIGHT,NeighborPosition.BOTTOM_LEFT,NeighborPosition.BOTTOM_RIGHT})
             {
                 if (piece.canEat(destination)){
                     return true;
@@ -76,7 +76,7 @@ public class Player {
     }
     public boolean canMove() {
         for (Piece piece:pieces){
-            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TopLeft, NeighborPosition.TopRight,NeighborPosition.BottomLeft,NeighborPosition.BottomRight})
+            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TOP_LEFT, NeighborPosition.TOP_RIGHT,NeighborPosition.BOTTOM_LEFT,NeighborPosition.BOTTOM_RIGHT})
             {
                 if (piece.canEat(destination) || piece.canMovePieceByOne(destination)){
                     return true;
