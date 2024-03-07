@@ -60,7 +60,7 @@ public class Piece {
         return getNeighbor(position) == null;
     }
 
-    public boolean isMoveAfterOutOfBounds(NeighborPosition position){
+    private boolean isMoveAfterOutOfBounds(NeighborPosition position){
         if (isMoveOutOfBounds(position)){
             return true;
         }else {
