@@ -88,7 +88,7 @@ public class GraphicBoard extends JPanel{
     }
 
 
-    public void removePiece(GraphicPiece piece) {
+    private void removePiece(GraphicPiece piece) {
         pieceList.remove(piece);
         repaint();
     }
