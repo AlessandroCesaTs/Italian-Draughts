@@ -26,7 +26,7 @@ public class Piece {
 
     public void movePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
-            BlackTile targetTile = getTile().getNeighbor(position);
+            BlackTile targetTile = tile.getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
             }
@@ -35,7 +35,7 @@ public class Piece {
 
     public boolean canMovePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
-            BlackTile targetTile = getTile().getNeighbor(position);
+            BlackTile targetTile = tile.getNeighbor(position);
             return targetTile.isFree();
         }else{
             return false;
@@ -57,7 +57,7 @@ public class Piece {
         }
     }
     public boolean isMoveOutOfBounds(NeighborPosition position) {
-        return getTile().getNeighbor(position) == null;
+        return tile.getNeighbor(position) == null;
     }
 
     public boolean isMoveAfterOutOfBounds(NeighborPosition position){
@@ -69,7 +69,7 @@ public class Piece {
     }
 
     public void movePieceByTwo(NeighborPosition position) {
-        BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
+        BlackTile targetTile=tile.getNeighbor(position).getNeighbor(position);
         if (isMoveValid(position)) {
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
@@ -129,7 +129,7 @@ public class Piece {
     }
 
     public BlackTile getTile(){
-        return this.tile;
+        return tile;
     }
 
     public Team getTeam() {
