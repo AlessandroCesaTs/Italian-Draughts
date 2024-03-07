@@ -56,7 +56,7 @@ public class Piece {
             }
         }
     }
-    public boolean isMoveOutOfBounds(NeighborPosition position) {
+    private boolean isMoveOutOfBounds(NeighborPosition position) {
         return getNeighbor(position) == null;
     }
 
