@@ -190,7 +190,7 @@ public class GraphicBoard extends JPanel{
         gBoard.movePieceTo(movingGraphicPiece,destination);
     }
 
-    public GraphicPiece findPieceAtTile(Point tile) {
+    private GraphicPiece findPieceAtTile(Point tile) {
         return pieceList.stream()
                 .filter(p -> p.col == tile.x && p.row == tile.y)
                 .findFirst()
