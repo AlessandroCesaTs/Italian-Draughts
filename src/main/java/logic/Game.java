@@ -123,14 +123,8 @@ public class Game implements MoveMadeObserver, GameInterface {
     public void checkGameOver(){
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
             gameOver=true;
-            if (multiRole != null){
-
-            }
         }else if(roundsWithoutEating==40){
             gameOver=true;
-            if (multiRole != null){
-                multiRole.close();
-            }
         }
     }
 
