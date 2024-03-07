@@ -1,3 +1,7 @@
 package multiplayer;
 
-public enum Role {Host, Guest, Null}
+public enum Role {
+    HOST,
+    GUEST,
+    NULL
+}

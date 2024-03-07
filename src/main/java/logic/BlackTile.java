@@ -48,10 +48,10 @@ public class BlackTile extends Tile {
     }
 
     public void setNeighbors(){
-        checkAndAddNeighbor(NeighborPosition.BottomLeft, row -1, col -1);
-        checkAndAddNeighbor(NeighborPosition.BottomRight, row -1, col +1);
-        checkAndAddNeighbor(NeighborPosition.TopLeft, row +1, col -1);
-        checkAndAddNeighbor(NeighborPosition.TopRight, row +1, col +1);
+        checkAndAddNeighbor(NeighborPosition.BOTTOM_LEFT, row -1, col -1);
+        checkAndAddNeighbor(NeighborPosition.BOTTOM_RIGHT, row -1, col +1);
+        checkAndAddNeighbor(NeighborPosition.TOP_LEFT, row +1, col -1);
+        checkAndAddNeighbor(NeighborPosition.TOP_RIGHT, row +1, col +1);
     }
 
     private void checkAndAddNeighbor(NeighborPosition position,int row, int col) {

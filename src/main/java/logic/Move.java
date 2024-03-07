@@ -17,13 +17,13 @@ public class Move {
         if (player.getTeam() == piece.team && neighborDestination!=null){
             if (player.shouldEat()){
                 if (piece.canEat(neighborDestination)){
-                    return TypeOfMove.Eat;
+                    return TypeOfMove.EAT;
                 }
             }else if (piece.canMovePieceByOne(neighborDestination)){
-                return TypeOfMove.Move;
+                return TypeOfMove.MOVE;
             }
         }
-        return TypeOfMove.NoMove;
+        return TypeOfMove.NO_MOVE;
     }
 
     public Piece getPiece() {
