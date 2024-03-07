@@ -6,7 +6,7 @@ import java.net.Socket;
 public class GameHandler implements Runnable {
     private final Socket[] sockets;
     private int turnListener;
-    private final boolean running;
+    private boolean running;
 
     public GameHandler(Socket[] sockets) {
         this.sockets = sockets;
@@ -32,7 +32,6 @@ public class GameHandler implements Runnable {
                 }
 
             }
-
         } catch (IOException e) {
             System.out.printf("Failed or interrupted I/O operation on client connection. Error message: \"%s\"", e.getMessage());
         }

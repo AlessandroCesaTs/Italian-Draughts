@@ -1,5 +1,6 @@
 package multiplayer;
 
+import gui.GraphicBoard;
 import logic.Game;
 
 import java.awt.*;
@@ -86,8 +87,9 @@ public class Guest implements MultiplayerActions,Runnable {
     }
 
     private void setAdversaryMove (Point[] advMove) {
-        game.getGBoard().setStartTile(advMove[0]);
-        game.getGBoard().setEndTile(advMove[1]);
+        GraphicBoard graphicBoard = game.getGBoard();
+        graphicBoard.setStartTile(advMove[0]);
+        graphicBoard.setEndTile(advMove[1]);
         if (advMove[2].getX() == 1)
             setAdversaryMove(receiveMove());
     }
