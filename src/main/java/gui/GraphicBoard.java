@@ -236,7 +236,7 @@ public class GraphicBoard extends JPanel{
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade){
+    private void setMoveMade(boolean moveMade){
         if (moveMade) {
             notifyMoveMadeObservers();
         }
