@@ -47,8 +47,8 @@ public class Player {
                 .collect(Collectors.toList());
     }
 
-    public boolean hasPieces(){
-        return numberOfPieces!=0;
+    public boolean doesntHavePieces(){
+        return numberOfPieces == 0;
     }
 
     public void loseOnePiece(Piece piece){

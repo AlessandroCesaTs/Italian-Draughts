@@ -67,7 +67,7 @@ public class MockGame implements GameInterface{
 
     @Override
     public void checkGameOver(){
-        if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
+        if (inactivePlayer.doesntHavePieces() || !inactivePlayer.canMove()){
             gameOver=true;
         }else if(roundsWithoutEating==40){
             gameOver=true;
