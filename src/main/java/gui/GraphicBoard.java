@@ -28,7 +28,6 @@ public class GraphicBoard extends JPanel{
 
     public GraphicBoard(GameInterface gameInterface) {
         setGame(gameInterface);
-        //debugPieces();
         this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -83,13 +82,13 @@ public class GraphicBoard extends JPanel{
         this.currentTile = currentTile;
     }
 
-    public void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
+    private void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
         piece.moveTo(destination);
         repaint();
     }
 
 
-    public void removePiece(GraphicPiece piece) {
+    private void removePiece(GraphicPiece piece) {
         pieceList.remove(piece);
         repaint();
     }
@@ -102,17 +101,17 @@ public class GraphicBoard extends JPanel{
         }
         return graphicPiece;
     }
-    public void setGame(GameInterface gameInterface) {
+    private void setGame(GameInterface gameInterface) {
         this.gameInterface = gameInterface;
         resetBoard();
     }
-    public void resetBoard() {
+    private void resetBoard() {
         pieceList.clear();
         startTile = null;
         endTile = null;
         addPieces();
     }
-    public void addPieces() {
+    private void addPieces() {
         for (int c=0; c < cols; c++) {
             for (int r = 0; r <= 2; r++) {
                 if ((r+c) % 2 == 0){
@@ -191,22 +190,22 @@ public class GraphicBoard extends JPanel{
         gBoard.movePieceTo(movingGraphicPiece,destination);
     }
 
-    public GraphicPiece findPieceAtTile(Point tile) {
+    private GraphicPiece findPieceAtTile(Point tile) {
         return pieceList.stream()
                 .filter(p -> p.col == tile.x && p.row == tile.y)
                 .findFirst()
                 .orElse(null);
     }
-    public int rowDiff(Point endTile){
+    private int rowDiff(Point endTile){
         return endTile.y-startTile.y;
     }
-    public int colDiff(Point endTile){
+    private int colDiff(Point endTile){
         return endTile.x-startTile.x;
     }
-    public boolean isOnDiagonal(Point endTile){
+    private boolean isOnDiagonal(Point endTile){
         return Math.abs(rowDiff(endTile))==Math.abs(colDiff(endTile)) && rowDiff(endTile)!=0;
     }
-    public NeighborPosition getNeighborPosition(Point endTile){
+    private NeighborPosition getNeighborPosition(Point endTile){
 
         int rowDiff=rowDiff(endTile);
         int colDiff=colDiff(endTile);
@@ -232,12 +231,12 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    public void notifyMoveMadeObservers(){
+    private void notifyMoveMadeObservers(){
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    public void setMoveMade(boolean moveMade){
+    private void setMoveMade(boolean moveMade){
         if (moveMade) {
             notifyMoveMadeObservers();
         }

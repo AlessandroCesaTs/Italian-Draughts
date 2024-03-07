@@ -26,7 +26,7 @@ public class Piece {
 
     public void movePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
-            BlackTile targetTile = getTile().getNeighbor(position);
+            BlackTile targetTile = getNeighbor(position);
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
             }
@@ -35,7 +35,7 @@ public class Piece {
 
     public boolean canMovePieceByOne(NeighborPosition position) {
         if (isMoveValid(position) & !isMoveOutOfBounds(position)) {
-            BlackTile targetTile = getTile().getNeighbor(position);
+            BlackTile targetTile = getNeighbor(position);
             return targetTile.isFree();
         }else{
             return false;
@@ -45,7 +45,7 @@ public class Piece {
     public boolean pieceHasToBePromoted(){
         return (team==Team.WHITE && tile.getRow()==7)||(team==Team.BLACK && tile.getRow()==0);
     }
-    public boolean isMoveValid(NeighborPosition position){
+    private boolean isMoveValid(NeighborPosition position){
         if (isKing){
             return true;
         }else {
@@ -56,20 +56,20 @@ public class Piece {
             }
         }
     }
-    public boolean isMoveOutOfBounds(NeighborPosition position) {
-        return getTile().getNeighbor(position) == null;
+    private boolean isMoveOutOfBounds(NeighborPosition position) {
+        return getNeighbor(position) == null;
     }
 
-    public boolean isMoveAfterOutOfBounds(NeighborPosition position){
+    private boolean isMoveAfterOutOfBounds(NeighborPosition position){
         if (isMoveOutOfBounds(position)){
             return true;
         }else {
-            return tile.getNeighbor(position).getNeighbor(position) == null;
+            return getNeighbor(position).getNeighbor(position) == null;
         }
     }
 
-    public void movePieceByTwo(NeighborPosition position) {
-        BlackTile targetTile=getTile().getNeighbor(position).getNeighbor(position);
+    private void movePieceByTwo(NeighborPosition position) {
+        BlackTile targetTile=getNeighbor(position).getNeighbor(position);
         if (isMoveValid(position)) {
             if (targetTile.isFree()) {
                 moveToTile(targetTile);
@@ -79,27 +79,27 @@ public class Piece {
 
     public void eatPiece(NeighborPosition position){
         if (canEat(position)){
-            tile.getNeighbor(position).removePiece();
+            getNeighbor(position).removePiece();
             movePieceByTwo(position);
         }
     }
 
     private boolean isPositionAfterEatingFree(NeighborPosition position){
-        return tile.getNeighbor(position).getNeighbor(position).isFree();
+        return getNeighbor(position).getNeighbor(position).isFree();
     }
 
     private boolean pieceOfOpposingTeam(NeighborPosition position) {
-        if (tile.getNeighbor(position).isFree()){
+        if (getNeighbor(position).isFree()){
             return true;
         }else {
-            return tile.getNeighbor(position).getPiece().getTeam() != team;
+            return getNeighborPiece(position).getTeam() != team;
         }
     }
     private boolean neighboringPieceIsKing(NeighborPosition position)  {
-        if (tile.getNeighbor(position).isFree()){
+        if (getNeighbor(position).isFree()){
             return false;
         }else {
-            return tile.getNeighbor(position).getPiece().isKing;
+            return getNeighborPiece(position).isKing;
         }
     }
 
@@ -112,7 +112,7 @@ public class Piece {
     }
 
     private boolean isPositionGoodForEating(NeighborPosition position){
-        return  !isMoveAfterOutOfBounds(position) && !tile.getNeighbor(position).isFree() && isPositionAfterEatingFree(position);
+        return  !isMoveAfterOutOfBounds(position) && !getNeighbor(position).isFree() && isPositionAfterEatingFree(position);
     }
 
     public boolean canEatAnotherPiece() {
@@ -129,7 +129,7 @@ public class Piece {
     }
 
     public BlackTile getTile(){
-        return this.tile;
+        return tile;
     }
 
     public Team getTeam() {
@@ -142,6 +142,13 @@ public class Piece {
 
     public void remove(){
         tile=null;
+    }
+
+    private BlackTile getNeighbor(NeighborPosition position){
+        return tile.getNeighbor(position);
+    }
+    private Piece getNeighborPiece(NeighborPosition position){
+        return getNeighbor(position).getPiece();
     }
 
 }
