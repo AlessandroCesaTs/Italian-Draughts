@@ -34,7 +34,7 @@ public class Player {
         return Objects.equals(name, player.getName());
     }
 
-    public void reloadPieces(){
+    private void reloadPieces(){
         List<BlackTile> fullBlackTiles;
         try {
             fullBlackTiles = gameInterface.getFullBlackTiles();
