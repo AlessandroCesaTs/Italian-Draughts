@@ -64,7 +64,7 @@ public class Main implements GameObserver {
     private static JButton getMultiplayerButton(JFrame frame, JLabel playersLabel) {
         JButton multiplayerButton = new JButton("Multiplayer");
         multiplayerButton.addActionListener(e -> {
-            JComboBox<Role> playerRoleField = new JComboBox<>(Role.values());
+            JComboBox<Role> playerRoleField = new JComboBox<>(new Role[]{Role.Host, Role.Guest});
             JTextField hostIPField = new JTextField();
 
             playerRoleField.setSelectedItem(Role.Host);
