@@ -37,5 +37,4 @@ public interface GameInterface {
     List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException;
 
     Player getPlayer1();
-
 }

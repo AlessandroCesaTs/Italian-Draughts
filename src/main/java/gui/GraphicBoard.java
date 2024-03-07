@@ -12,8 +12,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.Main.gBoard;
-
 public class GraphicBoard extends JPanel{
     private GameInterface gameInterface;
     final public static int tileSize = 75;
@@ -179,15 +177,15 @@ public class GraphicBoard extends JPanel{
     }
 
     public void eatPiece(Piece eatingPiece,NeighborPosition destination) {
-        GraphicPiece eatingGraphicPiece= gBoard.getGraphicPiece(eatingPiece);
-        GraphicPiece targetGraphicPiece= gBoard.getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
-        gBoard.removePiece(targetGraphicPiece);
-        gBoard.movePieceTo(eatingGraphicPiece,destination);
-        gBoard.movePieceTo(eatingGraphicPiece,destination);
+        GraphicPiece eatingGraphicPiece= getGraphicPiece(eatingPiece);
+        GraphicPiece targetGraphicPiece= getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
+        removePiece(targetGraphicPiece);
+        movePieceTo(eatingGraphicPiece,destination);
+        movePieceTo(eatingGraphicPiece,destination);
     }
     public void movePiece(Piece movingPiece,NeighborPosition destination){
-        GraphicPiece movingGraphicPiece= gBoard.getGraphicPiece(movingPiece);
-        gBoard.movePieceTo(movingGraphicPiece,destination);
+        GraphicPiece movingGraphicPiece= getGraphicPiece(movingPiece);
+        movePieceTo(movingGraphicPiece,destination);
     }
 
     private GraphicPiece findPieceAtTile(Point tile) {
