@@ -199,7 +199,7 @@ public class GraphicBoard extends JPanel{
     private int rowDiff(Point endTile){
         return endTile.y-startTile.y;
     }
-    public int colDiff(Point endTile){
+    private int colDiff(Point endTile){
         return endTile.x-startTile.x;
     }
     public boolean isOnDiagonal(Point endTile){
