@@ -71,11 +71,11 @@ public class GraphicBoard extends JPanel{
     }
 
     private boolean moveComesFromOtherPlayer() {
-        return gameInterface.getPlayer1().getRole() != gameInterface.getActivePlayer().getRole();
+        return gameInterface.getPlayer1().getRole() != getActivePlayer().getRole();
     }
 
     private boolean draggedPieceIsNotOfActivePlayer() {
-        return ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam();
+        return ((NormalPiece) draggedPiece).getPiece().getTeam() != getActivePlayer().getTeam();
     }
 
     private void setCurrentTile(Point currentTile) {
@@ -171,7 +171,7 @@ public class GraphicBoard extends JPanel{
         }
 
         Piece piece = ((NormalPiece) draggedPiece).getPiece();
-        Player player = gameInterface.getActivePlayer();
+        Player player = getActivePlayer();
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
 
         return new Move(player, piece, neighborDestination);
@@ -263,5 +263,9 @@ public class GraphicBoard extends JPanel{
         setMoveMade(true);
 
         draggedPiece = null;
+    }
+
+    private Player getActivePlayer(){
+        return gameInterface.getActivePlayer();
     }
 }
