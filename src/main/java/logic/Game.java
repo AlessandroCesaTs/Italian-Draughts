@@ -218,8 +218,4 @@ public class Game implements MoveMadeObserver, GameInterface {
         return getBoard().getFullBlackTiles();
     }
 
-    @Override
-    public MultiplayerActions getMultiRole() {
-        return multiRole;
-    }
 }
