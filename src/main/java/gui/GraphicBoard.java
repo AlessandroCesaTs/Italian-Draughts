@@ -196,7 +196,7 @@ public class GraphicBoard extends JPanel{
                 .findFirst()
                 .orElse(null);
     }
-    public int rowDiff(Point endTile){
+    private int rowDiff(Point endTile){
         return endTile.y-startTile.y;
     }
     public int colDiff(Point endTile){
