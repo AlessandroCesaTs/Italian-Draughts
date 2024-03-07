@@ -82,7 +82,7 @@ public class GraphicBoard extends JPanel{
         this.currentTile = currentTile;
     }
 
-    public void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
+    private void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
         piece.moveTo(destination);
         repaint();
     }

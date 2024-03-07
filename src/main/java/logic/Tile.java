@@ -27,7 +27,7 @@ public abstract class Tile {
      }
      public abstract Piece getPiece() throws NoPieceOnWhiteException;
 
-    public boolean equals(Tile tile) {
+     public boolean equals(Tile tile) {
         return tile.getRow()== row && tile.getCol()== col;
     }
 
