@@ -5,7 +5,7 @@ import multiplayer.Role;
 
 import java.util.List;
 
-public class MockGame implements GameInterface{
+public class FakeGame implements GameInterface{
 
     final Player player1;
     final Player player2;
@@ -17,7 +17,7 @@ public class MockGame implements GameInterface{
     private int roundsWithoutEating=0;
     private int consecutiveEatings;
 
-    public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
+    public FakeGame(String player1Name, String player2Name, Team team1, Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
         if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
             throw new IllegalTeamsCompositionException();
         }

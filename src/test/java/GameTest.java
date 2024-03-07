@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SuppressWarnings("MagicNumber")
 public class GameTest {
 
-    final MockGame game =new MockGame("Anna","Mario", Team.WHITE,Team.BLACK);
+    final FakeGame game =new FakeGame("Anna","Mario", Team.WHITE,Team.BLACK);
     final Board board=game.getBoard();
     final Player player1=game.getActivePlayer();
     final Player player2=game.getInactivePlayer();
