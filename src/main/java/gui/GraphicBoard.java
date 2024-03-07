@@ -111,7 +111,7 @@ public class GraphicBoard extends JPanel{
         endTile = null;
         addPieces();
     }
-    public void addPieces() {
+    private void addPieces() {
         for (int c=0; c < cols; c++) {
             for (int r = 0; r <= 2; r++) {
                 if ((r+c) % 2 == 0){
