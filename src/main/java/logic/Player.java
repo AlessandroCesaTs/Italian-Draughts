@@ -20,7 +20,7 @@ public class Player {
         this.team = team;
         this.gameInterface = gameInterface;
         this.role = role;
-        this.pieces = getPieces();
+        setPieces();
     }
 
     public String getName(){
@@ -34,7 +34,7 @@ public class Player {
         return Objects.equals(name, player.getName());
     }
 
-    private void reloadPieces(){
+    private void setPieces(){
         List<BlackTile> fullBlackTiles;
         try {
             fullBlackTiles = gameInterface.getFullBlackTiles();
@@ -45,10 +45,6 @@ public class Player {
                 .map(BlackTile::getPiece)
                 .filter(piece -> piece.getTeam().equals(team))
                 .collect(Collectors.toList());
-    }
-    public List<Piece> getPieces(){
-        reloadPieces();
-        return pieces;
     }
 
     public boolean hasPieces(){
