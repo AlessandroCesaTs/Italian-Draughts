@@ -1,6 +1,7 @@
 package logic;
 
 import exceptions.*;
+import multiplayer.MultiplayerActions;
 import multiplayer.Role;
 
 import java.util.List;
@@ -143,4 +144,8 @@ public class MockGame implements GameInterface{
         return player1;
     }
 
+    @Override
+    public MultiplayerActions getMultiRole() {
+        return null;
+    }
 }
