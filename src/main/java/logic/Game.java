@@ -17,7 +17,6 @@ public class Game implements MoveMadeObserver, GameInterface {
     final Player player2;
     private Player activePlayer;
     private Player inactivePlayer;
-    private Player winnerPlayer=null;
     private boolean gameOver=false;
     private final Board board;
     private GraphicBoard gBoard;
@@ -123,16 +122,9 @@ public class Game implements MoveMadeObserver, GameInterface {
     @Override
     public void checkGameOver(){
         if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
-            winnerPlayer=activePlayer;
             gameOver=true;
-            if (multiRole != null){
-
-            }
         }else if(roundsWithoutEating==40){
             gameOver=true;
-            if (multiRole != null){
-                multiRole.close();
-            }
         }
     }
 
@@ -193,10 +185,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     public Board getBoard() {
         return board;
     }
-    @Override
-    public Player getWinnerPlayer() {
-        return winnerPlayer;
-    }
+
     @Override
     public boolean isGameOver(){return gameOver; }
 

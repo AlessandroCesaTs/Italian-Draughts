@@ -26,8 +26,6 @@ public interface GameInterface {
 
     Board getBoard();
 
-    Player getWinnerPlayer();
-
     boolean isGameOver();
 
     int getRoundsWithoutEating();
