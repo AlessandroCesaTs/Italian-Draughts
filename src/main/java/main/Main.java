@@ -21,10 +21,10 @@ public class Main implements GameObserver {
     }
     public static Runnable gameInitiation() {
         return () -> {
-            JFrame frame = getjFrame();
+            JFrame frame = getJFrame();
             Game placeholderGame;
             try {
-                placeholderGame = new Game("Player1", "Player2", Team.White, Team.Black);
+                placeholderGame = new Game("Player1", "Player2", Team.WHITE, Team.BLACK);
             } catch (IllegalTilePlacementException | IllegalTeamsCompositionException e) {
                 throw new RuntimeException(e);
             }
@@ -64,10 +64,10 @@ public class Main implements GameObserver {
     private static JButton getMultiplayerButton(JFrame frame, JLabel playersLabel) {
         JButton multiplayerButton = new JButton("Multiplayer");
         multiplayerButton.addActionListener(e -> {
-            JComboBox<Role> playerRoleField = new JComboBox<>(new Role[]{Role.Host, Role.Guest});
+            JComboBox<Role> playerRoleField = new JComboBox<>(new Role[]{Role.HOST, Role.GUEST});
             JTextField hostIPField = new JTextField();
 
-            playerRoleField.setSelectedItem(Role.Host);
+            playerRoleField.setSelectedItem(Role.HOST);
 
             JPanel panel = new JPanel(new GridLayout(0, 1));
             panel.add(new JLabel("Enter Player Role:"));
@@ -85,8 +85,8 @@ public class Main implements GameObserver {
 
                     switch ((Role) playerRoleField.getSelectedItem()) {
 
-                        case Host -> {
-                            game = new Game("Host", Team.White, hostIPField.getText());
+                        case HOST -> {
+                            game = new Game("Host", Team.WHITE, hostIPField.getText());
                             frame.remove(gBoard);
                             gBoard = new GraphicBoard(game);
                             game.setGBoard(gBoard);
@@ -94,8 +94,8 @@ public class Main implements GameObserver {
                             frame.add(gBoard);
                         }
 
-                        case Guest -> {
-                            game = new Game("Guest", Team.Black, hostIPField.getText());
+                        case GUEST -> {
+                            game = new Game("Guest", Team.BLACK, hostIPField.getText());
                             frame.remove(gBoard);
                             gBoard = new GraphicBoard(game);
                             game.setGBoard(gBoard);
@@ -127,18 +127,18 @@ public class Main implements GameObserver {
             JComboBox<Team> player1TeamField = new JComboBox<>(Team.values());
             JComboBox<Team> player2TeamField = new JComboBox<>(Team.values());
 
-            player1TeamField.setSelectedItem(Team.White);
-            player2TeamField.setSelectedItem(Team.Black);
+            player1TeamField.setSelectedItem(Team.WHITE);
+            player2TeamField.setSelectedItem(Team.BLACK);
 
             player1TeamField.addItemListener(event -> {
                 if (event.getStateChange() == ItemEvent.SELECTED) {
-                    player2TeamField.setSelectedItem(player1TeamField.getSelectedItem() == Team.White ? Team.Black : Team.White);
+                    player2TeamField.setSelectedItem(player1TeamField.getSelectedItem() == Team.WHITE ? Team.BLACK : Team.WHITE);
                 }
             });
 
             player2TeamField.addItemListener(event -> {
                 if (event.getStateChange() == ItemEvent.SELECTED) {
-                    player1TeamField.setSelectedItem(player2TeamField.getSelectedItem() == Team.White ? Team.Black : Team.White);
+                    player1TeamField.setSelectedItem(player2TeamField.getSelectedItem() == Team.WHITE ? Team.BLACK : Team.WHITE);
                 }
             });
 
@@ -192,7 +192,7 @@ public class Main implements GameObserver {
         return playersLabel;
     }
 
-    private static JFrame getjFrame() {
+    private static JFrame getJFrame() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(new Color(240, 236, 236));

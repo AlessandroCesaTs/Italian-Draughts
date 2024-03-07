@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SuppressWarnings("MagicNumber")
 public class PlayerTest {
 
-    final GameInterface gameInterface =new Game("Anna","Mario", Team.White,Team.Black);
+    final GameInterface gameInterface =new Game("Anna","Mario", Team.WHITE,Team.BLACK);
 
     public PlayerTest() throws IllegalTilePlacementException, IllegalTeamsCompositionException {
     }
@@ -20,13 +20,13 @@ public class PlayerTest {
     @Test
     void player1Test(){
         assertEquals("Anna",player1.getName());
-        assertEquals(Team.White,player1.getTeam());
+        assertEquals(Team.WHITE,player1.getTeam());
         assertEquals(12,player1.getNumberOfPieces());
     }
     @Test
     void player2Test(){
         assertEquals("Mario",player2.getName());
-        assertEquals(Team.Black,player2.getTeam());
+        assertEquals(Team.BLACK,player2.getTeam());
         assertEquals(12,player2.getNumberOfPieces());
     }
 

@@ -14,9 +14,9 @@ public class EatingTest {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
-        whitePiece.movePieceByOne(NeighborPosition.TopRight);
-        blackPiece.movePieceByOne(NeighborPosition.BottomLeft);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
+        whitePiece.movePieceByOne(NeighborPosition.TOP_RIGHT);
+        blackPiece.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
         assertEquals(board.getPiece(5,5),whitePiece);
         assertNull(board.getPiece(4,4));
     }
@@ -25,7 +25,7 @@ public class EatingTest {
         Board board=new Board();
         Piece whitePiece=board.getPiece(1,1);
         Piece whitePiece2=board.getPiece(2,2);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
         assertEquals(board.getPiece(1,1),whitePiece);
         assertEquals(board.getPiece(2,2),whitePiece2);
     }
@@ -34,9 +34,9 @@ public class EatingTest {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
-        whitePiece.movePieceByOne(NeighborPosition.TopRight);
-        whitePiece.movePieceByOne(NeighborPosition.TopRight);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
+        whitePiece.movePieceByOne(NeighborPosition.TOP_RIGHT);
+        whitePiece.movePieceByOne(NeighborPosition.TOP_RIGHT);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
         assertEquals(board.getPiece(4,4),whitePiece);
         assertEquals(board.getPiece(5,5),blackPiece);
     }

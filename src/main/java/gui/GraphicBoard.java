@@ -60,7 +60,7 @@ public class GraphicBoard extends JPanel{
                 getNeighborPosition(endTile);
 
                 GraphicPiece piece = draggedPiece;
-                if (piece != null && ((NormalPiece) piece).getTeam() == gameInterface.getActiveTeam()) {
+                if (piece != null && piece.getTeam() == gameInterface.getActiveTeam()) {
                     setCurrentTile(endTile);
 
                     setMoveMade(true);
@@ -75,7 +75,7 @@ public class GraphicBoard extends JPanel{
     }
 
     private boolean draggedPieceIsNotOfActivePlayer() {
-        return ((NormalPiece) draggedPiece).getPiece().getTeam() != gameInterface.getActivePlayer().getTeam();
+        return draggedPiece.getPiece().getTeam() != gameInterface.getActivePlayer().getTeam();
     }
 
     private void setCurrentTile(Point currentTile) {
@@ -95,7 +95,7 @@ public class GraphicBoard extends JPanel{
     public GraphicPiece getGraphicPiece (Piece piece) {
         GraphicPiece graphicPiece = null;
         for (GraphicPiece g : pieceList) {
-            if (((NormalPiece) g).getPiece() == piece) {
+            if (g.getPiece() == piece) {
                 graphicPiece = g;
             }
         }
@@ -121,7 +121,7 @@ public class GraphicBoard extends JPanel{
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
-                    pieceList.add(new NormalPiece(this, piece, c, r, true));
+                    pieceList.add(new GraphicPiece(piece, c, r, true));
                 }
             }
             for (int r = 5; r < rows; r++) {
@@ -132,7 +132,7 @@ public class GraphicBoard extends JPanel{
                     } catch (NoPieceOnWhiteException e) {
                         throw new RuntimeException(e);
                     }
-                    pieceList.add(new NormalPiece(this, piece, c, r, false));
+                    pieceList.add(new GraphicPiece(piece, c, r, false));
                 }
             }
         }
@@ -170,7 +170,7 @@ public class GraphicBoard extends JPanel{
             return null;
         }
 
-        Piece piece = ((NormalPiece) draggedPiece).getPiece();
+        Piece piece = draggedPiece.getPiece();
         Player player = gameInterface.getActivePlayer();
         NeighborPosition neighborDestination = getNeighborPosition(endTile);
 
@@ -212,15 +212,15 @@ public class GraphicBoard extends JPanel{
         if (isOnDiagonal(endTile)) {
             if (rowDiff > 0) {
                 if (colDiff > 0) {
-                    return NeighborPosition.TopRight;
+                    return NeighborPosition.TOP_RIGHT;
                 } else {
-                    return NeighborPosition.TopLeft;
+                    return NeighborPosition.TOP_LEFT;
                 }
             } else {
                 if (colDiff > 0) {
-                    return NeighborPosition.BottomRight;
+                    return NeighborPosition.BOTTOM_RIGHT;
                 } else {
-                    return NeighborPosition.BottomLeft;
+                    return NeighborPosition.BOTTOM_LEFT;
                 }
             }
         }else{
@@ -241,7 +241,6 @@ public class GraphicBoard extends JPanel{
             notifyMoveMadeObservers();
         }
     }
-
     public Point getStartTile() {
         return startTile;
     }

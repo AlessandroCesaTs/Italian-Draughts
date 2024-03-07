@@ -22,8 +22,8 @@ public class MockGame implements GameInterface{
             throw new IllegalTeamsCompositionException();
         }
         board = new Board();
-        player1 =new Player(player1Name,team1,this, Role.Null);
-        player2 =new Player(player2Name,team2,this,Role.Null);
+        player1 =new Player(player1Name,team1,this, Role.NULL);
+        player2 =new Player(player2Name,team2,this,Role.NULL);
         activePlayer= player1;
         inactivePlayer=player2;
     }
@@ -31,10 +31,10 @@ public class MockGame implements GameInterface{
     @Override
     public void playTurn(Move move){
         TypeOfMove typeOfMove=move.getTypeOfMove();
-        if (typeOfMove!=TypeOfMove.NoMove){
+        if (typeOfMove!=TypeOfMove.NO_MOVE){
             Piece movingPiece=move.getPiece();
             NeighborPosition targetPosition=move.getDestination();
-            if (typeOfMove.equals(TypeOfMove.Eat)){
+            if (typeOfMove.equals(TypeOfMove.EAT)){
                 eat(movingPiece, targetPosition);
                 if (checkMultipleEating(movingPiece) && consecutiveEatings <= 3) {
                     return;
@@ -50,14 +50,14 @@ public class MockGame implements GameInterface{
 
     @Override
     public void Move(Piece movingPiece, NeighborPosition targetPosition) {
-        activePlayer.makeMove(TypeOfMove.Move, movingPiece, targetPosition);
+        activePlayer.makeMove(TypeOfMove.MOVE, movingPiece, targetPosition);
         roundsWithoutEating++;
     }
 
     @Override
     public void eat(Piece movingPiece, NeighborPosition targetPosition){
         Piece eatenPiece= movingPiece.getTile().getNeighbor(targetPosition).getPiece();
-        activePlayer.makeMove(TypeOfMove.Eat, movingPiece, targetPosition);
+        activePlayer.makeMove(TypeOfMove.EAT, movingPiece, targetPosition);
 
         inactivePlayer.loseOnePiece(eatenPiece);
         roundsWithoutEating=0;

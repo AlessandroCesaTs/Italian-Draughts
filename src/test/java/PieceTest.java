@@ -10,24 +10,24 @@ public class PieceTest {
     void getBlackNeighborTest() throws exceptions.IllegalTilePlacementException {
         Board board = new Board();
         Tile tile = board.getTile(0, 2);
-        assertEquals(Team.White, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopLeft).getPiece().getTeam());
-        assertEquals(Team.White, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopRight).getPiece().getTeam());
+        assertEquals(Team.WHITE, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TOP_LEFT).getPiece().getTeam());
+        assertEquals(Team.WHITE, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TOP_RIGHT).getPiece().getTeam());
     }
 
     @Test
     void getNullNeighborTest() throws exceptions.IllegalTilePlacementException {
         Board board = new Board();
         Tile tile = board.getTile(2, 2);
-        assertNull(BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopLeft).getPiece());
-        assertNull(BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopRight).getPiece());
+        assertNull(BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TOP_LEFT).getPiece());
+        assertNull(BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TOP_RIGHT).getPiece());
     }
 
     @Test
     void getWhiteNeighborTest() throws exceptions.IllegalTilePlacementException{
         Board board = new Board();
         Tile tile = board.getTile(5, 3);
-        assertEquals(Team.Black, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopLeft).getPiece().getTeam());
-        assertEquals(Team.Black, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TopRight).getPiece().getTeam());
+        assertEquals(Team.BLACK, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TOP_LEFT).getPiece().getTeam());
+        assertEquals(Team.BLACK, BlackTile.asBlackTile(tile).getNeighbor(NeighborPosition.TOP_RIGHT).getPiece().getTeam());
     }
 
 }

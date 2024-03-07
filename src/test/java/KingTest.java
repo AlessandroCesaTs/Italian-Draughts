@@ -21,15 +21,15 @@ public class KingTest {
 
         assertFalse(whitePiece.getIfKing());
 
-        whitePiece.movePieceByOne(NeighborPosition.TopRight);
-        blackPiece1.movePieceByOne(NeighborPosition.BottomLeft);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
-        blackPiece2.movePieceByOne(NeighborPosition.BottomLeft);
-        blackPiece3.movePieceByOne(NeighborPosition.BottomRight);
-        blackPiece4.movePieceByOne(NeighborPosition.BottomLeft);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
+        whitePiece.movePieceByOne(NeighborPosition.TOP_RIGHT);
+        blackPiece1.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
+        blackPiece2.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        blackPiece3.movePieceByOne(NeighborPosition.BOTTOM_RIGHT);
+        blackPiece4.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
 
-        whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
+        whitePiece.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
 
         assertEquals(board.getPiece(6,6),whitePiece);
         assertTrue(whitePiece.getIfKing());
@@ -46,19 +46,19 @@ public class KingTest {
 
         assertFalse(whitePiece.getIfKing());
 
-        whitePiece.movePieceByOne(NeighborPosition.TopRight);
-        blackPiece1.movePieceByOne(NeighborPosition.BottomLeft);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
-        blackPiece2.movePieceByOne(NeighborPosition.BottomLeft);
-        blackPiece3.movePieceByOne(NeighborPosition.BottomRight);
-        blackPiece4.movePieceByOne(NeighborPosition.BottomLeft);
-        whitePiece.eatPiece(NeighborPosition.TopRight);
+        whitePiece.movePieceByOne(NeighborPosition.TOP_RIGHT);
+        blackPiece1.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
+        blackPiece2.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        blackPiece3.movePieceByOne(NeighborPosition.BOTTOM_RIGHT);
+        blackPiece4.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        whitePiece.eatPiece(NeighborPosition.TOP_RIGHT);
 
-        whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
-        whitePiece.movePieceByOne(NeighborPosition.BottomLeft);
-        blackPiece5.movePieceByOne(NeighborPosition.BottomRight);
+        whitePiece.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        whitePiece.movePieceByOne(NeighborPosition.BOTTOM_LEFT);
+        blackPiece5.movePieceByOne(NeighborPosition.BOTTOM_RIGHT);
 
-        blackPiece5.eatPiece(NeighborPosition.BottomRight);
+        blackPiece5.eatPiece(NeighborPosition.BOTTOM_RIGHT);
         assertEquals(whitePiece, BlackTile.asBlackTile(board.getTile(5,5)).getPiece());
         assertEquals(blackPiece5, BlackTile.asBlackTile(board.getTile(6,6)).getPiece());
     }

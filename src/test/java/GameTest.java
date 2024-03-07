@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SuppressWarnings("MagicNumber")
 public class GameTest {
 
-    final MockGame game =new MockGame("Anna","Mario", Team.White,Team.Black);
+    final MockGame game =new MockGame("Anna","Mario", Team.WHITE,Team.BLACK);
     final Board board=game.getBoard();
     final Player player1=game.getActivePlayer();
     final Player player2=game.getInactivePlayer();
@@ -17,13 +17,13 @@ public class GameTest {
     @Test
     void changeActivePlayerTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(2,2);
-        game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,piece,NeighborPosition.TOP_RIGHT));
         assertEquals(player2,game.getActivePlayer());
         assertEquals(player1,game.getInactivePlayer());
     }
     @Test
     void illegalTeamCompositionTest(){
-        assertThrows(IllegalTeamsCompositionException.class,()->new Game("Anna","Mario",Team.White,Team.White));
+        assertThrows(IllegalTeamsCompositionException.class,()->new Game("Anna","Mario",Team.WHITE,Team.WHITE));
     }
 
 
@@ -31,7 +31,7 @@ public class GameTest {
     @Test
     void moveOnePieceTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(2,2);
-        Move move=new Move(player1,piece,NeighborPosition.TopRight);
+        Move move=new Move(player1,piece,NeighborPosition.TOP_RIGHT);
         game.playTurn(move);
         assertEquals(piece, board.getPiece(3,3));
         assertNull(board.getPiece(2,2));
@@ -41,7 +41,7 @@ public class GameTest {
     @Test
     void CantMoveOtherPlayersPiece() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(5,1);
-        game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player1,piece,NeighborPosition.BOTTOM_LEFT));
         assertEquals(piece, board.getPiece(5,1));
         assertNull(board.getPiece(4,0));
     }
@@ -49,10 +49,10 @@ public class GameTest {
     @Test
     void moveTwoPiecesTest() throws NoPieceOnWhiteException {
         Piece piece1=board.getPiece(2,2);
-        game.playTurn(new Move(player1,piece1,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,piece1,NeighborPosition.TOP_RIGHT));
 
         Piece piece2=board.getPiece(5,1);
-        game.playTurn(new Move(player2,piece2,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player2,piece2,NeighborPosition.BOTTOM_LEFT));
 
         assertEquals(piece1, board.getPiece(3,3));
         assertNull(board.getPiece(2,2));
@@ -64,13 +64,13 @@ public class GameTest {
     @Test
     void illegalMoveTest() throws NoPieceOnWhiteException {
         Piece piece=board.getPiece(7,5);
-        game.playTurn(new Move(player1,piece,NeighborPosition.BottomLeft));
+        game.playTurn(new Move(player1,piece,NeighborPosition.BOTTOM_LEFT));
         assertEquals(piece,board.getPiece(7,5));
     }
     @Test
     void whiteOutOfBoundsTest() throws NoPieceOnWhiteException{
         Piece piece=board.getPiece(1,7);
-        game.playTurn(new Move(player1,piece,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,piece,NeighborPosition.TOP_RIGHT));
         assertEquals(piece,board.getPiece(1,7));
     }
 
@@ -79,9 +79,9 @@ public class GameTest {
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
 
-        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
-        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BottomLeft));
-        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TOP_RIGHT));
+        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BOTTOM_LEFT));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TOP_RIGHT));
 
         assertEquals(board.getPiece(5,5),whitePiece);
         assertNull(board.getPiece(4,4));
@@ -93,7 +93,7 @@ public class GameTest {
     void cantEatSameTeamTest() throws NoPieceOnWhiteException{
         Piece whitePiece=board.getPiece(1,1);
         Piece whitePiece2=board.getPiece(2,2);
-        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TOP_RIGHT));
 
         assertEquals(board.getPiece(1,1),whitePiece);
         assertEquals(board.getPiece(2,2),whitePiece2);
@@ -105,9 +105,9 @@ public class GameTest {
         Piece whitePiece=board.getPiece(2,6);
         Piece blackPiece=board.getPiece(5,7);
 
-        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopRight));
-        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BottomLeft));
-        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TopLeft));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TOP_RIGHT));
+        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BOTTOM_LEFT));
+        game.playTurn(new Move(player1,whitePiece,NeighborPosition.TOP_LEFT));
 
         assertEquals(board.getPiece(3,7),whitePiece);
         assertEquals(board.getPiece(4,6),blackPiece);
@@ -120,9 +120,9 @@ public class GameTest {
         Piece whitePiece2=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,7);
 
-        game.playTurn(new Move(player1,whitePiece1,NeighborPosition.TopRight));
-        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BottomLeft));
-        game.playTurn(new Move(player1,whitePiece2,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,whitePiece1,NeighborPosition.TOP_RIGHT));
+        game.playTurn(new Move(player2,blackPiece,NeighborPosition.BOTTOM_LEFT));
+        game.playTurn(new Move(player1,whitePiece2,NeighborPosition.TOP_RIGHT));
 
         assertEquals(board.getPiece(3,5),whitePiece1);
         assertEquals(board.getPiece(4,6),blackPiece);
@@ -140,17 +140,17 @@ public class GameTest {
         Piece whitePiece4=board.getPiece(2,0);
 
 
-        game.playTurn(new Move(player1,whitePiece1,NeighborPosition.TopRight));
-        game.playTurn(new Move(player2,blackPiece1,NeighborPosition.BottomRight));
-        game.playTurn(new Move(player1,whitePiece2,NeighborPosition.TopRight));
-        game.playTurn(new Move(player2,blackPiece2,NeighborPosition.BottomRight));
-        game.playTurn(new Move(player1,whitePiece3,NeighborPosition.TopRight));
-        game.playTurn(new Move(player2,blackPiece1,NeighborPosition.BottomLeft));
-        game.playTurn(new Move(player1,whitePiece4,NeighborPosition.TopRight));
+        game.playTurn(new Move(player1,whitePiece1,NeighborPosition.TOP_RIGHT));
+        game.playTurn(new Move(player2,blackPiece1,NeighborPosition.BOTTOM_RIGHT));
+        game.playTurn(new Move(player1,whitePiece2,NeighborPosition.TOP_RIGHT));
+        game.playTurn(new Move(player2,blackPiece2,NeighborPosition.BOTTOM_RIGHT));
+        game.playTurn(new Move(player1,whitePiece3,NeighborPosition.TOP_RIGHT));
+        game.playTurn(new Move(player2,blackPiece1,NeighborPosition.BOTTOM_LEFT));
+        game.playTurn(new Move(player1,whitePiece4,NeighborPosition.TOP_RIGHT));
 
         assertEquals(game.getActivePlayer(),player1);
 
-        game.playTurn(new Move(player1,whitePiece4,NeighborPosition.TopLeft));
+        game.playTurn(new Move(player1,whitePiece4,NeighborPosition.TOP_LEFT));
 
         assertEquals(whitePiece4,board.getPiece(6,0));
         assertNull(board.getPiece(5,1));
