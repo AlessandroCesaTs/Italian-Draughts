@@ -121,7 +121,6 @@ public class Piece {
 
         for (NeighborPosition position : neighborPositions) {
             if(canEat(position)){
-                System.out.println(position);
                 return true;
             }
         }
