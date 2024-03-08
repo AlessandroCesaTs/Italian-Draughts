@@ -1,6 +1,5 @@
 package main;
 
-import exceptions.*;
 import gui.GraphicBoard;
 import logic.Game;
 import logic.GameInterface;
@@ -23,11 +22,9 @@ public class Main implements GameObserver {
         return () -> {
             JFrame frame = getJFrame();
             Game placeholderGame;
-            try {
-                placeholderGame = new Game("Player1", "Player2", Team.WHITE, Team.BLACK);
-            } catch ( IllegalTeamsCompositionException e) {
-                throw new RuntimeException(e);
-            }
+
+            placeholderGame = new Game("Player1", "Player2", Team.WHITE, Team.BLACK);
+
             gBoard = new GraphicBoard(placeholderGame);
             placeholderGame.setGBoard(gBoard);
 
@@ -164,16 +161,14 @@ public class Main implements GameObserver {
                                      "; " + player2Name + " with " + player2Team + "s" );
 
                 Game game;
-                try {
+
                     game = new Game(player1Name, player2Name, player1Team, player2Team);
                     frame.remove(gBoard);
                     gBoard = new GraphicBoard(game);
                     game.setGBoard(gBoard);
                     game.addObserver(new Main());
                     frame.add(gBoard);
-                } catch (IllegalTeamsCompositionException ex) {
-                    throw new RuntimeException(ex);
-                }
+
                 gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
             }
         });

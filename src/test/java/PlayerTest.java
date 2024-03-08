@@ -11,7 +11,7 @@ public class PlayerTest {
 
     final GameInterface gameInterface =new Game("Anna","Mario", Team.WHITE,Team.BLACK);
 
-    public PlayerTest() throws IllegalTeamsCompositionException {
+    public PlayerTest(){
     }
 
     final Player player1= gameInterface.getActivePlayer();
