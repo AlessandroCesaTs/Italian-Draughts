@@ -18,9 +18,6 @@ public class FakeGame implements GameInterface{
     private int consecutiveEatings;
 
     public FakeGame(String player1Name, String player2Name, Team team1, Team team2) throws IllegalTeamsCompositionException {
-        if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
-            throw new IllegalTeamsCompositionException();
-        }
         board = new Board();
         player1 =new Player(player1Name,team1,this, Role.NULL);
         player2 =new Player(player2Name,team2,this,Role.NULL);

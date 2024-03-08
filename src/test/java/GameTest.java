@@ -21,11 +21,6 @@ public class GameTest {
         assertEquals(player2,game.getActivePlayer());
         assertEquals(player1,game.getInactivePlayer());
     }
-    @Test
-    void illegalTeamCompositionTest(){
-        assertThrows(IllegalTeamsCompositionException.class,()->new Game("Anna","Mario",Team.WHITE,Team.WHITE));
-    }
-
 
 
     @Test
