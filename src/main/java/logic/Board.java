@@ -1,7 +1,5 @@
 package logic;
 
-import exceptions.NoPieceOnWhiteException;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -48,7 +46,7 @@ public class Board {
         }
     }
 
-    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+    public List<BlackTile> getFullBlackTiles() {
         List<BlackTile> fullBlackTiles = new ArrayList<>();
         for (Tile[] tileRow:tiles){
             for (Tile tile:tileRow){
@@ -71,11 +69,11 @@ public class Board {
     public Tile getTile(int row,int col){
         return tiles[row][col];
     }
-    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+    public Piece getPiece(int row,int col)  {
         return getTile(row,col).getPiece();
     }
 
-    public Team getTeam(int row, int col) throws NoPieceOnWhiteException {
+    public Team getTeam(int row, int col){
         return getPiece(row,col).getTeam();
     }
     public int getSize(){

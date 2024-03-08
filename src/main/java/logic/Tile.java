@@ -1,7 +1,5 @@
 package logic;
 
-import exceptions.NoPieceOnWhiteException;
-
 public abstract class Tile {
     final int row;
     final int col;
@@ -25,7 +23,7 @@ public abstract class Tile {
      public Board getBoard(){
         return board;
      }
-     public abstract Piece getPiece() throws NoPieceOnWhiteException;
+     public abstract Piece getPiece();
 
      public boolean equals(Tile tile) {
         return tile.getRow()== row && tile.getCol()== col;

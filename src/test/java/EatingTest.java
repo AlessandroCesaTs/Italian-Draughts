@@ -1,4 +1,3 @@
-import exceptions.*;
 import logic.Board;
 import logic.NeighborPosition;
 import logic.Piece;
@@ -10,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EatingTest {
 
     @Test
-    void whiteEatsBlackTest() throws  NoPieceOnWhiteException {
+    void whiteEatsBlackTest(){
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);
@@ -21,7 +20,7 @@ public class EatingTest {
         assertNull(board.getPiece(4,4));
     }
     @Test
-    void cantEatSameTeamTest() throws NoPieceOnWhiteException {
+    void cantEatSameTeamTest() {
         Board board=new Board();
         Piece whitePiece=board.getPiece(1,1);
         Piece whitePiece2=board.getPiece(2,2);
@@ -30,7 +29,7 @@ public class EatingTest {
         assertEquals(board.getPiece(2,2),whitePiece2);
     }
     @Test
-    void cantEatTileAfterOccupiedTest() throws  NoPieceOnWhiteException {
+    void cantEatTileAfterOccupiedTest() {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece=board.getPiece(5,5);

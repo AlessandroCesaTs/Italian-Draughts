@@ -1,6 +1,5 @@
 package logic;
 
-import exceptions.*;
 import gui.GraphicBoard;
 import multiplayer.Guest;
 import multiplayer.Host;
@@ -206,12 +205,12 @@ public class Game implements MoveMadeObserver, GameInterface {
     }
 
     @Override
-    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+    public Piece getPiece(int row,int col) {
         return board.getPiece(row,col);
     }
 
     @Override
-    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+    public List<BlackTile> getFullBlackTiles() {
         return board.getFullBlackTiles();
     }
 

@@ -1,6 +1,5 @@
 package logic;
 
-import exceptions.*;
 import multiplayer.Role;
 
 import java.util.List;
@@ -128,11 +127,11 @@ public class FakeGame implements GameInterface{
         return activePlayer.getTeam();
     }
     @Override
-    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+    public Piece getPiece(int row,int col) {
         return board.getPiece(row,col);
     }
     @Override
-    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+    public List<BlackTile> getFullBlackTiles(){
         return board.getFullBlackTiles();
     }
     @Override

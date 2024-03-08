@@ -1,4 +1,3 @@
-import exceptions.*;
 import logic.*;
 import org.junit.jupiter.api.Test;
 
@@ -41,13 +40,13 @@ public class PlayerTest {
         assertTrue(player2.equals(testPlayer));
     }
     @Test
-    void losePiece1Test() throws NoPieceOnWhiteException {
+    void losePiece1Test() {
         Piece pieceToLose= gameInterface.getPiece(0,0);
         player1.loseOnePiece(pieceToLose);
         assertEquals(11,player1.getNumberOfPieces());
     }
     @Test
-    void losePiece2Test() throws NoPieceOnWhiteException {
+    void losePiece2Test() {
         Piece pieceToLose1= gameInterface.getPiece(5,1);
         Piece pieceToLose2= gameInterface.getPiece(5,3);
         player2.loseOnePiece(pieceToLose1);

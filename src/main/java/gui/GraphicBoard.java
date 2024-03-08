@@ -1,6 +1,5 @@
 package gui;
 
-import exceptions.*;
 import logic.*;
 import observers.MoveMadeObserver;
 
@@ -115,22 +114,18 @@ public class GraphicBoard extends JPanel{
             for (int r = 0; r <= 2; r++) {
                 if ((r+c) % 2 == 0){
                     Piece piece;
-                    try {
-                        piece = gameInterface.getPiece(r, c);
-                    } catch (NoPieceOnWhiteException e) {
-                        throw new RuntimeException(e);
-                    }
+
+                    piece = gameInterface.getPiece(r, c);
+
                     pieceList.add(new GraphicPiece(piece, c, r, true));
                 }
             }
             for (int r = 5; r < rows; r++) {
                 if ((r+c) % 2 == 0){
                     Piece piece;
-                    try {
-                        piece = gameInterface.getPiece(r, c);
-                    } catch (NoPieceOnWhiteException e) {
-                        throw new RuntimeException(e);
-                    }
+
+                    piece = gameInterface.getPiece(r, c);
+
                     pieceList.add(new GraphicPiece(piece, c, r, false));
                 }
             }
