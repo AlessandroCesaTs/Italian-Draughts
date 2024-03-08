@@ -2,7 +2,6 @@ package logic;
 
 
 import multiplayer.Role;
-import exceptions.NoPieceOnWhiteException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -36,19 +35,17 @@ public class Player {
 
     private void setPieces(){
         List<BlackTile> fullBlackTiles;
-        try {
-            fullBlackTiles = gameInterface.getFullBlackTiles();
-        } catch (NoPieceOnWhiteException e) {
-            throw new RuntimeException(e);
-        }
+
+        fullBlackTiles = gameInterface.getFullBlackTiles();
+
         pieces = fullBlackTiles.stream()
                 .map(BlackTile::getPiece)
                 .filter(piece -> piece.getTeam().equals(team))
                 .collect(Collectors.toList());
     }
 
-    public boolean hasPieces(){
-        return numberOfPieces!=0;
+    public boolean doesntHavePieces(){
+        return numberOfPieces == 0;
     }
 
     public void loseOnePiece(Piece piece){

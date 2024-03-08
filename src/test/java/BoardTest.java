@@ -1,5 +1,3 @@
-import exceptions.IllegalTilePlacementException;
-import exceptions.NoPieceOnWhiteException;
 import logic.BlackTile;
 import logic.Board;
 import logic.Team;
@@ -12,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BoardTest {
 
 
-    public BoardTest() throws IllegalTilePlacementException {
+    public BoardTest()  {
     }
     final Board board=new Board();
     @Test
@@ -42,7 +40,7 @@ public class BoardTest {
         }
     }
     @Test
-    void blackPieceTest() throws NoPieceOnWhiteException {
+    void blackPieceTest(){
         for (int row=0;row<4;row+=2){
             for (int col=0;col<board.getSize();col+=2){
                 assertEquals(Team.WHITE,board.getTeam(row,col));
@@ -53,7 +51,7 @@ public class BoardTest {
         }
     }
     @Test
-    void whitePieceTest() throws NoPieceOnWhiteException {
+    void whitePieceTest() {
         for (int row=5;row<board.getSize();row+=2){
             for (int col=1;col<board.getSize();col+=2){
                 assertEquals(Team.BLACK,board.getTeam(row,col));

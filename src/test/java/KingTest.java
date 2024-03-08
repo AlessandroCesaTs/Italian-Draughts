@@ -1,4 +1,3 @@
-import exceptions.*;
 import logic.BlackTile;
 import logic.Board;
 import logic.NeighborPosition;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KingTest {
 
     @Test
-    void whiteBecomesKing() throws IllegalTilePlacementException, NoPieceOnWhiteException{
+    void whiteBecomesKing(){
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece1=board.getPiece(5,5);
@@ -35,7 +34,7 @@ public class KingTest {
         assertTrue(whitePiece.getIfKing());
     }
     @Test
-    void cantEatKing() throws IllegalTilePlacementException, NoPieceOnWhiteException {
+    void cantEatKing() {
         Board board=new Board();
         Piece whitePiece=board.getPiece(2,2);
         Piece blackPiece1=board.getPiece(5,5);

@@ -1,11 +1,10 @@
 package logic;
 
-import exceptions.*;
 import multiplayer.Role;
 
 import java.util.List;
 
-public class MockGame implements GameInterface{
+public class FakeGame implements GameInterface{
 
     final Player player1;
     final Player player2;
@@ -17,10 +16,7 @@ public class MockGame implements GameInterface{
     private int roundsWithoutEating=0;
     private int consecutiveEatings;
 
-    public MockGame(String player1Name, String player2Name,Team team1,Team team2) throws IllegalTilePlacementException, IllegalTeamsCompositionException {
-        if (team1.equals(team2)){ //questa in teoria non può verificarsi perchè nella gui se uno sceglie un team l'altro cambia automaticamente
-            throw new IllegalTeamsCompositionException();
-        }
+    public FakeGame(String player1Name, String player2Name, Team team1, Team team2){
         board = new Board();
         player1 =new Player(player1Name,team1,this, Role.NULL);
         player2 =new Player(player2Name,team2,this,Role.NULL);
@@ -67,7 +63,7 @@ public class MockGame implements GameInterface{
 
     @Override
     public void checkGameOver(){
-        if (!inactivePlayer.hasPieces() || !inactivePlayer.canMove()){
+        if (inactivePlayer.doesntHavePieces() || !inactivePlayer.canMove()){
             gameOver=true;
         }else if(roundsWithoutEating==40){
             gameOver=true;
@@ -131,11 +127,11 @@ public class MockGame implements GameInterface{
         return activePlayer.getTeam();
     }
     @Override
-    public Piece getPiece(int row,int col) throws NoPieceOnWhiteException {
+    public Piece getPiece(int row,int col) {
         return board.getPiece(row,col);
     }
     @Override
-    public List<BlackTile> getFullBlackTiles() throws NoPieceOnWhiteException {
+    public List<BlackTile> getFullBlackTiles(){
         return board.getFullBlackTiles();
     }
     @Override
