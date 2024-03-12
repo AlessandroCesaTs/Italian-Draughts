@@ -5,11 +5,14 @@ This repository contains the Java implementation of the classic Italian Draughts
 The game can be played either on a single computer, or with the two players playing against each other each one on his computer.
 
 ## How to run the software
-In order to run the software and start playing, it is necessary to clone this repository in order to download the whole software, and then open the project's folder in a terminal and run the command `./gradlew run`
+In order to run the software and start playing, you can:
+* On this Github page go to `Releases`, click on `Italian-Draughts`, then in the Assets click on `Italian-Draughts-1.0-SNAPSHOT.jar` in order to download the jar file. Then on your computer open the folder where you have the downloaded jar file in a terminal, and run `java -jar Italian-Draughts-1.0-SNAPSHOT.jar`
+
+*If you want the whole source code, you can clone this repository, and then open the project's folder in a terminal and run the command `./gradlew run`
 
 ### Requirements
 
-It is necessary to have the Java Development Kit 21 and Gradle 8.5
+It is necessary to have the Java Development Kit 21 (and Gradle 8.5 if you want to download the source code and build it)
 
 ## Playing on one computer
 If both players want to play on the same computer, they just need to click on `New Game`, insert their names, select the team (Black or White, of course the 2 players can't select the same team) and the game will start.
