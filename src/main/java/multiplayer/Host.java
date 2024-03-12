@@ -40,6 +40,10 @@ public class Host implements MultiplayerActions,Runnable {
         try {
             String line = br.readLine();
             String[] command = line.split(";");
+
+            if (Integer.parseInt(command[4]) == 2)
+                close();
+
             if (command.length != 5)
                 throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
             Point oppStartTitle = new Point(Integer.parseInt(command[0]), Integer.parseInt(command[1]));
@@ -85,7 +89,6 @@ public class Host implements MultiplayerActions,Runnable {
                 setAdversaryMove(receiveMove());
             }
 
-            close();
         } catch (Exception e){
             throw new RuntimeException(e);
         }

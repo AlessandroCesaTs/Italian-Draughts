@@ -31,6 +31,7 @@ public class LocalServer extends Thread {
                 if (nConnections == 2) {
                     executorService.execute(new GameHandler(sockets));
                 }
+
             }
 
         } catch (IOException e) {

@@ -119,8 +119,10 @@ public class Game implements MoveMadeObserver, GameInterface {
     public void checkGameOver(){
         if (inactivePlayer.doesntHavePieces() || !inactivePlayer.canMove()){
             gameOver=true;
+            sendMove(2);
         }else if(roundsWithoutEating==40){
             gameOver=true;
+            sendMove(2);
         }
     }
 
