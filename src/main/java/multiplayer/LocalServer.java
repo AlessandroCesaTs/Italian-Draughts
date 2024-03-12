@@ -45,5 +45,14 @@ public class LocalServer extends Thread {
 
     public void close() {
         running = false;
+
+        try {
+            sockets[0].close();
+            sockets[1].close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

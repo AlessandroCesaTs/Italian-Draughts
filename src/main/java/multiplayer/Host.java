@@ -31,6 +31,10 @@ public class Host implements MultiplayerActions,Runnable {
                     (int) endTitle.getX(), (int) endTitle.getY(), typeOfMove);
             bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
+
+            if(typeOfMove == 2)
+                close();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
