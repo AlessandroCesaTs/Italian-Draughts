@@ -36,17 +36,23 @@ public class Guest implements MultiplayerActions,Runnable {
     private Point[] receiveMove() {
         try {
             String line = br.readLine();
-            String[] command = line.split(";");
+            if(line == null)
+                throw new RuntimeException("Something went wrong!");
+            else {
+                String[] command = line.split(";");
 
-            if (Integer.parseInt(command[4]) == 2)
-                close();
+                if (Integer.parseInt(command[4]) == 2) {
+                    close();
+                    return null;
+                }
 
-            if (command.length != 5)
-                throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
-            Point oppStartTitle = new Point(Integer.parseInt(command[0]), Integer.parseInt(command[1]));
-            Point oppEndTitle = new Point(Integer.parseInt(command[2]), Integer.parseInt(command[3]));
-            Point oppTurnNotify = new Point(Integer.parseInt(command[4]), 0);
-            return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
+                if (command.length != 5)
+                    throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
+                Point oppStartTitle = new Point(Integer.parseInt(command[0]), Integer.parseInt(command[1]));
+                Point oppEndTitle = new Point(Integer.parseInt(command[2]), Integer.parseInt(command[3]));
+                Point oppTurnNotify = new Point(Integer.parseInt(command[4]), 0);
+                return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -90,6 +96,9 @@ public class Guest implements MultiplayerActions,Runnable {
     }
 
     private void setAdversaryMove (Point[] advMove) {
+        if(advMove == null)
+            return;
+
         GraphicBoard graphicBoard = game.getGBoard();
         graphicBoard.setStartTile(advMove[0]);
         graphicBoard.setEndTile(advMove[1]);
