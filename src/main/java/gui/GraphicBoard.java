@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphicBoard extends JPanel{
+public class GraphicBoard extends JPanel {
     private GameInterface gameInterface;
     final public static int tileSize = 75;
     final int cols = 8;
@@ -49,7 +49,7 @@ public class GraphicBoard extends JPanel{
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)  {
+            public void mouseReleased(MouseEvent e) {
                 int x = e.getX() / tileSize;
                 int y = (getHeight() - e.getY()) / tileSize;
                 endTile = new Point(x, y);
@@ -80,7 +80,7 @@ public class GraphicBoard extends JPanel{
         this.currentTile = currentTile;
     }
 
-    private void movePieceTo(GraphicPiece piece,NeighborPosition destination) {
+    private void movePieceTo(GraphicPiece piece, NeighborPosition destination) {
         piece.moveTo(destination);
         repaint();
     }
@@ -90,7 +90,8 @@ public class GraphicBoard extends JPanel{
         pieceList.remove(piece);
         repaint();
     }
-    public GraphicPiece getGraphicPiece (Piece piece) {
+
+    public GraphicPiece getGraphicPiece(Piece piece) {
         GraphicPiece graphicPiece = null;
         for (GraphicPiece g : pieceList) {
             if (g.getPiece() == piece) {
@@ -99,20 +100,23 @@ public class GraphicBoard extends JPanel{
         }
         return graphicPiece;
     }
+
     private void setGame(GameInterface gameInterface) {
         this.gameInterface = gameInterface;
         resetBoard();
     }
+
     private void resetBoard() {
         pieceList.clear();
         startTile = null;
         endTile = null;
         addPieces();
     }
+
     private void addPieces() {
-        for (int c=0; c < cols; c++) {
+        for (int c = 0; c < cols; c++) {
             for (int r = 0; r <= 2; r++) {
-                if ((r+c) % 2 == 0){
+                if ((r + c) % 2 == 0) {
                     Piece piece;
 
                     piece = gameInterface.getPiece(r, c);
@@ -121,7 +125,7 @@ public class GraphicBoard extends JPanel{
                 }
             }
             for (int r = 5; r < rows; r++) {
-                if ((r+c) % 2 == 0){
+                if ((r + c) % 2 == 0) {
                     Piece piece;
 
                     piece = gameInterface.getPiece(r, c);
@@ -132,7 +136,7 @@ public class GraphicBoard extends JPanel{
         }
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
         // Translate the origin to the bottom left
@@ -140,9 +144,9 @@ public class GraphicBoard extends JPanel{
         g2d.scale(1, -1);
 
 
-        for (int r=0; r < rows; r++) {
-            for (int c=0; c < cols; c++) {
-                g2d.setColor((c+r) %2 ==0 ? new Color(132, 84, 35) : new Color(229, 183, 145, 255));
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                g2d.setColor((c + r) % 2 == 0 ? new Color(132, 84, 35) : new Color(229, 183, 145, 255));
                 g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
                 if (currentTile != null && currentTile.x == c && currentTile.y == rows - r - 1) {
                     g2d.setColor(Color.RED); // set the border color
@@ -156,11 +160,12 @@ public class GraphicBoard extends JPanel{
             graphicPiece.paint(g2d);
         }
     }
-    public Move getMoveFromGUI(){
+
+    public Move getMoveFromGUI() {
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
         }
-        if(endTile.x>cols-1 || endTile.y>rows-1){
+        if (endTile.x > cols - 1 || endTile.y > rows - 1) {
             return null;
         }
 
@@ -173,16 +178,17 @@ public class GraphicBoard extends JPanel{
 
     }
 
-    public void eatPiece(Piece eatingPiece,NeighborPosition destination) {
-        GraphicPiece eatingGraphicPiece= getGraphicPiece(eatingPiece);
-        GraphicPiece targetGraphicPiece= getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
+    public void eatPiece(Piece eatingPiece, NeighborPosition destination) {
+        GraphicPiece eatingGraphicPiece = getGraphicPiece(eatingPiece);
+        GraphicPiece targetGraphicPiece = getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
         removePiece(targetGraphicPiece);
-        movePieceTo(eatingGraphicPiece,destination);
-        movePieceTo(eatingGraphicPiece,destination);
+        movePieceTo(eatingGraphicPiece, destination);
+        movePieceTo(eatingGraphicPiece, destination);
     }
-    public void movePiece(Piece movingPiece,NeighborPosition destination){
-        GraphicPiece movingGraphicPiece= getGraphicPiece(movingPiece);
-        movePieceTo(movingGraphicPiece,destination);
+
+    public void movePiece(Piece movingPiece, NeighborPosition destination) {
+        GraphicPiece movingGraphicPiece = getGraphicPiece(movingPiece);
+        movePieceTo(movingGraphicPiece, destination);
     }
 
     private GraphicPiece findPieceAtTile(Point tile) {
@@ -191,19 +197,23 @@ public class GraphicBoard extends JPanel{
                 .findFirst()
                 .orElse(null);
     }
-    private int rowDiff(Point endTile){
-        return endTile.y-startTile.y;
-    }
-    private int colDiff(Point endTile){
-        return endTile.x-startTile.x;
-    }
-    private boolean isOnDiagonal(Point endTile){
-        return Math.abs(rowDiff(endTile))==Math.abs(colDiff(endTile)) && rowDiff(endTile)!=0;
-    }
-    private NeighborPosition getNeighborPosition(Point endTile){
 
-        int rowDiff=rowDiff(endTile);
-        int colDiff=colDiff(endTile);
+    private int rowDiff(Point endTile) {
+        return endTile.y - startTile.y;
+    }
+
+    private int colDiff(Point endTile) {
+        return endTile.x - startTile.x;
+    }
+
+    private boolean isOnDiagonal(Point endTile) {
+        return Math.abs(rowDiff(endTile)) == Math.abs(colDiff(endTile)) && rowDiff(endTile) != 0;
+    }
+
+    private NeighborPosition getNeighborPosition(Point endTile) {
+
+        int rowDiff = rowDiff(endTile);
+        int colDiff = colDiff(endTile);
         if (isOnDiagonal(endTile)) {
             if (rowDiff > 0) {
                 if (colDiff > 0) {
@@ -218,7 +228,7 @@ public class GraphicBoard extends JPanel{
                     return NeighborPosition.BOTTOM_LEFT;
                 }
             }
-        }else{
+        } else {
             return null;
         }
     }
@@ -226,16 +236,19 @@ public class GraphicBoard extends JPanel{
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
-    private void notifyMoveMadeObservers(){
+
+    private void notifyMoveMadeObservers() {
         for (MoveMadeObserver observer : observers) {
             observer.onMoveMade();
         }
     }
-    private void setMoveMade(boolean moveMade){
+
+    private void setMoveMade(boolean moveMade) {
         if (moveMade) {
             notifyMoveMadeObservers();
         }
     }
+
     public Point getStartTile() {
         return startTile;
     }
@@ -259,7 +272,7 @@ public class GraphicBoard extends JPanel{
         draggedPiece = null;
     }
 
-    private Player getActivePlayer(){
+    private Player getActivePlayer() {
         return gameInterface.getActivePlayer();
     }
 }

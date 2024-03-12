@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-
 public class Board {
-    private final int size=8;
+    private final int size = 8;
     private final Tile[][] tiles = new Tile[size][size];
 
-    public Board(){
-        for (int row=0;row<size;row++){
-            for (int col=0;col<size;col++){
+    public Board() {
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
                 createTile(row, col);
             }
         }
@@ -19,38 +18,38 @@ public class Board {
     }
 
     private void setNeighborsForEachTile() {
-        for (Tile[] tileRow: tiles){
-            for (Tile tile:tileRow){
-                if(tile instanceof BlackTile){
+        for (Tile[] tileRow : tiles) {
+            for (Tile tile : tileRow) {
+                if (tile instanceof BlackTile) {
                     ((BlackTile) tile).setNeighbors();
                 }
             }
         }
     }
 
-    private void createTile(int row, int col){
-        if(isPositionForBlackTile(row, col)){
-            tiles[row][col]=BlackTile.createBlackTile(row, col);
+    private void createTile(int row, int col) {
+        if (isPositionForBlackTile(row, col)) {
+            tiles[row][col] = BlackTile.createBlackTile(row, col);
             placePiece(row, col);
-        }else{
-            tiles[row][col]=WhiteTile.createWhiteTile(row, col);
+        } else {
+            tiles[row][col] = WhiteTile.createWhiteTile(row, col);
         }
         tiles[row][col].setBoard(this);
     }
 
-    private void placePiece(int row, int col){
-        if (row <3){
+    private void placePiece(int row, int col) {
+        if (row < 3) {
             ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.WHITE));
-        }else if(row <8 && row >4){
+        } else if (row < 8 && row > 4) {
             ((BlackTile) tiles[row][col]).setPiece(new Piece(Team.BLACK));
         }
     }
 
     public List<BlackTile> getFullBlackTiles() {
         List<BlackTile> fullBlackTiles = new ArrayList<>();
-        for (Tile[] tileRow:tiles){
-            for (Tile tile:tileRow){
-                if(tile instanceof BlackTile && tile.getPiece()!=null){
+        for (Tile[] tileRow : tiles) {
+            for (Tile tile : tileRow) {
+                if (tile instanceof BlackTile && tile.getPiece() != null) {
                     fullBlackTiles.add((BlackTile) tile);
                 }
             }
@@ -62,25 +61,25 @@ public class Board {
         return (col + row) % 2 == 0;
     }
 
-    public boolean validCoordinates(int x,int y){
-        return x>=0 && x<size && y>=0 && y<size;
+    public boolean validCoordinates(int x, int y) {
+        return x >= 0 && x < size && y >= 0 && y < size;
     }
 
-    public Tile getTile(int row,int col){
+    public Tile getTile(int row, int col) {
         return tiles[row][col];
     }
-    public Piece getPiece(int row,int col)  {
-        return getTile(row,col).getPiece();
+
+    public Piece getPiece(int row, int col) {
+        return getTile(row, col).getPiece();
     }
 
-    public Team getTeam(int row, int col){
-        return getPiece(row,col).getTeam();
+    public Team getTeam(int row, int col) {
+        return getPiece(row, col).getTeam();
     }
-    public int getSize(){
+
+    public int getSize() {
         return size;
     }
-
-
 
 
 }

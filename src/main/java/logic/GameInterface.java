@@ -8,7 +8,7 @@ public interface GameInterface {
 
     void Move(Piece movingPiece, NeighborPosition targetPosition);
 
-    void eat(Piece movingPiece, NeighborPosition targetPosition) ;
+    void eat(Piece movingPiece, NeighborPosition targetPosition);
 
     void checkGameOver();
 
@@ -30,7 +30,7 @@ public interface GameInterface {
 
     Team getActiveTeam();
 
-    Piece getPiece(int row,int col) ;
+    Piece getPiece(int row, int col);
 
     List<BlackTile> getFullBlackTiles();
 
