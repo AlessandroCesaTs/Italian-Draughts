@@ -8,7 +8,7 @@ The game can be played either on a single computer, or with the two players play
 In order to run the software and start playing, you can:
 * On this Github page go to `Releases`, click on `Italian-Draughts`, then in the Assets click on `Italian-Draughts-1.0-SNAPSHOT.jar` in order to download the jar file. Then on your computer open the folder where you have the downloaded jar file in a terminal, and run `java -jar Italian-Draughts-1.0-SNAPSHOT.jar`
 
-*If you want the whole source code, you can clone this repository, and then open the project's folder in a terminal and run the command `./gradlew run`
+* If you want the whole source code, you can clone this repository, and then open the project's folder in a terminal and run the command `./gradlew run`
 
 ### Requirements
 
