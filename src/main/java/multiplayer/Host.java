@@ -8,7 +8,7 @@ import java.io.*;
 import java.net.Socket;
 
 
-public class Host implements MultiplayerActions,Runnable {
+public class Host implements MultiplayerActions, Runnable {
 
     private Socket socket;
     private final LocalServer localServer;
@@ -21,7 +21,7 @@ public class Host implements MultiplayerActions,Runnable {
         this.game = game;
         localServer = new LocalServer(10000);
         localServer.start();
-        }
+    }
 
     @Override
     public void sendMove(Point startTitle, Point endTitle, int typeOfMove) {
@@ -31,10 +31,6 @@ public class Host implements MultiplayerActions,Runnable {
                     (int) endTitle.getX(), (int) endTitle.getY(), typeOfMove);
             bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
-
-            if(typeOfMove == 2)
-                close();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -43,22 +39,22 @@ public class Host implements MultiplayerActions,Runnable {
     private Point[] receiveMove() {
         try {
             String line = br.readLine();
-            if(line == null)
+            if (line == null)
                 throw new RuntimeException("Something went wrong!");
             else {
-            String[] command = line.split(";");
+                String[] command = line.split(";");
 
-            if (Integer.parseInt(command[4]) == 2) {
-                close();
-                return null;
-            }
+                if (Integer.parseInt(command[4]) == 2) {
+                    close();
+                    return null;
+                }
 
-            if (command.length != 5)
-                throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
-            Point oppStartTitle = new Point(Integer.parseInt(command[0]), Integer.parseInt(command[1]));
-            Point oppEndTitle = new Point(Integer.parseInt(command[2]), Integer.parseInt(command[3]));
-            Point oppTurnNotify = new Point(Integer.parseInt(command[4]), 0);
-            return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
+                if (command.length != 5)
+                    throw new RuntimeException("Move is not passed correctly, something has gone wrong!");
+                Point oppStartTitle = new Point(Integer.parseInt(command[0]), Integer.parseInt(command[1]));
+                Point oppEndTitle = new Point(Integer.parseInt(command[2]), Integer.parseInt(command[3]));
+                Point oppTurnNotify = new Point(Integer.parseInt(command[4]), 0);
+                return new Point[]{oppStartTitle, oppEndTitle, oppTurnNotify};
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -66,7 +62,7 @@ public class Host implements MultiplayerActions,Runnable {
     }
 
     @Override
-    public void connect(){
+    public void connect() {
         try {
             socket = new Socket("127.0.0.1", 10000);
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -78,14 +74,14 @@ public class Host implements MultiplayerActions,Runnable {
     }
 
     @Override
-    public void close(){
+    public void close() {
         try {
             running = false;
             br.close();
             bw.close();
             socket.close();
             localServer.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -95,17 +91,17 @@ public class Host implements MultiplayerActions,Runnable {
         try {
             running = true;
 
-            while (running){
+            while (running) {
                 setAdversaryMove(receiveMove());
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void setAdversaryMove (Point[] advMove) {
-        if(advMove == null)
+    private void setAdversaryMove(Point[] advMove) {
+        if (advMove == null)
             return;
 
         GraphicBoard graphicBoard = game.getGBoard();

@@ -21,6 +21,7 @@ public class GraphicPiece extends JPanel {
     final BufferedImage white;
     final BufferedImage whiteKing;
     private Image sprite;
+
     {
         try {
             black = ImageIO.read(Objects.requireNonNull(ClassLoader.getSystemResourceAsStream("black.png")));
@@ -31,7 +32,8 @@ public class GraphicPiece extends JPanel {
             throw new RuntimeException(e);
         }
     }
-    public GraphicPiece(Piece piece, int col, int row, boolean isWhite){
+
+    public GraphicPiece(Piece piece, int col, int row, boolean isWhite) {
         this.piece = piece;
         this.row = row;
         this.col = col;
@@ -39,44 +41,49 @@ public class GraphicPiece extends JPanel {
         this.yPos = row * GraphicBoard.tileSize;
         this.isWhite = isWhite;
 
-        if(isWhite){
+        if (isWhite) {
             this.sprite = white.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
         } else {
             this.sprite = black.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
         }
     }
+
     public void paint(Graphics2D g2d) {
         g2d.drawImage(sprite, xPos, yPos, null);
     }
 
     public void moveTo(NeighborPosition destination) {
-        if (destination.equals(NeighborPosition.TOP_RIGHT)){
-            col=col+1;
-            row=row+1;
-        } else if(destination.equals(NeighborPosition.TOP_LEFT)){
-            col=col-1;
-            row=row+1;
-        }
-        else if(destination.equals(NeighborPosition.BOTTOM_RIGHT)){
-            col=col+1;
-            row=row-1;
-        }else{
-            col=col-1;
-            row=row-1;
+        if (destination.equals(NeighborPosition.TOP_RIGHT)) {
+            col = col + 1;
+            row = row + 1;
+        } else if (destination.equals(NeighborPosition.TOP_LEFT)) {
+            col = col - 1;
+            row = row + 1;
+        } else if (destination.equals(NeighborPosition.BOTTOM_RIGHT)) {
+            col = col + 1;
+            row = row - 1;
+        } else {
+            col = col - 1;
+            row = row - 1;
         }
         xPos = col * GraphicBoard.tileSize;
         yPos = row * GraphicBoard.tileSize;
     }
-    public void promote(){
+
+    public void promote() {
         if (isWhite) {
             sprite = whiteKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
         } else {
             sprite = blackKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
         }
     }
-    public Piece getPiece(){
+
+    public Piece getPiece() {
         return piece;
     }
-    public Team getTeam(){return getPiece().getTeam();}
+
+    public Team getTeam() {
+        return getPiece().getTeam();
+    }
 
 }

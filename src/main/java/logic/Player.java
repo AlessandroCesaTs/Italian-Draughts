@@ -2,6 +2,7 @@ package logic;
 
 
 import multiplayer.Role;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,7 +12,7 @@ public class Player {
     private final Team team;
     public final GameInterface gameInterface;
     private final Role role;
-    private int numberOfPieces=12;
+    private int numberOfPieces = 12;
     private List<Piece> pieces;
 
     public Player(String name, Team team, GameInterface gameInterface, Role role) {
@@ -22,18 +23,23 @@ public class Player {
         setPieces();
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public Team getTeam(){
+
+    public Team getTeam() {
         return team;
     }
-    public int getNumberOfPieces() {return numberOfPieces;}
-    public boolean equals(Player player){
+
+    public int getNumberOfPieces() {
+        return numberOfPieces;
+    }
+
+    public boolean equals(Player player) {
         return Objects.equals(name, player.getName());
     }
 
-    private void setPieces(){
+    private void setPieces() {
         List<BlackTile> fullBlackTiles;
 
         fullBlackTiles = gameInterface.getFullBlackTiles();
@@ -44,38 +50,38 @@ public class Player {
                 .collect(Collectors.toList());
     }
 
-    public boolean doesntHavePieces(){
+    public boolean doesntHavePieces() {
         return numberOfPieces == 0;
     }
 
-    public void loseOnePiece(Piece piece){
+    public void loseOnePiece(Piece piece) {
         pieces.remove(piece);
         numberOfPieces--;
     }
-    public void makeMove(TypeOfMove typeOfMove,Piece movingPiece,NeighborPosition targetPosition) {
+
+    public void makeMove(TypeOfMove typeOfMove, Piece movingPiece, NeighborPosition targetPosition) {
         if (Objects.requireNonNull(typeOfMove) == TypeOfMove.MOVE) {
             movingPiece.movePieceByOne(targetPosition);
-        }else{
-        movingPiece.eatPiece(targetPosition);
+        } else {
+            movingPiece.eatPiece(targetPosition);
         }
     }
 
-    public boolean shouldEat(){
-        for (Piece piece:pieces){
-            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TOP_LEFT, NeighborPosition.TOP_RIGHT,NeighborPosition.BOTTOM_LEFT,NeighborPosition.BOTTOM_RIGHT})
-            {
-                if (piece.canEat(destination)){
+    public boolean shouldEat() {
+        for (Piece piece : pieces) {
+            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TOP_LEFT, NeighborPosition.TOP_RIGHT, NeighborPosition.BOTTOM_LEFT, NeighborPosition.BOTTOM_RIGHT}) {
+                if (piece.canEat(destination)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
     public boolean canMove() {
-        for (Piece piece:pieces){
-            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TOP_LEFT, NeighborPosition.TOP_RIGHT,NeighborPosition.BOTTOM_LEFT,NeighborPosition.BOTTOM_RIGHT})
-            {
-                if (piece.canEat(destination) || piece.canMovePieceByOne(destination)){
+        for (Piece piece : pieces) {
+            for (NeighborPosition destination : new NeighborPosition[]{NeighborPosition.TOP_LEFT, NeighborPosition.TOP_RIGHT, NeighborPosition.BOTTOM_LEFT, NeighborPosition.BOTTOM_RIGHT}) {
+                if (piece.canEat(destination) || piece.canMovePieceByOne(destination)) {
                     return true;
                 }
             }

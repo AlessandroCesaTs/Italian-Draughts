@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 
-public class Guest implements MultiplayerActions,Runnable {
+public class Guest implements MultiplayerActions, Runnable {
     private final String host;
     private Socket socket;
     private BufferedReader br;
@@ -15,7 +15,7 @@ public class Guest implements MultiplayerActions,Runnable {
     private boolean running = false;
     private final Game game;
 
-    public Guest(String host,Game game) {
+    public Guest(String host, Game game) {
         this.host = host;
         this.game = game;
     }
@@ -25,13 +25,9 @@ public class Guest implements MultiplayerActions,Runnable {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             String moveProtocol = String.format("%d;%d;%d;%d;%d", (int) startTitle.getX(), (int) startTitle.getY(),
-                                                (int) endTitle.getX(), (int) endTitle.getY(), typeOfMove);
+                    (int) endTitle.getX(), (int) endTitle.getY(), typeOfMove);
             bw.write(moveProtocol + System.lineSeparator());
             bw.flush();
-
-            if(typeOfMove == 2)
-                close();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,7 +36,7 @@ public class Guest implements MultiplayerActions,Runnable {
     private Point[] receiveMove() {
         try {
             String line = br.readLine();
-            if(line == null)
+            if (line == null)
                 throw new RuntimeException("Something went wrong!");
             else {
                 String[] command = line.split(";");
@@ -62,7 +58,7 @@ public class Guest implements MultiplayerActions,Runnable {
         }
     }
 
-    public void connect(){
+    public void connect() {
         try {
             socket = new Socket(host, 10000);
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -74,13 +70,13 @@ public class Guest implements MultiplayerActions,Runnable {
     }
 
     @Override
-    public void close(){
+    public void close() {
         try {
             running = false;
             br.close();
             bw.close();
             socket.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -90,17 +86,17 @@ public class Guest implements MultiplayerActions,Runnable {
         try {
             running = true;
 
-            while (running){
+            while (running) {
                 setAdversaryMove(receiveMove());
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void setAdversaryMove (Point[] advMove) {
-        if(advMove == null)
+    private void setAdversaryMove(Point[] advMove) {
+        if (advMove == null)
             return;
 
         GraphicBoard graphicBoard = game.getGBoard();

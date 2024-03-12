@@ -15,9 +15,11 @@ import java.awt.event.ItemEvent;
 public class Main implements GameObserver {
     public static GraphicBoard gBoard;
     private static JLabel gameLabel;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(gameInitiation());
     }
+
     public static Runnable gameInitiation() {
         return () -> {
             JFrame frame = getJFrame();
@@ -78,7 +80,7 @@ public class Main implements GameObserver {
 
                 Game game;
 
-                try{
+                try {
 
                     switch ((Role) playerRoleField.getSelectedItem()) {
 
@@ -104,7 +106,7 @@ public class Main implements GameObserver {
 
                     }
 
-                } catch (Exception exception){
+                } catch (Exception exception) {
                     throw new RuntimeException(exception);
                 }
 
@@ -158,16 +160,16 @@ public class Main implements GameObserver {
                 Team player2Team = (Team) player2TeamField.getSelectedItem();
 
                 playersLabel.setText(player1Name + " with " + player1Team + "s" +
-                                     "; " + player2Name + " with " + player2Team + "s" );
+                        "; " + player2Name + " with " + player2Team + "s");
 
                 Game game;
 
-                    game = new Game(player1Name, player2Name, player1Team, player2Team);
-                    frame.remove(gBoard);
-                    gBoard = new GraphicBoard(game);
-                    game.setGBoard(gBoard);
-                    game.addObserver(new Main());
-                    frame.add(gBoard);
+                game = new Game(player1Name, player2Name, player1Team, player2Team);
+                frame.remove(gBoard);
+                gBoard = new GraphicBoard(game);
+                game.setGBoard(gBoard);
+                game.addObserver(new Main());
+                frame.add(gBoard);
 
                 gameLabel.setText("Turn " + game.getCurrentRound() + ", active player: " + game.getActivePlayer().getName());
             }
@@ -201,14 +203,14 @@ public class Main implements GameObserver {
     public void update(GameInterface gameInterface) {
         SwingUtilities.invokeLater(() -> {
             if (!gameInterface.isGameOver()) {
-                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: "+ gameInterface.getRoundsWithoutEating()+", Active player: " + gameInterface.getActivePlayer().getName());
-            }else{
-                Player winner=gameInterface.getInactivePlayer();
-                if (winner!=null) {
+                gameLabel.setText("Turn " + gameInterface.getCurrentRound() + ", Rounds without eating: " + gameInterface.getRoundsWithoutEating() + ", Active player: " + gameInterface.getActivePlayer().getName());
+            } else {
+                Player winner = gameInterface.getInactivePlayer();
+                if (winner != null) {
                     String winnerName = winner.getName();
-                    gameLabel.setText("Player " + winnerName + " has won, press New Game for playing again");
-                }else{
-                    gameLabel.setText("the game is tied, press New Game for playing again");
+                    gameLabel.setText("Player " + winnerName + " has won.");
+                } else {
+                    gameLabel.setText("The game is tied.");
                 }
             }
         });

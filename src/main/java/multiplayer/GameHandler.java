@@ -42,9 +42,9 @@ public class GameHandler implements Runnable {
             String line = br.readLine();
             String[] command = line.split(";");
 
-            if (command.length == 5){
+            if (command.length == 5) {
                 if (Integer.parseInt(command[4]) == 0)
-                    switch (turnListener){
+                    switch (turnListener) {
                         case 0 -> turnListener = 1;
                         case 1 -> turnListener = 0;
                         case 2 -> running = false;
@@ -53,7 +53,7 @@ public class GameHandler implements Runnable {
                 throw new RuntimeException("Somethings went wrong!");
             }
 
-            if(running){
+            if (running) {
                 bw.write(line + System.lineSeparator());
                 bw.flush();
             }
