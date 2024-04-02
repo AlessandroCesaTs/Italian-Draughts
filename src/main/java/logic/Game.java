@@ -1,6 +1,6 @@
 package logic;
 
-import gui.GraphicBoard;
+import gui.GraphicBoardInterface;
 import multiplayer.Guest;
 import multiplayer.Host;
 import multiplayer.MultiplayerActions;
@@ -19,7 +19,7 @@ public class Game implements MoveMadeObserver, GameInterface {
     private Player inactivePlayer;
     private boolean gameOver = false;
     private final Board board;
-    private GraphicBoard gBoard;
+    private GraphicBoardInterface gBoard;
     private int currentRound = 1;
     private int roundsWithoutEating = 0;
     private final List<GameObserver> observers = new ArrayList<>();
@@ -167,7 +167,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         notifyObservers();
     }
 
-    public void setGBoard(GraphicBoard gBoard) {
+    public void setGBoard(GraphicBoardInterface gBoard) {
         this.gBoard = gBoard;
         gBoard.addMoveMadeObserver(this);
     }
@@ -202,7 +202,7 @@ public class Game implements MoveMadeObserver, GameInterface {
         return roundsWithoutEating;
     }
 
-    public GraphicBoard getGBoard() {
+    public GraphicBoardInterface getGBoard() {
         return gBoard;
     }
 

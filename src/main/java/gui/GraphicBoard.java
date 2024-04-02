@@ -11,9 +11,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphicBoard extends JPanel {
+public class GraphicBoard extends JPanel implements GraphicBoardInterface {
     private GameInterface gameInterface;
-    final public static int tileSize = 75;
     final int cols = 8;
     final int rows = 8;
     Point currentTile = null;
@@ -91,6 +90,7 @@ public class GraphicBoard extends JPanel {
         repaint();
     }
 
+    @Override
     public GraphicPiece getGraphicPiece(Piece piece) {
         GraphicPiece graphicPiece = null;
         for (GraphicPiece g : pieceList) {
@@ -136,6 +136,7 @@ public class GraphicBoard extends JPanel {
         }
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
@@ -161,6 +162,7 @@ public class GraphicBoard extends JPanel {
         }
     }
 
+    @Override
     public Move getMoveFromGUI() {
         if (startTile == null || endTile == null || draggedPiece == null) {
             return null;
@@ -178,6 +180,7 @@ public class GraphicBoard extends JPanel {
 
     }
 
+    @Override
     public void eatPiece(Piece eatingPiece, NeighborPosition destination) {
         GraphicPiece eatingGraphicPiece = getGraphicPiece(eatingPiece);
         GraphicPiece targetGraphicPiece = getGraphicPiece(eatingPiece.getTile().getNeighbor(destination).getPiece());
@@ -186,6 +189,7 @@ public class GraphicBoard extends JPanel {
         movePieceTo(eatingGraphicPiece, destination);
     }
 
+    @Override
     public void movePiece(Piece movingPiece, NeighborPosition destination) {
         GraphicPiece movingGraphicPiece = getGraphicPiece(movingPiece);
         movePieceTo(movingGraphicPiece, destination);
@@ -233,6 +237,7 @@ public class GraphicBoard extends JPanel {
         }
     }
 
+    @Override
     public void addMoveMadeObserver(MoveMadeObserver observer) {
         observers.add(observer);
     }
@@ -249,19 +254,23 @@ public class GraphicBoard extends JPanel {
         }
     }
 
+    @Override
     public Point getStartTile() {
         return startTile;
     }
 
+    @Override
     public void setStartTile(Point startTile) {
         this.startTile = startTile;
         draggedPiece = findPieceAtTile(startTile);
     }
 
+    @Override
     public Point getEndTile() {
         return endTile;
     }
 
+    @Override
     public void setEndTile(Point endTile) {
         this.endTile = endTile;
         getNeighborPosition(endTile);

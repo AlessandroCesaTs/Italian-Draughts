@@ -37,14 +37,14 @@ public class GraphicPiece extends JPanel {
         this.piece = piece;
         this.row = row;
         this.col = col;
-        this.xPos = col * GraphicBoard.tileSize;
-        this.yPos = row * GraphicBoard.tileSize;
+        this.xPos = col * GraphicBoardInterface.tileSize;
+        this.yPos = row * GraphicBoardInterface.tileSize;
         this.isWhite = isWhite;
 
         if (isWhite) {
-            this.sprite = white.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+            this.sprite = white.getScaledInstance(GraphicBoardInterface.tileSize, GraphicBoardInterface.tileSize, BufferedImage.SCALE_SMOOTH);
         } else {
-            this.sprite = black.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+            this.sprite = black.getScaledInstance(GraphicBoardInterface.tileSize, GraphicBoardInterface.tileSize, BufferedImage.SCALE_SMOOTH);
         }
     }
 
@@ -66,15 +66,15 @@ public class GraphicPiece extends JPanel {
             col = col - 1;
             row = row - 1;
         }
-        xPos = col * GraphicBoard.tileSize;
-        yPos = row * GraphicBoard.tileSize;
+        xPos = col * GraphicBoardInterface.tileSize;
+        yPos = row * GraphicBoardInterface.tileSize;
     }
 
     public void promote() {
         if (isWhite) {
-            sprite = whiteKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+            sprite = whiteKing.getScaledInstance(GraphicBoardInterface.tileSize, GraphicBoardInterface.tileSize, BufferedImage.SCALE_SMOOTH);
         } else {
-            sprite = blackKing.getScaledInstance(GraphicBoard.tileSize, GraphicBoard.tileSize, BufferedImage.SCALE_SMOOTH);
+            sprite = blackKing.getScaledInstance(GraphicBoardInterface.tileSize, GraphicBoardInterface.tileSize, BufferedImage.SCALE_SMOOTH);
         }
     }
 

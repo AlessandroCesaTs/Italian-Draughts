@@ -1,4 +1,7 @@
+import gui.FakeGraphicBoard;
+import gui.GraphicBoard;
 import logic.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,13 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @SuppressWarnings("MagicNumber")
 public class GameTest {
 
-    final FakeGame game =new FakeGame("Anna","Mario", Team.WHITE,Team.BLACK);
+    final Game game =new Game("Anna","Mario", Team.WHITE,Team.BLACK);
     final Board board=game.getBoard();
     final Player player1=game.getActivePlayer();
     final Player player2=game.getInactivePlayer();
 
     public GameTest() {
     }
+
+    @BeforeEach
+    void setUp() {
+        game.setGBoard(new FakeGraphicBoard());
+    }
+
     @Test
     void changeActivePlayerTest() {
         Piece piece=board.getPiece(2,2);
