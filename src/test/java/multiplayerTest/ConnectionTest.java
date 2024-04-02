@@ -30,6 +30,7 @@ public class ConnectionTest {
 
         new Thread(() -> {
             try {
+                fail();
                 assertTrue(latch.await(5, TimeUnit.SECONDS));
                 assertEquals(1, host.getLocalServer().getnConnections());
             } catch (InterruptedException e) {
